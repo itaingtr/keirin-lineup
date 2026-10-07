@@ -12,12 +12,12 @@ input,select{font:inherit;padding:10px 12px;border:1px solid #c8d2df;border-radi
 input{min-width:min(280px,100%)}.count{color:var(--muted);font-size:14px;margin-left:auto}
 .notice{padding:12px 14px;margin:0 0 16px;border:1px solid #cfe0f7;background:#eff6ff;border-radius:10px;color:#294b72;font-size:14px;line-height:1.6}
 .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 8px 24px #172b4510}
-table{border-collapse:separate;border-spacing:0;width:100%;min-width:780px}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:780px;table-layout:fixed}
 th,td{padding:12px 12px;border-bottom:1px solid #e8edf3;text-align:center;vertical-align:top}
 thead th{position:sticky;top:0;z-index:1;background:#edf2f8;color:#394a61;font-size:13px}
 tbody tr:hover{background:#f7faff}tbody tr:last-child td{border-bottom:0}
-td.venue{text-align:left;font-weight:700;min-width:74px;padding-top:16px}
-td.race{min-width:74px;padding-top:17px}td.race a{color:var(--blue);font-size:17px;font-weight:750;text-decoration:none}td.race a:hover{text-decoration:underline}.video{min-width:142px;padding-top:15px}.video-link{display:inline-flex;align-items:center;gap:5px;padding:8px 10px;border-radius:8px;background:#d63b3b;color:#fff;text-decoration:none;font-size:13px;font-weight:750;white-space:nowrap}.video-link:hover{background:#b92d2d}
+td.venue{text-align:left;font-weight:700;width:78px;padding-top:16px}
+td.race{width:66px;padding-top:17px}td.race a{color:var(--blue);font-size:17px;font-weight:750;text-decoration:none}td.race a:hover{text-decoration:underline}.video{width:142px;padding-top:15px}.video-link{display:inline-flex;align-items:center;gap:5px;padding:8px 10px;border-radius:8px;background:#d63b3b;color:#fff;text-decoration:none;font-size:13px;font-weight:750;white-space:nowrap}.video-link:hover{background:#b92d2d}
 .lineup{display:flex;justify-content:flex-start;align-items:flex-start;gap:18px;min-height:132px;padding:2px 3px 4px}
 .line-group{display:flex;align-items:flex-start;gap:0px}
 .rider{display:flex;flex:0 0 25px;flex-direction:column;align-items:center;gap:0px}
@@ -29,11 +29,11 @@ footer{color:var(--muted);font-size:13px;margin-top:14px;line-height:1.6}
 header{padding:20px 16px}main{padding:14px 10px 32px}h1{font-size:25px}.count{width:100%;margin-left:0}
 .notice{padding:10px 11px;font-size:13px}
 .table-wrap{overflow:visible;border:0;background:transparent;box-shadow:none}
-table,thead,tbody,tr,th,td{display:block}table{width:100%;min-width:0}thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+table,thead,tbody,tr,th,td{display:block}table{width:100%;min-width:0}.desktop-columns{display:none}thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 tbody{display:grid;gap:12px}tbody tr{display:grid;grid-template-columns:auto auto 1fr;grid-template-areas:"venue race video" "lineup lineup lineup";align-items:center;gap:12px 10px;padding:12px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 14px #172b450d}
 tbody tr:hover{background:#fff}td{padding:0;border:0;text-align:left}td.venue{grid-area:venue;min-width:0;padding:0}td.race{grid-area:race;min-width:0;padding:0}td.video{grid-area:video;min-width:0;padding:0;justify-self:end}.video-link{padding:7px 9px;font-size:12px}
 td.lineup-cell{grid-area:lineup;width:100%;overflow:hidden}
-.lineup{justify-content:space-between;gap:clamp(10px,4vw,16px);width:100%;min-height:0;padding:2px 0 4px}.line-group{gap:0}.rider{flex-basis:22px}.car{width:18px;height:18px;font-size:11px}.name{font-size:12px;height:auto;margin-top:.2em}
+.lineup{justify-content:flex-start;gap:22px;width:100%;min-height:0;padding:2px 0 4px}.line-group{gap:0}.rider{flex-basis:22px}.car{width:18px;height:18px;font-size:11px}.name{font-size:12px;height:auto;margin-top:.2em}
 }
 </style></head>
 <body>
@@ -41,7 +41,7 @@ td.lineup-cell{grid-area:lineup;width:100%;overflow:hidden}
 <main>
 <div class="tools"><input id="search" type="search" placeholder="選手名・競輪場で検索" aria-label="選手名または競輪場を検索"><select id="venue" aria-label="競輪場で絞り込み"><option value="">すべての競輪場</option><option>大宮</option><option>奈良</option><option>四日市</option></select><span class="count" id="count" aria-live="polite"></span></div>
 <p class="notice">並び予想とライン構成は楽天Kドリームスの各レース詳細を反映しています。間隔が広い箇所が別ラインです。1人だけのライン（単騎）も独立して表示しています。</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">競輪場</th><th scope="col">レース</th><th scope="col">ダイジェスト映像</th><th scope="col">並び・選手名（左から）</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="table-wrap"><table><colgroup class="desktop-columns"><col style="width:78px"><col style="width:66px"><col style="width:142px"><col></colgroup><thead><tr><th scope="col">競輪場</th><th scope="col">レース</th><th scope="col">ダイジェスト映像</th><th scope="col">並び・選手名（左から）</th></tr></thead><tbody id="rows"></tbody></table></div>
 <footer>車番色は1白・2黒・3赤・4青・5黄・6緑・7橙です。レース番号から出走表、映像ボタンから楽天Kドリームスの結果ページを開けます。結果ページにダイジェスト映像ボタンが表示されたら再生できます。映像が未公開の場合は、結果確定後に同じリンクから確認してください。</footer>
 </main>
 <script>
