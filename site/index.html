@@ -33,7 +33,7 @@ table,thead,tbody,tr,th,td{display:block}table{width:100%;min-width:0}thead{posi
 tbody{display:grid;gap:12px}tbody tr{display:grid;grid-template-columns:auto auto 1fr;grid-template-areas:"venue race video" "lineup lineup lineup";align-items:center;gap:12px 10px;padding:12px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 14px #172b450d}
 tbody tr:hover{background:#fff}td{padding:0;border:0;text-align:left}td.venue{grid-area:venue;min-width:0;padding:0}td.race{grid-area:race;min-width:0;padding:0}td.video{grid-area:video;min-width:0;padding:0;justify-self:end}.video-link{padding:7px 9px;font-size:12px}
 td.lineup-cell{grid-area:lineup;width:100%;overflow:hidden}
-.lineup{gap:clamp(10px,4vw,16px);width:max-content;max-width:100%;min-height:112px;padding:2px 0 4px;overflow-x:auto;overscroll-behavior-x:contain}.line-group{gap:0}.rider{flex-basis:22px}.car{width:18px;height:18px;font-size:11px}.name{font-size:12px;height:100px;margin-top:.2em}
+.lineup{justify-content:space-between;gap:clamp(10px,4vw,16px);width:100%;min-height:0;padding:2px 0 4px}.line-group{gap:0}.rider{flex-basis:22px}.car{width:18px;height:18px;font-size:11px}.name{font-size:12px;height:auto;margin-top:.2em}
 }
 </style></head>
 <body>
