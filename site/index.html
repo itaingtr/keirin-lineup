@@ -1,84 +1,41 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>10月7日 S級戦 並びと選手一覧</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>10月11日 S級戦 並びと選手一覧</title>
 <style>
-:root{color-scheme:light;--ink:#18212f;--muted:#627086;--line:#dbe2ea;--paper:#f4f7fb;--blue:#155eef}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-header{padding:27px clamp(18px,5vw,64px);background:linear-gradient(120deg,#10243c,#1d4978);color:#fff}
-.eyebrow{font-size:13px;letter-spacing:.08em;opacity:.8}
-h1{font-size:clamp(24px,4vw,36px);margin:7px 0 8px}
-.intro{margin:0;color:#dce8f5}
-main{max-width:1180px;margin:auto;padding:22px clamp(12px,3vw,36px) 48px}
-.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 14px}
-input,select{font:inherit;padding:10px 12px;border:1px solid #c8d2df;border-radius:9px;background:#fff;color:var(--ink)}
-input{min-width:min(280px,100%)}
-.count{color:var(--muted);font-size:14px;margin-left:auto}
-.notice{padding:12px 14px;margin:0 0 16px;border:1px solid #cfe0f7;background:#eff6ff;border-radius:10px;color:#294b72;font-size:14px;line-height:1.6}
-.table-wrap{max-width:520px;margin-left:0;overflow:visible;border:0;background:transparent;box-shadow:none}
-table{border-collapse:separate;border-spacing:0;width:100%;min-width:0;table-layout:fixed}
-.desktop-columns,thead{display:none}
-tbody{display:grid;gap:12px}
-tbody tr{display:grid;grid-template-columns:max-content minmax(0,1fr);grid-template-areas:"venue race" "lineup lineup";align-items:center;gap:10px 12px;padding:12px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 14px #172b450d}
-tbody tr:hover{background:#f7faff}
-tbody tr:last-child td{border-bottom:0}
-th,td{padding:0;border:0;text-align:left;vertical-align:top}
-td.venue{grid-area:venue;text-align:left;font-weight:700;width:auto;padding:0}
-td.race{grid-area:race;display:flex;flex-direction:row;align-items:center;justify-self:start;gap:10px;width:auto;padding:0;text-align:left}
-td.race .race-link{display:inline-block;color:var(--blue);font-size:17px;font-weight:750;text-decoration:none}
-td.race .race-link:hover{text-decoration:underline}
-.video-link{display:inline-flex;align-items:center;gap:4px;margin-top:0;padding:5px 8px;border-radius:7px;background:#d63b3b;color:#fff;text-decoration:none;font-size:11px;font-weight:750;white-space:nowrap}
-.video-link:hover{background:#b92d2d}
-td.lineup-cell{grid-area:lineup;width:100%;min-width:0;overflow:hidden}
-.lineup{display:flex;justify-content:flex-start;align-items:flex-start;gap:18px;min-height:0;padding:2px 0 4px}
-.line-group{display:flex;align-items:flex-start;gap:0}
-.contest{display:flex;align-items:flex-start;padding:0 2px}
-.contest-bracket{display:block;flex:0 0 auto;color:#394a61;font-size:15px;line-height:19px;font-weight:700}
-.rider{display:flex;flex:0 0 25px;flex-direction:column;align-items:center;gap:0}
-.car{position:relative;z-index:1;width:19px;height:19px;display:grid;place-items:center;border-radius:50%;font-weight:850;font-size:12px;line-height:1}
-.name{position:relative;z-index:2;align-self:center;height:110px;margin-top:.2em;writing-mode:vertical-rl;text-orientation:upright;text-align:start;line-height:1;letter-spacing:0;font-size:13px;color:#27364b;white-space:nowrap}
-.c1{background:#fff;color:#111;border:1px solid #b9c4d0}.c2{background:#252b35;color:#fff}.c3{background:#e53935;color:#fff}.c4{background:#2878d0;color:#fff}.c5{background:#f1d331;color:#302b10}.c6{background:#35a765;color:#fff}.c7{background:#ed8d2c;color:#fff}
-footer{color:var(--muted);font-size:13px;margin-top:14px;line-height:1.6}
-@media(max-width:640px){
-header{padding:20px 16px}
-main{padding:14px 10px 32px}
-h1{font-size:25px}
-.count{width:100%;margin-left:0}
-.notice{padding:10px 11px;font-size:13px}
-.table-wrap{max-width:none}
-tbody tr{grid-template-columns:auto minmax(0,1fr);gap:8px 10px;padding:12px}
-td.race{gap:8px}
-.video-link{padding:4px 7px;font-size:10px}
-td.race .race-link{font-size:17px}
-.lineup{gap:18px}
-.rider{flex-basis:22px}
-.car{width:18px;height:18px;font-size:11px}
-.name{font-size:12px;height:auto;margin-top:.2em}
-}
-</style></head>
-<body>
-<header><div class="eyebrow">KEIRIN · 2026.10.07</div><h1>10月7日 S級戦｜並び・選手一覧</h1><p class="intro">全19レース・133人。ラインごとに間を空け、車番の下に選手名を縦書きで表示。</p></header>
-<main>
-<div class="tools"><input id="search" type="search" placeholder="選手名・競輪場で検索" aria-label="選手名または競輪場を検索"><select id="venue" aria-label="競輪場で絞り込み"><option value="">すべての競輪場</option><option>大宮</option><option>奈良</option><option>四日市</option></select><span class="count" id="count" aria-live="polite"></span></div>
-<p class="notice">並び予想とライン構成は楽天Kドリームスの各レース詳細を反映しています。間隔が広い箇所が別ラインです。1人だけのライン（単騎）も独立して表示しています。</p>
-<div class="table-wrap"><table><colgroup class="desktop-columns"><col style="width:78px"><col style="width:138px"><col></colgroup><thead><tr><th scope="col">競輪場</th><th scope="col">レース・映像</th><th scope="col">並び・選手名（左から）</th></tr></thead><tbody id="rows"></tbody></table></div>
-<footer>車番色は1白・2黒・3赤・4青・5黄・6緑・7橙です。レース番号から出走表、映像ボタンから楽天Kドリームスの結果ページを開けます。結果ページにダイジェスト映像ボタンが表示されたら再生できます。映像が未公開の場合は、結果確定後に同じリンクから確認してください。</footer>
-</main>
+:root{color-scheme:light;--ink:#18212f;--muted:#627086;--line:#dbe2ea;--paper:#f4f7fb;--blue:#155eef}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}header{padding:27px clamp(18px,5vw,64px);background:linear-gradient(120deg,#10243c,#1d4978);color:#fff}.eyebrow{font-size:13px;letter-spacing:.08em;opacity:.8}h1{font-size:clamp(24px,4vw,36px);margin:7px 0 8px}.intro{margin:0;color:#dce8f5}main{max-width:1180px;margin:auto;padding:22px clamp(12px,3vw,36px) 48px}.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 14px}input,select{font:inherit;padding:10px 12px;border:1px solid #c8d2df;border-radius:9px;background:#fff;color:var(--ink)}input{min-width:min(280px,100%)}.count{color:var(--muted);font-size:14px;margin-left:auto}.notice{padding:12px 14px;margin:0 0 16px;border:1px solid #cfe0f7;background:#eff6ff;border-radius:10px;color:#294b72;font-size:14px;line-height:1.6}.table-wrap{max-width:520px;margin-left:0;overflow:visible;border:0;background:transparent;box-shadow:none}table{border-collapse:separate;border-spacing:0;width:100%;min-width:0;table-layout:fixed}.desktop-columns,thead{display:none}tbody{display:grid;gap:12px}tbody tr{display:grid;grid-template-columns:max-content minmax(0,1fr);grid-template-areas:"venue race" "lineup lineup";align-items:center;gap:10px 12px;padding:12px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 14px #172b450d}tbody tr:hover{background:#f7faff}tbody tr:last-child td{border-bottom:0}th,td{padding:0;border:0;text-align:left;vertical-align:top}td.venue{grid-area:venue;text-align:left;font-weight:700;width:auto;padding:0}td.race{grid-area:race;display:flex;flex-direction:row;align-items:center;justify-self:start;gap:10px;width:auto;padding:0;text-align:left}td.race .race-link{display:inline-block;color:var(--blue);font-size:17px;font-weight:750;text-decoration:none}td.race .race-link:hover{text-decoration:underline}.video-link{display:inline-flex;align-items:center;gap:4px;margin-top:0;padding:5px 8px;border-radius:7px;background:#d63b3b;color:#fff;text-decoration:none;font-size:11px;font-weight:750;white-space:nowrap}.video-link:hover{background:#b92d2d}td.lineup-cell{grid-area:lineup;width:100%;min-width:0;overflow:hidden}.lineup{display:flex;justify-content:flex-start;align-items:flex-start;gap:18px;min-height:0;padding:2px 0 4px}.line-group{display:flex;align-items:flex-start;gap:0}.rider{display:flex;flex:0 0 27px;flex-direction:column;align-items:center;gap:0}.score,.period{height:14px;font-size:10px;line-height:14px;font-weight:750;color:#627086}.score-high{color:#d32f2f}.score-low{color:#2463eb}.car{position:relative;z-index:1;width:19px;height:19px;display:grid;place-items:center;border-radius:50%;font-weight:850;font-size:12px;line-height:1}.name{position:relative;z-index:2;align-self:center;height:auto;margin-top:.2em;writing-mode:vertical-rl;text-orientation:upright;text-align:start;line-height:1;letter-spacing:0;font-size:13px;color:#27364b;white-space:nowrap}.c1{background:#fff;color:#111;border:1px solid #b9c4d0}.c2{background:#252b35;color:#fff}.c3{background:#e53935;color:#fff}.c4{background:#2878d0;color:#fff}.c5{background:#f1d331;color:#302b10}.c6{background:#35a765;color:#fff}.c7{background:#ed8d2c;color:#fff}.c8{background:#e66da5;color:#fff}.c9{background:#8052b8;color:#fff}footer{color:var(--muted);font-size:13px;margin-top:14px;line-height:1.6}@media(max-width:640px){header{padding:20px 16px}main{padding:14px 10px 32px}h1{font-size:25px}.count{width:100%;margin-left:0}.notice{padding:10px 11px;font-size:13px}.table-wrap{max-width:none}tbody tr{grid-template-columns:auto minmax(0,1fr);gap:8px 10px;padding:12px}td.race{gap:8px}.video-link{padding:4px 7px;font-size:10px}td.race .race-link{font-size:17px}.lineup{gap:18px}.rider{flex-basis:25px}.car{width:18px;height:18px;font-size:11px}.name{font-size:12px;height:auto;margin-top:.2em}}
+</style></head><body>
+<header><div class="eyebrow">KEIRIN · 2026.10.11</div><h1>10月11日 S級戦｜並び・選手一覧</h1><p class="intro">全24レース・192人。ラインごとに間を空け、車番の下に選手名を縦書きで表示。</p></header>
+<main><div class="tools"><input id="search" type="search" placeholder="選手名・競輪場で検索" aria-label="選手名または競輪場を検索"><select id="venue" aria-label="競輪場で絞り込み"><option value="">すべての競輪場</option><option>弥彦</option><option>富山</option><option>小倉</option></select><span class="count" id="count" aria-live="polite">24 / 24 レース</span></div>
+<p class="notice">並び予想とライン構成は楽天Kドリームスの各レース詳細を反映しています。得点の小数点以下2桁、車番、選手名5文字まで、期別の下2桁を上から表示しています。別ラインは間隔を空けています。</p>
+<div class="table-wrap"><table><colgroup class="desktop-columns"><col style="width:78px"><col style="width:138px"><col></colgroup><thead><tr><th>競輪場</th><th>レース・映像</th><th>並び</th></tr></thead><tbody id="rows"></tbody></table></div>
+<footer>車番色は1白・2黒・3赤・4青・5黄・6緑・7橙です。レース番号から出走表、映像ボタンから楽天Kドリームスの結果ページを開けます。</footer></main>
 <script>
-const races=[{"venue":"大宮","race":8,"names":["角田光","山口貴弘","三谷政史","菱田浩二","平尾一晃","佐藤成人","明田春喜"],"groups":[[1,7],[5,2],[4,3,6]],"source":"https://keirin.kdreams.jp/omiya/racedetail/2520261006020008/"},{"venue":"大宮","race":9,"names":["伊藤裕貴","山田駿斗","前反祐一郎","徳丸泰教","長谷部翔","飯嶋則之","瀬戸栄作"],"groups":[[1,4],[2,5,6],[7,3]],"source":"https://keirin.kdreams.jp/omiya/racedetail/2520261006020009/"},{"venue":"大宮","race":10,"names":["湊聖二","福田稔希","竹内智彦","木村佑来","鈴木伸之","笠松将太","阿部将大"],"groups":[[7,1],[2,6],[4,3,5]],"source":"https://keirin.kdreams.jp/omiya/racedetail/2520261006020010/"},{"venue":"大宮","race":11,"names":["渡邉雅也","和泉尚吾","橋本瑠偉","北井佑季","荒澤貴史","朝倉佳弘","川口雄太"],"groups":[[1,5],[2,7],[4],[3,6]],"source":"https://keirin.kdreams.jp/omiya/racedetail/2520261006020011/"},{"venue":"大宮","race":12,"names":["久木原洋","高市訓但","栗山和樹","鰐淵圭佑","森田一郎","中原航大","南潤"],"groups":[[5,1,4],[6,2],[7,3]],"source":"https://keirin.kdreams.jp/omiya/racedetail/2520261006020012/"},{"venue":"奈良","race":5,"names":["内山貴裕","不破将登","山本直","齋藤登志信","宝満大作","加倉正義","中村一将"],"groups":[[7,1],[2,5],[4],[3,6]],"source":"https://keirin.kdreams.jp/nara/racedetail/5320261005030005/"},{"venue":"奈良","race":6,"names":["菅原晃","塩崎隼秀","伊藤慶太郎","坂田康季","坂田章","谷田泰平","望月永悟"],"groups":[[4,1,3,6],[7],[2,5]],"contests":[[1,3]],"source":"https://keirin.kdreams.jp/nara/racedetail/5320261005030006/"},{"venue":"奈良","race":7,"names":["伊藤成紀","坂本亮馬","八日市屋浩之","中川貴徳","河崎正晴","奥村諭志","小谷実"],"groups":[[5,2,3],[1,7],[6,4]],"source":"https://keirin.kdreams.jp/nara/racedetail/5320261005030007/"},{"venue":"奈良","race":8,"names":["原田研太朗","原田翔真","木村弘","佐藤愼太郎","飯野祐太","元砂勇雪","佐々木則幸"],"groups":[[1,7],[2,6],[3,5,4]],"source":"https://keirin.kdreams.jp/nara/racedetail/5320261005030008/"},{"venue":"奈良","race":9,"names":["小林潤二","城戸俊潔","山口敦也","太田龍希","松本秀之慎","木村幸希","上野優太"],"groups":[[2,6],[5,7,3],[4,1]],"source":"https://keirin.kdreams.jp/nara/racedetail/5320261005030009/"},{"venue":"奈良","race":10,"names":["藤井昭吾","門田凌","土屋壮登","川口公太朗","富武大","中西大","永井哉多"],"groups":[[6,1,4],[5,2],[7,3]],"source":"https://keirin.kdreams.jp/nara/racedetail/5320261005030010/"},{"venue":"奈良","race":12,"names":["平野想真","中田健太","川津悠揮","和田健太郎","寺沼拓摩","天田裕輝","原大智"],"groups":[[1,4],[5,2,6],[7,3]],"source":"https://keirin.kdreams.jp/nara/racedetail/5320261005030012/"},{"venue":"四日市","race":6,"names":["山口泰生","堀内俊介","原誠宏","土屋裕二","小川三士郎","高橋成英","成清貴之"],"groups":[[5,3,1],[2,7,4],[6]],"source":"https://keirin.kdreams.jp/yokkaichi/racedetail/4820261007010006/"},{"venue":"四日市","race":7,"names":["橋本宇宙","木暮安由","小酒大勇","橋本壮史","島田竜二","佐野梅一","高橋昇平"],"groups":[[1,3,5],[4,2,7],[6]],"source":"https://keirin.kdreams.jp/yokkaichi/racedetail/4820261007010007/"},{"venue":"四日市","race":8,"names":["藤井栄二","田村大","小榑佑弥","野崎将史","大洞翔平","根本哲吏","貴志修己"],"groups":[[7,1,5],[2,4],[3],[6]],"source":"https://keirin.kdreams.jp/yokkaichi/racedetail/4820261007010008/"},{"venue":"四日市","race":9,"names":["才迫開","安彦統賀","長田龍拳","小島歩","高橋広大","五十嵐力","山本拳也"],"groups":[[1,7],[2,5],[3,4,6]],"source":"https://keirin.kdreams.jp/yokkaichi/racedetail/4820261007010009/"},{"venue":"四日市","race":10,"names":["南部翔大","石川裕二","後藤悠","畑段嵐士","山崎将幸","植原琢也","上田裕和"],"groups":[[1,4,7],[6,2],[3,5]],"source":"https://keirin.kdreams.jp/yokkaichi/racedetail/4820261007010010/"},{"venue":"四日市","race":11,"names":["尾形鉄馬","酒井拳蔵","猿樂楓樹","木村直隆","山本奨","蓮井祐輝","照井拓成"],"groups":[[7,1],[2,4],[3,5,6]],"source":"https://keirin.kdreams.jp/yokkaichi/racedetail/4820261007010011/"},{"venue":"四日市","race":12,"names":["杉森輝大","吉田有希","立部楓真","吉本卓仁","坂口晃輔","堤洋","塩島嵩一朗"],"groups":[[7,1],[2,5],[3,4,6]],"source":"https://keirin.kdreams.jp/yokkaichi/racedetail/4820261007010012/"}];
-const body=document.getElementById('rows'), search=document.getElementById('search'), venue=document.getElementById('venue'), count=document.getElementById('count');
-function riderMarkup(n,r){return '<div class="rider"><span class="car c'+n+'">'+n+'</span><span class="name">'+r.names[n-1]+'</span></div>';}
-function groupMarkup(group,r){const contests=r.contests||[];let html='',i=0;while(i<group.length){const contest=contests.find(c=>c.length>1&&c[0]===group[i]&&c.every((n,j)=>group[i+j]===n));if(contest){html+='<span class="contest" aria-label="競り '+contest.join('と')+'"><span class="contest-bracket">(</span>'+contest.map(n=>riderMarkup(n,r)).join('')+'<span class="contest-bracket">)</span></span>';i+=contest.length;}else{html+=riderMarkup(group[i],r);i++;}}return '<div class="line-group">'+html+'</div>';}
-function draw(){const q=search.value.trim().toLocaleLowerCase(),v=venue.value;const shown=races.filter(r=>(!v||r.venue===v)&&(!q||r.venue.toLocaleLowerCase().includes(q)||r.names.some(n=>n.toLocaleLowerCase().includes(q))));body.innerHTML=shown.map(r=>{const namesInLine=r.groups.flatMap(g=>g.map(n=>r.names[n-1]));return '<tr><td class="venue">'+r.venue+'</td><td class="race"><a class="race-link" href="'+r.source+'" target="_blank" rel="noopener">'+r.race+'R</a><a class="video-link" href="'+r.source+'?pageType=showResult" target="_blank" rel="noopener" title="結果ページを開き、ダイジェスト映像を見る">▶ 映像を見る</a></td><td class="lineup-cell"><div class="lineup" aria-label="'+r.venue+' '+r.race+'レース 並び予想 '+namesInLine.join('、')+(r.contests?'、競り '+r.contests.map(c=>c.join('と')).join('、'):'')+'">'+r.groups.map(g=>groupMarkup(g,r)).join('')+'</div></td></tr>';}).join('');count.textContent=shown.length+' / '+races.length+' レース';}
-search.addEventListener('input',draw);venue.addEventListener('change',draw);body.addEventListener('click',e=>{const a=e.target.closest('.video-link');if(!a)return;e.preventDefault();window.open(a.href,'kdreams-digest','popup=yes,width=800,height=500,resizable=yes,scrollbars=yes');});draw();
+const raw=String.raw`弥彦	1	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030001/	Ｓ級一般	1|長尾拳太|106.54|103,2|田尾駿介|106.17|111,3|神山拓弥|105.37|91,4|東矢圭吾|103.27|121,5|金子幸央|110.11|101,6|村上翔馬|97.58|123,7|橋本強|109.93|89,8|山口多聞|99.00|121,9|川口公太朗|103.63|98	6-1-9/4-7-2/8-5-3
+弥彦	2	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030002/	Ｓ級一般	1|東口善朋|110.18|85,2|山崎芳仁|106.56|88,3|大石剣士|105.44|109,4|橋本優己|103.86|117,5|内藤宣彦|106.56|67,6|久木原洋|100.86|97,7|渡邉一成|106.65|88,8|角令央奈|103.04|98,9|和田真久留|111.15|99	4-1-8/7-2-5/3-9-6
+弥彦	3	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030003/	Ｓ級一般	1|小倉竜二|110.28|77,2|谷内健太|106.45|125,3|松坂洋平|106.83|89,4|河野通孝|100.36|88,5|菅原大也|104.50|107,6|渡辺正光|96.45|95,7|村田雅一|109.35|90,8|黒瀬浩太郎|100.09|123,9|佐々木雄一|106.94|83	8-1/2-7/4/5-3-9-6
+弥彦	4	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030004/	Ｓ級選抜	1|園田匠|109.20|87,2|佐々木龍|111.30|109,3|杉浦侑吾|111.10|115,4|成田和也|108.37|88,5|長島大介|108.50|96,6|坂本貴史|101.57|94,7|西田優大|109.46|123,8|松井宏佑|107.73|113,9|和田圭|110.54|92	7-1/6-9-4/3-5/8-2
+弥彦	5	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030005/	Ｓ級選抜	1|山田庸平|111.71|94,2|佐藤一伸|107.80|94,3|三谷将太|109.47|92,4|松崎広太|107.43|123,5|中釜章成|109.69|113,6|梁島邦友|96.25|117,7|後藤大輝|108.33|121,8|椎木尾拓哉|105.39|93,9|菅田壱道|115.74|91	7-1/2-9/5-3-8/4-6
+弥彦	6	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030006/	Ｓ級選抜	1|守澤太志|115.71|96,2|雨谷一樹|109.82|96,3|三谷竜生|108.73|101,4|棚瀬義大|106.91|123,5|山崎歩夢|108.40|125,6|真鍋智寛|102.92|121,7|市田龍生都|110.84|127,8|荒川達郎|104.04|123,9|志智俊夫|107.24|70	5-1/8-2/7-3/4-9/6
+弥彦	7	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030007/	Ｓ級特選	1|根田空史|111.27|94,2|南修二|114.41|88,3|柏野智典|108.32|88,4|小川勇介|107.64|90,5|佐藤友和|109.46|88,6|岸田剛|101.64|121,7|取鳥雄吾|112.18|107,8|岡本総|106.47|105,9|松谷秀幸|111.43|96	1-9-5/6-2-8/7-3-4
+弥彦	8	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030008/	Ｓ級特選	1|山田英明|112.92|89,2|浅井康太|114.29|90,3|嶋津拓弥|111.33|103,4|河端朋之|109.90|95,5|小原太樹|112.84|95,6|小原佑太|105.66|115,7|山口拳矢|115.26|117,8|山形一気|107.50|96,9|伊藤旭|109.93|117	9-1/7-2/6-5-3/4-8
+弥彦	9	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030009/	Ｓ級特選	1|武藤龍生|113.25|98,2|大槻寛徳|109.66|85,3|町田太我|110.16|117,4|山田久徳|108.56|93,5|新山響平|114.96|107,6|朝倉智仁|102.45|115,7|岩津裕介|111.30|87,8|山本伸一|104.85|101,9|渡部幸訓|114.72|89	6-1/5-9-2/3-7/4-8
+弥彦	10	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030010/	Ｓ級準決勝	1|脇本雄太|114.52|94,2|荒井崇博|114.38|82,3|吉田拓矢|120.78|107,4|村上博幸|110.00|86,5|深谷知広|116.26|96,6|木村皆斗|108.57|119,7|佐々木眞也|110.80|117,8|室井蓮太朗|109.06|121,9|嘉永泰斗|114.35|113	5-7/9-2/1-4/6-3/8
+弥彦	11	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030011/	Ｓ級準決勝	1|佐々木悠葵|114.50|115,2|寺崎浩平|115.75|117,3|犬伏湧也|120.84|119,4|阿部力也|113.04|100,5|松本貴治|117.83|111,6|山崎賢人|112.04|111,7|古性優作|119.50|100,8|菊池岳仁|112.52|117,9|新田祐大|114.47|90	8-1/3-5/2-7/6-9-4
+弥彦	12	https://keirin.kdreams.jp/yahiko/racedetail/2120261009030012/	Ｓ級準決勝	1|郡司浩平|116.66|99,2|眞杉匠|120.75|113,3|清水裕友|114.46|105,4|吉澤純平|110.78|101,5|坂井洋|114.06|115,6|脇本勇希|106.33|115,7|石原颯|115.33|117,8|岡崎智哉|107.46|96,9|阿部拓真|114.44|107	1-9/2-5-4/7-3/6-8
+富山	8	https://keirin.kdreams.jp/toyama/racedetail/4620261010020008/	Ｓ級一般	1|吉川起也|98.30|92,2|市橋司優人|102.52|103,3|水谷好宏|96.87|93,4|小笠原光|96.46|117,5|張野幸聖|96.77|115,6|伊東佑晟|93.32|125,7|佐川翔吾|94.72|94	6-1/4-2/5-3-7
+富山	9	https://keirin.kdreams.jp/toyama/racedetail/4620261010020009/	Ｓ級一般	1|青木瑞樹|103.64|123,2|佐々木和紀|102.91|117,3|長屋秀明|94.57|117,4|柿沼信也|96.80|91,5|網谷竜次|96.58|91,6|谷口明正|94.37|103,7|菊池竣太朗|102.40|111	1-5/7-2-4/3-6
+富山	10	https://keirin.kdreams.jp/toyama/racedetail/4620261010020010/	Ｓ級準決勝	1|大矢崇弘|106.17|107,2|松川高大|104.44|94,3|山根将太|98.30|119,4|稲毛健太|98.89|97,5|上田尭弥|99.88|113,6|山中貴雄|98.12|90,7|中島詩音|104.00|119	7-1/5-2/3-6/4
+富山	11	https://keirin.kdreams.jp/toyama/racedetail/4620261010020011/	Ｓ級準決勝	1|川口聖二|105.10|103,2|近藤保|101.46|95,3|幸田望夢|97.03|115,4|村田祐樹|101.65|121,5|鈴木陸来|102.52|117,6|内田英介|96.75|91,7|高橋和也|102.31|91	4-1-7/5-2/3-6
+富山	12	https://keirin.kdreams.jp/toyama/racedetail/4620261010020012/	Ｓ級準決勝	1|島川将貴|103.04|109,2|中田雄喜|100.25|97,3|一戸康宏|98.39|101,4|佐藤博紀|103.30|96,5|嵯峨昇喜郎|109.59|113,6|都築巧|97.52|123,7|伊勢崎彰大|100.04|81	1-6/5-4-2/3-7
+小倉	6	https://keirin.kdreams.jp/kokura/racedetail/8120261011010006/	Ｓ級予選	1|松岡篤哉|99.69|97,2|小林弘和|101.85|91,3|安倍大成|102.34|121,4|高津晃治|98.95|87,5|岸澤賢太|99.47|91,6|神田龍|98.59|105,7|中川聖大|100.25|121	3-5/6-1/7-2/4
+小倉	7	https://keirin.kdreams.jp/kokura/racedetail/8120261011010007/	Ｓ級予選	1|渡口勝成|102.73|119,2|黒沢征治|103.23|113,3|上杉嘉槻|95.34|119,4|北村信明|100.07|93,5|宿口潤平|101.00|91,6|北川大五郎|94.36|103,7|矢野昌彦|95.50|91	1-4/2-5/7/3-6
+小倉	8	https://keirin.kdreams.jp/kokura/racedetail/8120261011010008/	Ｓ級予選	1|箱田優樹|102.56|98,2|伊藤世哉|94.84|87,3|角宗哉|105.33|125,4|斉藤樂|102.78|123,5|高田修汰|98.24|115,6|栗本武典|93.12|119,7|筒井敦史|104.68|85	4-1/5-2/3-7/6
+小倉	9	https://keirin.kdreams.jp/kokura/racedetail/8120261011010009/	Ｓ級予選	1|原口昌平|103.65|107,2|竹内雄作|98.57|99,3|岡田泰地|97.63|100,4|三浦貴大|97.95|115,5|佐藤幸治|103.34|92,6|小池千啓|95.88|119,7|松岡孔明|98.64|91	1-5-7/2-4/6-3
+小倉	10	https://keirin.kdreams.jp/kokura/racedetail/8120261011010010/	Ｓ級予選	1|遠藤拓巳|101.15|125,2|竹村勇祐|104.00|96,3|梅崎隆介|97.90|121,4|堀江省吾|106.00|119,5|佐々木翔一|97.42|93,6|三浦翔大|97.03|98,7|黒田淳|99.10|97	1-7/4-2-6/3-5
+小倉	11	https://keirin.kdreams.jp/kokura/racedetail/8120261011010011/	Ｓ級予選	1|石塚輪太郎|107.11|105,2|鈴木裕|98.59|92,3|松永将|99.46|89,4|藤岡隆治|97.20|98,5|村上直久|97.00|95,6|五十嵐綾|96.14|121,7|松村友和|102.09|88	1-7-4/5-2/6-3
+小倉	12	https://keirin.kdreams.jp/kokura/racedetail/8120261011010012/	Ｓ級初特選	1|野田源一|108.33|81,2|芦澤大輔|105.21|90,3|神田紘輔|108.70|100,4|櫻井正孝|103.69|100,5|志田龍星|108.23|119,6|久米康平|103.66|100,7|小林泰正|111.85|113	6-1/7-2-4/5-3`;
+const races=raw.trim().split(/\r?\n/).map(line=>{const [venue,race,source,raceType,rawPlayers,rawGroups]=line.split("\t");const players=rawPlayers.split(/,(?=\d+\|)/).map(s=>{const [no,name,score,period]=s.split("|");return {no:+no,name,score:String(Math.floor(Number(score))),rawScore:Number(score),period}});const groups=rawGroups.split("/").map(g=>g.split("-").map(Number));const averageScore=players.reduce((sum,p)=>sum+p.rawScore,0)/players.length;return {venue,race:+race,source,raceType,players,groups,averageScore};});
+const body=document.getElementById("rows"),search=document.getElementById("search"),venue=document.getElementById("venue"),count=document.getElementById("count");
+function riderMarkup(n,r){const p=r.players.find(x=>x.no===n),name=Array.from(p.name).slice(0,5).join("");const scoreClass=p.rawScore>=r.averageScore+3?" score-high":p.rawScore<=r.averageScore-3?" score-low":"";return '<div class="rider"><span class="score'+scoreClass+'">'+p.score+'</span><span class="car c'+n+'">'+n+'</span><span class="name">'+name+'</span><span class="period">'+p.period+'</span></div>'}function openVideo(event,url){event.preventDefault();window.open(url,"kdreams-video","width=900,height=500,toolbar=no,location=no,menubar=no,status=no,scrollbars=yes,resizable=yes");return false}function draw(){const q=search.value.trim().toLocaleLowerCase(),v=venue.value;const shown=races.filter(r=>(!v||r.venue===v)&&(!q||r.venue.toLocaleLowerCase().includes(q)||r.players.some(p=>p.name.toLocaleLowerCase().includes(q))));body.innerHTML=shown.map(r=>'<tr><td class="venue">'+r.venue+'</td><td class="race"><a class="race-link" href="'+r.source+'" target="_blank" rel="noopener">'+r.race+'R '+r.raceType+'</a><a class="video-link" href="'+r.source+'?pageType=showResult" target="_blank" rel="noopener" onclick="return openVideo(event,this.href)" title="幅900・高さ500の別ウィンドウで開く">▶ 映像を見る</a></td><td class="lineup-cell"><div class="lineup" aria-label="'+r.venue+' '+r.race+'レース 並び予想">'+r.groups.map(g=>'<div class="line-group">'+g.map(n=>riderMarkup(n,r)).join("")+'</div>').join("")+'</div></td></tr>').join("");count.textContent=shown.length+" / "+races.length+" レース"}
+search.addEventListener("input",draw);venue.addEventListener("change",draw);draw();
 </script></body></html>
-
-
-
-
-
-
-
-
-
-
