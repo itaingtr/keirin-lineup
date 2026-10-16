@@ -14,8 +14,10 @@ td.race-comment-cell{grid-area:comment;display:flex;flex-direction:column;gap:7p
 .race-comment-body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.4;color:#253247}
 .race-comment-time{display:block;margin-top:3px;font-size:9px;color:#7a8798}
 .race-comment-form{display:flex;flex-direction:column;gap:5px;margin-top:3px}
+.race-comment-form[hidden]{display:none}
 .race-comment-input{display:block;width:100%;min-height:54px;resize:vertical;padding:6px 7px;border:1px solid #c8d2df;border-radius:6px;background:#fff;color:#18212f;font:inherit;font-size:11px;line-height:1.4}
 .race-comment-save{align-self:flex-start;padding:5px 10px;border:0;border-radius:6px;background:#155eef;color:#fff;font:inherit;font-size:11px;font-weight:700;cursor:pointer}
 .race-comment-status{font-size:10px;color:#627086}
 .race-comments-auth-button:disabled,.race-comment-save:disabled{opacity:.6;cursor:wait}
 @media(max-width:640px){.table-wrap{max-width:none}tbody tr{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"venue race" "lineup lineup" "comment comment"}td.race-comment-cell{margin-top:4px}.race-comment-feed{max-height:160px}.race-comment-input{min-height:48px}.race-comments-auth{margin:0 8px 10px}}
+
