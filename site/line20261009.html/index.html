@@ -39,7 +39,8 @@ td.race{gap:4px 8px}.video-link{padding:4px 7px;font-size:10px}
 td.race .race-link{font-size:15px}
 .lineup{gap:18px}.rider{flex-basis:22px}.car{width:18px;height:18px;font-size:11px}.name{font-size:12px;height:4em;margin-top:.2em}.period{font:10px/1 Arial,sans-serif;letter-spacing:-.04em;color:#27364b;text-align:center;margin-top:1px;height:11px;white-space:nowrap}
 }
-</style></head>
+</style><link rel="stylesheet" href="/keirin-lineup/comments.css">
+</head>
 <body>
 <header><div class="eyebrow">KEIRIN · 2026.10.09</div><h1>10月9日 S級戦｜並び・選手一覧</h1><p class="intro">全24レース・191人。弥彦GⅠを先頭に、得点・車番・選手名・期別をラインごとに表示。</p></header>
 <main>
@@ -55,7 +56,8 @@ function riderMarkup(n,r){const name=Array.from(r.names[n-1]||'').slice(0,4).joi
 function groupMarkup(group,r){const contests=r.contests||[];let html='',i=0;while(i<group.length){const contest=contests.find(c=>c.length>1&&c[0]===group[i]&&c.every((n,j)=>group[i+j]===n));if(contest){html+='<span class="contest" aria-label="競り '+contest.join('と')+'"><span class="contest-bracket">(</span>'+contest.map(n=>riderMarkup(n,r)).join('')+'<span class="contest-bracket">)</span></span>';i+=contest.length;}else{html+=riderMarkup(group[i],r);i++;}}return '<div class="line-group">'+html+'</div>';}
 function draw(){const q=search.value.trim().toLocaleLowerCase(),v=venue.value;const shown=races.filter(r=>(!v||r.venue===v)&&(!q||r.venue.toLocaleLowerCase().includes(q)||r.names.some(n=>n.toLocaleLowerCase().includes(q))));body.innerHTML=shown.map(r=>{const namesInLine=r.groups.flatMap(g=>g.map(n=>r.names[n-1]));return '<tr><td class="venue">'+r.venue+'</td><td class="race"><a class="race-link" href="'+r.source+'" target="_blank" rel="noopener">'+r.race+'R'+r.label+'</a><a class="video-link" href="'+r.source+'?pageType=showResult" target="_blank" rel="noopener" title="結果ページを開き、ダイジェスト映像を見る">▶ 映像を見る</a></td><td class="lineup-cell"><div class="lineup" aria-label="'+r.venue+' '+r.race+'レース 並び予想 '+namesInLine.join('、')+(r.contests?'、競り '+r.contests.map(c=>c.join('と')).join('、'):'')+'">'+r.groups.map(g=>groupMarkup(g,r)).join('')+'</div></td></tr>';}).join('');count.textContent=shown.length+' / '+races.length+' レース';}
 search.addEventListener('input',draw);venue.addEventListener('change',draw);body.addEventListener('click',e=>{const a=e.target.closest('.video-link');if(!a)return;e.preventDefault();window.open(a.href,'kdreams-digest','popup=yes,width=800,height=500,resizable=yes,scrollbars=yes');});draw();
-</script></body></html>
+</script><script src="/keirin-lineup/comments.js" defer></script>
+</body></html>
 
 
 
