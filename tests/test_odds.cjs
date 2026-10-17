@@ -5,8 +5,8 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('site/index.html','utf8');
 const oddsCode=fs.readFileSync('site/odds.js','utf8');
 const tick=()=>new Promise(resolve=>setTimeout(resolve,20));
-function setup(data, configured=true) {
-  const dom=new JSDOM(html,{runScripts:'dangerously',url:'https://itaingtr.github.io/keirin-lineup/'});
+function setup(data, configured=true, page=html) {
+  const dom=new JSDOM(page,{runScripts:'dangerously',url:'https://itaingtr.github.io/keirin-lineup/'});
   const w=dom.window;
   const calls=[];
   w.fetch=async url=>{
@@ -38,10 +38,15 @@ function sample() {
     assert(panel.querySelector('.exacta-rider-name').textContent);
     assert(panel.querySelector('.exacta-row-rider').title.includes('寺沼拓摩'));
     assert.equal(panel.querySelector('[data-combination="2-1"]').textContent,'20.1');
-    assert.equal(panel.style.getPropertyValue('--exacta-width'),'332px');
+    assert.equal(panel.style.getPropertyValue('--exacta-width'),'324px');
     assert.equal(panel.querySelector('[data-combination="2-1"]').title.includes('20.1倍'),true);
     assert.equal(panel.querySelectorAll('.exacta-column-rider').length,9);
     assert.equal(panel.querySelectorAll('.exacta-row-rider').length,9);
+    assert.equal(panel.querySelectorAll('.exacta-synthetic').length,9);
+    assert.equal(panel.querySelector('.exacta-synthetic').textContent,'—','missing price prevents combined odds');
+    const rows=panel.querySelectorAll('.exacta-matrix tbody tr');
+    assert.equal(rows[0].children[2].dataset.combination,'2-1','columns fix first place');
+    assert.equal(rows[1].children[1].dataset.combination,'1-2','rows fix second place');
     assert.equal(calls.length,2);
     assert(new URL(calls[1]).searchParams.get('bet_type')==='exacta');
     assert.equal(w.location.href,'https://itaingtr.github.io/keirin-lineup/');
@@ -50,6 +55,32 @@ function sample() {
     panel.querySelector('.odds-refresh').click();await tick();assert.equal(calls.length,4);
     const search=d.querySelector('#search');search.value='高知';search.dispatchEvent(new w.Event('input'));await tick();
     assert.equal(d.querySelectorAll('.odds-toggle').length,7,'search redraw reattaches once per race');
+    dom.window.close();
+  }
+  {
+    const data=sample();
+    const prices=[3,6,12,24,48,96,192,384];
+    let index=0;
+    for (const item of data.odds) {
+      if(item.first===2)item.value=prices[index++];
+      if(item.first===7)item.value=80;
+    }
+    const {dom,w}=setup(data,true,html.replaceAll('寺沼拓摩','𠮷田太郎次'));
+    w.document.querySelector('.odds-toggle').click();await tick();
+    const summaries=w.document.querySelectorAll('.exacta-synthetic');
+    assert.equal(summaries[1].textContent,'1.5','harmonic total, not an average or equal stakes');
+    assert.equal(summaries[6].textContent,'10.0','eight 80x outcomes combine to 10x');
+    assert(summaries[1].title.includes('100円単位への丸めなし'));
+    // Inverse-odds stakes give identical payout for every second-place outcome.
+    const combined=1/prices.reduce((sum,price)=>sum+1/price,0);
+    const stakes=prices.map(price=>1000*combined/price);
+    assert(Math.abs(stakes.reduce((a,b)=>a+b,0)-1000)<1e-8);
+    assert(stakes.every((stake,i)=>Math.abs(stake*prices[i]-1000*combined)<1e-8));
+    const labels=w.document.querySelectorAll('.exacta-rider-name');
+    assert([...labels].every(label=>[...label.textContent].length<=4));
+    assert.equal(labels[0].textContent,'𠮷田太郎','four Unicode characters, including supplementary kanji');
+    assert(w.document.querySelector('.exacta-column-rider').title.includes('𠮷田太郎次'),'full name remains available');
+    assert.equal(w.document.querySelector('.exacta-row-rider .exacta-rider-name').textContent,'𠮷田太郎');
     dom.window.close();
   }
   for(const mutate of [d=>d.race_key='/wrong/',d=>d.bet_type='trifecta',d=>d.odds.pop(),d=>d.odds[1]=d.odds[0],d=>d.observed_at='unknown',d=>d.odds[0].value=-1]){
@@ -80,5 +111,5 @@ function sample() {
     const {dom,w,calls}=setup(sample(),false);w.document.querySelector('.odds-toggle').click();await tick();
     assert.equal(calls.length,1);assert(w.document.querySelector('.odds-status').textContent.includes('取得先を確認中'));dom.window.close();
   }
-  console.log('PASS exacta disclosure, lazy loading, refresh, no navigation, matrix, validation failures, search redraw and unconfigured source');
+  console.log('PASS exacta disclosure, lazy loading, refresh, matrix orientation, theoretical combined odds, missing prices, four-character names, validation and search redraw');
 })().catch(error=>{console.error(error);process.exit(1)});

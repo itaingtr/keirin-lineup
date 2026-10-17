@@ -1,6 +1,9 @@
-name: Check real exacta odds
+name: Collect exacta odds
 on:
   workflow_dispatch:
+  schedule:
+    # GitHub uses UTC: 02:00–08:00 UTC = 11:00–17:00 JST, every day.
+    - cron: '0 2-8 * * *'
   push:
     branches: [main]
     paths:
@@ -19,7 +22,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Test parser
         run: python3 -m unittest discover -s tests -v
-      - name: Read exacta odds for the current published card once
+      - name: Read exacta odds for the current published card
         run: |
           python3 scripts/collect_exacta.py \
             --page site/index.html \
@@ -51,5 +54,5 @@ jobs:
           latest.write_text(json.dumps({'checked_at':current['checked_at'],'results':list(snapshots.values())},ensure_ascii=False,indent=2)+'\n')
           PYTHON
           git add "diagnostics/exacta/$REPORT_NAME" diagnostics/exacta/latest.json
-          git commit -m 'Record one-off exacta source check'
+          git commit -m 'Save exacta odds snapshots'
           git push origin HEAD:odds-diagnostics

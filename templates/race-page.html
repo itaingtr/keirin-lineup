@@ -43,7 +43,7 @@
 .table-wrap .odds-content{width:100%;max-width:100%;overflow-x:auto}
 .table-wrap .exacta-matrix{display:table;width:var(--exacta-width);min-width:0;max-width:100%;border-collapse:collapse;table-layout:fixed;font-size:10px;font-variant-numeric:tabular-nums}
 .table-wrap .exacta-matrix caption{font-size:9px;line-height:12px;text-align:left;margin:0;color:#627086}
-.table-wrap .exacta-matrix .exacta-label-column{width:62px}
+.table-wrap .exacta-matrix .exacta-label-column{width:54px}
 .table-wrap .exacta-matrix thead{display:table-header-group}
 .table-wrap .exacta-matrix tbody{display:table-row-group}
 .table-wrap .exacta-matrix tr{display:table-row;background:transparent;box-shadow:none;border:0;border-radius:0}
@@ -59,7 +59,8 @@
 .table-wrap .exacta-number{display:inline-grid;place-items:center;flex:0 0 13px;width:13px;height:13px;border-radius:2px;font-size:9px;line-height:1;font-weight:750;box-sizing:border-box}
 .table-wrap .exacta-rider-name{font-size:9px;line-height:1.05;letter-spacing:-.2px;color:#253247;font-weight:400}
 .table-wrap .exacta-column-rider{flex-direction:column;gap:1px;padding-bottom:2px}
-.table-wrap .exacta-column-rider .exacta-rider-name{writing-mode:vertical-rl;text-orientation:upright;max-height:5em;overflow:hidden}
+.table-wrap .exacta-synthetic{font-size:8px;line-height:10px;min-height:10px;font-weight:650;letter-spacing:-.2px;color:#253247}
+.table-wrap .exacta-column-rider .exacta-rider-name{writing-mode:vertical-rl;text-orientation:upright;max-height:4em;overflow:hidden}
 .table-wrap .exacta-row-rider .exacta-rider-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 </style>
@@ -93,7 +94,7 @@ function riderMarkup(n,r,contestPosition=""){
 }function openVideo(event,url){event.preventDefault();if(window.matchMedia("(max-width: 640px)").matches){location.href=url;return false}window.open(url,"kdreams-video","width=750,height=470,toolbar=no,location=no,menubar=no,status=no,scrollbars=yes,resizable=yes");return false}function draw(){const q=search.value.trim().toLocaleLowerCase();const shown=races.filter(r=>(!q||r.venue.toLocaleLowerCase().includes(q)||r.players.some(p=>p.name.toLocaleLowerCase().includes(q))));body.innerHTML=shown.map(r=>'<tr><td class="venue">'+escapeHtml(r.venue)+'</td><td class="race"><a class="race-link'+(r.venue==="弥彦"&&r.race===1?" race-link-small":"")+'" href="'+r.source+'" target="_blank" rel="noopener">'+r.race+'R <span class="race-class">'+escapeHtml(r.raceType)+'</span></a><span class="race-time">'+r.startTime+'</span><a class="video-link" href="'+videoUrl(r)+'" target="_blank" rel="noopener" onclick="return openVideo(event,this.href)" title="PCは別ウィンドウ、スマートフォンは同じ画面でKドリームスの映像ページを開きます">▶ 映像を見る</a></td><td class="lineup-cell"><div class="lineup" aria-label="'+escapeHtml(r.venue)+' '+r.race+'レース 並び予想">'+r.groups.map(line=>'<div class="line-group">'+line.map(unit=>unit.type==="contest"?'<div class="contest-pair" aria-label="競り">'+unit.riders.map(n=>riderMarkup(n,r)).join("")+'</div>':unit.riders.map(n=>riderMarkup(n,r)).join("")).join("")+'</div>').join("")+'</div></td></tr>').join("");count.textContent=shown.length+" / "+races.length+" レース"}
 search.addEventListener("input",draw);dateSelect.addEventListener("change",()=>{if(dateSelect.value)location.href=dateSelect.value});draw();
 </script><script src="/keirin-lineup/comments.js?v=bottom-20261017d" defer></script>
-<script src="/keirin-lineup/odds.js?v=exacta-compact-20261017" defer></script>
+<script src="/keirin-lineup/odds.js?v=exacta-synthetic-20261017" defer></script>
 </body></html>
 
 
