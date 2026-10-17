@@ -47,7 +47,6 @@ function attachRow(row) {
   const key = raceKeyFor(row);
   if (!key) return;
   const cell = html('td', 'race-comment-cell');
-  const title = html('strong', 'race-comment-title', '猫のコメント');
   const feed = html('div', 'race-comment-feed');
   const form = html('form', 'race-comment-form');
   const input = html('textarea', 'race-comment-input');
@@ -59,7 +58,7 @@ function attachRow(row) {
   const formStatus = html('span', 'race-comment-status');
   form.append(input, submit, formStatus);
   form.hidden = true;
-  cell.append(title, feed, form);
+  cell.append(feed, form);
   row.append(cell);
   raceRows.set(key, row);
   commentCells.set(key, { cell, feed, form, input, submit, formStatus });
@@ -80,10 +79,10 @@ async function loadComments() {
     const parts = commentCells.get(item.race_key);
     if (!parts) continue;
     const post = html('article', 'race-comment-post');
-    post.append(html('div', 'race-comment-body', item.body));
+    post.append(html('span', 'race-comment-body', item.body));
     const time = new Date(item.created_at);
     post.append(html('time', 'race-comment-time', new Intl.DateTimeFormat('ja-JP', {
-      dateStyle: 'short', timeStyle: 'short', timeZone: 'Asia/Tokyo'
+      timeStyle: 'short', timeZone: 'Asia/Tokyo'
     }).format(time)));
     parts.feed.append(post);
   }
