@@ -48,10 +48,16 @@
     if (!['keirin.kdreams.jp', 'my.keirin.kdreams.jp'].includes(source.hostname) || source.pathname !== data.race_key) return data;
     return {...data, parser_version: 2, odds: data.odds.map(item => ({...item, first: item.second, second: item.first}))};
   }
-  function matrix(data, numbers, names) {
+  const formatOdds = value => value >= 100 ? String(Math.floor(value)) : value.toFixed(1);
+  const shadeClass = value => value >= 200 ? ' exacta-very-high' : value >= 100 ? ' exacta-high' : '';
+  function matrix(data, numbers, names, scores) {
     const values = new Map(data.odds.map(item => [item.first + '-' + item.second, item.value]));
+    const minimums = new Map();
+    for (const {first, value} of data.odds) {
+      if (value !== null && (!minimums.has(first) || value < minimums.get(first))) minimums.set(first, value);
+    }
     const table = element('table', 'exacta-matrix');
-    table.append(element('caption', '', '二車単 · 列1着／行2着 · 上段は合成オッズ'));
+    table.append(element('caption', '', '二車単 · 列1着／行2着 · 得点／単勝想定'));
     const columns = element('colgroup');
     columns.append(element('col', 'exacta-label-column'));
     for (const number of numbers) columns.append(element('col', 'exacta-value-column'));
@@ -61,15 +67,19 @@
       const name = names.get(number) || '';
       label.title = number + ' ' + name;
       if (orientation === 'column') {
+        const originalScore = scores.get(number);
+        const score = element('span', 'exacta-score ' + (originalScore?.className || 'score'), originalScore?.value || '—');
+        score.title = number + ' ' + name + 'の競走得点（出走表と同じ表示）';
+        label.append(score);
         const prices = numbers.filter(second => second !== number).map(second => values.get(number + '-' + second));
         // Equal payout requires stakes proportional to 1 / odds, with no ticket-unit rounding.
         // Never derive an all-combinations total from a missing price.
         const combined = prices.every(price => typeof price === 'number')
           ? 1 / prices.reduce((sum, price) => sum + 1 / price, 0) : null;
-        const summary = element('span', 'exacta-synthetic', combined === null ? '—' : combined.toFixed(1));
+        const summary = element('span', 'exacta-synthetic' + (combined === null ? '' : shadeClass(combined)), combined === null ? '—' : formatOdds(combined));
         summary.title = number + ' ' + name + 'の1着固定・2着全通り。払戻金がそろうように賭け金を配分した理論上の合成倍率（100円単位への丸めなし）。' +
           (combined === null ? '未発売・対象外の組合せがあるため計算しません。' : '計算式：1 ÷ Σ(1 ÷ 二車単オッズ)。実売の単勝オッズではありません。');
-        summary.setAttribute('aria-label', number + '番の理論合成オッズ ' + (combined === null ? '計算不可' : combined.toFixed(1) + '倍'));
+        summary.setAttribute('aria-label', number + '番の理論合成オッズ ' + (combined === null ? '計算不可' : formatOdds(combined) + '倍'));
         label.append(summary);
       }
       label.append(element('span', 'exacta-number c' + number, number));
@@ -96,13 +106,18 @@
       row.append(th);
       for (const first of numbers) {
         const value = values.get(first + '-' + second);
-        const text = first === second ? '·' : value === null ? '—' : value.toFixed(1);
+        const text = first === second ? '·' : value === null ? '—' : formatOdds(value);
         const td = element('td', first === second ? 'exacta-diagonal' : 'exacta-value', text);
         if (first !== second) {
           td.dataset.combination = first + '-' + second;
-          td.title = first + ' ' + (names.get(first) || '') + ' → ' + second + ' ' + (names.get(second) || '') + '：' + (value === null ? '未発売・対象外' : text + '倍');
+          td.title = first + ' ' + (names.get(first) || '') + ' → ' + second + ' ' + (names.get(second) || '') + '：' + (value === null ? '未発売・対象外' : value.toFixed(1) + '倍');
           if (value === null) td.classList.add('exacta-unavailable');
-          else if (value < 10) td.classList.add('exacta-low');
+          else {
+            if (value < 10) td.classList.add('exacta-low');
+            const shade = shadeClass(value).trim();
+            if (shade) td.classList.add(shade);
+            if (value === minimums.get(first)) td.classList.add('exacta-minimum');
+          }
           if (text.length >= 6) td.classList.add('exacta-long');
         }
         row.append(td);
@@ -123,6 +138,10 @@
     const race = typeof races === 'undefined' ? null : races.find(race => new URL(race.source).pathname === raceKey);
     const names = new Map(race ? race.players.map(player => [player.no, player.name]) :
       [...row.querySelectorAll('.rider')].map(rider => [Number(rider.querySelector('.car')?.textContent), rider.querySelector('.name')?.textContent || '']));
+    const scores = new Map([...row.querySelectorAll('.rider')].map(rider => {
+      const score = rider.querySelector('.score');
+      return [Number(rider.querySelector('.car')?.textContent), {value: score?.textContent, className: score?.className}];
+    }));
     const button = element('button', 'odds-toggle', '二車単オッズ');
     button.type = 'button';
     button.setAttribute('aria-expanded', 'false');
@@ -172,7 +191,7 @@
           const formatted = new Intl.DateTimeFormat('ja-JP', {month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Tokyo'}).format(new Date(data.observed_at));
           status.textContent = '取得時刻：' + formatted + (data.status === 'snapshot' ? '（保存値）' : '（変動あり）');
           status.title = data.status === 'snapshot' ? '取得時点の保存値です。現在の発売状態は未確認です。' : 'オッズは変動します。';
-          content.append(matrix(data, numbers, names));
+          content.append(matrix(data, numbers, names, scores));
         }
       } catch (error) {
         status.textContent = 'オッズを取得できなかったにゃ。「更新」で再確認してにゃ。';

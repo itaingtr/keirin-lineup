@@ -44,6 +44,15 @@ function sample() {
     assert.equal(panel.querySelectorAll('.exacta-column-rider').length,9);
     assert.equal(panel.querySelectorAll('.exacta-row-rider').length,9);
     assert.equal(panel.querySelectorAll('.exacta-synthetic').length,9);
+    assert.equal(panel.querySelectorAll('.exacta-score').length,9);
+    for(const header of panel.querySelectorAll('.exacta-column-rider')) {
+      const number=header.querySelector('.exacta-number').textContent;
+      const original=[...panel.parentElement.querySelectorAll('.rider')].find(rider=>rider.querySelector('.car').textContent===number).querySelector('.score');
+      const score=header.querySelector('.exacta-score');
+      assert.equal(score.textContent,original.textContent,'score copied from the matching rider');
+      assert.equal(score.className,'exacta-score '+original.className,'score keeps its original emphasis');
+      assert(score.nextElementSibling.classList.contains('exacta-synthetic'),'score appears above combined odds');
+    }
     assert.equal(panel.querySelector('.exacta-synthetic').textContent,'—','missing price prevents combined odds');
     const rows=panel.querySelectorAll('.exacta-matrix tbody tr');
     assert.equal(rows[0].children[2].dataset.combination,'2-1','columns fix first place');
@@ -60,6 +69,47 @@ function sample() {
     panel.querySelector('.odds-refresh').click();await tick();assert.equal(calls.length,4);
     const search=d.querySelector('#search');search.value='高知';search.dispatchEvent(new w.Event('input'));await tick();
     assert.equal(d.querySelectorAll('.odds-toggle').length,7,'search redraw reattaches once per race');
+    dom.window.close();
+  }
+  {
+    const data=sample(), prices=[5,5,99.9,100,100.9,199.9,200,200.9];
+    let index=0;
+    for(const item of data.odds) {
+      if(item.first===1)item.value=prices[index++];
+      if(item.first===2)item.value=null;
+      if(item.first===3)item.value=item.second===1?100.1:item.second===2?100.9:500;
+      if(item.first===4)item.value=800.8;
+      if(item.first===7)item.value=100.9;
+      if(item.first===8)item.value=2400.8;
+    }
+    const {dom,w}=setup(data);w.document.querySelector('.odds-toggle').click();await tick();
+    const table=w.document.querySelector('.exacta-matrix');
+    const cell=pair=>table.querySelector('[data-combination="'+pair+'"]');
+    assert.equal(cell('1-4').textContent,'99.9');
+    assert.equal(cell('1-5').textContent,'100');
+    assert.equal(cell('1-6').textContent,'100','100.9 truncates instead of rounding up');
+    assert.equal(cell('1-7').textContent,'199');
+    assert.equal(cell('1-8').textContent,'200');
+    assert.equal(cell('1-9').textContent,'200');
+    assert(!cell('1-4').classList.contains('exacta-high'));
+    assert(cell('1-5').classList.contains('exacta-high'));
+    assert(cell('1-7').classList.contains('exacta-high'));
+    assert(cell('1-8').classList.contains('exacta-very-high'));
+    assert(cell('1-9').title.includes('200.9倍'),'full original quote remains in the tooltip');
+    assert.equal(table.querySelectorAll('[data-combination^="1-"].exacta-minimum').length,2,'all tied column minima are bold');
+    assert(cell('1-2').classList.contains('exacta-minimum'));
+    assert(cell('1-3').classList.contains('exacta-minimum'));
+    assert.equal(table.querySelectorAll('[data-combination^="2-"].exacta-minimum').length,0,'unavailable column has no minimum');
+    assert(cell('3-1').classList.contains('exacta-minimum'));
+    assert(!cell('3-2').classList.contains('exacta-minimum'),'rounded display ties do not change the true minimum');
+    const summaries=table.querySelectorAll('.exacta-synthetic');
+    assert.equal(summaries[1].textContent,'—');
+    assert.equal(summaries[3].textContent,'100');
+    assert(summaries[3].classList.contains('exacta-high'));
+    assert.equal(summaries[6].textContent,'12.6','combined odds still use 100.9, not the displayed 100');
+    assert.equal(summaries[7].textContent,'300');
+    assert(summaries[7].classList.contains('exacta-very-high'));
+    assert.equal(data.odds.find(item=>item.first===1&&item.second===9).value,200.9);
     dom.window.close();
   }
   for(const parserVersion of [undefined,2]) {
