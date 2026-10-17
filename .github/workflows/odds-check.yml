@@ -1,0 +1,45 @@
+name: Check real exacta odds
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/odds-check.yml
+      - scripts/collect_exacta.py
+permissions:
+  contents: write
+concurrency:
+  group: exacta-diagnostic
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+      - name: Test parser
+        run: python3 -m unittest discover -s tests -v
+      - name: Read three public race pages once
+        run: |
+          python3 scripts/collect_exacta.py \
+            --url 'https://my.keirin.kdreams.jp/shizuoka/racedetail/3820261015030009/' \
+            --url 'https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010011/' \
+            --url 'https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010006/' \
+            --report /tmp/exacta-report.json
+      - name: Preserve diagnostic result on a separate branch
+        env:
+          REPORT_NAME: run-${{ github.run_id }}-${{ github.run_attempt }}.json
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git ls-remote --exit-code --heads origin odds-diagnostics > /dev/null; then
+            git fetch origin odds-diagnostics
+            git checkout -b odds-diagnostics FETCH_HEAD
+          else
+            git checkout -b odds-diagnostics
+          fi
+          mkdir -p diagnostics/exacta
+          cp /tmp/exacta-report.json "diagnostics/exacta/$REPORT_NAME"
+          git add "diagnostics/exacta/$REPORT_NAME"
+          git commit -m 'Record one-off exacta source check'
+          git push origin HEAD:odds-diagnostics
