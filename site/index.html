@@ -8,20 +8,27 @@
 /* Keep this layout local to today's page and the matching index. */
 .table-wrap{width:100%;max-width:none;overflow-x:auto;overscroll-behavior-x:contain}
 .table-wrap table{width:860px;min-width:860px;max-width:860px}
-.table-wrap tbody tr{grid-template-columns:52px 274px minmax(0,1fr);grid-template-areas:"venue race comment" "lineup lineup comment";column-gap:12px;align-items:start}
+.table-wrap tbody tr{grid-template-columns:52px 274px minmax(0,1fr);grid-template-areas:"venue race comment" "lineup lineup comment" "composer composer comment";column-gap:12px;align-items:start}
 .table-wrap td.race{flex-wrap:nowrap;gap:8px}
-.table-wrap td.race-comment-cell{margin:0 0 0 8px;min-width:0}
-.table-wrap .race-comment-feed{max-height:none;overflow:visible}
+.table-wrap td.race-comment-cell{display:contents}
+.table-wrap .race-comment-feed{grid-area:comment;margin-left:8px;min-width:0;max-height:none;overflow:visible}
 .table-wrap .race-comment-post{min-width:0;overflow-wrap:anywhere}
 .table-wrap .race-comment-body{white-space:pre-wrap;overflow-wrap:anywhere}
-.table-wrap .race-comment-input{min-height:64px;min-width:0;overflow-wrap:anywhere}
+.table-wrap .race-comment-form{grid-area:composer;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:5px;margin:0;min-width:0}
+.table-wrap .race-comment-form[hidden]{display:none}
+.table-wrap .race-comment-input{height:28px;min-height:28px;min-width:0;padding:5px 6px;resize:none;white-space:pre;overflow:auto;line-height:16px}
+.table-wrap .race-comment-save{align-self:center;white-space:nowrap}
+.table-wrap .race-comment-status{grid-column:1/-1}
+.table-wrap .race-comment-status:empty{display:none}
 @media(max-width:640px){
+.table-wrap table{width:640px;min-width:640px;max-width:640px}
+.table-wrap .race-comment-feed{margin-left:0}
 .table-wrap tbody tr{grid-template-columns:44px 230px minmax(0,1fr);column-gap:4px}
 .table-wrap td.race-comment-cell{margin:0;font-size:10px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .table-wrap .race-comment-body,.table-wrap .race-comment-input{font-size:10px;line-height:1.4}
 .table-wrap .race-comment-post{padding:4px 5px}
 .table-wrap .race-comment-time{font-size:8px}
-.table-wrap .race-comment-input{min-height:48px}
+.table-wrap .race-comment-input{height:26px;min-height:26px;padding:5px 6px}
 .table-wrap .race-comment-save{font-size:10px;padding:4px 7px}
 }
 </style>
