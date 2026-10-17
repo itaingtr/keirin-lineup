@@ -29,7 +29,7 @@ const signOut = html('button', 'race-comments-auth-button race-comments-signout'
 signOut.type = 'button';
 signOut.hidden = true;
 authBar.append(authHeading, authMessage, email, sendCode, signOut);
-document.querySelector('.table-wrap')?.before(authBar);
+(document.getElementById('comments-auth-slot') || document.querySelector('main')).append(authBar);
 
 const raceRows = new Map();
 const commentCells = new Map();

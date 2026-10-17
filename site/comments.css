@@ -22,3 +22,5 @@ td.race-comment-cell{grid-area:comment;display:flex;flex-direction:column;gap:7p
 
 
 .stat.stat-highlight{color:#d32f2f}
+
+.refresh-button{padding:5px 9px;border:1px solid #c8d2df;border-radius:6px;background:#fff;color:#46556a;font:inherit;font-size:11px;cursor:pointer}.page-bottom{margin-top:20px}.bottom-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}.page-bottom .notice{margin-bottom:14px}.page-bottom .race-comments-auth{margin:0}
