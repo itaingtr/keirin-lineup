@@ -3,7 +3,8 @@ const {JSDOM}=require('jsdom');
 const fs=require('node:fs');
 const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
-const html=fs.readFileSync('site/index.html','utf8');
+// Keep a fixed published regression card as index advances to later race days.
+const html=fs.readFileSync('site/line20261017.html/index.html','utf8');
 const oddsCode=fs.readFileSync('site/odds.js','utf8');
 const tick=()=>new Promise(resolve=>setTimeout(resolve,20));
 function setup(data, configured=true, page=html) {
@@ -160,6 +161,25 @@ function sample() {
     assert.equal(w.document.querySelector('.exacta-synthetic').textContent,expected,'combined odds use the corrected first-place column');
     assert.equal(data.observed_at,observed,'original observation time is preserved');
     assert.equal(data.odds.find(item=>item.first===1&&item.second===5).value,10.5,'saved history is not mutated');
+    dom.window.close();
+  }
+  {
+    const {dom,w,calls}=setup(sample());
+    w.eval(fs.readFileSync('site/odds-comparison.js','utf8'));
+    w.document.querySelector('.odds-toggle').click();await tick();
+    const panel=w.document.querySelector('.odds-cell');
+    const left=panel.querySelector('[data-odds-order="number"]'),right=panel.querySelector('[data-odds-order="lineup"]');
+    assert(left&&right);
+    const order=[...w.document.querySelectorAll('#rows > tr:first-child .lineup .car')].map(car=>Number(car.textContent));
+    assert.deepEqual([...left.querySelectorAll('.exacta-column-rider .exacta-number')].map(car=>Number(car.textContent)),[...order].sort((a,b)=>a-b));
+    assert.deepEqual([...right.querySelectorAll('.exacta-column-rider .exacta-number')].map(car=>Number(car.textContent)),order);
+    assert.deepEqual([...right.tBodies[0].rows].map(row=>Number(row.firstElementChild.querySelector('.exacta-number').textContent)),order);
+    const quotes=table=>Object.fromEntries([...table.querySelectorAll('[data-combination]')].map(cell=>[cell.dataset.combination,[cell.textContent,cell.title,cell.className]]));
+    assert.deepEqual(quotes(left),quotes(right),'reordering preserves prices and emphasis');
+    assert.equal(calls.length,2,'configuration plus one shared feed fetch');
+    panel.querySelector('.odds-refresh').click();await tick();
+    assert.equal(panel.querySelectorAll('.odds-comparison').length,1);
+    assert.equal(panel.querySelectorAll('table').length,2,'refresh replaces both tables without duplication');
     dom.window.close();
   }
   {
