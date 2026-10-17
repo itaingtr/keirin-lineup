@@ -97,12 +97,14 @@ def parse_exacta(html, url, observed_at=None):
     for row in rows:
         headers = [n for n in row.children if isinstance(n,Node) and n.tag == 'th']
         cells = [n for n in row.children if isinstance(n,Node) and n.tag == 'td']
-        first = rider_number(headers[0]) if headers else None
-        if first is None or not cells:
+        # K Dreams places first-place riders across the top and second-place
+        # riders down the left. A cell in column 1, row 5 is 1 -> 5.
+        second = rider_number(headers[0]) if headers else None
+        if second is None or not cells:
             continue
-        if first not in numbers or len(cells) != len(numbers):
+        if second not in numbers or len(cells) != len(numbers):
             raise ValueError('Unexpected matrix dimensions')
-        for second, cell in zip(numbers, cells):
+        for first, cell in zip(numbers, cells):
             if first == second:
                 continue
             pair = (first, second)
@@ -122,7 +124,7 @@ def parse_exacta(html, url, observed_at=None):
     if seen != {(a,b) for a in numbers for b in numbers if a != b}:
         raise ValueError('Incomplete exacta matrix')
     title = next((n.text().strip() for n in doc.find_all('title')), '')
-    return {'race_key':key,'bet_type':'exacta','status':'snapshot',
+    return {'race_key':key,'bet_type':'exacta','status':'snapshot','parser_version':2,
             'observed_at':observed_at or datetime.now(timezone.utc).isoformat(),
             'source_url':url,'rider_numbers':sorted(numbers),'odds':output,'source_title':title}
 

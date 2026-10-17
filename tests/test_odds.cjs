@@ -1,6 +1,7 @@
 // Run with jsdom@26.1.0 installed in your test environment; never contacts a real odds source.
 const {JSDOM}=require('jsdom');
 const fs=require('node:fs');
+const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
 const html=fs.readFileSync('site/index.html','utf8');
 const oddsCode=fs.readFileSync('site/odds.js','utf8');
@@ -47,6 +48,10 @@ function sample() {
     const rows=panel.querySelectorAll('.exacta-matrix tbody tr');
     assert.equal(rows[0].children[2].dataset.combination,'2-1','columns fix first place');
     assert.equal(rows[1].children[1].dataset.combination,'1-2','rows fix second place');
+    assert.equal(rows[4].children[1].dataset.combination,'1-5','1-5 is first column, fifth rider row');
+    assert.equal(rows[4].children[1].textContent,'10.5');
+    assert.equal(rows[0].children[5].dataset.combination,'5-1');
+    assert.equal(rows[0].children[5].textContent,'50.1');
     assert.equal(calls.length,2);
     assert(new URL(calls[1]).searchParams.get('bet_type')==='exacta');
     assert.equal(w.location.href,'https://itaingtr.github.io/keirin-lineup/');
@@ -55,6 +60,46 @@ function sample() {
     panel.querySelector('.odds-refresh').click();await tick();assert.equal(calls.length,4);
     const search=d.querySelector('#search');search.value='高知';search.dispatchEvent(new w.Event('input'));await tick();
     assert.equal(d.querySelectorAll('.odds-toggle').length,7,'search redraw reattaches once per race');
+    dom.window.close();
+  }
+  for(const parserVersion of [undefined,2]) {
+    const data=sample();data.status='snapshot';
+    data.source_url='https://my.keirin.kdreams.jp'+data.race_key+'?pageType=odds';
+    data.rider_numbers=[1,2,3,4,5,6,7,8,9];
+    if(parserVersion!==undefined)data.parser_version=parserVersion;
+    const observed=data.observed_at;
+    const {dom,w}=setup({results:[{ok:true,snapshot:data}]});
+    w.document.querySelector('.odds-toggle').click();await tick();
+    const rows=w.document.querySelectorAll('.exacta-matrix tbody tr');
+    assert.equal(rows[4].children[1].dataset.combination,'1-5');
+    assert.equal(rows[4].children[1].textContent,parserVersion===2?'10.5':'50.1','legacy quotes normalize once, corrected quotes stay in place');
+    const firstPrices=data.odds.filter(item=>parserVersion===2?item.first===1:item.second===1).map(item=>item.value);
+    const expected=firstPrices.some(value=>value===null)?'—':(1/firstPrices.reduce((sum,value)=>sum+1/value,0)).toFixed(1);
+    assert.equal(w.document.querySelector('.exacta-synthetic').textContent,expected,'combined odds use the corrected first-place column');
+    assert.equal(data.observed_at,observed,'original observation time is preserved');
+    assert.equal(data.odds.find(item=>item.first===1&&item.second===5).value,10.5,'saved history is not mutated');
+    dom.window.close();
+  }
+  {
+    // Exercise the complete source HTML -> collector -> saved feed -> UI path.
+    // Deliberately unequal 1-5/5-1 values expose an extra or missing transpose.
+    const headers=Array.from({length:9},(_,i)=>'<th class="n'+(i+1)+'">'+(i+1)+'</th>').join('');
+    const rows=Array.from({length:9},(_,i)=>{
+      const second=i+1;
+      return '<tr><th class="n'+second+'">'+second+'</th>'+Array.from({length:9},(_,j)=>{
+        const first=j+1;return '<td>'+(first===second?'':first*10+second+0.1)+'</td>';
+      }).join('')+'</tr>';
+    }).join('');
+    const source='<div id="JS_ODDSCONTENTS_2shatan"><table class="odds_table"><tr><th>2着＼1着</th>'+headers+'</tr>'+rows+'</table></div>';
+    const script="import sys,json; sys.path.insert(0,'scripts'); from collect_exacta import parse_exacta; print(json.dumps(parse_exacta(sys.stdin.read(),'https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010001/')))";
+    const data=JSON.parse(execFileSync('python3',['-c',script],{input:source,encoding:'utf8'}));
+    const {dom,w}=setup({results:[{ok:true,snapshot:data}]});
+    w.document.querySelector('.odds-toggle').click();await tick();
+    const output=w.document.querySelectorAll('.exacta-matrix tbody tr');
+    assert.equal(output[4].children[1].textContent,'15.1','1-5 comes from source column 1, row 5');
+    assert.equal(output[0].children[5].textContent,'51.1','5-1 comes from source column 5, row 1');
+    const expected=(1/[12.1,13.1,14.1,15.1,16.1,17.1,18.1,19.1].reduce((sum,value)=>sum+1/value,0)).toFixed(1);
+    assert.equal(w.document.querySelector('.exacta-synthetic').textContent,expected,'car 1 combined odds use all second-place rows in column 1');
     dom.window.close();
   }
   {

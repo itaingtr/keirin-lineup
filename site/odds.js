@@ -39,6 +39,15 @@
     }
     return data;
   }
+  function normalizeSavedSnapshot(data) {
+    // Our original K Dreams collector mislabeled row/column identities.
+    // Correct those saved quotes without changing their observation time or
+    // stored history. Version 2 already uses first=column, second=row.
+    if (data?.parser_version !== undefined || data?.status !== 'snapshot' || !data.source_url || !Array.isArray(data.rider_numbers)) return data;
+    const source = new URL(data.source_url);
+    if (!['keirin.kdreams.jp', 'my.keirin.kdreams.jp'].includes(source.hostname) || source.pathname !== data.race_key) return data;
+    return {...data, parser_version: 2, odds: data.odds.map(item => ({...item, first: item.second, second: item.first}))};
+  }
   function matrix(data, numbers, names) {
     const values = new Map(data.odds.map(item => [item.first + '-' + item.second, item.value]));
     const table = element('table', 'exacta-matrix');
@@ -154,7 +163,7 @@
         if (!response.ok) throw new Error('fetch');
         const payload = await response.json();
         const candidate = Array.isArray(payload.results)
-          ? payload.results.find(item => item.ok && item.snapshot?.race_key === raceKey)?.snapshot
+          ? normalizeSavedSnapshot(payload.results.find(item => item.ok && item.snapshot?.race_key === raceKey)?.snapshot)
           : payload;
         const data = validate(candidate || {race_key:raceKey,bet_type:'exacta',status:'unavailable'}, raceKey, numbers);
         if (data.status === 'closed') status.textContent = 'このレースのオッズ発売は終了しているにゃ。';
