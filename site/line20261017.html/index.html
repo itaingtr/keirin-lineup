@@ -23,7 +23,8 @@
 @media(max-width:640px){
 .table-wrap table{width:640px;min-width:640px;max-width:640px}
 .table-wrap .race-comment-feed{margin-left:0}
-.table-wrap tbody tr{grid-template-columns:44px 230px minmax(0,1fr);column-gap:4px}
+.table-wrap tbody tr{grid-template-columns:44px 230px minmax(0,1fr);grid-template-areas:"venue race comment" "lineup lineup comment" "composer composer .";column-gap:4px}
+.table-wrap .race-comment-form{width:calc(100% + 40px);max-width:none}
 .table-wrap td.race-comment-cell{margin:0;font-size:10px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .table-wrap .race-comment-body,.table-wrap .race-comment-input{font-size:10px;line-height:1.4}
 .table-wrap .race-comment-post{padding:4px 5px}
