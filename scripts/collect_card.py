@@ -39,7 +39,7 @@ def review_table(table):
     for row in table.find_all('tr'):
         values = cells(row)
         if values:
-            rows.append('<tr>' + ''.join('<td title="' + esc(node.attrs.get('class', '')) + '">' + esc(clean(node.text())) + '</td>' for node in values) + '</tr>')
+            rows.append('<tr>' + ''.join('<td title="' + esc(node.attrs.get('class', '') + ' | ' + ' ; '.join(str(child.attrs) for child in node.find_all() if child.attrs)) + '">' + esc(clean(node.text())) + '</td>' for node in values) + '</tr>')
     return '<table border="1"><caption>' + esc(table.attrs.get('class', '')) + '</caption>' + ''.join(rows) + '</table>'
 
 
@@ -78,6 +78,11 @@ def inspect_day(day, output):
         parts.append('<h3>並び表示の確認</h3>')
         for node in detail.find_all():
             classes = node.attrs.get('class', '')
+            if 'line_position' in classes.split():
+                parts.append('<h4>並びの区切り</h4>')
+                for child in node.children:
+                    if isinstance(child, Node):
+                        parts.append('<pre>' + esc(child.tag + ' ' + str(child.attrs) + ' : ' + clean(child.text())) + '</pre>')
             if 'line' in classes.lower() or 'line' in node.attrs.get('id', '').lower():
                 if len(node.text()) < 500:
                     parts.append('<p>' + esc(node.tag + ' ' + classes + ' ' + node.attrs.get('id', '') + ' : ' + clean(node.text())) + '</p>')
