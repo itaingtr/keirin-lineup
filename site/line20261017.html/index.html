@@ -32,6 +32,21 @@
 .page-bottom #search,.page-bottom .race-comments-email{font-size:16px}
 .table-wrap .race-comment-save{font-size:10px;padding:4px 7px}
 }
+.table-wrap tbody tr.odds-open{grid-template-areas:"venue race comment" "lineup lineup comment" "composer composer comment" "odds odds odds"}
+.table-wrap .odds-toggle,.table-wrap .odds-refresh{font:inherit;font-size:11px;padding:5px 9px;border:1px solid #c8d2df;border-radius:6px;background:#eff6ff;color:#155eef;cursor:pointer}
+.table-wrap .odds-toggle{margin-top:4px}
+.table-wrap .odds-cell{grid-area:odds;min-width:0;border-top:1px solid #dbe2ea;padding-top:8px}
+.table-wrap .odds-cell[hidden]{display:none}
+.table-wrap .odds-heading{font-size:12px;margin-right:10px}
+.table-wrap .odds-status{font-size:11px;margin:6px 0;color:#526176}
+.table-wrap .odds-content{max-width:100%;overflow-x:auto}
+.table-wrap .exacta-matrix{display:table;width:100%;min-width:0;max-width:none;border-collapse:collapse;table-layout:fixed;font-size:10px}
+.table-wrap .exacta-matrix caption{font-size:10px;text-align:left;margin-bottom:5px}
+.table-wrap .exacta-matrix thead{display:table-header-group}
+.table-wrap .exacta-matrix tbody{display:table-row-group}
+.table-wrap .exacta-matrix tr{display:table-row;background:#fff;box-shadow:none;border:0}
+.table-wrap .exacta-matrix th,.table-wrap .exacta-matrix td{display:table-cell;border:1px solid #dbe2ea;padding:5px 2px;text-align:center;overflow-wrap:anywhere}
+.table-wrap .exacta-matrix th{background:#eff6ff}
 </style>
 </head><body>
 <header><div class="eyebrow">KEIRIN · 2026.10.17</div><h1>10月17日 S級戦｜並び・選手一覧</h1><p class="intro">全19レース・157人。グレードの高い開催から掲載。</p></header>
@@ -63,6 +78,7 @@ function riderMarkup(n,r,contestPosition=""){
 }function openVideo(event,url){event.preventDefault();if(window.matchMedia("(max-width: 640px)").matches){location.href=url;return false}window.open(url,"kdreams-video","width=750,height=470,toolbar=no,location=no,menubar=no,status=no,scrollbars=yes,resizable=yes");return false}function draw(){const q=search.value.trim().toLocaleLowerCase();const shown=races.filter(r=>(!q||r.venue.toLocaleLowerCase().includes(q)||r.players.some(p=>p.name.toLocaleLowerCase().includes(q))));body.innerHTML=shown.map(r=>'<tr><td class="venue">'+escapeHtml(r.venue)+'</td><td class="race"><a class="race-link'+(r.venue==="弥彦"&&r.race===1?" race-link-small":"")+'" href="'+r.source+'" target="_blank" rel="noopener">'+r.race+'R <span class="race-class">'+escapeHtml(r.raceType)+'</span></a><span class="race-time">'+r.startTime+'</span><a class="video-link" href="'+videoUrl(r)+'" target="_blank" rel="noopener" onclick="return openVideo(event,this.href)" title="PCは別ウィンドウ、スマートフォンは同じ画面でKドリームスの映像ページを開きます">▶ 映像を見る</a></td><td class="lineup-cell"><div class="lineup" aria-label="'+escapeHtml(r.venue)+' '+r.race+'レース 並び予想">'+r.groups.map(line=>'<div class="line-group">'+line.map(unit=>unit.type==="contest"?'<div class="contest-pair" aria-label="競り">'+unit.riders.map(n=>riderMarkup(n,r)).join("")+'</div>':unit.riders.map(n=>riderMarkup(n,r)).join("")).join("")+'</div>').join("")+'</div></td></tr>').join("");count.textContent=shown.length+" / "+races.length+" レース"}
 search.addEventListener("input",draw);dateSelect.addEventListener("change",()=>{if(dateSelect.value)location.href=dateSelect.value});draw();
 </script><script src="/keirin-lineup/comments.js?v=bottom-20261017d" defer></script>
+<script src="/keirin-lineup/odds.js?v=exacta-20261017" defer></script>
 </body></html>
 
 
