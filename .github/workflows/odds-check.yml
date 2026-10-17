@@ -19,12 +19,10 @@ jobs:
       - uses: actions/checkout@v6
       - name: Test parser
         run: python3 -m unittest discover -s tests -v
-      - name: Read three public race pages once
+      - name: Read exacta odds for the current published card once
         run: |
           python3 scripts/collect_exacta.py \
-            --url 'https://my.keirin.kdreams.jp/shizuoka/racedetail/3820261015030009/' \
-            --url 'https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010011/' \
-            --url 'https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010006/' \
+            --page site/index.html \
             --report /tmp/exacta-report.json
       - name: Preserve diagnostic result on a separate branch
         env:
@@ -40,6 +38,18 @@ jobs:
           fi
           mkdir -p diagnostics/exacta
           cp /tmp/exacta-report.json "diagnostics/exacta/$REPORT_NAME"
-          git add "diagnostics/exacta/$REPORT_NAME"
+          python3 - <<'PYTHON'
+          import json
+          from pathlib import Path
+          current=json.loads(Path('/tmp/exacta-report.json').read_text())
+          latest=Path('diagnostics/exacta/latest.json')
+          previous=json.loads(latest.read_text()) if latest.exists() else {'results':[]}
+          snapshots={item['snapshot']['race_key']:item for item in previous['results'] if item.get('ok')}
+          for item in current['results']:
+              if item.get('ok'):
+                  snapshots[item['snapshot']['race_key']]=item
+          latest.write_text(json.dumps({'checked_at':current['checked_at'],'results':list(snapshots.values())},ensure_ascii=False,indent=2)+'\n')
+          PYTHON
+          git add "diagnostics/exacta/$REPORT_NAME" diagnostics/exacta/latest.json
           git commit -m 'Record one-off exacta source check'
           git push origin HEAD:odds-diagnostics

@@ -145,11 +145,19 @@ def fetch_exacta(url):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--url', action='append', required=True)
+    parser.add_argument('--url', action='append', default=[])
+    parser.add_argument('--page', type=Path, help='Collect the races already listed in our generated page')
     parser.add_argument('--report', type=Path, required=True)
     args = parser.parse_args()
+    urls = list(args.url)
+    if args.page:
+        from export_races import export
+        urls.extend(race['source'] for race in export(args.page.read_text())['races'])
+    urls = list(dict.fromkeys(urls))
+    if not urls:
+        parser.error('Provide --url or --page')
     report = {'checked_at':datetime.now(timezone.utc).isoformat(), 'results':[]}
-    for index, url in enumerate(args.url):
+    for index, url in enumerate(urls):
         if index:
             time.sleep(2)
         item = {'source_url':url}
