@@ -1,8 +1,8 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 import importlib.util
 from pathlib import Path
-import re
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('archive', Path(__file__).parents[1] / 'scripts/archive_snapshot.py')
 archive = importlib.util.module_from_spec(spec)
@@ -19,35 +19,56 @@ class SnapshotTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             archive.snapshot_name('../../comments')
 
-    def test_expiry_uses_upload_age_and_preserves_boundary(self):
-        now = datetime(2026, 11, 17, 12, tzinfo=timezone.utc)
-        ages = [timedelta(days=30, seconds=1), timedelta(days=30), timedelta(days=2)]
-        objects = [{'name': str(i), 'created_at': (now-age).isoformat()} for i, age in enumerate(ages)]
-        self.assertEqual(archive.expired_objects(objects, now), ['0'])
-
-    def test_bad_expiry_metadata_fails_closed(self):
-        with self.assertRaises(ValueError):
-            archive.expired_objects([{'name': 'keep', 'created_at': 'unknown'}])
-
-    def test_paginated_listing_prunes_only_private_snapshot_paths(self):
+    def test_inventory_keeps_old_data_and_counts_all_pages_and_dates(self):
+        calls = []
         class Fake(archive.Storage):
             def __init__(self):
-                self.deleted = []
+                pass
             def request(self, method, path, body=None, content_type='application/json'):
-                if method == 'DELETE':
-                    self.deleted.extend(body['prefixes'])
-                    return None
+                calls.append((method, path))
+                self_outer.assertEqual(method, 'POST')
+                self_outer.assertTrue(path.startswith('object/list/'))
                 if body['prefix'] == '':
-                    return [{'name': '2026-10-18', 'id': None}, {'name': 'race_comments', 'id': None}]
-                self_outer.assertEqual(body['prefix'], '2026-10-18')
-                if body['offset'] == 0:
-                    return [{'name': str(i), 'id': str(i), 'created_at': '2020-01-01T00:00:00Z'} for i in range(100)]
-                return [{'name': 'recent', 'id': 'recent', 'created_at': datetime.now(timezone.utc).isoformat()}]
+                    return [{'name': '2020-01-01', 'id': None}, {'name': '2026-10-18', 'id': None},
+                            {'name': 'other.json', 'id': 'root', 'metadata': {'size': 7}}]
+                if body['prefix'] == '2020-01-01':
+                    if body['offset'] == 0:
+                        return [{'name': str(i), 'id': str(i), 'created_at': '2020-01-01T00:00:00Z',
+                                 'metadata': {'size': 10}} for i in range(100)]
+                    return [{'name': 'last', 'id': 'last', 'metadata': {'size': 5}}]
+                return [{'name': 'recent', 'id': 'recent', 'metadata': {'size': 20}}]
         self_outer = self
-        store = Fake()
-        self.assertEqual(store.prune(), 100)
-        self.assertEqual(len(store.deleted), 100)
-        self.assertTrue(all(name.startswith('2026-10-18/') for name in store.deleted))
+        report = Fake().usage()
+        self.assertEqual(report['objects'], 103)
+        self.assertEqual(report['known_bytes'], 1032)
+        self.assertEqual(report['by_date']['2020-01-01']['known_bytes'], 1005)
+        self.assertEqual(report['by_date']['2026-10-18']['known_bytes'], 20)
+        self.assertTrue(report['bytes_complete'])
+        self.assertTrue(all(method != 'DELETE' for method, _ in calls))
+
+    def test_missing_size_is_reported_as_unknown_not_zero_usage(self):
+        class Fake(archive.Storage):
+            def __init__(self):
+                pass
+            def list_all(self, prefix):
+                return [{'name': 'unknown.json', 'id': '1', 'metadata': None}]
+        report = Fake().usage()
+        self.assertFalse(report['bytes_complete'])
+        self.assertEqual(report['objects'], 1)
+        self.assertEqual(report['unknown_size_objects'], 1)
+
+    def test_delete_is_rejected_before_network_access(self):
+        store = archive.Storage('https://test.supabase.co', 'test-placeholder')
+        with patch.object(archive.urllib.request, 'urlopen') as network:
+            with self.assertRaises(ValueError):
+                store.request('DELETE', 'object/' + archive.BUCKET, {'prefixes': ['old.json']})
+            network.assert_not_called()
+
+    def test_upload_does_not_overwrite_or_expire_existing_objects(self):
+        store = archive.Storage('https://test.supabase.co', 'test-placeholder')
+        with patch.object(store, 'request') as request:
+            store.upload('2020-01-01/new.json', b'{}')
+        request.assert_called_once_with('POST', 'object/' + archive.BUCKET + '/2020-01-01/new.json', b'{}')
 
     def test_refuses_untrusted_credential_destination(self):
         with self.assertRaises(ValueError):
