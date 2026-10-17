@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-17T12:44:56.385350+00:00",
+  "checked_at": "2026-10-17T14:06:04.866351+00:00",
   "results": [
     {
       "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010001/",
@@ -8,7 +8,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010001/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:44:59.797888+00:00",
+        "observed_at": "2026-10-17T14:06:07.009358+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010001/?pageType=odds",
         "rider_numbers": [
           1,
@@ -393,7 +393,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010002/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:04.239682+00:00",
+        "observed_at": "2026-10-17T14:06:10.505199+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010002/?pageType=odds",
         "rider_numbers": [
           1,
@@ -778,7 +778,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010003/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:07.756557+00:00",
+        "observed_at": "2026-10-17T14:06:14.813518+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010003/?pageType=odds",
         "rider_numbers": [
           1,
@@ -1163,7 +1163,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010004/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:11.717176+00:00",
+        "observed_at": "2026-10-17T14:06:19.016666+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010004/?pageType=odds",
         "rider_numbers": [
           1,
@@ -1548,7 +1548,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010005/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:15.061887+00:00",
+        "observed_at": "2026-10-17T14:06:22.843138+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010005/?pageType=odds",
         "rider_numbers": [
           1,
@@ -1933,7 +1933,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010006/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:18.517212+00:00",
+        "observed_at": "2026-10-17T14:06:27.294105+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010006/?pageType=odds",
         "rider_numbers": [
           1,
@@ -2318,7 +2318,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010007/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:21.962918+00:00",
+        "observed_at": "2026-10-17T14:06:31.504719+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010007/?pageType=odds",
         "rider_numbers": [
           1,
@@ -2703,7 +2703,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010008/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:25.133509+00:00",
+        "observed_at": "2026-10-17T14:06:35.278367+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010008/?pageType=odds",
         "rider_numbers": [
           1,
@@ -3088,7 +3088,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010009/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:28.451646+00:00",
+        "observed_at": "2026-10-17T14:06:39.038429+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010009/?pageType=odds",
         "rider_numbers": [
           1,
@@ -3473,7 +3473,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010010/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:31.959631+00:00",
+        "observed_at": "2026-10-17T14:06:43.158668+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010010/?pageType=odds",
         "rider_numbers": [
           1,
@@ -3858,7 +3858,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010011/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:35.945998+00:00",
+        "observed_at": "2026-10-17T14:06:46.659867+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010011/?pageType=odds",
         "rider_numbers": [
           1,
@@ -4243,7 +4243,7 @@
         "race_key": "/keiokaku/racedetail/2720261017010012/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:39.912238+00:00",
+        "observed_at": "2026-10-17T14:06:51.488914+00:00",
         "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010012/?pageType=odds",
         "rider_numbers": [
           1,
@@ -4628,7 +4628,7 @@
         "race_key": "/kochi/racedetail/7420261017010006/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:43.219890+00:00",
+        "observed_at": "2026-10-17T14:06:54.973588+00:00",
         "source_url": "https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010006/?pageType=odds",
         "rider_numbers": [
           1,
@@ -4861,7 +4861,7 @@
         "race_key": "/kochi/racedetail/7420261017010007/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:47.356972+00:00",
+        "observed_at": "2026-10-17T14:06:58.410787+00:00",
         "source_url": "https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010007/?pageType=odds",
         "rider_numbers": [
           1,
@@ -5094,7 +5094,7 @@
         "race_key": "/kochi/racedetail/7420261017010008/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:50.846007+00:00",
+        "observed_at": "2026-10-17T14:07:02.005080+00:00",
         "source_url": "https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010008/?pageType=odds",
         "rider_numbers": [
           1,
@@ -5327,7 +5327,7 @@
         "race_key": "/kochi/racedetail/7420261017010009/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:54.343467+00:00",
+        "observed_at": "2026-10-17T14:07:05.695341+00:00",
         "source_url": "https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010009/?pageType=odds",
         "rider_numbers": [
           1,
@@ -5560,7 +5560,7 @@
         "race_key": "/kochi/racedetail/7420261017010010/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:45:57.868875+00:00",
+        "observed_at": "2026-10-17T14:07:10.408171+00:00",
         "source_url": "https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010010/?pageType=odds",
         "rider_numbers": [
           1,
@@ -5793,7 +5793,7 @@
         "race_key": "/kochi/racedetail/7420261017010011/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:46:01.035643+00:00",
+        "observed_at": "2026-10-17T14:07:13.917391+00:00",
         "source_url": "https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010011/?pageType=odds",
         "rider_numbers": [
           1,
@@ -6026,7 +6026,7 @@
         "race_key": "/kochi/racedetail/7420261017010012/",
         "bet_type": "exacta",
         "status": "snapshot",
-        "observed_at": "2026-10-17T12:46:05.080697+00:00",
+        "observed_at": "2026-10-17T14:07:17.264206+00:00",
         "source_url": "https://my.keirin.kdreams.jp/kochi/racedetail/7420261017010012/?pageType=odds",
         "rider_numbers": [
           1,
