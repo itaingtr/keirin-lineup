@@ -73,3 +73,11 @@ python3 -m unittest discover -s tests -v
 ```
 
 実機での開閉レイアウト・取得元との実接続は未確認です。
+
+## 新たに確認した資料
+
+公開リポジトリ `nau539/keirin_odds` のREADMEと `keirin_provider.py` はGitHub経由で読み取りできました。
+出走表URLに `?pageType=odds` を付けたページから、`JS_ODDSCONTENTS_2shatan` の表を処理する実装が存在します。
+これは今後のパーサー検証の手がかりです。第三者コードは本プロジェクトへ転載していません。
+元ページの実取得が復旧したら、実物の二車単・時刻・欠損・発売終了を確認し、既存の応答契約へ変換すること。
+元ページの確認・実接続は未完了で、endpointはnullを維持しています。
