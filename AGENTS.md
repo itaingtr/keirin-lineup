@@ -7,3 +7,5 @@
 - Do not enable unattended publishing until live source extraction and validation have passed. Never publish an empty, partially fetched, or fabricated race card over a working page.
 
 - For new race pages, use the dataset workflow in `RENDERING.md`: edit `templates/race-page.html` for layout, validate data with `scripts/render_races.py`, and generate only the index and target date. Read `DATA_SOURCES.md` before selecting or claiming permission for another data provider.
+
+- Exacta odds use the operational GitHub Actions collector in `ODDS.md`. Public display-only odds JSON is served from `odds-diagnostics`; keep raw source HTML and private user data out of that public branch. Direct executor HTTP failures do not establish that the deployment collector failed. Keep observation timestamps; panel refresh currently rereads saved quotes and does not trigger source collection.
