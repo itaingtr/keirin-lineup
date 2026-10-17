@@ -35,14 +35,16 @@ function sample() {
     assert.equal(panel.querySelectorAll('.exacta-matrix tbody td').length,81);
     assert(panel.textContent.includes('取得時刻：'));
     assert(panel.querySelector('.exacta-unavailable').title.includes('未発売・対象外'));
-    assert.equal(panel.querySelectorAll('.exacta-number').length,18);
+    assert.equal(panel.querySelectorAll('.exacta-number').length,27);
     assert(panel.querySelector('.exacta-rider-name').textContent);
     assert(panel.querySelector('.exacta-row-rider').title.includes('寺沼拓摩'));
     assert.equal(panel.querySelector('[data-combination="2-1"]').textContent,'20.1');
-    assert.equal(panel.style.getPropertyValue('--exacta-width'),'324px');
+    assert.equal(panel.style.getPropertyValue('--exacta-width'),'306px');
     assert.equal(panel.querySelector('[data-combination="2-1"]').title.includes('20.1倍'),true);
     assert.equal(panel.querySelectorAll('.exacta-column-rider').length,9);
     assert.equal(panel.querySelectorAll('.exacta-row-rider').length,9);
+    assert.equal(panel.querySelectorAll('.exacta-mirror-rider').length,9);
+    assert.equal(panel.querySelectorAll('.exacta-row-rider .exacta-rider-name,.exacta-mirror-rider .exacta-rider-name').length,0);
     assert.equal(panel.querySelectorAll('.exacta-synthetic').length,9);
     assert.equal(panel.querySelectorAll('.exacta-score').length,9);
     for(const header of panel.querySelectorAll('.exacta-column-rider')) {
@@ -55,6 +57,11 @@ function sample() {
     }
     assert.equal(panel.querySelector('.exacta-synthetic').textContent,'—','missing price prevents combined odds');
     const rows=panel.querySelectorAll('.exacta-matrix tbody tr');
+    for(const [index,row] of [...rows].entries()) {
+      assert.equal(row.firstElementChild.querySelector('.exacta-number').textContent,String(index+1));
+      assert.equal(row.lastElementChild.querySelector('.exacta-number').textContent,String(index+1));
+      assert.equal(row.lastElementChild.getAttribute('aria-hidden'),'true');
+    }
     assert.equal(rows[0].children[2].dataset.combination,'2-1','columns fix first place');
     assert.equal(rows[1].children[1].dataset.combination,'1-2','rows fix second place');
     assert.equal(rows[4].children[1].dataset.combination,'1-5','1-5 is first column, fifth rider row');
@@ -78,6 +85,9 @@ function sample() {
       if(item.first===1)item.value=prices[index++];
       if(item.first===2)item.value=null;
       if(item.first===3)item.value=item.second===1?100.1:item.second===2?100.9:500;
+      if(item.first===3&&item.second===4)item.value=299.9;
+      if(item.first===3&&item.second===5)item.value=300;
+      if(item.first===3&&item.second===6)item.value=300.9;
       if(item.first===4)item.value=800.8;
       if(item.first===7)item.value=100.9;
       if(item.first===8)item.value=2400.8;
@@ -95,6 +105,11 @@ function sample() {
     assert(cell('1-5').classList.contains('exacta-high'));
     assert(cell('1-7').classList.contains('exacta-high'));
     assert(cell('1-8').classList.contains('exacta-very-high'));
+    assert(cell('3-4').classList.contains('exacta-very-high'));
+    assert(cell('3-5').classList.contains('exacta-extreme'));
+    assert(cell('3-6').classList.contains('exacta-extreme'));
+    assert.equal(cell('3-4').textContent,'299');
+    assert.equal(cell('3-6').textContent,'300');
     assert(cell('1-9').title.includes('200.9倍'),'full original quote remains in the tooltip');
     assert.equal(table.querySelectorAll('[data-combination^="1-"].exacta-minimum').length,2,'all tied column minima are bold');
     assert(cell('1-2').classList.contains('exacta-minimum'));
@@ -108,9 +123,26 @@ function sample() {
     assert(summaries[3].classList.contains('exacta-high'));
     assert.equal(summaries[6].textContent,'12.6','combined odds still use 100.9, not the displayed 100');
     assert.equal(summaries[7].textContent,'300');
-    assert(summaries[7].classList.contains('exacta-very-high'));
+    assert(summaries[7].classList.contains('exacta-extreme'));
     assert.equal(data.odds.find(item=>item.first===1&&item.second===9).value,200.9);
     dom.window.close();
+  }
+  {
+    const data=sample();
+    for(const item of data.odds)item.value=item.first<=2?8.01:item.first===3?8.09:80;
+    const {dom,w}=setup(data);w.document.querySelector('.odds-toggle').click();await tick();
+    const summaries=w.document.querySelectorAll('.exacta-synthetic');
+    assert.equal(summaries[0].textContent,'1.0');
+    assert.equal(summaries[2].textContent,'1.0');
+    assert(summaries[0].classList.contains('exacta-favorite'));
+    assert(summaries[1].classList.contains('exacta-favorite'),'all exactly tied favorites are bold');
+    assert(!summaries[2].classList.contains('exacta-favorite'),'display rounding does not create a favorite');
+    assert.equal(w.document.querySelectorAll('.exacta-favorite').length,2);
+    dom.window.close();
+    for(const item of data.odds)item.value=null;
+    const missing=setup(data);missing.w.document.querySelector('.odds-toggle').click();await tick();
+    assert.equal(missing.w.document.querySelectorAll('.exacta-favorite').length,0,'missing combined odds are never favorites');
+    missing.dom.window.close();
   }
   for(const parserVersion of [undefined,2]) {
     const data=sample();data.status='snapshot';
@@ -175,7 +207,8 @@ function sample() {
     assert([...labels].every(label=>[...label.textContent].length<=4));
     assert.equal(labels[0].textContent,'𠮷田太郎','four Unicode characters, including supplementary kanji');
     assert(w.document.querySelector('.exacta-column-rider').title.includes('𠮷田太郎次'),'full name remains available');
-    assert.equal(w.document.querySelector('.exacta-row-rider .exacta-rider-name').textContent,'𠮷田太郎');
+    assert.equal(w.document.querySelector('.exacta-row-rider .exacta-rider-name'),null);
+    assert(w.document.querySelector('.exacta-row-rider').title.includes('𠮷田太郎次'),'side badge retains the full name in its tooltip');
     dom.window.close();
   }
   for(const mutate of [d=>d.race_key='/wrong/',d=>d.bet_type='trifecta',d=>d.odds.pop(),d=>d.odds[1]=d.odds[0],d=>d.observed_at='unknown',d=>d.odds[0].value=-1]){

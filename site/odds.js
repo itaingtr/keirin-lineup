@@ -49,18 +49,27 @@
     return {...data, parser_version: 2, odds: data.odds.map(item => ({...item, first: item.second, second: item.first}))};
   }
   const formatOdds = value => value >= 100 ? String(Math.floor(value)) : value.toFixed(1);
-  const shadeClass = value => value >= 200 ? ' exacta-very-high' : value >= 100 ? ' exacta-high' : '';
+  const shadeClass = value => value >= 300 ? ' exacta-extreme' : value >= 200 ? ' exacta-very-high' : value >= 100 ? ' exacta-high' : '';
   function matrix(data, numbers, names, scores) {
     const values = new Map(data.odds.map(item => [item.first + '-' + item.second, item.value]));
     const minimums = new Map();
     for (const {first, value} of data.odds) {
       if (value !== null && (!minimums.has(first) || value < minimums.get(first))) minimums.set(first, value);
     }
+    const combinedOdds = new Map(numbers.map(first => {
+      const prices = numbers.filter(second => second !== first).map(second => values.get(first + '-' + second));
+      // Equal payout uses inverse-odds stakes without ticket-unit rounding.
+      // A missing quote prevents an all-combinations calculation.
+      return [first, prices.every(price => typeof price === 'number')
+        ? 1 / prices.reduce((sum, price) => sum + 1 / price, 0) : null];
+    }));
+    const favorite = Math.min(...[...combinedOdds.values()].filter(value => value !== null));
     const table = element('table', 'exacta-matrix');
     table.append(element('caption', '', '二車単 · 列1着／行2着 · 得点／単勝想定'));
     const columns = element('colgroup');
     columns.append(element('col', 'exacta-label-column'));
     for (const number of numbers) columns.append(element('col', 'exacta-value-column'));
+    columns.append(element('col', 'exacta-label-column'));
     table.append(columns);
     function rider(number, orientation) {
       const label = element('span', 'exacta-rider exacta-' + orientation + '-rider');
@@ -71,29 +80,30 @@
         const score = element('span', 'exacta-score ' + (originalScore?.className || 'score'), originalScore?.value || '—');
         score.title = number + ' ' + name + 'の競走得点（出走表と同じ表示）';
         label.append(score);
-        const prices = numbers.filter(second => second !== number).map(second => values.get(number + '-' + second));
-        // Equal payout requires stakes proportional to 1 / odds, with no ticket-unit rounding.
-        // Never derive an all-combinations total from a missing price.
-        const combined = prices.every(price => typeof price === 'number')
-          ? 1 / prices.reduce((sum, price) => sum + 1 / price, 0) : null;
-        const summary = element('span', 'exacta-synthetic' + (combined === null ? '' : shadeClass(combined)), combined === null ? '—' : formatOdds(combined));
+        const combined = combinedOdds.get(number);
+        const summary = element('span', 'exacta-synthetic' + (combined === null ? '' : shadeClass(combined)) +
+          (combined === favorite ? ' exacta-favorite' : ''), combined === null ? '—' : formatOdds(combined));
         summary.title = number + ' ' + name + 'の1着固定・2着全通り。払戻金がそろうように賭け金を配分した理論上の合成倍率（100円単位への丸めなし）。' +
           (combined === null ? '未発売・対象外の組合せがあるため計算しません。' : '計算式：1 ÷ Σ(1 ÷ 二車単オッズ)。実売の単勝オッズではありません。');
         summary.setAttribute('aria-label', number + '番の理論合成オッズ ' + (combined === null ? '計算不可' : formatOdds(combined) + '倍'));
         label.append(summary);
       }
       label.append(element('span', 'exacta-number c' + number, number));
-      label.append(element('span', 'exacta-rider-name', [...name].slice(0, 4).join('')));
+      if (orientation === 'column') label.append(element('span', 'exacta-rider-name', [...name].slice(0, 4).join('')));
+      else label.setAttribute('aria-label', '2着：' + number + ' ' + name);
       return label;
     }
     const thead = element('thead');
     const heading = element('tr');
-    heading.append(element('th', 'exacta-corner', '2着＼1着'));
+    heading.append(element('th', 'exacta-corner', '2着'));
     for (const number of numbers) {
       const th = element('th');
       th.append(rider(number, 'column'));
       heading.append(th);
     }
+    const mirrorHeading = element('th', 'exacta-corner', '2着');
+    mirrorHeading.setAttribute('aria-hidden', 'true');
+    heading.append(mirrorHeading);
     for (const th of heading.children) th.scope = 'col';
     thead.append(heading);
     table.append(thead);
@@ -122,6 +132,10 @@
         }
         row.append(td);
       }
+      const mirror = element('th');
+      mirror.setAttribute('aria-hidden', 'true');
+      mirror.append(rider(second, 'mirror'));
+      row.append(mirror);
       tbody.append(row);
     }
     table.append(tbody);
@@ -147,7 +161,7 @@
     button.setAttribute('aria-expanded', 'false');
     const panel = element('td', 'odds-cell');
     panel.id = 'exacta-panel-' + index;
-    panel.style.setProperty('--exacta-width', (54 + numbers.length * 30) + 'px');
+    panel.style.setProperty('--exacta-width', (36 + numbers.length * 30) + 'px');
     panel.hidden = true;
     button.setAttribute('aria-controls', panel.id);
     const heading = element('strong', 'odds-heading', '二車単オッズ');
