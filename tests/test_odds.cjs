@@ -33,7 +33,15 @@ function sample() {
     assert.equal(panel.querySelectorAll('.exacta-matrix tbody tr').length,9);
     assert.equal(panel.querySelectorAll('.exacta-matrix tbody td').length,81);
     assert(panel.textContent.includes('取得時刻：'));
-    assert(panel.textContent.includes('未発売・対象外'));
+    assert(panel.querySelector('.exacta-unavailable').title.includes('未発売・対象外'));
+    assert.equal(panel.querySelectorAll('.exacta-number').length,18);
+    assert(panel.querySelector('.exacta-rider-name').textContent);
+    assert(panel.querySelector('.exacta-row-rider').title.includes('寺沼拓摩'));
+    assert.equal(panel.querySelector('[data-combination="2-1"]').textContent,'20.1');
+    assert.equal(panel.style.getPropertyValue('--exacta-width'),'332px');
+    assert.equal(panel.querySelector('[data-combination="2-1"]').title.includes('20.1倍'),true);
+    assert.equal(panel.querySelectorAll('.exacta-column-rider').length,9);
+    assert.equal(panel.querySelectorAll('.exacta-row-rider').length,9);
     assert.equal(calls.length,2);
     assert(new URL(calls[1]).searchParams.get('bet_type')==='exacta');
     assert.equal(w.location.href,'https://itaingtr.github.io/keirin-lineup/');
@@ -55,7 +63,7 @@ function sample() {
     const {dom,w}=setup({results:[{ok:true,snapshot:data}]});
     w.document.querySelector('.odds-toggle').click();await tick();
     assert.equal(w.document.querySelectorAll('.exacta-matrix tbody tr').length,9);
-    assert(w.document.querySelector('.odds-status').textContent.includes('取得済みの記録'));
+    assert(w.document.querySelector('.odds-status').textContent.includes('保存値'));
     dom.window.close();
   }
   {

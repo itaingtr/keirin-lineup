@@ -39,32 +39,59 @@
     }
     return data;
   }
-  function matrix(data, numbers) {
+  function matrix(data, numbers, names) {
     const values = new Map(data.odds.map(item => [item.first + '-' + item.second, item.value]));
     const table = element('table', 'exacta-matrix');
-    table.append(element('caption', '', '二車単オッズ（行＝1着、列＝2着）'));
+    table.append(element('caption', '', '二車単 · 行1着／列2着'));
+    const columns = element('colgroup');
+    columns.append(element('col', 'exacta-label-column'));
+    for (const number of numbers) columns.append(element('col', 'exacta-value-column'));
+    table.append(columns);
+    function rider(number, orientation) {
+      const label = element('span', 'exacta-rider exacta-' + orientation + '-rider');
+      const name = names.get(number) || '';
+      label.title = number + ' ' + name;
+      label.append(element('span', 'exacta-number c' + number, number));
+      label.append(element('span', 'exacta-rider-name', name));
+      return label;
+    }
     const thead = element('thead');
     const heading = element('tr');
-    heading.append(element('th', '', '1着＼2着'));
-    for (const number of numbers) heading.append(element('th', '', number));
+    heading.append(element('th', 'exacta-corner', '1着＼2着'));
+    for (const number of numbers) {
+      const th = element('th');
+      th.append(rider(number, 'column'));
+      heading.append(th);
+    }
     for (const th of heading.children) th.scope = 'col';
     thead.append(heading);
     table.append(thead);
     const tbody = element('tbody');
     for (const first of numbers) {
       const row = element('tr');
-      const th = element('th', '', first);
+      const th = element('th');
       th.scope = 'row';
+      th.append(rider(first, 'row'));
       row.append(th);
       for (const second of numbers) {
         const value = values.get(first + '-' + second);
-        row.append(element('td', '', first === second ? '—' : value === null ? '未発売・対象外' : value.toFixed(1)));
+        const text = first === second ? '·' : value === null ? '—' : value.toFixed(1);
+        const td = element('td', first === second ? 'exacta-diagonal' : 'exacta-value', text);
+        if (first !== second) {
+          td.dataset.combination = first + '-' + second;
+          td.title = first + ' ' + (names.get(first) || '') + ' → ' + second + ' ' + (names.get(second) || '') + '：' + (value === null ? '未発売・対象外' : text + '倍');
+          if (value === null) td.classList.add('exacta-unavailable');
+          else if (value < 10) td.classList.add('exacta-low');
+          if (text.length >= 6) td.classList.add('exacta-long');
+        }
+        row.append(td);
       }
       tbody.append(row);
     }
     table.append(tbody);
     return table;
   }
+
   function attach(row, index) {
     if (row.querySelector('.odds-toggle')) return;
     const link = row.querySelector('td.race .race-link');
@@ -72,11 +99,15 @@
     if (!link || !lineup) return;
     const raceKey = new URL(link.href).pathname;
     const numbers = [...new Set([...row.querySelectorAll('.car')].map(car => Number(car.textContent)))].sort((a,b) => a-b);
+    const race = typeof races === 'undefined' ? null : races.find(race => new URL(race.source).pathname === raceKey);
+    const names = new Map(race ? race.players.map(player => [player.no, player.name]) :
+      [...row.querySelectorAll('.rider')].map(rider => [Number(rider.querySelector('.car')?.textContent), rider.querySelector('.name')?.textContent || '']));
     const button = element('button', 'odds-toggle', '二車単オッズ');
     button.type = 'button';
     button.setAttribute('aria-expanded', 'false');
     const panel = element('td', 'odds-cell');
     panel.id = 'exacta-panel-' + index;
+    panel.style.setProperty('--exacta-width', (62 + numbers.length * 30) + 'px');
     panel.hidden = true;
     button.setAttribute('aria-controls', panel.id);
     const heading = element('strong', 'odds-heading', '二車単オッズ');
@@ -118,8 +149,9 @@
         else if (data.status === 'unavailable') status.textContent = 'このレースのオッズはまだ取得できないにゃ。';
         else {
           const formatted = new Intl.DateTimeFormat('ja-JP', {month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Tokyo'}).format(new Date(data.observed_at));
-          status.textContent = '取得時刻：' + formatted + (data.status === 'snapshot' ? '（取得済みの記録・発売状態は未確認にゃ）' : '（オッズは変動するにゃ）');
-          content.append(matrix(data, numbers));
+          status.textContent = '取得時刻：' + formatted + (data.status === 'snapshot' ? '（保存値）' : '（変動あり）');
+          status.title = data.status === 'snapshot' ? '取得時点の保存値です。現在の発売状態は未確認です。' : 'オッズは変動します。';
+          content.append(matrix(data, numbers, names));
         }
       } catch (error) {
         status.textContent = 'オッズを取得できなかったにゃ。「更新」で再確認してにゃ。';
