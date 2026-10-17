@@ -1,0 +1,43 @@
+name: Prepare requested race card
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: Requested race date (YYYY-MM-DD)
+        default: '2026-10-18'
+        required: true
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/card-prepare.yml
+      - scripts/collect_card.py
+permissions:
+  contents: write
+concurrency:
+  group: prepare-race-card
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Read requested public race card for review
+        env:
+          TARGET_DATE: ${{ inputs.date || '2026-10-18' }}
+        run: python3 scripts/collect_card.py --date "$TARGET_DATE" --review /tmp/card-review.html
+      - name: Save display-only review without publishing the working site
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git ls-remote --exit-code --heads origin card-preview > /dev/null; then
+            git fetch origin card-preview
+            git checkout -b card-preview FETCH_HEAD
+          else
+            git checkout -b card-preview
+          fi
+          mkdir -p review
+          cp /tmp/card-review.html "review/card-${{ github.run_id }}.html"
+          git add review
+          git commit -m 'Prepare public race-card display for review'
+          git push origin HEAD:card-preview
