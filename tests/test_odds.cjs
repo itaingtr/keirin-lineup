@@ -50,6 +50,20 @@ function sample() {
     assert(w.document.querySelector('.odds-status').textContent.includes('取得できなかった'));
     dom.window.close();
   }
+  {
+    const data=sample();data.status='snapshot';
+    const {dom,w}=setup({results:[{ok:true,snapshot:data}]});
+    w.document.querySelector('.odds-toggle').click();await tick();
+    assert.equal(w.document.querySelectorAll('.exacta-matrix tbody tr').length,9);
+    assert(w.document.querySelector('.odds-status').textContent.includes('取得済みの記録'));
+    dom.window.close();
+  }
+  {
+    const {dom,w}=setup({results:[]});w.document.querySelector('.odds-toggle').click();await tick();
+    assert.equal(w.document.querySelectorAll('.exacta-matrix').length,0);
+    assert(w.document.querySelector('.odds-status').textContent.includes('まだ取得できない'));
+    dom.window.close();
+  }
   for(const status of ['closed','unavailable']){
     const data=sample();data.status=status;const {dom,w}=setup(data);w.document.querySelector('.odds-toggle').click();await tick();
     assert.equal(w.document.querySelectorAll('.exacta-matrix').length,0);dom.window.close();

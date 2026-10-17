@@ -32,4 +32,6 @@ jobs:
       - name: Publish the site
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Check published exacta feed
+        run: python3 scripts/check_published_odds.py
 

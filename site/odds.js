@@ -24,8 +24,8 @@
   }
   function validate(data, raceKey, numbers) {
     if (data.race_key !== raceKey || data.bet_type !== 'exacta') throw new Error('race');
-    if (!['open', 'closed', 'unavailable'].includes(data.status)) throw new Error('status');
-    if (data.status !== 'open') return data;
+    if (!data || !['open', 'snapshot', 'closed', 'unavailable'].includes(data.status)) throw new Error('status');
+    if (!['open', 'snapshot'].includes(data.status)) return data;
     const observed = Date.parse(data.observed_at);
     if (!Number.isFinite(observed) || !/(?:Z|[+-]\d\d:\d\d)$/.test(data.observed_at) || observed > Date.now() + 60000) throw new Error('time');
     if (!Array.isArray(data.odds) || data.odds.length !== numbers.length * (numbers.length - 1)) throw new Error('incomplete');
@@ -109,12 +109,16 @@
         url.searchParams.set('bet_type', 'exacta');
         const response = await fetch(url.href, {cache: 'no-store', signal: controller.signal});
         if (!response.ok) throw new Error('fetch');
-        const data = validate(await response.json(), raceKey, numbers);
+        const payload = await response.json();
+        const candidate = Array.isArray(payload.results)
+          ? payload.results.find(item => item.ok && item.snapshot?.race_key === raceKey)?.snapshot
+          : payload;
+        const data = validate(candidate || {race_key:raceKey,bet_type:'exacta',status:'unavailable'}, raceKey, numbers);
         if (data.status === 'closed') status.textContent = 'このレースのオッズ発売は終了しているにゃ。';
         else if (data.status === 'unavailable') status.textContent = 'このレースのオッズはまだ取得できないにゃ。';
         else {
           const formatted = new Intl.DateTimeFormat('ja-JP', {month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Tokyo'}).format(new Date(data.observed_at));
-          status.textContent = '取得時刻：' + formatted + '（オッズは変動するにゃ）';
+          status.textContent = '取得時刻：' + formatted + (data.status === 'snapshot' ? '（取得済みの記録・発売状態は未確認にゃ）' : '（オッズは変動するにゃ）');
           content.append(matrix(data, numbers));
         }
       } catch (error) {
