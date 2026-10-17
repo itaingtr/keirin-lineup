@@ -22,10 +22,14 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-      - name: Read requested public race card for review
+      - name: Validate collector
+        run: python3 -m unittest discover -s tests -v
+      - name: Prepare requested S-class race card for review
         env:
           TARGET_DATE: ${{ inputs.date || '2026-10-18' }}
-        run: python3 scripts/collect_card.py --date "$TARGET_DATE" --review /tmp/card-review.html
+        run: |
+          python3 scripts/collect_card.py --date "$TARGET_DATE" --review /tmp/card-review.html --output-site /tmp/prepared-site
+          python3 scripts/collect_exacta.py --page /tmp/prepared-site/index.html --report /tmp/card-odds.json
       - name: Save display-only review without publishing the working site
         run: |
           git config user.name 'github-actions[bot]'
@@ -38,6 +42,29 @@ jobs:
           fi
           mkdir -p review
           cp /tmp/card-review.html "review/card-${{ github.run_id }}.html"
+          mkdir -p "review/prepared-${{ github.run_id }}"
+          cp -R /tmp/prepared-site/. "review/prepared-${{ github.run_id }}/"
           git add review
           git commit -m 'Prepare public race-card display for review'
           git push origin HEAD:card-preview
+      - name: Save the requested card's display-only odds
+        run: |
+          git fetch origin odds-diagnostics
+          git checkout -b odds-diagnostics FETCH_HEAD
+          mkdir -p diagnostics/exacta
+          cp /tmp/card-odds.json "diagnostics/exacta/card-${{ github.run_id }}-${{ github.run_attempt }}.json"
+          python3 - <<'PYTHON'
+          import json
+          from pathlib import Path
+          current=json.loads(Path('/tmp/card-odds.json').read_text())
+          path=Path('diagnostics/exacta/latest.json')
+          previous=json.loads(path.read_text())
+          snapshots={item['snapshot']['race_key']:item for item in previous['results'] if item.get('ok')}
+          for item in current['results']:
+              if item.get('ok'):
+                  snapshots[item['snapshot']['race_key']]=item
+          path.write_text(json.dumps({'checked_at':current['checked_at'],'results':list(snapshots.values())},ensure_ascii=False,indent=2)+'\n')
+          PYTHON
+          git add diagnostics/exacta
+          git commit -m 'Save odds for the newly prepared card'
+          git push origin HEAD:odds-diagnostics

@@ -21,7 +21,7 @@
 .table-wrap .race-comment-status{grid-column:1/-1}
 .table-wrap .race-comment-status:empty{display:none}
 @media(max-width:640px){
-.table-wrap table{width:640px;min-width:640px;max-width:640px}
+.table-wrap table{width:650px;min-width:650px;max-width:650px}
 .table-wrap .race-comment-feed{margin-left:0}
 .table-wrap tbody tr{grid-template-columns:44px 230px minmax(0,1fr);column-gap:4px}
 .table-wrap td.race-comment-cell{margin:0;font-size:10px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -35,12 +35,14 @@
 .table-wrap tbody tr.odds-open{grid-template-areas:"venue race comment" "lineup lineup comment" "composer composer comment" "odds odds odds"}
 .table-wrap .odds-toggle,.table-wrap .odds-refresh{font:inherit;font-size:11px;padding:5px 9px;border:1px solid #c8d2df;border-radius:6px;background:#eff6ff;color:#155eef;cursor:pointer}
 .table-wrap .odds-toggle{margin-top:4px}
-.table-wrap .odds-cell{grid-area:odds;width:var(--exacta-width);max-width:100%;min-width:0;border:0;padding:0;justify-self:start}
+.table-wrap .odds-cell{grid-area:odds;width:calc(var(--exacta-width)*2 + 12px);max-width:100%;min-width:0;border:0;padding:0;justify-self:start}
 .table-wrap .odds-cell[hidden]{display:none}
 .table-wrap .odds-heading{font-size:10px;margin-right:6px}
 .table-wrap .odds-refresh{font-size:10px;padding:2px 5px}
 .table-wrap .odds-status{font-size:9px;line-height:1.2;margin:2px 0;color:#526176}
 .table-wrap .odds-content{width:100%;max-width:100%;overflow-x:auto}
+.table-wrap .odds-comparison{display:flex;align-items:flex-start;gap:12px;width:max-content}
+.table-wrap .odds-comparison-view{flex:0 0 var(--exacta-width);width:var(--exacta-width);margin:0}
 .table-wrap .exacta-matrix{display:table;width:var(--exacta-width);min-width:0;max-width:100%;border-collapse:collapse;table-layout:fixed;font-size:10px;font-variant-numeric:tabular-nums}
 .table-wrap .exacta-matrix caption{font-size:9px;line-height:12px;text-align:left;margin:0;color:#627086}
 .table-wrap .exacta-matrix .exacta-label-column{width:18px}
@@ -102,6 +104,7 @@ function riderMarkup(n,r,contestPosition=""){
 search.addEventListener("input",draw);dateSelect.addEventListener("change",()=>{if(dateSelect.value)location.href=dateSelect.value});draw();
 </script><script src="/keirin-lineup/comments.js?v=bottom-20261017d" defer></script>
 <script src="/keirin-lineup/odds.js?v=exacta-sides-20261017" defer></script>
+<script src="/keirin-lineup/odds-comparison.js?v=compare-20261018" defer></script>
 </body></html>
 
 
