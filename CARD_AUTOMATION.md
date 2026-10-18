@@ -21,6 +21,8 @@
 
 登録後、[夜のworkflow](https://github.com/itaingtr/keirin-lineup/actions/workflows/card-nightly.yml) の **Run workflow** を実行すると、接続確認から作成・公開まで試せます。日付欄は空なら日本時間の翌日、指定すればその日です。公開中より過去の日付への巻き戻しは拒否します。
 
+[公開確認workflow](https://github.com/itaingtr/keirin-lineup/actions/workflows/card-publication-check.yml) は、公開中の日付を読み取り、その日付で夜のworkflowを手動実行として起動します。取得・非公開保存・生成・mainへの保存・Pages公開までを、日付を勝手に翌日に進めず確認できます。確認用workflow自体の変更時にも実行します。
+
 キーが未登録なら、最初の保存先確認で停止します。workflow変更のコードpushでは、公開中の日付を対象に、接続・実データ取得・非公開保存・読み戻し・プレビュー生成まで確認し、公開ページは更新しません。未登録かどうかは実際のActions実行で確認します。クラウド開発環境にキーがないことだけでは、Actionsの未設定とは判定しません。
 
 2026-10-18の[接続確認実行](https://github.com/itaingtr/keirin-lineup/actions/runs/39093412055)では、28件のテストは成功し、保存用secretの未登録が確認されました。登録・再実行で非公開保存と公開の成功を確認するまでは、夜の自動公開が稼働済みとは扱いません。

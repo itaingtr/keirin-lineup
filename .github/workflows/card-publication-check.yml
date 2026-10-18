@@ -1,0 +1,36 @@
+name: Check current card publication
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/card-publication-check.yml]
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  request:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v6
+      - name: Request a complete collection, private backup and publication check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PYTHON'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from export_races import export
+          target = export(Path('site/index.html').read_text())['target_date']
+          Path('/tmp/card-check-dispatch.json').write_text(json.dumps({
+              'ref':'main', 'inputs':{'date':target}
+          }))
+          print(f'::notice title=Current card publication check requested::Run the normal nightly workflow for {target}; only index and that date can be updated.')
+          PYTHON
+          gh api --method POST "repos/$GH_REPO/actions/workflows/card-nightly.yml/dispatches" \
+            --input /tmp/card-check-dispatch.json
