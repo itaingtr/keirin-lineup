@@ -1,0 +1,169 @@
+name: Publish next-day S-class card
+
+on:
+  schedule:
+    # 21:00 and 23:30 JST. Both target the following race day.
+    - cron: '0 12 * * *'
+    - cron: '30 14 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: Race date YYYY-MM-DD (blank = tomorrow in Japan)
+        required: false
+  push:
+    branches: [main]
+    paths: [.github/workflows/card-nightly.yml]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Do not overlap the two next-day card publication runs.
+concurrency:
+  group: next-day-card
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      publish: ${{ steps.publish.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate collectors and archive behavior
+        run: python3 -m unittest discover -s tests -v
+      - name: Verify private persistent storage before enabling publication
+        env:
+          SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
+          SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
+        run: |
+          python3 - <<'PYTHON'
+          import os, sys
+          sys.path.insert(0, 'scripts')
+          from archive_snapshot import Storage
+          if not os.environ.get('SNAPSHOT_SUPABASE_SERVICE_KEY'):
+              raise SystemExit('Missing Actions secret SNAPSHOT_SUPABASE_SERVICE_KEY. Existing public pages are preserved; automatic card publication remains blocked until private storage is connected.')
+          Storage(os.environ['SNAPSHOT_SUPABASE_URL'], os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY']).ensure_private_bucket()
+          print('Private snapshot storage verified; no deletion or expiry configured.')
+          PYTHON
+      # A code push checks readiness only. Collection is scheduled or explicitly requested.
+      - name: Select requested race date
+        if: github.event_name != 'push'
+        env:
+          REQUESTED_DATE: ${{ inputs.date }}
+        run: |
+          python3 - <<'PYTHON'
+          import os
+          from datetime import datetime, timedelta, timezone
+          from zoneinfo import ZoneInfo
+          now = datetime.now(timezone.utc)
+          # UTC calendar + 1 also handles a 23:30 run delayed past midnight JST.
+          base = now.date() if os.environ['GITHUB_EVENT_NAME'] == 'schedule' else now.astimezone(ZoneInfo('Asia/Tokyo')).date()
+          target = os.environ.get('REQUESTED_DATE') or (base + timedelta(days=1)).isoformat()
+          datetime.strptime(target, '%Y-%m-%d')
+          with open(os.environ['GITHUB_ENV'], 'a') as handle:
+              handle.write('TARGET_DATE=' + target + '\n')
+          PYTHON
+      - name: Collect and validate the complete eligible card
+        if: github.event_name != 'push'
+        run: |
+          python3 scripts/collect_card.py --date "$TARGET_DATE" \
+            --review /tmp/card-review.html --output-site /tmp/prepared-site \
+            --snapshot /tmp/card-snapshot.json
+      - name: Archive source data privately before changing public pages
+        if: github.event_name != 'push'
+        env:
+          SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
+          SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
+        run: |
+          python3 scripts/archive_snapshot.py --date "$TARGET_DATE" \
+            --input /tmp/card-snapshot.json --report /tmp/storage-usage.json
+          python3 - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          usage = json.loads(Path('/tmp/storage-usage.json').read_text())
+          daily = usage['by_date'].get(os.environ['TARGET_DATE'], {})
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as handle:
+              handle.write(f"Private storage: {daily.get('known_bytes', 0):,} bytes for this race day; {usage['known_bytes']:,} bytes total, {usage['objects']} snapshots. Unknown-size objects: {usage['unknown_size_objects']}. No automatic deletion.\n")
+          PYTHON
+      - name: Generate and publish only index and the requested day
+        id: publish
+        if: github.event_name != 'push'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git checkout -B auto-card FETCH_HEAD
+          python3 - <<'PYTHON'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from export_races import export
+          from render_races import write_pages
+          snapshot = json.loads(Path('/tmp/card-snapshot.json').read_text())
+          current = export(Path('site/index.html').read_text())
+          if current['target_date'] > snapshot['target_date']:
+              raise SystemExit('A newer card is already published; refusing to replace it with an older date')
+          write_pages(snapshot, Path('site'))
+          PYTHON
+          DATE_PATH="line$(date -d "$TARGET_DATE" +%Y%m%d).html/index.html"
+          git add -- site/index.html "site/$DATE_PATH"
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish $TARGET_DATE S-class card from validated private snapshot"
+            git push origin HEAD:main
+          fi
+          echo 'publish=true' >> "$GITHUB_OUTPUT"
+      - name: Summarize the published card
+        if: github.event_name != 'push'
+        run: |
+          python3 - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          snapshot = json.loads(Path('/tmp/card-snapshot.json').read_text())
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as handle:
+              handle.write(f"Published {snapshot['target_date']}: {len(snapshot['races'])} S-class races. Entire meetings with unpublished lineups were omitted: {len(snapshot['excluded_meetings'])}. Historical pages were preserved.\n")
+          PYTHON
+
+  # GITHUB_TOKEN commits do not start the separate push-based Pages workflow.
+  deploy:
+    needs: collect
+    if: needs.collect.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./site
+      - uses: actions/deploy-pages@v4
+        id: deployment
+      - name: Verify both public pages after deployment
+        run: |
+          python3 - <<'PYTHON'
+          import sys, time, urllib.request
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from export_races import export
+          expected = Path('site/index.html').read_bytes()
+          target = export(expected.decode())['target_date'].replace('-','')
+          for suffix in ['', 'line'+target+'.html/']:
+              for attempt in range(6):
+                  with urllib.request.urlopen('https://itaingtr.github.io/keirin-lineup/'+suffix+'?check='+str(time.time_ns()),timeout=30) as response:
+                      actual = response.read()
+                  if actual == expected:
+                      break
+                  if attempt == 5:
+                      raise SystemExit('Published card differs from the validated generated page')
+                  time.sleep(10)
+          print('PASS published index and dated page match the validated card')
+          PYTHON

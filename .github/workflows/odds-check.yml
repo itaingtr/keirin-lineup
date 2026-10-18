@@ -2,8 +2,8 @@ name: Collect exacta odds
 on:
   workflow_dispatch:
   schedule:
-    # GitHub uses UTC: 02:00–08:00 UTC = 11:00–17:00 JST, every day.
-    - cron: '0 2-8 * * *'
+    # GitHub uses UTC: 01:00–11:00 UTC = 10:00–20:00 JST, every day.
+    - cron: '0 1-11 * * *'
   push:
     branches: [main]
     paths:

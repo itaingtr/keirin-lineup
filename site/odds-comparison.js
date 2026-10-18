@@ -30,6 +30,19 @@
       rows.get(second).append(original[0], ...order.map(first => byFirst.get(first)), original.at(-1));
     }
     body.append(...order.map(number => rows.get(number)));
+    // Half a 9px name character between separate lines, without changing prices.
+    const gap = 4.5;
+    const starts = new Set([...raceRow.querySelectorAll('.lineup .line-group')].slice(1)
+      .map(group => Number(group.querySelector('.car')?.textContent)));
+    const columns = [...lineup.querySelectorAll('col')];
+    order.forEach((number, index) => {
+      const boundary = starts.has(number);
+      columns[index + 1].style.width = (30 + (boundary ? gap : 0)) + 'px';
+      if (boundary) {
+        heading.cells[index + 1].classList.add('exacta-line-start');
+        for (const row of body.rows) row.cells[index + 1].classList.add('exacta-line-start');
+      }
+    });
     normal.dataset.oddsOrder = 'number';
     lineup.dataset.oddsOrder = 'lineup';
     lineup.dataset.axisOrder = order.join('-');
@@ -41,13 +54,26 @@
     pair.className = 'odds-comparison';
     const left = document.createElement('figure'), right = document.createElement('figure');
     left.className = right.className = 'odds-comparison-view';
+    const baseWidth = 36 + order.length * 30;
+    left.style.setProperty('--exacta-width', (baseWidth + starts.size * gap) + 'px');
+    raceRow.querySelector('.odds-cell').style.setProperty('--exacta-line-gaps', (starts.size * gap) + 'px');
+    const outer = root.closest('table');
+    const requiredWidth = baseWidth * 2 + starts.size * gap + 12 + 26;
+    outer.style.setProperty('--odds-pair-width', Math.max(requiredWidth,
+      Number.parseFloat(outer.style.getPropertyValue('--odds-pair-width')) || 0) + 'px');
     normal.replaceWith(pair);
-    left.append(normal);
-    right.append(lineup);
+    left.append(lineup);
+    right.append(normal);
     pair.append(left, right);
   }
 
-  const update = () => root.querySelectorAll('.odds-content > .exacta-matrix').forEach(addComparison);
+  const update = () => {
+    for (const panel of root.querySelectorAll('.odds-cell')) {
+      const status = panel.querySelector('.odds-status');
+      if (status && panel.lastElementChild !== status) panel.append(status);
+    }
+    root.querySelectorAll('.odds-content > .exacta-matrix').forEach(addComparison);
+  };
   update();
   new MutationObserver(update).observe(root, {childList: true, subtree: true});
 })();

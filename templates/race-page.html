@@ -21,7 +21,7 @@
 .table-wrap .race-comment-status{grid-column:1/-1}
 .table-wrap .race-comment-status:empty{display:none}
 @media(max-width:640px){
-.table-wrap table{width:650px;min-width:650px;max-width:650px}
+.table-wrap table{width:max(650px,var(--odds-pair-width,0px));min-width:max(650px,var(--odds-pair-width,0px));max-width:max(650px,var(--odds-pair-width,0px))}
 .table-wrap .race-comment-feed{margin-left:0}
 .table-wrap tbody tr{grid-template-columns:44px 230px minmax(0,1fr);column-gap:4px}
 .table-wrap td.race-comment-cell{margin:0;font-size:10px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -35,7 +35,7 @@
 .table-wrap tbody tr.odds-open{grid-template-areas:"venue race comment" "lineup lineup comment" "composer composer comment" "odds odds odds"}
 .table-wrap .odds-toggle,.table-wrap .odds-refresh{font:inherit;font-size:11px;padding:5px 9px;border:1px solid #c8d2df;border-radius:6px;background:#eff6ff;color:#155eef;cursor:pointer}
 .table-wrap .odds-toggle{margin-top:4px}
-.table-wrap .odds-cell{grid-area:odds;width:calc(var(--exacta-width)*2 + 12px);max-width:100%;min-width:0;border:0;padding:0;justify-self:start}
+.table-wrap .odds-cell{grid-area:odds;width:calc(var(--exacta-width)*2 + var(--exacta-line-gaps,0px) + 12px);max-width:100%;min-width:0;border:0;padding:0;justify-self:start}
 .table-wrap .odds-cell[hidden]{display:none}
 .table-wrap .odds-heading{font-size:10px;margin-right:6px}
 .table-wrap .odds-refresh{font-size:10px;padding:2px 5px}
@@ -44,12 +44,14 @@
 .table-wrap .odds-comparison{display:flex;align-items:flex-start;gap:12px;width:max-content}
 .table-wrap .odds-comparison-view{flex:0 0 var(--exacta-width);width:var(--exacta-width);margin:0}
 .table-wrap .exacta-matrix{display:table;width:var(--exacta-width);min-width:0;max-width:100%;border-collapse:collapse;table-layout:fixed;font-size:10px;font-variant-numeric:tabular-nums}
-.table-wrap .exacta-matrix caption{font-size:9px;line-height:12px;text-align:left;margin:0;color:#627086}
+.table-wrap .exacta-matrix caption{caption-side:bottom;font-size:9px;line-height:12px;text-align:left;margin:2px 0 0;color:#627086}
+.table-wrap .exacta-matrix[data-odds-order="lineup"]{border-collapse:separate;border-spacing:0}
 .table-wrap .exacta-matrix .exacta-label-column{width:18px}
 .table-wrap .exacta-matrix thead{display:table-header-group}
 .table-wrap .exacta-matrix tbody{display:table-row-group}
 .table-wrap .exacta-matrix tr{display:table-row;background:transparent;box-shadow:none;border:0;border-radius:0}
 .table-wrap .exacta-matrix th,.table-wrap .exacta-matrix td{display:table-cell;border:0;padding:1px;line-height:14px;height:16px;white-space:nowrap;background:transparent;vertical-align:middle}
+.table-wrap .exacta-matrix .exacta-line-start{padding-left:5.5px}
 .table-wrap .exacta-matrix th{text-align:center;font-weight:500}
 .table-wrap .exacta-matrix .exacta-corner{font-size:9px;color:#627086;vertical-align:bottom;text-align:left}
 .table-wrap .exacta-matrix .exacta-value{text-align:right;letter-spacing:-.2px;font-weight:500;color:#253247}
@@ -78,7 +80,7 @@
 <main><div class="tools"><select id="date-select" aria-label="日付を選択">@@DATE_OPTIONS@@</select><button type="button" class="refresh-button" onclick="location.reload()" aria-label="ページを更新">更新</button></div>
 
 <div class="table-wrap"><table><colgroup class="desktop-columns"><col style="width:78px"><col style="width:138px"><col></colgroup><thead><tr><th>競輪場</th><th>レース・映像</th><th>並び</th></tr></thead><tbody id="rows"></tbody></table></div>
-<footer>車番色は1白・2黒・3赤・4青・5黄・6緑・7橙・8ピンク・9紫です。レース番号から出走表、映像ボタンから楽天Kドリームスの映像ページを開けます。映像は公開後に視聴できます。</footer><section class="page-bottom" aria-label="検索・説明・ログイン"><div class="bottom-tools"><input id="search" type="search" placeholder="選手名・競輪場で検索" aria-label="選手名または競輪場を検索"><span class="count" id="count" aria-live="polite">@@COUNT@@</span></div><p class="notice">並び予想とライン構成は楽天Kドリームスの各レース詳細を反映しています。並び予想を確認できないナイターのS級戦は掲載していません。得点は小数点以下を切り捨て。Sの数値は印の上、選手名の下は期別、B、逃、捲、差、マの順で表示しています。別ラインごとに間隔を空けています。</p><div id="comments-auth-slot"></div></section></main>
+<footer>車番色は1白・2黒・3赤・4青・5黄・6緑・7橙・8ピンク・9紫です。レース番号から出走表、映像ボタンから楽天Kドリームスの映像ページを開けます。映像は公開後に視聴できます。</footer><section class="page-bottom" aria-label="検索・説明・ログイン"><div class="bottom-tools"><input id="search" type="search" placeholder="選手名・競輪場で検索" aria-label="選手名または競輪場を検索"><span class="count" id="count" aria-live="polite">@@COUNT@@</span></div><p class="notice">並び予想とライン構成は楽天Kドリームスの各レース詳細を反映しています。並び予想を確認できない開催のS級戦は掲載していません。得点は小数点以下を切り捨て。Sの数値は印の上、選手名の下は期別、B、逃、捲、差、マの順で表示しています。別ラインごとに間隔を空けています。</p><div id="comments-auth-slot"></div></section></main>
 <script>
 const races=@@RACES@@;
 const body=document.getElementById("rows"),search=document.getElementById("search"),count=document.getElementById("count"),dateSelect=document.getElementById("date-select");
@@ -104,7 +106,7 @@ function riderMarkup(n,r,contestPosition=""){
 search.addEventListener("input",draw);dateSelect.addEventListener("change",()=>{if(dateSelect.value)location.href=dateSelect.value});draw();
 </script><script src="/keirin-lineup/comments.js?v=bottom-20261017d" defer></script>
 <script src="/keirin-lineup/odds.js?v=exacta-sides-20261017" defer></script>
-<script src="/keirin-lineup/odds-comparison.js?v=compare-20261018" defer></script>
+<script src="/keirin-lineup/odds-comparison.js?v=line-gaps-20261018" defer></script>
 </body></html>
 
 

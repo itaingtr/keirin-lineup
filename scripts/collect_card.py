@@ -2,6 +2,7 @@
 import argparse
 from datetime import datetime, timezone
 import html
+import json
 from pathlib import Path
 import re
 import time
@@ -166,14 +167,17 @@ def parse_card(doc, url, meeting):
             'grade_code':meeting['grade_code'],'start_time':start[1].zfill(5),'lineup':lineup,'players':players}
 
 
-def prepare_day(day, output_site, review):
+def prepare_day(day, output_site, review, snapshot=None):
     target=datetime.strptime(day,'%Y-%m-%d').date()
     calendar=f'https://keirin.kdreams.jp/racecard/{target:%Y/%m/%d}/'
-    meetings=schedule(fetch(calendar),calendar,target)
+    calendar_doc=fetch(calendar)
+    calendar_observed=datetime.now(timezone.utc).isoformat()
+    meetings=schedule(calendar_doc,calendar,target)
     races, observations, skipped = [], [], []
     for meeting in meetings:
         if meeting['grade_code']==1:
             continue  # FII meetings have no S-class races.
+        meeting_races, unpublished = [], False
         for url in meeting['urls']:
             time.sleep(2)
             doc=fetch(url)
@@ -181,25 +185,39 @@ def prepare_day(day, output_site, review):
             try:
                 race=parse_card(doc,url,meeting)
             except MissingLineup as error:
-                if not meeting['night']:
-                    raise
-                skipped.append((url,str(error)))
-                continue
-            observations.append((url,observed))
+                observations.append({'url':url,'observed_at':observed,'missing_lineup':True})
+                skipped.append((meeting['venue'],url,str(error)))
+                unpublished=True
+                break  # Omit the whole meeting, including races already parsed.
+            observations.append({'url':url,'observed_at':observed,'normalized':race})
             if race is not None:
-                races.append(race)
+                meeting_races.append(race)
             print(f'Checked {url}: ' + ('S-class confirmed' if race else 'A/L class excluded'),flush=True)
+        if not unpublished:
+            races.extend(meeting_races)
     dataset={'schema_version':1,'target_date':day,'expected_races':len(races),'races':races}
     validate(dataset)
+    if snapshot is not None:
+        snapshot=Path(snapshot)
+        if any(snapshot.resolve().is_relative_to(directory.resolve())
+               for directory in (Path(__file__).resolve().parents[1]/'site',output_site)):
+            raise ValueError('Source snapshots must stay outside the public site')
+        snapshot.parent.mkdir(parents=True,exist_ok=True)
+        with snapshot.open('x') as handle:
+            json.dump({**dataset,'calendar_url':calendar,'calendar_observed_at':calendar_observed,
+                       'sources':observations,'excluded_meetings':[{'venue':venue,'url':url,'reason':reason}
+                         for venue,url,reason in skipped]},handle,ensure_ascii=False,indent=2)
+            handle.write('\n')
     write_pages(dataset,output_site)
     details=['<!doctype html><html lang="ja"><meta charset="utf-8"><h1>'+esc(day)+' 出走表取得結果</h1>',
              '<p>'+str(len(races))+' S級レース・'+str(sum(len(r['players']) for r in races))+'人</p>',
              '<table><tr><th>取得元</th><th>取得時刻</th></tr>']
-    details.extend('<tr><td><a href="'+esc(url)+'">'+esc(url)+'</a></td><td>'+esc(stamp)+'</td></tr>' for url,stamp in observations)
-    details.append('</table><h2>並び未発表のナイター</h2>')
-    details.extend('<p>'+esc(url+' '+reason)+'</p>' for url,reason in skipped)
+    details.extend('<tr><td><a href="'+esc(item['url'])+'">'+esc(item['url'])+'</a></td><td>'+esc(item['observed_at'])+'</td></tr>' for item in observations)
+    details.append('</table><h2>並び未発表のため除外した開催</h2>')
+    details.extend('<p>'+esc(venue+' '+url+' '+reason)+'</p>' for venue,url,reason in skipped)
+    review.parent.mkdir(parents=True,exist_ok=True)
     review.write_text('\n'.join(details)+'</html>\n')
-    print(f'Prepared {day}: {len(races)} races, {sum(len(r["players"]) for r in races)} riders; {len(skipped)} unpublished night lineups excluded',flush=True)
+    print(f'Prepared {day}: {len(races)} races, {sum(len(r["players"]) for r in races)} riders; {len(skipped)} unpublished meetings excluded',flush=True)
 
 
 def review_table(table):
@@ -276,8 +294,9 @@ if __name__ == '__main__':
     parser.add_argument('--date', required=True)
     parser.add_argument('--review', type=Path, required=True)
     parser.add_argument('--output-site', type=Path)
+    parser.add_argument('--snapshot', type=Path, help='New private JSON file, outside the public site')
     args = parser.parse_args()
     if args.output_site:
-        prepare_day(args.date,args.output_site,args.review)
+        prepare_day(args.date,args.output_site,args.review,args.snapshot)
     else:
         inspect_day(args.date, args.review)

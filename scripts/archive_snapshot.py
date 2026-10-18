@@ -43,6 +43,15 @@ class Storage:
     def upload(self, name, data):
         self.request('POST', 'object/' + BUCKET + '/' + urllib.parse.quote(name, safe='/'), data)
 
+    def ensure_private_bucket(self):
+        buckets = self.request('GET', 'bucket')
+        matching = [bucket for bucket in buckets if bucket.get('id') == BUCKET]
+        if not matching:
+            self.request('POST', 'bucket', {'id':BUCKET, 'name':BUCKET, 'public':False})
+        bucket = self.request('GET', 'bucket/' + BUCKET)
+        if bucket.get('id') != BUCKET or bucket.get('public') is not False:
+            raise ValueError('Snapshot bucket must be private; no data uploaded')
+
     def list_all(self, prefix):
         result, offset = [], 0
         while True:
@@ -107,6 +116,7 @@ def main():
         name = snapshot_name(args.date)
     store = Storage(os.environ['SNAPSHOT_SUPABASE_URL'].rstrip('/'),
                     os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
+    store.ensure_private_bucket()
     if name is not None:
         # New unique object, no upsert or overwrite. No expiry or deletion follows.
         store.upload(name, data)

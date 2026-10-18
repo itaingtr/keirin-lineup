@@ -1,7 +1,11 @@
 import sys
+import copy
+import json
 from datetime import date
 from pathlib import Path
 import unittest
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).parents[1] / 'scripts'))
 import collect_card as collector
@@ -60,6 +64,40 @@ class CardTests(unittest.TestCase):
         self.assertEqual(meetings,[{**MEETING,'urls':[URL]}])
         with self.assertRaises(ValueError):collector.schedule(Document(source).root,'https://keirin.kdreams.jp/',date(2026,10,19))
         with self.assertRaises(ValueError):collector.schedule(Document(source.replace('gr2','unknown')).root,'https://keirin.kdreams.jp/',date(2026,10,18))
+
+    def test_missing_lineup_omits_entire_meeting_including_previously_parsed_races(self):
+        first=collector.parse_card(Document(fixture()).root,URL,MEETING)
+        other=copy.deepcopy(first)
+        other.update(venue='奈良',race=1,source='https://keirin.kdreams.jp/nara/racedetail/5320261018010001/')
+        for night in [False,True]:
+            with self.subTest(night=night), TemporaryDirectory() as directory:
+                root=Path(directory)
+                meetings=[{**MEETING,'night':night,'urls':[URL,URL.replace('0006','0007')]},
+                          {'venue':'奈良','grade_code':2,'night':False,'urls':[other['source']]}]
+                with patch.object(collector,'schedule',return_value=meetings), patch.object(collector,'fetch'), \
+                     patch.object(collector.time,'sleep'), patch.object(collector,'parse_card',
+                       side_effect=[first,collector.MissingLineup('Unpublished'),other]):
+                    collector.prepare_day('2026-10-18',root/'site',root/'review.html',root/'private.json')
+                snapshot=json.loads((root/'private.json').read_text())
+                self.assertEqual(snapshot['races'],[other])
+                self.assertEqual(snapshot['expected_races'],1)
+                self.assertEqual(len(snapshot['sources']),3)
+                self.assertEqual(snapshot['excluded_meetings'][0]['venue'],'高知')
+                self.assertEqual((root/'site/index.html').read_bytes(),(root/'site/line20261018.html/index.html').read_bytes())
+
+    def test_failed_or_empty_collection_preserves_working_page(self):
+        first=collector.parse_card(Document(fixture()).root,URL,MEETING)
+        for failure in [collector.MissingLineup('Unpublished'),ValueError('Unknown columns'),OSError('Fetch failed')]:
+            with self.subTest(failure=failure), TemporaryDirectory() as directory:
+                root=Path(directory); site=root/'site'; site.mkdir()
+                (site/'index.html').write_text('working page')
+                meetings=[{**MEETING,'urls':[URL,URL.replace('0006','0007')]}]
+                with patch.object(collector,'schedule',return_value=meetings), patch.object(collector,'fetch'), \
+                     patch.object(collector.time,'sleep'), patch.object(collector,'parse_card',side_effect=[first,failure]):
+                    with self.assertRaises((ValueError,OSError)):
+                        collector.prepare_day('2026-10-18',site,root/'review.html',root/'private.json')
+                self.assertEqual((site/'index.html').read_text(),'working page')
+                self.assertFalse((root/'private.json').exists())
 
 
 if __name__=='__main__':unittest.main()

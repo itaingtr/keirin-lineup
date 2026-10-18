@@ -74,6 +74,19 @@ class SnapshotTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             archive.Storage('https://example.com', 'test-placeholder')
 
+    def test_creates_missing_private_bucket_without_expiry_or_overwrite(self):
+        store=archive.Storage('https://test.supabase.co','test-placeholder')
+        with patch.object(store,'request',side_effect=[[],{'name':archive.BUCKET},{'id':archive.BUCKET,'public':False}]) as request:
+            store.ensure_private_bucket()
+        self.assertEqual(request.call_args_list[1].args,('POST','bucket',{'id':archive.BUCKET,'name':archive.BUCKET,'public':False}))
+        self.assertEqual(len(request.call_args_list),3)
+
+    def test_existing_public_bucket_is_rejected_without_modifying_it(self):
+        store=archive.Storage('https://test.supabase.co','test-placeholder')
+        with patch.object(store,'request',side_effect=[[{'id':archive.BUCKET}],{'id':archive.BUCKET,'public':True}]) as request:
+            with self.assertRaises(ValueError):store.ensure_private_bucket()
+        self.assertTrue(all(call.args[0]=='GET' for call in request.call_args_list))
+
 
 if __name__ == '__main__':
     unittest.main()
