@@ -1,0 +1,36 @@
+name: Check private source storage
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/storage-check.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v6
+      - name: Read private bucket configuration and storage usage
+        env:
+          SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
+          SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
+        run: |
+          python3 - <<'PYTHON'
+          import os, sys
+          sys.path.insert(0, 'scripts')
+          from archive_snapshot import Storage, BUCKET
+          store = Storage(os.environ['SNAPSHOT_SUPABASE_URL'], os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
+          bucket = store.request('GET', 'bucket/' + BUCKET)
+          if bucket.get('id') != BUCKET or bucket.get('public') is not False:
+              raise SystemExit('Expected the existing private source bucket')
+          usage = store.usage()
+          message = f"Private Supabase storage connected: {usage['objects']} snapshots, {usage['known_bytes']} known bytes; {usage['unknown_size_objects']} unknown-size objects. Read-only check; no uploads or deletions."
+          print('::notice title=Supabase storage connection verified::' + message)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as handle:
+              handle.write(message + '\n')
+          PYTHON

@@ -35,7 +35,7 @@
 .table-wrap tbody tr.odds-open{grid-template-areas:"venue race comment" "lineup lineup comment" "composer composer comment" "odds odds odds"}
 .table-wrap .odds-toggle,.table-wrap .odds-refresh{font:inherit;font-size:11px;padding:5px 9px;border:1px solid #c8d2df;border-radius:6px;background:#eff6ff;color:#155eef;cursor:pointer}
 .table-wrap .odds-toggle{margin-top:4px}
-.table-wrap .odds-cell{grid-area:odds;width:calc(var(--exacta-width)*2 + var(--exacta-line-gaps,0px) + 12px);max-width:100%;min-width:0;border:0;padding:0;justify-self:start}
+.table-wrap .odds-cell{grid-area:odds;width:calc(var(--exacta-width) + var(--exacta-lineup-width,var(--exacta-width)) + 12px);max-width:100%;min-width:0;border:0;padding:0;justify-self:start}
 .table-wrap .odds-cell[hidden]{display:none}
 .table-wrap .odds-heading{font-size:10px;margin-right:6px}
 .table-wrap .odds-refresh{font-size:10px;padding:2px 5px}
@@ -51,7 +51,11 @@
 .table-wrap .exacta-matrix tbody{display:table-row-group}
 .table-wrap .exacta-matrix tr{display:table-row;background:transparent;box-shadow:none;border:0;border-radius:0}
 .table-wrap .exacta-matrix th,.table-wrap .exacta-matrix td{display:table-cell;border:0;padding:1px;line-height:14px;height:16px;white-space:nowrap;background:transparent;vertical-align:middle}
-.table-wrap .exacta-matrix .exacta-line-start{padding-left:5.5px}
+.table-wrap .exacta-matrix .exacta-line-start{padding-left:3px}
+.table-wrap .exacta-matrix .exacta-line-row-start>th,.table-wrap .exacta-matrix .exacta-line-row-start>td{padding-top:4px;height:19px}
+.table-wrap .exacta-matrix th.exacta-pair-heading{position:relative;padding-top:25px}
+.table-wrap .exacta-line-pair{position:absolute;left:100%;top:1px;transform:translateX(-50%);width:28px;text-align:center;white-space:nowrap}
+.table-wrap .exacta-line-pair .exacta-pair-value{display:block;font-size:9px;line-height:11px;height:11px;text-align:center}
 .table-wrap .exacta-matrix th{text-align:center;font-weight:500}
 .table-wrap .exacta-matrix .exacta-corner{font-size:9px;color:#627086;vertical-align:bottom;text-align:left}
 .table-wrap .exacta-matrix .exacta-value{text-align:right;letter-spacing:-.2px;font-weight:500;color:#253247}
@@ -106,7 +110,7 @@ function riderMarkup(n,r,contestPosition=""){
 search.addEventListener("input",draw);dateSelect.addEventListener("change",()=>{if(dateSelect.value)location.href=dateSelect.value});draw();
 </script><script src="/keirin-lineup/comments.js?v=bottom-20261017d" defer></script>
 <script src="/keirin-lineup/odds.js?v=exacta-sides-20261017" defer></script>
-<script src="/keirin-lineup/odds-comparison.js?v=line-gaps-20261018" defer></script>
+<script src="/keirin-lineup/odds-comparison.js?v=line-pairs-20261018" defer></script>
 </body></html>
 
 

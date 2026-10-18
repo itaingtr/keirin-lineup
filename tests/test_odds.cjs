@@ -164,15 +164,19 @@ function sample() {
     dom.window.close();
   }
   {
-    const {dom,w,calls}=setup(sample());
+    const data=sample();
+    data.odds.find(item=>item.first===4&&item.second===1).value=null;
+    const {dom,w,calls}=setup(data);
     w.eval(fs.readFileSync('site/odds-comparison.js','utf8'));
     w.document.querySelector('.odds-toggle').click();await tick();
     const panel=w.document.querySelector('.odds-cell');
     const left=panel.querySelector('[data-odds-order="number"]'),right=panel.querySelector('[data-odds-order="lineup"]');
     assert(left&&right);
     assert.equal(panel.querySelector('.odds-comparison').firstElementChild.firstElementChild,right,'lineup view is on the left');
-    assert.equal(panel.querySelector('.odds-comparison').lastElementChild.firstElementChild,left,'number view is on the right');
-    assert.equal(panel.lastElementChild,panel.querySelector('.odds-status'),'observation time follows both tables');
+    const rightFigure=panel.querySelector('.odds-comparison').lastElementChild;
+    assert.equal(rightFigure.firstElementChild,left,'number view is on the right');
+    const statusNode=panel.querySelector('.odds-status');
+    assert.equal(rightFigure.lastElementChild,statusNode,'observation time follows the right-hand numeric table');
     const order=[...w.document.querySelectorAll('#rows > tr:first-child .lineup .car')].map(car=>Number(car.textContent));
     assert.deepEqual([...left.querySelectorAll('.exacta-column-rider .exacta-number')].map(car=>Number(car.textContent)),[...order].sort((a,b)=>a-b));
     assert.deepEqual([...right.querySelectorAll('.exacta-column-rider .exacta-number')].map(car=>Number(car.textContent)),order);
@@ -181,12 +185,46 @@ function sample() {
     assert.deepEqual([...right.tHead.querySelectorAll('.exacta-line-start .exacta-number')].map(car=>Number(car.textContent)),starts,'gaps occur only between lines');
     assert.equal(left.querySelectorAll('.exacta-line-start').length,0,'numeric view has no line gaps');
     assert.equal(right.tBodies[0].querySelectorAll('.exacta-line-start').length,starts.length*order.length);
+    assert.deepEqual([...right.tBodies[0].querySelectorAll('.exacta-line-row-start')].map(row=>Number(row.firstElementChild.querySelector('.exacta-number').textContent)),starts,'row gaps occur at line boundaries');
+    const groups=[...w.document.querySelectorAll('#rows > tr:first-child .line-group')].map(group=>[...group.querySelectorAll('.car')].map(car=>Number(car.textContent)));
+    const expectedPairs=groups.flatMap(group=>group.slice(0,-1).map((car,index)=>car+'-'+group[index+1]));
+    assert.deepEqual([...right.querySelectorAll('.exacta-line-pair')].map(pair=>pair.dataset.linePair),expectedPairs,'only neighboring riders within a line are paired');
+    assert.equal(left.querySelectorAll('.exacta-line-pair').length,0,'numeric view has no extra quotes');
+    for(const pair of right.querySelectorAll('.exacta-line-pair')) {
+      const [first,second]=pair.dataset.linePair.split('-');
+      assert.deepEqual([...pair.children].map(value=>value.dataset.pairCombination),[first+'-'+second,second+'-'+first],'forward quote is above the reverse quote');
+      for(const value of pair.children) {
+        const source=left.querySelector('[data-combination="'+value.dataset.pairCombination+'"]');
+        assert.equal(value.textContent,source.textContent);
+        assert.equal(value.title,source.title);
+      }
+      assert.equal(pair.parentElement.querySelector('.exacta-number').textContent,first);
+    }
+    assert.equal(right.querySelector('[data-pair-combination="4-1"]').textContent,'—','an unavailable line quote is not replaced with zero');
     const quotes=table=>Object.fromEntries([...table.querySelectorAll('[data-combination]')].map(cell=>[cell.dataset.combination,[cell.textContent,cell.title,cell.className.replace(' exacta-line-start','')]]));
     assert.deepEqual(quotes(left),quotes(right),'reordering preserves prices and emphasis');
     assert.equal(calls.length,2,'configuration plus one shared feed fetch');
     panel.querySelector('.odds-refresh').click();await tick();
     assert.equal(panel.querySelectorAll('.odds-comparison').length,1);
     assert.equal(panel.querySelectorAll('table').length,2,'refresh replaces both tables without duplication');
+    assert.equal(panel.querySelectorAll('.odds-status').length,1);
+    assert.equal(panel.querySelector('.odds-comparison').lastElementChild.lastElementChild,statusNode,'refresh preserves the original live status node');
+    const originalFetch=w.fetch;
+    w.fetch=async()=>{throw new Error('fixture connection failure')};
+    panel.querySelector('.odds-refresh').click();await tick();
+    assert.equal(panel.querySelectorAll('.odds-comparison').length,0);
+    assert.equal(panel.lastElementChild,statusNode,'failed refresh restores the status outside the cleared content');
+    assert(statusNode.textContent.includes('取得できなかった'));
+    w.fetch=originalFetch;
+    panel.querySelector('.odds-refresh').click();await tick();
+    assert.equal(panel.querySelector('.odds-comparison').lastElementChild.lastElementChild,statusNode,'recovery places the time back under the numeric table');
+    const group=panel.parentElement.querySelector('.line-group');
+    const contested=[...group.querySelectorAll('.rider')].slice(0,2);
+    const contestedCars=contested.map(rider=>rider.querySelector('.car').textContent);
+    const contest=w.document.createElement('div');contest.className='contest-pair';
+    contested[0].before(contest);contest.append(...contested);
+    panel.querySelector('.odds-refresh').click();await tick();
+    assert([...panel.querySelectorAll('.exacta-line-pair')].every(pair=>!pair.dataset.linePair.split('-').some(car=>contestedCars.includes(car))),'a contested position is not presented as a simple sequential line');
     dom.window.close();
   }
   {
