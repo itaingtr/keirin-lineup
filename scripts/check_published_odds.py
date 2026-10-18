@@ -41,7 +41,7 @@ def check():
             raise ValueError('Published feed does not match listed riders: ' + key)
         count += len(pairs)
     # Ensure the newly deployed client has the snapshot reader as well.
-    client, _ = read(BASE + 'odds.js')
+    client, _ = read(BASE + ('odds-current.js' if 'odds-current.js' in page else 'odds.js'))
     if 'payload.results' not in client or "'snapshot'" not in client:
         raise ValueError('Published client has not updated to read the feed')
     print(f'PASS published page: {len(races)} races, {count} actual exacta combinations, client and browser CORS')

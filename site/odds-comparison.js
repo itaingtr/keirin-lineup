@@ -4,11 +4,104 @@
   const root = document.getElementById('rows');
   if (!root) return;
   const panelStatuses = new WeakMap();
+  const initialRows = new WeakSet(), summaryTimes = new WeakMap();
+  const initialEnabled = root.hasAttribute('data-initial-odds') && Boolean(window.keirinExacta);
+  const pageDate = document.querySelector('.eyebrow')?.textContent.match(/(\d{4})\.(\d{2})\.(\d{2})/);
+  const today = new Intl.DateTimeFormat('sv-SE', {timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const showInitial = initialEnabled && pageDate && pageDate.slice(1).join('-') <= today;
+  let initialPayload = null;
+
+  function linePairs(raceRow, normal) {
+    const quotes = new Map([...normal.querySelectorAll('td[data-combination]')]
+      .map(cell => [cell.dataset.combination, cell]));
+    const pairs = [];
+    for (const group of raceRow.querySelectorAll('.lineup .line-group')) {
+      const cars = [...group.querySelectorAll('.car')];
+      for (let index = 0; index < cars.length - 1; index++) {
+        if (cars[index].closest('.contest-pair') || cars[index + 1].closest('.contest-pair')) continue;
+        const first = Number(cars[index].textContent), second = Number(cars[index + 1].textContent);
+        const pair = document.createElement('span');
+        pair.className = 'exacta-line-pair';
+        pair.dataset.linePair = first + '-' + second;
+        for (const combination of [first + '-' + second, second + '-' + first]) {
+          const source = quotes.get(combination);
+          if (!source) continue;
+          const value = document.createElement('span');
+          value.className = source.className + ' exacta-pair-value';
+          value.textContent = source.textContent;
+          value.title = source.title;
+          value.dataset.pairCombination = combination;
+          pair.append(value);
+        }
+        if (pair.children.length === 2) pairs.push({first, pair});
+      }
+    }
+    return pairs;
+  }
+
+  function clearSummary(row) {
+    row.querySelectorAll('.rider-odds').forEach(node => node.remove());
+    row.querySelector('.lineup')?.classList.remove('lineup-odds-visible');
+  }
+
+  function showSummary(row, normal) {
+    if (!showInitial) return;
+    const observed = Date.parse(normal.dataset.observedAt);
+    if (!Number.isFinite(observed) || observed < (summaryTimes.get(row) || 0)) return;
+    summaryTimes.set(row, observed);
+    initialRows.add(row);
+    clearSummary(row);
+    if (![...normal.querySelectorAll('td[data-combination]')].some(cell => !cell.classList.contains('exacta-unavailable'))) return;
+    const savedAt = new Intl.DateTimeFormat('ja-JP', {timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(new Date(observed));
+    const summaries = new Map([...normal.querySelectorAll('.exacta-column-rider')]
+      .map(header => [Number(header.querySelector('.exacta-number').textContent), header.querySelector('.exacta-synthetic')]));
+    const bands = new Map();
+    for (const rider of row.querySelectorAll('.lineup .rider')) {
+      const number = Number(rider.querySelector('.car').textContent);
+      const band = document.createElement('span');
+      band.className = 'rider-odds';
+      band.dataset.observedAt = normal.dataset.observedAt;
+      const summary = summaries.get(number)?.cloneNode(true);
+      if (summary) {
+        summary.classList.add('rider-win-odds');
+        summary.dataset.car = number;
+        if (summary.textContent === '—') summary.textContent = '';
+        summary.title += ' 保存値：' + savedAt;
+        band.append(summary);
+      }
+      rider.prepend(band);
+      bands.set(number, band);
+    }
+    for (const {first, pair} of linePairs(row, normal)) {
+      if ([...pair.children].every(value => value.classList.contains('exacta-unavailable'))) continue;
+      for (const value of pair.children) {
+        if (value.classList.contains('exacta-unavailable')) value.textContent = '';
+        value.title += ' 保存値：' + savedAt;
+      }
+      bands.get(first)?.append(pair);
+    }
+    row.querySelector('.lineup')?.classList.add('lineup-odds-visible');
+  }
+
+  function applyInitial() {
+    if (!initialPayload || !showInitial) return;
+    for (const row of root.children) {
+      if (initialRows.has(row)) continue;
+      initialRows.add(row);
+      try {
+        const normal = window.keirinExacta.matrixForRow(initialPayload, row);
+        if (normal) showSummary(row, normal);
+      } catch (error) {
+        // Missing or invalid saved quotes leave the original lineup untouched.
+      }
+    }
+  }
 
   function addComparison(normal) {
     const panel = normal.closest('.odds-cell');
     const raceRow = panel?.parentElement;
     if (!raceRow) return;
+    showSummary(raceRow, normal);
     const order = [...raceRow.querySelectorAll('.lineup .car')].map(car => Number(car.textContent));
     const lineup = normal.cloneNode(true);
     const heading = lineup.tHead?.rows[0], body = lineup.tBodies[0];
@@ -52,30 +145,7 @@
         cell.classList.add('exacta-pair-heading');
       }
     }
-    const quotes = new Map([...normal.querySelectorAll('td[data-combination]')]
-      .map(cell => [cell.dataset.combination, cell]));
-    for (const group of groups) {
-      const cars = [...group.querySelectorAll('.car')];
-      for (let index = 0; index < cars.length - 1; index++) {
-        // Riders competing for the same position do not define a simple line edge.
-        if (cars[index].closest('.contest-pair') || cars[index + 1].closest('.contest-pair')) continue;
-        const first = Number(cars[index].textContent), second = Number(cars[index + 1].textContent);
-        const pair = document.createElement('span');
-        pair.className = 'exacta-line-pair';
-        pair.dataset.linePair = first + '-' + second;
-        for (const combination of [first + '-' + second, second + '-' + first]) {
-          const source = quotes.get(combination);
-          if (!source) return;
-          const value = document.createElement('span');
-          value.className = source.className + ' exacta-pair-value';
-          value.textContent = source.textContent;
-          value.title = source.title;
-          value.dataset.pairCombination = combination;
-          pair.append(value);
-        }
-        headerByCar.get(first).append(pair);
-      }
-    }
+    for (const {first, pair} of linePairs(raceRow, normal)) headerByCar.get(first).append(pair);
     normal.dataset.oddsOrder = 'number';
     lineup.dataset.oddsOrder = 'lineup';
     lineup.dataset.axisOrder = order.join('-');
@@ -113,7 +183,20 @@
       if (!panel.querySelector('.odds-comparison') && panel.lastElementChild !== status) panel.append(status);
     }
     root.querySelectorAll('.odds-content > .exacta-matrix').forEach(addComparison);
+    applyInitial();
   };
+  root.addEventListener('keirin-exacta-unavailable', event => {
+    initialRows.add(event.target);
+    clearSummary(event.target);
+  });
   update();
   new MutationObserver(update).observe(root, {childList: true, subtree: true});
+  if (showInitial) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    window.keirinExacta.loadSavedFeed(controller.signal).then(payload => {
+      initialPayload = payload;
+      applyInitial();
+    }).catch(() => {}).finally(() => clearTimeout(timeout));
+  }
 })();

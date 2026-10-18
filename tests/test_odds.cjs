@@ -5,7 +5,7 @@ const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
 // Keep a fixed published regression card as index advances to later race days.
 const html=fs.readFileSync('site/line20261017.html/index.html','utf8');
-const oddsCode=fs.readFileSync('site/odds.js','utf8');
+const oddsCode=fs.readFileSync(process.env.EXACTA_READER||'site/odds.js','utf8');
 const tick=()=>new Promise(resolve=>setTimeout(resolve,20));
 function setup(data, configured=true, page=html) {
   const dom=new JSDOM(page,{runScripts:'dangerously',url:'https://itaingtr.github.io/keirin-lineup/'});
