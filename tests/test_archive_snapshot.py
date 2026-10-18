@@ -87,6 +87,19 @@ class SnapshotTests(unittest.TestCase):
             with self.assertRaises(ValueError):store.ensure_private_bucket()
         self.assertTrue(all(call.args[0]=='GET' for call in request.call_args_list))
 
+    def test_uploaded_snapshot_is_read_back_through_authenticated_route(self):
+        store=archive.Storage('https://test.supabase.co','test-placeholder')
+        data=b'{"target_date":"2026-10-18","races":[{"no":1}]}'
+        with patch.object(store,'request',return_value={'target_date':'2026-10-18','races':[{'no':1}]}) as request:
+            store.verify('2026-10-18/new.json',data)
+        request.assert_called_once_with('GET','object/authenticated/'+archive.BUCKET+'/2026-10-18/new.json')
+
+    def test_mismatched_readback_stops_publication_without_deleting_the_snapshot(self):
+        store=archive.Storage('https://test.supabase.co','test-placeholder')
+        with patch.object(store,'request',return_value={'races':[]}) as request:
+            with self.assertRaises(ValueError):store.verify('2026-10-18/new.json',b'{"races":[1]}')
+        self.assertTrue(all(call.args[0]=='GET' for call in request.call_args_list))
+
 
 if __name__ == '__main__':
     unittest.main()

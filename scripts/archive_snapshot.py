@@ -43,6 +43,11 @@ class Storage:
     def upload(self, name, data):
         self.request('POST', 'object/' + BUCKET + '/' + urllib.parse.quote(name, safe='/'), data)
 
+    def verify(self, name, data):
+        restored = self.request('GET', 'object/authenticated/' + BUCKET + '/' + urllib.parse.quote(name, safe='/'))
+        if restored != json.loads(data):
+            raise ValueError('Private snapshot readback differs from the uploaded data; publication stopped')
+
     def ensure_private_bucket(self):
         buckets = self.request('GET', 'bucket')
         matching = [bucket for bucket in buckets if bucket.get('id') == BUCKET]
@@ -120,6 +125,7 @@ def main():
     if name is not None:
         # New unique object, no upsert or overwrite. No expiry or deletion follows.
         store.upload(name, data)
+        store.verify(name, data)
         print(f'Private snapshot saved: {name}')
     report = store.usage()
     if args.report:

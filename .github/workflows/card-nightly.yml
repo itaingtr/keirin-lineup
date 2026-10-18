@@ -53,32 +53,35 @@ jobs:
               raise
           print('Private snapshot storage verified; no deletion or expiry configured.')
           PYTHON
-      # A code push checks readiness only. Collection is scheduled or explicitly requested.
+      # A code push verifies the currently published date privately, without publishing.
       - name: Select requested race date
-        if: github.event_name != 'push'
         env:
           REQUESTED_DATE: ${{ inputs.date }}
         run: |
           python3 - <<'PYTHON'
           import os
+          import sys
+          from pathlib import Path
           from datetime import datetime, timedelta, timezone
           from zoneinfo import ZoneInfo
           now = datetime.now(timezone.utc)
           # UTC calendar + 1 also handles a 23:30 run delayed past midnight JST.
           base = now.date() if os.environ['GITHUB_EVENT_NAME'] == 'schedule' else now.astimezone(ZoneInfo('Asia/Tokyo')).date()
           target = os.environ.get('REQUESTED_DATE') or (base + timedelta(days=1)).isoformat()
+          if os.environ['GITHUB_EVENT_NAME'] == 'push':
+              sys.path.insert(0, 'scripts')
+              from export_races import export
+              target = export(Path('site/index.html').read_text())['target_date']
           datetime.strptime(target, '%Y-%m-%d')
           with open(os.environ['GITHUB_ENV'], 'a') as handle:
               handle.write('TARGET_DATE=' + target + '\n')
           PYTHON
       - name: Collect and validate the complete eligible card
-        if: github.event_name != 'push'
         run: |
           python3 scripts/collect_card.py --date "$TARGET_DATE" \
             --review /tmp/card-review.html --output-site /tmp/prepared-site \
             --snapshot /tmp/card-snapshot.json
       - name: Archive source data privately before changing public pages
-        if: github.event_name != 'push'
         env:
           SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
@@ -89,9 +92,11 @@ jobs:
           import json, os
           from pathlib import Path
           usage = json.loads(Path('/tmp/storage-usage.json').read_text())
+          snapshot = json.loads(Path('/tmp/card-snapshot.json').read_text())
           daily = usage['by_date'].get(os.environ['TARGET_DATE'], {})
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as handle:
               handle.write(f"Private storage: {daily.get('known_bytes', 0):,} bytes for this race day; {usage['known_bytes']:,} bytes total, {usage['objects']} snapshots. Unknown-size objects: {usage['unknown_size_objects']}. No automatic deletion.\n")
+          print(f"::notice title=Private source backup verified::{snapshot['target_date']}: {len(snapshot['races'])} S-class races saved and read back. Daily storage: {daily.get('known_bytes', 0)} bytes; total: {usage['known_bytes']} bytes in {usage['objects']} snapshots. No automatic deletion.")
           PYTHON
       - name: Generate and publish only index and the requested day
         id: publish
