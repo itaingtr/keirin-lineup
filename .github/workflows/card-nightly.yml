@@ -44,8 +44,13 @@ jobs:
           sys.path.insert(0, 'scripts')
           from archive_snapshot import Storage
           if not os.environ.get('SNAPSHOT_SUPABASE_SERVICE_KEY'):
+              print('::error title=Private source storage is not connected::Missing Actions secret SNAPSHOT_SUPABASE_SERVICE_KEY. Add it in repository Settings > Secrets and variables > Actions. Existing pages are preserved.')
               raise SystemExit('Missing Actions secret SNAPSHOT_SUPABASE_SERVICE_KEY. Existing public pages are preserved; automatic card publication remains blocked until private storage is connected.')
-          Storage(os.environ['SNAPSHOT_SUPABASE_URL'], os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY']).ensure_private_bucket()
+          try:
+              Storage(os.environ['SNAPSHOT_SUPABASE_URL'], os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY']).ensure_private_bucket()
+          except Exception:
+              print('::error title=Private source storage verification failed::Supabase did not confirm a private snapshot bucket. Existing public pages are preserved; check this step before enabling nightly publication.')
+              raise
           print('Private snapshot storage verified; no deletion or expiry configured.')
           PYTHON
       # A code push checks readiness only. Collection is scheduled or explicitly requested.
