@@ -1,0 +1,5890 @@
+{
+  "checked_at": "2026-10-19T06:18:26.047996+00:00",
+  "results": [
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030001/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030001/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:28.074432+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030001/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 66.5
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 21.0
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 34.6
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 134.5
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 86.9
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 7.1
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 30.2
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 85.6
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 125.6
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 122.8
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 188.4
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 20.8
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 14.1
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 108.7
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 12.5
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 89.7
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 34.8
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 21.4
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 15.1
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 144.9
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 11.4
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 125.6
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 86.9
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 27.0
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 51.3
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 137.8
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 42.1
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 94.2
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 137.8
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 42.1
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 53.3
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 314.0
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 20.1
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 122.8
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 201.8
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 60.7
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 4.9
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 50.0
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 28.8
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 31.0
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 76.3
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 83.1
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 1R Ｓ級一般 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030002/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030002/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:31.296085+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030002/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 18.9
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 48.8
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 13.7
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 54.2
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 78.1
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 29.1
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 11.9
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 93.0
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 9.6
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 162.7
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 195.3
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 65.1
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 17.5
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 67.3
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 33.1
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 244.1
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 78.1
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 81.3
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 7.4
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 9.3
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 50.0
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 81.3
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 195.3
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 51.3
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 8.7
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 108.5
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 72.3
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 39.0
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 195.3
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 122.0
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 38.2
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 130.2
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 34.2
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 81.3
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 279.0
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 130.2
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 7.1
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 51.3
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 88.7
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 44.3
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 150.2
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 195.3
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 2R Ｓ級一般 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030003/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030003/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:34.541905+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030003/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 69.2
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 44.3
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 3.6
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 189.1
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 567.4
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 83.4
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 85.9
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 50.6
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 70.9
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 20.1
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 157.6
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 283.7
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 83.4
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 45.0
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 41.7
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 76.6
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 9.1
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 33.7
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 283.7
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 32.6
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 72.7
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 11.7
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 64.4
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 25.3
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 118.2
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 709.3
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 37.8
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 59.1
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 72.7
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 149.3
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 15.5
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 34.1
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 354.6
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 88.6
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 128.9
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 177.3
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 101.3
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 283.7
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 91.5
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 567.4
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 166.8
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 236.4
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 60.3
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 83.4
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 23.4
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 22.3
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 105.0
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 567.4
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 74.6
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 85.9
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 41.1
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 51.5
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 18.5
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 157.6
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 472.8
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 85.9
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 3R Ｓ級一般 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030004/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030004/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:38.036291+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030004/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 84.3
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 30.3
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 70.5
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 13.1
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 228.1
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 102.0
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 242.4
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 23.2
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 70.5
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 24.8
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 129.3
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 36.5
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 258.6
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 31.2
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 204.1
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 21.3
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 70.5
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 84.3
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 39.9
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 26.5
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 387.9
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 57.0
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 125.1
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 22.6
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 80.8
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 76.0
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 13.9
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 44.5
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 228.1
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 69.2
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 149.1
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 23.6
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 23.5
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 79.1
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 18.5
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 76.0
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 323.2
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 71.8
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 204.1
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 23.3
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 138.5
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 228.1
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 138.5
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 277.0
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 204.1
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 184.7
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 352.6
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 33.4
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 79.1
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 37.2
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 47.3
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 102.0
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 47.3
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 298.3
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 161.6
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 25.5
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 155.1
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 176.3
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 56.2
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 92.3
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 114.0
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 387.9
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 161.6
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 33.1
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 77.5
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 55.4
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 32.8
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 80.8
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 35.2
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 184.7
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 63.5
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 138.5
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 4R Ｓ級選抜 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030005/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030005/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:42.620228+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030005/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 80.4
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 47.6
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 97.7
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 15.3
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 226.1
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 23.9
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 27.8
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 54.0
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 41.1
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 172.2
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 172.2
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 48.2
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 301.5
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 67.0
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 157.3
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 57.4
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 28.2
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 120.6
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 57.4
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 25.3
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 328.9
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 42.0
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 180.9
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 129.2
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 50.9
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 129.2
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 28.0
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 41.1
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 328.9
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 62.3
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 172.2
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 124.7
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 12.7
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 129.2
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 51.6
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 76.9
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 212.8
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 39.3
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 80.4
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 53.2
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 124.7
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 258.4
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 92.7
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 226.1
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 78.6
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 116.7
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 278.3
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 134.0
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 15.4
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 116.7
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 62.3
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 144.7
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 24.2
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 278.3
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 69.5
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 21.6
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 13.8
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 201.0
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 150.7
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 212.8
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 47.6
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 452.2
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 82.2
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 157.3
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 25.8
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 75.3
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 109.6
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 113.0
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 27.0
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 301.5
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 13.7
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 100.5
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 5R Ｓ級選抜 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030006/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030006/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:46.044050+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030006/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 60.2
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 142.0
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 159.0
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 2.9
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 180.7
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 99.4
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 209.2
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 159.0
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 76.4
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 104.6
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 159.0
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 10.2
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 662.7
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 45.1
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 165.6
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 72.3
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 198.8
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 50.3
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 142.0
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 16.2
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 120.5
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 58.4
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 233.9
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 220.9
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 152.9
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 101.9
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 198.8
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 64.1
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 497.0
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 33.1
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 397.6
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 172.8
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 13.9
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 26.8
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 88.3
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 128.2
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 198.8
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 49.0
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 198.8
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 110.4
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 248.5
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 248.5
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 69.7
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 441.8
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 84.6
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 172.8
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 994.1
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 189.3
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 88.3
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 39.3
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 82.8
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 81.1
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 14.7
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 497.0
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 76.4
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 92.4
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 198.8
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 128.2
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 284.0
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 397.6
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 64.1
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 1325.5
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 47.9
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 233.9
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 172.8
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 21.6
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 172.8
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 305.8
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 18.5
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 361.5
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 104.6
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 209.2
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 6R Ｓ級選抜 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030007/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030007/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:49.922564+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030007/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 35.4
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 90.8
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 82.3
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 13.4
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 131.2
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 16.4
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 322.0
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 50.6
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 24.7
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 98.4
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 131.2
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 78.7
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 354.3
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 7.1
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 442.8
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 70.8
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 44.2
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 80.5
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 147.6
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 77.0
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 168.7
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 33.7
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 272.5
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 25.6
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 57.1
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 107.3
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 196.8
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 141.7
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 88.5
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 42.6
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 590.5
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 86.4
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 7.8
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 84.3
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 147.6
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 114.2
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 590.5
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 38.5
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 354.3
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 126.5
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 66.8
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 295.2
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 131.2
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 90.8
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 221.4
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 56.2
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 1181.0
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 141.7
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 12.5
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 21.3
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 60.0
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 64.4
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 52.8
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 93.2
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 122.1
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 41.6
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 122.1
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 208.4
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 236.2
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 354.3
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 168.7
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 1771.5
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 34.7
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 168.7
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 41.6
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 61.0
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 27.6
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 104.2
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 126.5
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 221.4
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 44.2
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 322.0
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 7R Ｓ級特選 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030008/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030008/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:54.508472+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030008/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 104.7
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 49.0
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 77.5
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 168.5
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 57.8
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 18.6
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 215.3
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 9.0
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 51.6
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 59.6
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 138.4
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 276.8
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 102.0
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 90.1
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 352.3
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 33.1
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 32.8
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 80.7
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 161.5
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 323.0
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 102.0
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 70.4
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 352.3
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 11.1
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 46.6
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 129.2
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 143.5
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 161.5
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 33.7
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 65.6
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 352.3
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 38.7
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 77.5
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 242.2
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 168.5
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 90.1
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 117.4
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 69.2
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 484.5
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 155.0
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 43.0
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 323.0
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 65.6
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 41.6
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 176.1
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 69.2
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 276.8
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 27.8
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 7.4
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 149.0
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 82.4
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 92.2
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 129.2
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 57.8
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 193.8
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 18.1
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 84.2
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 298.1
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 258.4
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 228.0
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 298.1
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 184.5
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 228.0
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 34.9
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 13.1
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 86.1
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 21.2
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 92.2
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 215.3
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 46.6
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 49.6
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 59.6
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 8R Ｓ級特選 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030009/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030009/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:18:57.861102+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030009/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 10.4
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 26.0
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 155.1
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 18.9
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 806.7
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 77.5
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 183.3
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 67.2
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 16.9
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 27.2
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 192.0
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 54.5
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 224.0
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 30.5
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 268.9
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 57.6
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 31.2
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 17.1
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 336.1
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 77.5
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 504.1
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 106.1
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 237.2
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 22.5
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 91.6
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 56.0
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 161.3
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 38.7
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 504.1
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 118.6
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 576.2
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 183.3
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 13.1
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 15.5
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 41.1
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 70.7
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 448.1
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 98.3
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 336.1
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 115.2
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 175.3
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 15.4
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 122.2
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 1344.5
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 366.6
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 103.4
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 4033.5
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 224.0
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 46.3
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 11.0
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 82.3
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 224.0
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 89.6
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 336.1
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 237.2
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 72.0
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 144.0
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 62.0
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 168.0
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 806.7
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 237.2
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 2016.7
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 448.1
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 84.0
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 37.3
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 19.2
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 15.7
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 366.6
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 109.0
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 366.6
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 91.6
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 149.3
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 9R Ｓ級特選 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030010/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030010/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:01.253258+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030010/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 16.5
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 16.0
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 184.8
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 40.3
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 379.6
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 24.0
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 219.5
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 59.0
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 11.2
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 56.1
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 351.2
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 68.1
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 780.4
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 122.1
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 192.4
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 126.5
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 7.7
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 39.6
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 425.7
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 25.6
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 668.9
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 144.8
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 379.6
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 109.7
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 59.2
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 167.2
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 280.9
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 209.6
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 1756.0
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 298.8
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 2341.3
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 79.3
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 8.4
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 35.7
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 19.3
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 286.6
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 439.0
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 175.6
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 413.1
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 96.2
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 94.9
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 305.3
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 275.4
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 1756.0
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 167.2
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 468.2
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 2809.6
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 468.2
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 4.5
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 76.7
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 62.4
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 540.3
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 108.0
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 1277.1
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 1003.4
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 123.2
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 65.3
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 69.8
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 222.9
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 1560.9
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 280.9
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 2341.3
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 739.3
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 360.2
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 13.0
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 59.0
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 61.6
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 122.1
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 69.8
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 668.9
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 192.4
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 326.7
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 10R Ｓ級準決勝 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030011/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030011/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:04.799042+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030011/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 21.5
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 173.9
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 95.9
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 57.9
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 662.7
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 23.8
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 463.9
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 12.3
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 28.9
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 158.1
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 100.1
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 22.5
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 397.6
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 49.5
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 732.5
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 9.0
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 87.5
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 88.0
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 231.9
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 126.5
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 1159.8
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 121.0
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 994.1
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 9.0
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 107.8
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 101.5
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 248.5
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 121.0
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 732.5
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 108.7
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 994.1
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 39.5
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 75.2
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 12.0
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 210.8
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 130.0
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 535.3
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 58.2
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 632.6
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 22.3
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 347.9
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 69.2
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 632.6
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 632.6
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 302.5
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 257.7
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 2319.7
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 132.5
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 25.3
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 26.7
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 139.1
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 108.7
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 51.3
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 662.7
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 732.5
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 8.7
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 165.6
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 448.9
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 927.9
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 662.7
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 239.9
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 1988.3
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 331.3
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 131.3
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 31.9
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 20.4
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 25.9
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 86.9
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 36.6
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 347.9
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 22.3
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 386.6
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 11R Ｓ級準決勝 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030012/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/keiokaku/racedetail/2720261017030012/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:08.183330+00:00",
+        "source_url": "https://keirin.kdreams.jp/keiokaku/racedetail/2720261017030012/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 179.5
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 23.1
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 27.2
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 160.8
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 375.4
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 28.0
+          },
+          {
+            "first": 8,
+            "second": 1,
+            "value": 344.1
+          },
+          {
+            "first": 9,
+            "second": 1,
+            "value": 7.1
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 66.6
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 126.4
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 109.6
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 619.4
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 375.4
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 100.7
+          },
+          {
+            "first": 8,
+            "second": 2,
+            "value": 1548.5
+          },
+          {
+            "first": 9,
+            "second": 2,
+            "value": 152.9
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 19.6
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 233.7
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 69.9
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 317.6
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 619.4
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 17.2
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 375.4
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 30.0
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 28.6
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 209.9
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 57.0
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 233.7
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 334.8
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 48.5
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 516.1
+          },
+          {
+            "first": 9,
+            "second": 4,
+            "value": 62.8
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 26.9
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 619.4
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 131.7
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 149.2
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 1548.5
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 163.0
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 1376.5
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 104.1
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 182.1
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 247.7
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 252.8
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 182.1
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 1376.5
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 238.2
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 2064.7
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 294.9
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 16.7
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 233.7
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 18.0
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 41.7
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 263.5
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 728.7
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 252.8
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 21.8
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 152.9
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 1376.5
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 190.5
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 209.9
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 952.9
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 2477.7
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 115.7
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 199.8
+          },
+          {
+            "first": 1,
+            "second": 9,
+            "value": 3.1
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 288.1
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 34.2
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 55.5
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "value": 326.0
+          },
+          {
+            "first": 6,
+            "second": 9,
+            "value": 619.4
+          },
+          {
+            "first": 7,
+            "second": 9,
+            "value": 30.4
+          },
+          {
+            "first": 8,
+            "second": 9,
+            "value": 589.9
+          }
+        ],
+        "source_title": "京王閣競輪 レース詳細 | ゴールドカップレース 12R Ｓ級準決勝 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030005/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/kochi/racedetail/7420261017030005/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:12.173867+00:00",
+        "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030005/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 126.1
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 162.7
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 67.4
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 12.9
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 669.6
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 69.0
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 148.8
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 90.2
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 5.5
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 32.4
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 414.5
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 52.1
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 272.0
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 101.2
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 30.0
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 10.3
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 600.3
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 74.0
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 165.8
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 16.6
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 41.7
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 8.2
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 175.8
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 20.3
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 69.6
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 42.7
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 22.5
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 6.8
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 300.1
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 21.4
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 580.3
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 214.9
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 280.8
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 32.6
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 112.3
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 143.8
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 154.0
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 62.6
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 70.7
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 11.9
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 12.1
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 370.4
+          }
+        ],
+        "source_title": "高知競輪 レース詳細 | 土佐の名人戦・日曜市１５０周年 5R Ｓ級一般 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030006/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/kochi/racedetail/7420261017030006/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:15.388544+00:00",
+        "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030006/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 60.6
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 93.3
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 216.1
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 7.7
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 282.4
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 84.0
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 95.4
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 27.6
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 103.3
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 21.9
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 407.3
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 6.6
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 109.1
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 21.8
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 30.7
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 21.5
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 298.3
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 24.0
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 227.7
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 59.0
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 11.7
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 42.8
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 399.6
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 68.7
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 20.6
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 19.9
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 29.9
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 106.4
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 74.8
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 29.9
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 187.4
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 159.2
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 153.4
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 218.3
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 11.0
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 105.9
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 85.4
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 6.5
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 24.6
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 97.1
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 21.2
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 222.9
+          }
+        ],
+        "source_title": "高知競輪 レース詳細 | 土佐の名人戦・日曜市１５０周年 6R Ｓ級一般 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030007/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/kochi/racedetail/7420261017030007/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:19.199603+00:00",
+        "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030007/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 55.8
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 86.0
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 78.5
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 146.2
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 86.4
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 27.6
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 95.6
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 28.7
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 95.6
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 62.8
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 102.7
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 3.4
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 123.1
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 23.0
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 130.3
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 107.6
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 33.4
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 13.8
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 102.1
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 86.8
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 111.7
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 171.2
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 107.0
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 23.9
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 157.7
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 38.7
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 75.2
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 171.2
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 145.0
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 6.7
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 151.1
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 54.8
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 20.3
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 146.2
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 211.5
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 34.5
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 70.2
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 6.6
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 20.0
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 54.8
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 26.6
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 55.8
+          }
+        ],
+        "source_title": "高知競輪 レース詳細 | 土佐の名人戦・日曜市１５０周年 7R Ｓ級一般 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030008/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/kochi/racedetail/7420261017030008/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:22.425949+00:00",
+        "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030008/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 45.9
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 17.8
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 303.3
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 189.3
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 18.9
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 82.1
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 74.4
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 9.0
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 62.6
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 223.2
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 55.0
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 49.4
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 28.4
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 11.1
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 111.6
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 107.5
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 18.9
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 8.8
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 167.8
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 18.6
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 39.2
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 268.9
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 94.6
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 180.6
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 105.6
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 95.4
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 42.0
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 265.8
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 22.9
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 182.0
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 21.7
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 34.3
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 16.0
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 140.0
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 58.4
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 63.9
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 99.8
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 33.1
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 4.1
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 268.9
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 241.4
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 51.5
+          }
+        ],
+        "source_title": "高知競輪 レース詳細 | 土佐の名人戦・日曜市１５０周年 8R Ｓ級特選 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030009/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/kochi/racedetail/7420261017030009/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:25.865356+00:00",
+        "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030009/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 13.7
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 27.8
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 53.4
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 17.6
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 108.3
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 16.6
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 9.8
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 41.4
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 64.5
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 59.7
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 113.3
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 7.7
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 30.2
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 44.5
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 120.8
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 127.9
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 35.9
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 61.9
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 16.9
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 29.6
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 72.2
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 100.8
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 111.6
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 56.8
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 10.3
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 52.0
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 111.6
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 118.9
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 225.5
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 59.6
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 51.7
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 67.7
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 20.6
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 115.1
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 153.0
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 74.9
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 13.5
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 7.4
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 66.5
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 96.3
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 69.9
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 88.5
+          }
+        ],
+        "source_title": "高知競輪 レース詳細 | 土佐の名人戦・日曜市１５０周年 9R Ｓ級特選 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030010/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/kochi/racedetail/7420261017030010/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:29.041351+00:00",
+        "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030010/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 8.1
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 43.2
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 42.7
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 46.4
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 181.4
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 17.1
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 15.8
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 47.7
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 11.8
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 49.4
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 98.6
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 61.6
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 29.8
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 22.7
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 70.0
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 17.0
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 227.2
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 100.4
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 25.3
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 5.3
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 70.5
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 55.2
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 51.0
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 68.3
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 42.8
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 29.7
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 18.4
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 71.8
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 267.8
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 110.2
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 76.5
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 42.8
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 130.0
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 21.1
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 173.0
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 173.0
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 10.7
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 32.7
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 86.5
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 83.0
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 76.7
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 231.9
+          }
+        ],
+        "source_title": "高知競輪 レース詳細 | 土佐の名人戦・日曜市１５０周年 10R Ｓ級特選 | 2026年10月19日【楽天Kドリームス】"
+      }
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030012/",
+      "ok": true,
+      "snapshot": {
+        "race_key": "/kochi/racedetail/7420261017030012/",
+        "bet_type": "exacta",
+        "status": "snapshot",
+        "parser_version": 2,
+        "observed_at": "2026-10-19T06:19:32.748979+00:00",
+        "source_url": "https://keirin.kdreams.jp/kochi/racedetail/7420261017030012/?pageType=odds",
+        "rider_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "odds": [
+          {
+            "first": 2,
+            "second": 1,
+            "value": 74.1
+          },
+          {
+            "first": 3,
+            "second": 1,
+            "value": 60.9
+          },
+          {
+            "first": 4,
+            "second": 1,
+            "value": 23.0
+          },
+          {
+            "first": 5,
+            "second": 1,
+            "value": 32.5
+          },
+          {
+            "first": 6,
+            "second": 1,
+            "value": 44.5
+          },
+          {
+            "first": 7,
+            "second": 1,
+            "value": 78.4
+          },
+          {
+            "first": 1,
+            "second": 2,
+            "value": 67.0
+          },
+          {
+            "first": 3,
+            "second": 2,
+            "value": 80.9
+          },
+          {
+            "first": 4,
+            "second": 2,
+            "value": 20.0
+          },
+          {
+            "first": 5,
+            "second": 2,
+            "value": 31.8
+          },
+          {
+            "first": 6,
+            "second": 2,
+            "value": 9.8
+          },
+          {
+            "first": 7,
+            "second": 2,
+            "value": 51.1
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "value": 50.7
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "value": 105.8
+          },
+          {
+            "first": 4,
+            "second": 3,
+            "value": 42.3
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 35.7
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 58.1
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 73.7
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 48.7
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 43.7
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 62.5
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 12.5
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 8.4
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 49.5
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "value": 39.1
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "value": 47.0
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 48.5
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 9.6
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 28.1
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 42.8
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 68.6
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 23.5
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 86.6
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 8.3
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 35.9
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 77.5
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 126.6
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 35.8
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 96.2
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 34.8
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 44.1
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 51.2
+          }
+        ],
+        "source_title": "高知競輪 レース詳細 | 土佐の名人戦・日曜市１５０周年 12R Ｓ級決勝 | 2026年10月19日【楽天Kドリームス】"
+      }
+    }
+  ]
+}
