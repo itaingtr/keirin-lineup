@@ -163,20 +163,20 @@ function sample() {
     assert.equal(data.odds.find(item=>item.first===1&&item.second===5).value,10.5,'saved history is not mutated');
     dom.window.close();
   }
-  {
+  for(const primary of ['lineup','number']) {
     const data=sample();
     data.odds.find(item=>item.first===4&&item.second===1).value=null;
     const {dom,w,calls}=setup(data);
+    if(primary==='number')w.document.getElementById('rows').dataset.oddsPrimary='number';
     w.eval(fs.readFileSync('site/odds-comparison.js','utf8'));
     w.document.querySelector('.odds-toggle').click();await tick();
     const panel=w.document.querySelector('.odds-cell');
     const left=panel.querySelector('[data-odds-order="number"]'),right=panel.querySelector('[data-odds-order="lineup"]');
     assert(left&&right);
-    assert.equal(panel.querySelector('.odds-comparison').firstElementChild.firstElementChild,right,'lineup view is on the left');
-    const rightFigure=panel.querySelector('.odds-comparison').lastElementChild;
-    assert.equal(rightFigure.firstElementChild,left,'number view is on the right');
+    assert.equal(panel.querySelector('.odds-comparison').firstElementChild.firstElementChild,primary==='number'?left:right,'the selected primary view is on the left');
+    assert.equal(panel.querySelector('.odds-comparison').lastElementChild.firstElementChild,primary==='number'?right:left,'the other view is on the right');
     const statusNode=panel.querySelector('.odds-status');
-    assert.equal(rightFigure.lastElementChild,statusNode,'observation time follows the right-hand numeric table');
+    assert.equal(left.closest('figure').lastElementChild,statusNode,'observation time follows the numeric table in either position');
     const order=[...w.document.querySelectorAll('#rows > tr:first-child .lineup .car')].map(car=>Number(car.textContent));
     assert.deepEqual([...left.querySelectorAll('.exacta-column-rider .exacta-number')].map(car=>Number(car.textContent)),[...order].sort((a,b)=>a-b));
     assert.deepEqual([...right.querySelectorAll('.exacta-column-rider .exacta-number')].map(car=>Number(car.textContent)),order);
@@ -208,7 +208,7 @@ function sample() {
     assert.equal(panel.querySelectorAll('.odds-comparison').length,1);
     assert.equal(panel.querySelectorAll('table').length,2,'refresh replaces both tables without duplication');
     assert.equal(panel.querySelectorAll('.odds-status').length,1);
-    assert.equal(panel.querySelector('.odds-comparison').lastElementChild.lastElementChild,statusNode,'refresh preserves the original live status node');
+    assert.equal(panel.querySelector('[data-odds-order="number"]').closest('figure').lastElementChild,statusNode,'refresh preserves the original live status node');
     const originalFetch=w.fetch;
     w.fetch=async()=>{throw new Error('fixture connection failure')};
     panel.querySelector('.odds-refresh').click();await tick();
@@ -217,7 +217,7 @@ function sample() {
     assert(statusNode.textContent.includes('取得できなかった'));
     w.fetch=originalFetch;
     panel.querySelector('.odds-refresh').click();await tick();
-    assert.equal(panel.querySelector('.odds-comparison').lastElementChild.lastElementChild,statusNode,'recovery places the time back under the numeric table');
+    assert.equal(panel.querySelector('[data-odds-order="number"]').closest('figure').lastElementChild,statusNode,'recovery places the time back under the numeric table');
     const group=panel.parentElement.querySelector('.line-group');
     const contested=[...group.querySelectorAll('.rider')].slice(0,2);
     const contestedCars=contested.map(rider=>rider.querySelector('.car').textContent);

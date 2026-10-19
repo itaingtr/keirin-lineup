@@ -8,8 +8,11 @@
 /* Keep this layout local to today's page and the matching index. */
 .table-wrap{width:100%;max-width:none;overflow-x:auto;overscroll-behavior-x:contain}
 .table-wrap table{width:860px;min-width:860px;max-width:860px}
-.table-wrap tbody tr{grid-template-columns:52px 274px minmax(0,1fr);grid-template-areas:"venue race comment" "lineup lineup comment" "composer composer comment";column-gap:12px;align-items:start}
+.table-wrap tbody tr{grid-template-columns:52px 314px minmax(0,1fr);grid-template-areas:"venue race comment" "lineup lineup comment" "composer composer comment";column-gap:12px;align-items:start}
 .table-wrap td.race{flex-wrap:nowrap;gap:8px}
+.table-wrap .video-actions{display:inline-flex;align-items:center;gap:4px;flex:none}
+.table-wrap .live-link{background:#155eef;padding:4px 6px;font-size:10px}
+.table-wrap .live-link:hover{background:#1047b8}
 .table-wrap td.race-comment-cell{display:contents}
 .table-wrap .race-comment-feed{grid-area:comment;margin-left:8px;min-width:0;max-height:none;overflow:visible}
 .table-wrap .race-comment-post{min-width:0;overflow-wrap:anywhere}
@@ -23,7 +26,7 @@
 @media(max-width:640px){
 .table-wrap table{width:max(650px,var(--odds-pair-width,0px));min-width:max(650px,var(--odds-pair-width,0px));max-width:max(650px,var(--odds-pair-width,0px))}
 .table-wrap .race-comment-feed{margin-left:0}
-.table-wrap tbody tr{grid-template-columns:44px 230px minmax(0,1fr);column-gap:4px}
+.table-wrap tbody tr{grid-template-columns:44px 270px minmax(0,1fr);column-gap:4px}
 .table-wrap td.race-comment-cell{margin:0;font-size:10px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .table-wrap .race-comment-body{font-size:10px;line-height:1.4}
 .table-wrap .race-comment-post{padding:4px 5px}
@@ -94,12 +97,16 @@
 @@HEADER@@
 <main><div class="tools"><select id="date-select" aria-label="日付を選択">@@DATE_OPTIONS@@</select><button type="button" class="refresh-button" onclick="location.reload()" aria-label="ページを更新">更新</button></div>
 
-<div class="table-wrap"><table><colgroup class="desktop-columns"><col style="width:78px"><col style="width:138px"><col></colgroup><thead><tr><th>競輪場</th><th>レース・映像</th><th>並び</th></tr></thead><tbody id="rows" data-initial-odds></tbody></table></div>
-<footer>車番色は1白・2黒・3赤・4青・5黄・6緑・7橙・8ピンク・9紫です。レース番号から出走表、映像ボタンから楽天Kドリームスの映像ページを開けます。映像は公開後に視聴できます。</footer><section class="page-bottom" aria-label="検索・説明・ログイン"><div class="bottom-tools"><input id="search" type="search" placeholder="選手名・競輪場で検索" aria-label="選手名または競輪場を検索"><span class="count" id="count" aria-live="polite">@@COUNT@@</span></div><p class="notice">並び予想とライン構成は楽天Kドリームスの各レース詳細を反映しています。並び予想を確認できない開催のS級戦は掲載していません。得点は小数点以下を切り捨て。Sの数値は印の上、選手名の下は期別、B、逃、捲、差、マの順で表示しています。別ラインごとに間隔を空けています。</p><div id="comments-auth-slot"></div></section></main>
+<div class="table-wrap"><table><colgroup class="desktop-columns"><col style="width:78px"><col style="width:138px"><col></colgroup><thead><tr><th>競輪場</th><th>レース・映像</th><th>並び</th></tr></thead><tbody id="rows" data-initial-odds data-odds-primary="number"></tbody></table></div>
+<footer>車番色は1白・2黒・3赤・4青・5黄・6緑・7橙・8ピンク・9紫です。レース番号から出走表、映像ボタンから楽天Kドリームスの映像ページを開けます。映像は公開後に視聴できます。青いライブボタンから各競輪場の生中継を開けます。</footer><section class="page-bottom" aria-label="検索・説明・ログイン"><div class="bottom-tools"><input id="search" type="search" placeholder="選手名・競輪場で検索" aria-label="選手名または競輪場を検索"><span class="count" id="count" aria-live="polite">@@COUNT@@</span></div><p class="notice">並び予想とライン構成は楽天Kドリームスの各レース詳細を反映しています。並び予想を確認できない開催のS級戦は掲載していません。得点は小数点以下を切り捨て。Sの数値は印の上、選手名の下は期別、B、逃、捲、差、マの順で表示しています。別ラインごとに間隔を空けています。</p><div id="comments-auth-slot"></div></section></main>
 <script>
 const races=@@RACES@@;
 const body=document.getElementById("rows"),search=document.getElementById("search"),count=document.getElementById("count"),dateSelect=document.getElementById("date-select");
 const videoGrades=@@VIDEO_GRADES@@;
+function liveUrl(r){
+ const venue=new URL(r.source).pathname.match(/\/racedetail\/(\d{2})/)[1];
+ return 'https://keirin.kdreams.jp/stadium/live/?'+new URLSearchParams({kyogijoCd:venue,'l-id':'Livebroadcast'}).toString();
+}
 function videoUrl(r,gradeCd){
  const match=new URL(r.source).pathname.match(/\/racedetail\/(\d{2})(\d{4})(\d{2})(\d{2})(\d{2})(\d{4})\/$/);
  if(!match)return r.source+'?pageType=showResult';
@@ -117,11 +124,11 @@ function riderMarkup(n,r,contestPosition=""){
  const scoreClass=p.rawScore>=r.averageScore+3?" score-high":p.rawScore<=r.averageScore-3?" score-low":"";
  const stats=p.stats.slice(1).map((value,i)=>'<div class="stat'+(i===0?(value===0?' stat-b-zero':' stat-b'):'')+((i===0&&value>=10)||(i===1&&value>0&&value===Math.max(...r.players.map(player=>player.stats[2])))||(i===2&&value>0&&value===Math.max(...r.players.map(player=>player.stats[3])))?' stat-highlight':'')+'" aria-label="'+["B","逃","捲","差","マ"][i]+' '+value+'">'+value+'</div>').join("");
  return '<div class="rider"><span class="recent-s">'+p.stats[0]+'</span><span class="prediction-mark">'+p.mark+'</span><span class="score'+scoreClass+'">'+p.score+'</span><span class="car c'+n+(contestPosition?' contest-'+contestPosition:'')+'">'+n+'</span><span class="name">'+name+'</span><span class="period">'+p.period+'</span><div class="stats">'+stats+'</div></div>'
-}function openVideo(event,url){event.preventDefault();if(window.matchMedia("(max-width: 640px)").matches){location.href=url;return false}window.open(url,"kdreams-video","width=750,height=470,toolbar=no,location=no,menubar=no,status=no,scrollbars=yes,resizable=yes");return false}function draw(){const q=search.value.trim().toLocaleLowerCase();const shown=races.filter(r=>(!q||r.venue.toLocaleLowerCase().includes(q)||r.players.some(p=>p.name.toLocaleLowerCase().includes(q))));body.innerHTML=shown.map(r=>'<tr><td class="venue">'+escapeHtml(r.venue)+'</td><td class="race"><a class="race-link'+(r.venue==="弥彦"&&r.race===1?" race-link-small":"")+'" href="'+r.source+'" target="_blank" rel="noopener">'+r.race+'R <span class="race-class">'+escapeHtml(r.raceType)+'</span></a><span class="race-time">'+r.startTime+'</span><a class="video-link" href="'+videoUrl(r)+'" target="_blank" rel="noopener" onclick="return openVideo(event,this.href)" title="PCは別ウィンドウ、スマートフォンは同じ画面でKドリームスの映像ページを開きます">▶ 映像を見る</a></td><td class="lineup-cell"><div class="lineup" aria-label="'+escapeHtml(r.venue)+' '+r.race+'レース 並び予想">'+r.groups.map(line=>'<div class="line-group">'+line.map(unit=>unit.type==="contest"?'<div class="contest-pair" aria-label="競り">'+unit.riders.map(n=>riderMarkup(n,r)).join("")+'</div>':unit.riders.map(n=>riderMarkup(n,r)).join("")).join("")+'</div>').join("")+'</div></td></tr>').join("");count.textContent=shown.length+" / "+races.length+" レース"}
+}function openVideo(event,url){event.preventDefault();if(window.matchMedia("(max-width: 640px)").matches){location.href=url;return false}window.open(url,"kdreams-video","width=750,height=470,toolbar=no,location=no,menubar=no,status=no,scrollbars=yes,resizable=yes");return false}function draw(){const q=search.value.trim().toLocaleLowerCase();const shown=races.filter(r=>(!q||r.venue.toLocaleLowerCase().includes(q)||r.players.some(p=>p.name.toLocaleLowerCase().includes(q))));body.innerHTML=shown.map(r=>'<tr><td class="venue">'+escapeHtml(r.venue)+'</td><td class="race"><a class="race-link'+(r.venue==="弥彦"&&r.race===1?" race-link-small":"")+'" href="'+r.source+'" target="_blank" rel="noopener">'+r.race+'R <span class="race-class">'+escapeHtml(r.raceType)+'</span></a><span class="race-time">'+r.startTime+'</span><span class="video-actions"><a class="video-link" href="'+videoUrl(r)+'" target="_blank" rel="noopener" onclick="return openVideo(event,this.href)" title="PCは別ウィンドウ、スマートフォンは同じ画面でKドリームスの映像ページを開きます">▶ 映像を見る</a><a class="video-link live-link" href="'+liveUrl(r)+'" target="_blank" rel="noopener" onclick="return openVideo(event,this.href)" title="'+escapeHtml(r.venue)+'のライブ映像を開きます">ライブ</a></span></td><td class="lineup-cell"><div class="lineup" aria-label="'+escapeHtml(r.venue)+' '+r.race+'レース 並び予想">'+r.groups.map(line=>'<div class="line-group">'+line.map(unit=>unit.type==="contest"?'<div class="contest-pair" aria-label="競り">'+unit.riders.map(n=>riderMarkup(n,r)).join("")+'</div>':unit.riders.map(n=>riderMarkup(n,r)).join("")).join("")+'</div>').join("")+'</div></td></tr>').join("");count.textContent=shown.length+" / "+races.length+" レース"}
 search.addEventListener("input",draw);dateSelect.addEventListener("change",()=>{if(dateSelect.value)location.href=dateSelect.value});draw();
 </script><script src="/keirin-lineup/comments.js?v=bottom-20261017d" defer></script>
 <script src="/keirin-lineup/odds-current.js?v=initial-20261018" defer></script>
-<script src="/keirin-lineup/odds-comparison.js?v=initial-20261018" defer></script>
+<script src="/keirin-lineup/odds-comparison.js?v=live-20261019" defer></script>
 </body></html>
 
 

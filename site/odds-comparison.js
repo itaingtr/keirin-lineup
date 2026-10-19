@@ -3,6 +3,7 @@
   'use strict';
   const root = document.getElementById('rows');
   if (!root) return;
+  const numberFirst = root.dataset.oddsPrimary === 'number';
   const panelStatuses = new WeakMap();
   const initialRows = new WeakSet(), summaryTimes = new WeakMap();
   const initialEnabled = root.hasAttribute('data-initial-odds') && Boolean(window.keirinExacta);
@@ -159,17 +160,19 @@
     left.className = right.className = 'odds-comparison-view';
     const baseWidth = 36 + order.length * 30;
     const lineupWidth = 36 + order.length * columnWidth + starts.size * gap;
-    left.style.setProperty('--exacta-width', lineupWidth + 'px');
+    const lineupFigure = numberFirst ? right : left;
+    const numberFigure = numberFirst ? left : right;
+    lineupFigure.style.setProperty('--exacta-width', lineupWidth + 'px');
     panel.style.setProperty('--exacta-lineup-width', lineupWidth + 'px');
     const outer = root.closest('table');
     const requiredWidth = baseWidth + lineupWidth + 12 + 26;
     outer.style.setProperty('--odds-pair-width', Math.max(requiredWidth,
       Number.parseFloat(outer.style.getPropertyValue('--odds-pair-width')) || 0) + 'px');
     normal.replaceWith(pair);
-    left.append(lineup);
-    right.append(normal);
+    lineupFigure.append(lineup);
+    numberFigure.append(normal);
     const status = panelStatuses.get(panel);
-    if (status) right.append(status);
+    if (status) numberFigure.append(status);
     pair.append(left, right);
   }
 
@@ -179,7 +182,7 @@
       if (!status) continue;
       panelStatuses.set(panel, status);
       // The shared reader clears content on refresh. Restore its original live
-      // status node even after the old right-hand figure has been detached.
+      // status node even after the old numeric figure has been detached.
       if (!panel.querySelector('.odds-comparison') && panel.lastElementChild !== status) panel.append(status);
     }
     root.querySelectorAll('.odds-content > .exacta-matrix').forEach(addComparison);
