@@ -12,5 +12,5 @@ GitHubにリポジトリを作り、この一式を `main` ブランチへ置く
 
 ## Cloudflareでも公開する
 
-Cloudflare PagesのGitHub連携用に、公開ファイルのパスを変換するビルドを用意しています。接続設定と掲示板ログインの設定は [CLOUDFLARE.md](CLOUDFLARE.md) を参照してください。
+Cloudflare Workers / PagesのGitHub連携用に、公開ファイルのパスを変換するビルドを用意しています。接続設定と掲示板ログインの設定は [CLOUDFLARE.md](CLOUDFLARE.md) を参照してください。
 

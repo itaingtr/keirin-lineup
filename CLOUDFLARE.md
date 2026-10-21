@@ -1,9 +1,27 @@
-# Cloudflare Pagesで公開する
+# Cloudflareで公開する
 
-リポジトリ `itaingtr/keirin-lineup` をCloudflare PagesのGitHub連携につなぐ。
+リポジトリ `itaingtr/keirin-lineup` をCloudflare WorkersまたはPagesのGitHub連携につなぐ。
 既存のGitHub Pagesと並行して公開できる。Cloudflareへの初回ログインとGitHubアプリの認証は、アカウント所有者が管理画面で行う。
 
-## 接続設定
+## Workersの「Set up your application」画面から公開する
+
+「Configure your Worker project」と表示された画面では、次の設定を使う。
+
+| 項目 | 値 |
+| --- | --- |
+| Worker / Project name | `keirin-lineup` |
+| Production branch | `main` |
+| Build command | `python3 scripts/build_cloudflare.py` |
+| Deploy command（表示される場合） | `npx wrangler deploy` |
+| Root directory（Advanced settings） | リポジトリのルート（空欄または `/`） |
+| Enable Preview builds | オフ |
+| Protect with Cloudflare Access | オフ（一般公開） |
+
+入力後に **Deploy** を選ぶ。GitHub連携の初期設定に、Cloudflare APIトークンの手動登録は不要。
+
+`wrangler.jsonc` が `dist-cloudflare/` を静的ファイルの公開先として指定しているため、Workers画面ではBuild output directory欄の入力は不要。Worker名は設定ファイルの `keirin-lineup` と一致させる。
+
+## Pagesの接続設定
 
 1. [Cloudflare管理画面](https://dash.cloudflare.com/)で **Workers & Pages → Create application → Pages → Import an existing Git repository** を開く。
 2. GitHubを認証し、`itaingtr/keirin-lineup` へのアクセスを許可する。
@@ -53,6 +71,8 @@ Git連携の初期設定に、Cloudflare APIトークンの手動登録は不要
 
 ## 公式ドキュメント
 
+- [Cloudflare WorkersのGit連携とビルド設定](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)
+- [Cloudflare Workersの静的ファイル公開](https://developers.cloudflare.com/workers/static-assets/)
 - [Cloudflare PagesのGit連携](https://developers.cloudflare.com/pages/get-started/git-integration/)
 - [Cloudflare Pagesのビルド設定](https://developers.cloudflare.com/pages/configuration/build-configuration/)
 - [Supabaseのログイン許可先URL](https://supabase.com/docs/guides/auth/redirect-urls)

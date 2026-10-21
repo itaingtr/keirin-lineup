@@ -4,3 +4,4 @@ __pycache__/
 .env.*
 /private-snapshots/
 /dist-cloudflare/
+/.wrangler/

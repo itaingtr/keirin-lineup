@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a Cloudflare Pages copy without changing the GitHub Pages sources."""
+"""Build Cloudflare static assets without changing the GitHub Pages sources."""
 
 from pathlib import Path
 import shutil
@@ -51,7 +51,7 @@ def build():
             '<a href="/">トップへ戻る</a></html>\n',
             encoding="utf-8",
         )
-    print(f"Cloudflare Pages: prepared {count} text files in {OUTPUT.name}/")
+    print(f"Cloudflare: prepared {count} text files in {OUTPUT.name}/")
 
 
 if __name__ == "__main__":
