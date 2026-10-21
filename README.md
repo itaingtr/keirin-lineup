@@ -10,3 +10,7 @@ GitHubにリポジトリを作り、この一式を `main` ブランチへ置く
 
 公開URLは、リポジトリの **Settings → Pages** または成功したActions実行の `github-pages` 環境から確認できます。
 
+## Cloudflareでも公開する
+
+Cloudflare PagesのGitHub連携用に、公開ファイルのパスを変換するビルドを用意しています。接続設定と掲示板ログインの設定は [CLOUDFLARE.md](CLOUDFLARE.md) を参照してください。
+
