@@ -82,6 +82,6 @@ export default{async fetch(request){
     catch(_){return json({error:'Official media information is temporarily unavailable'},502);}
   }
   let path=url.pathname;if(path.endsWith('/'))path+='index.html';
-  const asset=ASSETS[path];if(!asset)return new Response('Not found',{status:404});
+  const asset=ASSETS[path]||ASSETS[path+'/index.html'];if(!asset)return new Response('Not found',{status:404});
   return new Response(request.method==='HEAD'?null:asset.body,{headers:{'content-type':asset.type,'cache-control':path.endsWith('.html')||path.endsWith('.json')?'no-store':'private, max-age=3600','x-content-type-options':'nosniff'}});
 }};

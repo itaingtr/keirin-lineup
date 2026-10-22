@@ -7,10 +7,17 @@ const dir = path.resolve(process.argv[2] || path.join(__dirname, '../site'));
 const project = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
 const feed = JSON.parse(fs.readFileSync(path.join(dir, 'odds.json'), 'utf8'));
+const media = JSON.parse(fs.readFileSync(path.join(dir, 'media.json'), 'utf8'));
+const inline=html.includes('openViewer(event,link)');
+const assetPrefix=dir.endsWith('line20261021.html')?'/line20261021.html':'';
+const sourceUrl=element=>element.dataset.sourceUrl||element.href;
+const history = inline ? {races:rawHistory()} : JSON.parse(fs.readFileSync(path.join(dir, 'history.json'), 'utf8'));
+function rawHistory(){const card=JSON.parse(html.match(/const races=(.*);\nconst body=/)[1]);return card.map(r=>({source_url:r.source,players:r.players.map(p=>({no:p.no,meeting_results:p.meetingResults}))}));}
 const snapshots = new Map(feed.results.filter(x=>x.ok).map(x=>[x.snapshot.race_key,x.snapshot]));
 const pause = () => new Promise(resolve=>setTimeout(resolve,25));
 const raw = JSON.parse(html.match(/const races=(.*);\nconst body=/)[1]);
 let checked = 0;
+let historyChecked = 0;
 
 async function check(url) {
   const fetched = [];
@@ -21,13 +28,13 @@ async function check(url) {
       const target = new URL(String(input),window.document.baseURI);
       fetched.push(target.href);
       assert.equal(target.hostname,'preview.example');
-      assert.ok(['/odds-config.json','/odds.json'].includes(target.pathname), target.href);
-      return {ok:true,json:async()=>target.pathname.endsWith('odds-config.json') ? {endpoint:'./odds.json'} : feed};
+      assert.ok(['/odds-config.json','/odds.json','/media.json'].includes(target.pathname.replace(assetPrefix,'')), target.href);
+      return {ok:true,json:async()=>target.pathname.endsWith('odds-config.json') ? {endpoint:'./odds.json'} : target.pathname.endsWith('media.json') ? media : feed};
     };
     window.addEventListener('error',event=>errors.push(event.error || event.message));
   }});
   const {window} = dom;
-  for (const name of ['odds-current.js','odds-comparison.js']) window.eval(fs.readFileSync(path.join(project,'site',name),'utf8'));
+  for (const name of ['predictions.js','odds-current.js','odds-comparison.js']) window.eval(fs.readFileSync(path.join(project,'site',name),'utf8'));
   await pause();
   const rows = [...window.document.getElementById('rows').children];
   assert.equal(rows.length,raw.length);
@@ -36,8 +43,40 @@ async function check(url) {
     const source = new URL(race.source);
     assert.equal(source.hostname,'www.winticket.jp');
     const video = row.querySelector('.video-link:not(.live-link)');
-    assert.equal(video.href,`https://www.winticket.jp/keirin/${race.venueSlug}/raceresult/${race.meetingStart}${race.venueCode}/${race.meetingDay}/${race.race}`);
-    assert.equal(row.querySelector('.live-link').href,`https://www.winticket.jp/keirin/${race.venueSlug}/live`);
+    assert.equal(sourceUrl(video),`https://www.winticket.jp/keirin/${race.venueSlug}/raceresult/${race.meetingStart}${race.venueCode}/${race.meetingDay}/${race.race}`);
+    assert.equal(sourceUrl(row.querySelector('.live-link')),`https://www.winticket.jp/keirin/${race.venueSlug}/live`);
+    const extra=media.races.find(r=>r.source_url===race.source);
+    for (const rider of row.querySelectorAll('.rider')) {
+      const number=Number(rider.querySelector('.car').textContent);
+      assert.equal(rider.querySelector('.prediction-mark').textContent,extra.players.find(p=>p.no===number).mark);
+      const results=history.races.find(r=>r.source_url===race.source).players.find(p=>p.no===number).meeting_results;
+      const container=rider.querySelector('.meeting-results');
+      assert.equal(rider.querySelector('.stats').nextElementSibling,container);
+      if(race.meetingDay===1){assert.equal(container.querySelectorAll('a').length,0);assert.match(container.querySelector('.meeting-empty').title,/初日/);}
+      const slots=[...container.querySelectorAll('.meeting-result')];
+      assert.equal(slots.length,race.meetingDay-1);
+      for(let day=1;day<race.meetingDay;day++) {
+        const slot=slots[day-1];
+        const item=results.find(r=>r.meeting_day===day);
+        if(!item){assert.equal(slot.querySelector('a'),null);continue;}
+        const link=slot.querySelector('.meeting-order');
+        const destination=new URL(sourceUrl(link));
+        const expected=new URL(item.result_url);
+        expected.searchParams.set('playerIds',item.player_id);
+        assert.equal(destination.href,expected.href);
+        assert.equal(destination.searchParams.get('playerIds'),item.player_id);
+        if(link.tagName==='BUTTON'){assert.equal(link.type,'button');assert.equal(link.hasAttribute('href'),false);}else assert.equal(link.target,inline?'':'_blank');
+        if(inline)assert.match(link.getAttribute('onclick'),/openViewer/);else assert.equal(link.rel,'noopener');
+        const rank=link.querySelector('.meeting-rank');
+        assert.equal(rank.textContent,item.has_accident?item.accident:String(item.order));
+        assert.equal(rank.classList.contains('meeting-rank-circle'),item.display_type===1);
+        assert.equal(rank.classList.contains('meeting-rank-solid'),item.display_type===2);
+        assert.equal(Boolean(link.querySelector('.meeting-back')),item.back);
+        assert.equal(slot.querySelector('.meeting-time').textContent,Number(item.final_half_record)>0?item.final_half_record:'—');
+        assert.match(link.getAttribute('aria-label'),/競走成績/);
+        historyChecked++;
+      }
+    }
     row.querySelector('.odds-toggle').click();
     await pause();
     const snapshot = snapshots.get(source.pathname);
@@ -74,8 +113,8 @@ async function check(url) {
 }
 
 (async()=>{
-  await check('https://preview.example/');
+  await check('https://preview.example'+(assetPrefix||'/'));
   const date = html.match(/KEIRIN · (\d{4})\.(\d{2})\.(\d{2})/).slice(1).join('');
   await check(`https://preview.example/line${date}.html/`);
-  console.log(`PASS ${raw.length} real races; ${checked} cell checks across both views and both URLs; search and WINTICKET video links`);
+  console.log(`PASS ${raw.length} real races; ${checked} odds cells and ${historyChecked} meeting results across both URLs; official video/live links and exact rider selection on every result link`);
 })().catch(error=>{console.error(error);process.exitCode=1;});
