@@ -30,12 +30,14 @@ jobs:
               print('PUBLIC PAGE',url,observed)
               for node in doc.find_all('script'):
                   src=node.attrs.get('src','')
+                  if src: print('ASSET',src)
                   if src and any(w in src.lower() for w in ('live','video','result','racecard','bootstrap','layouts-keirin')): scripts.add(urljoin(url,src))
                   text=node.text()
                   for match in re.finditer(r'window\.__CONFIG__\s*=\s*',text):
                       config=json.JSONDecoder().raw_decode(text[match.end():])[0]
                       print('PUBLIC VIDEO CONFIG',{k:v for k,v in config.items() if 'VIDEO' in k or 'LIVE' in k})
               for state in state_payloads(doc):
+                  if not isinstance(state,dict): continue
                   for q in state.get('tanStackQuery',{}).get('queries',[]):
                       key=q.get('queryKey'); data=q.get('state',{}).get('data',{})
                       print('QUERY',key)
