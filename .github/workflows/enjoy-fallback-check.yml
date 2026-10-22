@@ -1,93 +1,56 @@
-name: Verify direct WINTICKET media for keirin-lineup2
+name: Inspect WINTICKET current-meeting results
 on:
   push:
     branches: [keirin-lineup2-enjoy]
-    paths: [.github/workflows/enjoy-fallback-check.yml, keirin-lineup2/**]
+    paths: [.github/workflows/enjoy-fallback-check.yml]
   workflow_dispatch:
 permissions:
-  contents: write
-concurrency:
-  group: keirin-lineup2-preview
-  cancel-in-progress: false
+  contents: read
 jobs:
-  verify:
+  inspect:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v6
-      - name: Test independent parsers
+      - name: Inspect public current-meeting result fields
         working-directory: keirin-lineup2
-        run: python3 -m unittest discover -s tests -v
-      - name: Read existing private card and collect only new media and AI fields
-        working-directory: keirin-lineup2
-        env:
-          SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
-          SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
         run: |
           python3 - <<'PY'
-          import os,sys,json
-          from pathlib import Path
-          sys.path.insert(0,'scripts')
-          from archive_snapshot import Storage
-          from collect_media import collect
-          store=Storage(os.environ['SNAPSHOT_SUPABASE_URL'],os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
-          target='2026-10-22'
-          for item in reversed(store.list_all(target)):
-              card=store.request('GET','object/authenticated/keirin-source-snapshots/'+target+'/'+item['name'])
-              if card.get('provider')=='winticket' and card.get('calendar_url') and card.get('expected_races')==26: break
-          else: raise ValueError('Existing validated private card missing')
-          archive,display=collect(card)
-          Path('/tmp/lineup2-media.json').write_text(json.dumps(archive,ensure_ascii=False,indent=2))
-          Path('/tmp/lineup2-media-display.json').write_text(json.dumps(display,ensure_ascii=False,indent=2))
-          print('VALIDATED MEDIA',len(display['races']),'races,',sum(bool(r['digest']) for r in display['races']),'published videos,',sum(bool(v['hls']) for v in display['venues'].values()),'live feeds,',sum(bool(p['mark']) for r in display['races'] for p in r['players']),'AI marks')
-          PY
-      - name: Verify public media responses and cross-origin playback headers
-        run: |
-          python3 - <<'PY'
-          import json
+          import sys,json,re,gzip
           from urllib.request import Request,urlopen
-          from urllib.parse import urljoin,urlsplit
-          data=json.load(open('/tmp/lineup2-media-display.json'))
-          origin='https://keirin-lineup2.mightypig64.chatgpt.site'
-          def get(url,manifest=False):
-              headers={'Origin':origin,'User-Agent':'KeirinLineup2/1.0'}
-              if not manifest: headers['Range']='bytes=0-63'
-              with urlopen(Request(url,headers=headers),timeout=35) as r:
-                  raw=r.read(65536 if manifest else 64)
-                  if manifest:
-                      assert r.headers.get('Access-Control-Allow-Origin') in ('*',origin), 'HLS CORS unavailable'
-                      assert raw.startswith(b'#EXTM3U'), 'Invalid HLS playlist'
-                  else: assert r.headers.get('Content-Type','').startswith(('video/','application/octet-stream')), 'Unexpected media content type'
-                  print('MEDIA HTTP PASS',r.status,urlsplit(url).hostname,r.headers.get('Content-Type'),r.headers.get('Access-Control-Allow-Origin'))
-              return raw.decode() if manifest else raw
-          for venue in data['venues'].values():
-              if not venue['hls']: continue
-              master=get(venue['hls'],True)
-              child=next((s.strip() for s in master.splitlines() if s.strip() and not s.startswith('#')),None)
-              assert child, 'Empty live playlist'
-              child=urljoin(venue['hls'],child)
-              assert urlsplit(child).hostname==urlsplit(venue['hls']).hostname
-              playlist=get(child,True)
-              segment=next((s.strip() for s in playlist.splitlines() if s.strip() and not s.startswith('#')),None)
-              assert segment, 'No live segments'
-          videos=[r for r in data['races'] if r['digest']]
-          assert videos, 'Expected completed races with published video'
-          for race in videos: get(race['digest'])
+          sys.path.insert(0,'scripts')
+          from source_http import fetch,state_payloads
+          sources=[]
+          for url in ('https://www.winticket.jp/keirin/odawara/racecard/2026102036/3/6','https://www.winticket.jp/keirin/yokkaichi/racecard/2026102148/2/6'):
+              doc,observed=fetch(url,sources)
+              print('PAGE',url,observed)
+              for state in state_payloads(doc):
+                  if not isinstance(state,dict): continue
+                  for q in state.get('tanStackQuery',{}).get('queries',[]):
+                      key=q.get('queryKey',[]);data=q.get('state',{}).get('data',{})
+                      print('PUBLIC QUERY',key,'FIELDS',list(data) if isinstance(data,dict) else type(data).__name__)
+                      if len(key)>1 and key[1]=='FETCH_KEIRIN_RACE':
+                          print('PUBLIC RECORD',json.dumps(data.get('records',[{}])[0],ensure_ascii=False)[:14000])
+                          for k,v in data.items():
+                              if any(w in k.lower() for w in ('recent','past','history','result')): print('PUBLIC RESULT FIELD',k,json.dumps(v,ensure_ascii=False)[:14000])
+              for node in doc.find_all('a'):
+                  if any(w in node.text() for w in ('直近','今場所')): print('RECENT LINK',node.attrs,node.text())
+          url='https://www.winticket.jp/assets/a53660/chunk.ba7d3223a3c683fa.min.js'
+          with urlopen(Request(url,headers={'Accept-Encoding':'identity'}),timeout=40) as response:
+              raw=response.read(3000000)
+              if raw[:2]==b'\x1f\x8b':raw=gzip.decompress(raw)
+              code=raw.decode()
+          snippets=[]
+          for m in list(re.finditer(r'今場所|RECENT|recentResults|recentRecords|recentResult|上がり|上り',code))[:35]:
+              snippet=code[max(0,m.start()-400):m.end()+700]
+              snippets.append(snippet);print('PUBLIC RECENT CODE',snippet)
+          sources.append({'url':url,'observed_at':sources[-1]['observed_at'],'snippets':snippets})
+          with open('/tmp/lineup2-history-probe.json','w') as f:
+              json.dump({'target_date':'2026-10-22','provider':'winticket-meeting-history-inspection','sources':sources},f,ensure_ascii=False)
           PY
-      - name: Append new media fields privately and verify readback
+      - name: Append private source inspection and verify it
         working-directory: keirin-lineup2
         env:
           SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
-        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-media.json --report /tmp/lineup2-media-usage.json
-      - name: Save only a new display artifact
-        run: |
-          DEST="keirin-lineup2-media/run-${{ github.run_id }}-${{ github.run_attempt }}"
-          test ! -e "$DEST"
-          mkdir -p "$DEST"
-          cp /tmp/lineup2-media-display.json "$DEST/media.json"
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- "$DEST"
-          git commit -m 'Append verified direct video links and published AI ranks'
-          git push origin HEAD:keirin-lineup2-enjoy
+        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-history-probe.json --report /tmp/lineup2-history-probe-usage.json
