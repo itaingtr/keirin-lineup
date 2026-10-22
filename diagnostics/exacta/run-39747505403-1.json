@@ -1,0 +1,119 @@
+{
+  "checked_at": "2026-10-22T08:24:39.934185+00:00",
+  "results": [
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010001/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010002/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010003/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010004/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010005/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010006/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010007/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010008/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010009/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010010/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010011/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/kumamoto/racedetail/8720261022010012/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/odawara/racedetail/3620261020030006/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/odawara/racedetail/3620261020030007/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/odawara/racedetail/3620261020030008/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/odawara/racedetail/3620261020030009/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/odawara/racedetail/3620261020030010/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/odawara/racedetail/3620261020030011/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    },
+    {
+      "source_url": "https://keirin.kdreams.jp/odawara/racedetail/3620261020030012/",
+      "ok": false,
+      "error_type": "ValueError",
+      "error": "Exacta section absent or ambiguous"
+    }
+  ]
+}
