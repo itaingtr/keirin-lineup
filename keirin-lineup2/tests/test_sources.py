@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).parents[1] / 'scripts'))
 from collect_sources import parse_card, parse_odds, lineup_text, daily_races, prediction_marks
 from render_races import render, write_pages
 from source_http import Document, check_url
+from collect_media import parse_extra, parse_live, media_url
 
 URL = 'https://www.winticket.jp/keirin/kumamoto/racecard/2026102287/1/12'
 OBSERVED = '2026-10-22T05:00:00+00:00'
@@ -23,7 +24,7 @@ def fixture():
             'entries':[{'number':n,'raceId':'test-race','absent':False,'playerId':str(n)} for n in (1,2,3)],
             'players':[{'id':str(n),'name':f'テスト選手{n}','term':100+n} for n in (1,2,3)],
             'records':[{'playerId':str(n),'racePoint':100.25+n,'standing':n,'back':10+n,
-                        'frontRunner':n,'stalker':3,'deepCloser':2,'marker':0} for n in (1,2,3)],
+                        'frontRunner':n,'stalker':3,'deepCloser':2,'marker':0,'currentCupResults':[]} for n in (1,2,3)],
             'linePrediction':{'lines':[{'entries':[{'numbers':[1]},{'numbers':[2]}]}, {'entries':[{'numbers':[3]}]}]}}
     odds = {'oddsUpdatedAt':1792644000, 'exacta':[{'raceId':'test-race','type':4,'key':[a,b],
               'odds':float(a*10+b),'absent':False} for a in (1,2,3) for b in (1,2,3) if a!=b]}
@@ -40,6 +41,26 @@ def doc(card, odds):
 
 
 class SourceTests(unittest.TestCase):
+    def test_media_race_and_rider_identity_are_checked(self):
+        c,o=fixture()
+        players=[{'no':n,'name':f'テスト選手{n}'} for n in (1,2,3)]
+        extra=parse_extra(doc(c,o),URL,OBSERVED,players)
+        self.assertEqual(extra['digest_status'],'unpublished')
+        c['race'].update(hasDigestVideo=True,digestVideoProvider=0,digestVideo='https://video.winticket.jp/keirin/digest/verified123.mp4')
+        self.assertEqual(parse_extra(doc(c,o),URL,OBSERVED,players)['digest'],c['race']['digestVideo'])
+        players[0]['name']='別の選手'
+        with self.assertRaises(ValueError): parse_extra(doc(c,o),URL,OBSERVED,players)
+
+    def test_live_broadcast_uses_calendar_day_on_multiday_meetings(self):
+        hls='https://keirin-odawara.winticket.live/out/v1/'+'a'*32+'/index.m3u8'
+        data={'channels':[{'venueId':'36','programs':[{'id':'1:venue36:2026102236:0','videoProvider':0,'hls':hls,'startAt':1,'endAt':2}]}]}
+        state={'redux':{'user':{'loggedIn':False}},'tanStackQuery':{'queries':[{'queryKey':['broadcast','FETCH_BROADCAST_TIMETABLE',{'sport':0}], 'state':{'status':'success','data':data}}]}}
+        page=Document('<script>window.__PRELOADED_STATE__='+json.dumps(state)+'</script>').root
+        self.assertEqual(parse_live(page,'36','2026-10-22',OBSERVED)['hls'],hls)
+        self.assertIsNone(parse_live(page,'36','2026-10-23',OBSERVED)['hls'])
+        for url in (hls.replace('odawara','kumamoto'),hls+'?token=x',hls.replace('https:','http:')):
+            with self.assertRaises(ValueError): media_url(url,slug='odawara')
+
     def test_ai_marks_follow_published_order_and_missing_predictions_stay_empty(self):
         self.assertEqual(prediction_marks({}, [1,2,3]), {})
         self.assertEqual(prediction_marks({'predictions':[{'isAi':True,'order':[3,1,2]}]}, [1,2,3]),

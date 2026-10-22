@@ -8,6 +8,7 @@ import math
 from pathlib import Path
 import re
 import tempfile
+from meeting_history import validate_history
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = re.compile(r'https://www\.yen-joy\.net/kaisai/race/forecast/detail/(\d{6})/(\d{2})/(\d{8})/(\d{8})/(\d{1,2})/?')
@@ -93,7 +94,9 @@ def validate(dataset):
             mark = p['mark']
             require(mark in ('', '◎', '○', '◯', '▲', '△', '×', '注', '☆', '★', '穴'), 'Invalid prediction mark')
             players.append({'no': no, 'name': text(p['name'], 'rider name'), 'score': str(math.floor(score)),
-                            'rawScore': score, 'period': str(period), 'mark': mark, 'stats': stats})
+                            'rawScore': score, 'period': str(period), 'mark': mark, 'stats': stats,
+                            'meetingResults': validate_history(p.get('meeting_results', []),source)
+                            if source_id['provider'] == 'winticket' else []})
         normalized.append({'venue': venue, 'race': number, 'source': source, 'raceType': race_type,
                            'startTime': start_time, 'players': players, 'groups': parse_lineup(r['lineup'], numbers),
                            'averageScore': sum(p['rawScore'] for p in players) / len(players),

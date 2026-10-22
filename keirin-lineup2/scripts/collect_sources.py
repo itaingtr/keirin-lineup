@@ -16,6 +16,7 @@ from zoneinfo import ZoneInfo
 from source_http import cells, fetch, state_payloads
 from venues import identity, VENUES
 from render_races import validate, parse_lineup, write_pages
+from meeting_history import parse_history
 
 JST = ZoneInfo('Asia/Tokyo')
 
@@ -136,7 +137,8 @@ def parse_card(doc, url, fetched_at):
         for label, shown, value in zip(('S','B','逃','捲','差','マ'), visible[entry['number']][1:], stats):
             require(shown == value, f'Visible {label} statistic differs for car {entry["number"]}: shown={shown}, source={value}')
         output.append({'no':entry['number'], 'name':player['name'], 'score':record['racePoint'],
-                       'period':player['term'], 'mark':marks.get(entry['number'], ''), 'stats':stats})
+                       'period':player['term'], 'mark':marks.get(entry['number'], ''), 'stats':stats,
+                       'meeting_results':parse_history(record,url,entry['playerId'])})
     lineup = lineup_text(data.get('linePrediction'), numbers)
     card = {'venue':VENUES[ident['code']][0], 'race':ident['race'], 'source':url,
             'race_type':race['class'] + race['raceType3'], 'grade_code':cup['grade'],

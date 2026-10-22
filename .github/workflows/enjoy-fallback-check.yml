@@ -1,8 +1,8 @@
-name: Verify inline result and video data for keirin-lineup2
+name: Prepare October 21 independent card only
 on:
   push:
     branches: [keirin-lineup2-enjoy]
-    paths: [.github/workflows/enjoy-fallback-check.yml, keirin-lineup2/scripts/result_cards.py]
+    paths: [.github/workflows/enjoy-fallback-check.yml, keirin-lineup2/scripts/prepare_oct21.py]
   workflow_dispatch:
 permissions:
   contents: write
@@ -18,63 +18,20 @@ jobs:
       - name: Test source identity validation
         working-directory: keirin-lineup2
         run: python3 -m unittest discover -s tests -v
-      - name: Collect complete result tables and current official media URLs
+      - name: Independently collect October 21, append privately and read back before rendering
         working-directory: keirin-lineup2
         env:
           SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
+        run: python3 -u scripts/prepare_oct21.py
+      - name: Append new October 21 display artifact
         run: |
-          python3 - <<'PY'
-          import os,sys,json
-          from pathlib import Path
-          from datetime import datetime,timezone
-          sys.path.insert(0,'scripts')
-          from archive_snapshot import Storage
-          from collect_history import collect as history_collect
-          from collect_media import collect as media_collect
-          from source_http import fetch
-          store=Storage(os.environ['SNAPSHOT_SUPABASE_URL'],os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
-          target='2026-10-22'
-          for item in reversed(store.list_all(target)):
-              size=(item.get('metadata') or {}).get('size',0)
-              if size<150000 or size>500000: continue
-              card=store.request('GET','object/authenticated/keirin-source-snapshots/'+target+'/'+item['name'])
-              if card.get('provider')=='winticket' and card.get('calendar_url') and card.get('expected_races')==26: break
-          else: raise ValueError('Validated private source card missing')
-          cache={}
-          def read(url,sources):
-              if url not in cache:
-                  saved=[]
-                  doc,observed=fetch(url,saved)
-                  cache[url]=(doc,observed,saved[-1])
-              doc,observed,raw=cache[url]
-              sources.append(raw)
-              return doc,observed
-          hist_archive,history=history_collect(card,read=read,pause=1)
-          media_archive,media=media_collect(card,read=read,pause=0)
-          display={'schema_version':1,'provider':'winticket','target_date':target,
-                   'checked_at':datetime.now(timezone.utc).isoformat(),
-                   'results':history['result_cards'],'media':media}
-          archive={**display,'snapshot_kind':'inline-viewer',
-                   'sources':hist_archive['sources']+media_archive['sources']}
-          Path('/tmp/lineup2-viewer-source.json').write_text(json.dumps(archive,ensure_ascii=False,indent=2))
-          Path('/tmp/lineup2-viewer.json').write_text(json.dumps(display,ensure_ascii=False,indent=2))
-          print('VERIFIED INLINE VIEWER',len(display['results']),'result tables,',sum(len(c['rows']) for c in display['results']),'result rows,',sum(bool(r['digest']) for r in media['races']),'published videos,',len(cache),'source pages')
-          PY
-      - name: Append sources privately and verify readback
-        working-directory: keirin-lineup2
-        env:
-          SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
-          SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
-        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-viewer-source.json --report /tmp/lineup2-viewer-usage.json
-      - name: Save a new display-only viewer artifact
-        run: |
-          DEST="keirin-lineup2-viewer/run-${{ github.run_id }}-${{ github.run_attempt }}"
+          DEST="keirin-lineup2-oct21/run-${{ github.run_id }}-${{ github.run_attempt }}"
           test ! -e "$DEST"
           mkdir -p "$DEST"
-          cp /tmp/lineup2-viewer.json "$DEST/viewer.json"
+          cp -R /tmp/lineup2-oct21/line20261021.html "$DEST/"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- "$DEST"
-          git commit -m 'Append verified inline result tables and current video metadata'
+          git commit -m 'Append verified October 21 independent display card'
           git push origin HEAD:keirin-lineup2-enjoy
