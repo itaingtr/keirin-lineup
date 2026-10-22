@@ -117,7 +117,7 @@ def parse_card(doc, url, fetched_at):
     output = []
     for entry in entries:
         player, record = players[entry['playerId']], records[entry['playerId']]
-        stats = [record[k] for k in ('standing', 'back', 'frontRunner', 'stalker', 'deepCloser', 'marker')]
+        stats = [record[k] for k in ('standing', 'back', 'frontRunner', 'deepCloser', 'stalker', 'marker')]
         require(visible[entry['number']][0] == float(record.get('racePointStr', record['racePoint'])), 'Visible formatted score does not match source score')
         for label, shown, value in zip(('S','B','逃','捲','差','マ'), visible[entry['number']][1:], stats):
             require(shown == value, f'Visible {label} statistic differs for car {entry["number"]}: shown={shown}, source={value}')

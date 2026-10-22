@@ -18,7 +18,7 @@
     }
     const config = await configPromise;
     if (!config.endpoint) return null;
-    const url = new URL(config.endpoint, location.href);
+    const url = new URL(config.endpoint, document.baseURI);
     if (url.protocol !== 'https:' && url.origin !== location.origin) throw new Error('endpoint');
     if (url.username || url.password) throw new Error('endpoint');
     return url;

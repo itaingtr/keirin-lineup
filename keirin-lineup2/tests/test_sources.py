@@ -23,7 +23,7 @@ def fixture():
             'entries':[{'number':n,'raceId':'test-race','absent':False,'playerId':str(n)} for n in (1,2,3)],
             'players':[{'id':str(n),'name':f'テスト選手{n}','term':100+n} for n in (1,2,3)],
             'records':[{'playerId':str(n),'racePoint':100.25+n,'standing':n,'back':10+n,
-                        'frontRunner':n,'stalker':2,'deepCloser':3,'marker':0} for n in (1,2,3)],
+                        'frontRunner':n,'stalker':3,'deepCloser':2,'marker':0} for n in (1,2,3)],
             'linePrediction':{'lines':[{'entries':[{'numbers':[1]},{'numbers':[2]}]}, {'entries':[{'numbers':[3]}]}]}}
     odds = {'oddsUpdatedAt':1792644000, 'exacta':[{'raceId':'test-race','type':4,'key':[a,b],
               'odds':float(a*10+b),'absent':False} for a in (1,2,3) for b in (1,2,3) if a!=b]}
