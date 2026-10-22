@@ -26,7 +26,7 @@ const request=(query)=>new Request('https://site.example/api/media?'+query);
  let response=await mod.default.fetch(new Request('https://site.example/'));
  assert.equal(response.status,200);assert.equal(await response.text(),fs.readFileSync(path.join(root,'site/index.html'),'utf8'));
  response=await mod.default.fetch(new Request('https://site.example/line20261022.html/'));assert.equal(response.status,200);assert.equal(await response.text(),fs.readFileSync(path.join(root,'site/line20261022.html/index.html'),'utf8'));
- response=await mod.default.fetch(new Request('https://site.example/line20261021.html/'));assert.equal(response.status,200);assert.match(await response.text(),/lineup-viewer|viewer.js/);
+ response=await mod.default.fetch(new Request('https://site.example/line20261021.html/'));assert.equal(response.status,200);assert.match(await response.text(),/data-web-navigation/);
  response=await mod.default.fetch(new Request('https://site.example/line20261021.html'));assert.equal(response.status,200);
  response=await mod.default.fetch(new Request('https://site.example/line20261022.html'));assert.equal(response.status,200);
  response=await mod.default.fetch(request('kind=digest&race=https://evil.example/'));assert.equal(response.status,400);assert.equal(calls.length,0);

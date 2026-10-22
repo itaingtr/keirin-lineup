@@ -72,6 +72,22 @@ function json(value,status=200){return new Response(JSON.stringify(value),{statu
 export default{async fetch(request){
   const url=new URL(request.url);
   if(request.method!=='GET'&&request.method!=='HEAD')return new Response('Method not allowed',{status:405});
+  if(url.pathname==='/open-web'){
+    // Keep the clicked link on this origin, then follow a normal same-tab HTTP
+    // redirect to the official browser page. Never use an app URL or iframe.
+    let target;
+    try{target=new URL(url.searchParams.get('to'));}catch(_){return new Response('Invalid official page',{status:400});}
+    const resultPath=target.pathname.replace('/racecard/','/raceresult/');
+    const live=Object.values(VENUES).some(v=>target.pathname==='/keirin/'+v.slug+'/live');
+    const params=[...target.searchParams.keys()];
+    const selected=target.searchParams.get('playerIds');
+    if(target.origin!=='https://www.winticket.jp'||target.username||target.password||target.port||target.hash||
+       !(ALLOWED_RACES[resultPath]||live)||params.some(k=>k!=='playerIds')||params.length>1||
+       (selected!==null&&!/^[A-Za-z0-9_-]{1,80}$/.test(selected))||live&&params.length){
+      return new Response('Unknown official page',{status:400});
+    }
+    return new Response(null,{status:302,headers:{'location':target.href,'cache-control':'no-store'}});
+  }
   if(url.pathname==='/api/media'){
     if(request.method==='HEAD')return new Response(null,{status:405});
     const kind=url.searchParams.get('kind');

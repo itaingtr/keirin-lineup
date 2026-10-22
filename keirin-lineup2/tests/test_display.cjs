@@ -8,10 +8,9 @@ const project = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
 const feed = JSON.parse(fs.readFileSync(path.join(dir, 'odds.json'), 'utf8'));
 const media = JSON.parse(fs.readFileSync(path.join(dir, 'media.json'), 'utf8'));
-const inline=html.includes('openViewer(event,link)');
 const assetPrefix=dir.endsWith('line20261021.html')?'/line20261021.html':'';
 const sourceUrl=element=>element.dataset.sourceUrl||element.href;
-const history = inline ? {races:rawHistory()} : JSON.parse(fs.readFileSync(path.join(dir, 'history.json'), 'utf8'));
+const history = assetPrefix ? {races:rawHistory()} : JSON.parse(fs.readFileSync(path.join(dir, 'history.json'), 'utf8'));
 function rawHistory(){const card=JSON.parse(html.match(/const races=(.*);\nconst body=/)[1]);return card.map(r=>({source_url:r.source,players:r.players.map(p=>({no:p.no,meeting_results:p.meetingResults}))}));}
 const snapshots = new Map(feed.results.filter(x=>x.ok).map(x=>[x.snapshot.race_key,x.snapshot]));
 const pause = () => new Promise(resolve=>setTimeout(resolve,25));
@@ -65,8 +64,7 @@ async function check(url) {
         expected.searchParams.set('playerIds',item.player_id);
         assert.equal(destination.href,expected.href);
         assert.equal(destination.searchParams.get('playerIds'),item.player_id);
-        if(link.tagName==='BUTTON'){assert.equal(link.type,'button');assert.equal(link.hasAttribute('href'),false);}else assert.equal(link.target,inline?'':'_blank');
-        if(inline)assert.match(link.getAttribute('onclick'),/openViewer/);else assert.equal(link.rel,'noopener');
+        assert.equal(link.tagName,'A');assert.equal(link.target,'_self');assert.equal(link.hasAttribute('onclick'),false);assert.equal(new URL(link.href).pathname,'/open-web');
         const rank=link.querySelector('.meeting-rank');
         assert.equal(rank.textContent,item.has_accident?item.accident:String(item.order));
         assert.equal(rank.classList.contains('meeting-rank-circle'),item.display_type===1);

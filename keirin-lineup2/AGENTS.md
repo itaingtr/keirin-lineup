@@ -7,4 +7,4 @@
 - Validate a complete eligible card, privately archive and read it back before preparing a display artifact. A failed collection or invalid pair leaves the previous artifact intact.
 - Never claim a provider permits collection or redistribution merely because a page is readable. Enjoy live extraction has not passed. Keep this a manual prototype until source and operating conditions are verified.
 
-- The user has now explicitly requested publishing the inline result/video/live viewer to both root and October 22. Update those two pages together; preserve the October 21 page and existing stored source data. Use real buttons with source URLs in data attributes so media and past-result clicks cannot trigger external app links. Keep the original sibling website unchanged.
+- The latest user request restores the original official web pages: use same-tab links for results, video and live; no custom result table or video player. Update root and October 22 together and apply the same rollback to the prototype October 21 page. Preserve stored data, do not collect or append any new database records for this UI change, and do not modify the original sibling website.
