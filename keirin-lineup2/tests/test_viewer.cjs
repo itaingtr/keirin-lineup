@@ -7,7 +7,7 @@ global.fetch=()=>{throw Error('Official-page navigation must not fetch or save s
 (async()=>{
  const worker=(await import('data:text/javascript;base64,'+Buffer.from(bundle).toString('base64'))).default;
  let checked=0;
- for(const route of ['/','/line20261022.html','/line20261022.html/','/line20261021.html','/line20261021.html/']){
+ for(const route of ['/','/line20261022.html','/line20261022.html/','/line20261021.html','/line20261021.html/','/line20261023.html','/line20261023.html/']){
   const url='https://preview.example'+route;
   const response=await worker.fetch(new Request(url));assert.equal(response.status,200);
   const html=await response.text();
@@ -34,5 +34,5 @@ global.fetch=()=>{throw Error('Official-page navigation must not fetch or save s
   const response=await worker.fetch(new Request('https://preview.example/open-web?to='+encodeURIComponent(destination)));
   assert.equal(response.status,400);assert.equal(response.headers.has('location'),false);
  }
- console.log(`PASS ${checked} same-tab links across root/Oct22/Oct21, original controls, exact official URLs and selected riders, no player/data requests and rejected unknown redirects`);
+ console.log(`PASS ${checked} same-tab links across root/Oct23/Oct22/Oct21, original controls, exact official URLs and selected riders, no player/data requests and rejected unknown redirects`);
 })().catch(e=>{console.error(e);process.exitCode=1;});

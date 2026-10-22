@@ -6,11 +6,13 @@ const {JSDOM} = require('jsdom');
 const dir = path.resolve(process.argv[2] || path.join(__dirname, '../site'));
 const project = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
-const feed = JSON.parse(fs.readFileSync(path.join(dir, 'odds.json'), 'utf8'));
-const media = JSON.parse(fs.readFileSync(path.join(dir, 'media.json'), 'utf8'));
-const assetPrefix=dir.endsWith('line20261021.html')?'/line20261021.html':'';
+const fixedBase=html.match(/<base href="\/(line\d{8}\.html)\/">/);
+const assetPrefix=fixedBase?'/'+fixedBase[1]:'';
+const dataDir=fixedBase?path.join(project,'site',fixedBase[1]):fs.existsSync(path.join(dir,'odds.json'))?dir:path.join(project,'site');
+const feed = JSON.parse(fs.readFileSync(path.join(dataDir, 'odds.json'), 'utf8'));
+const media = JSON.parse(fs.readFileSync(path.join(dataDir, 'media.json'), 'utf8'));
 const sourceUrl=element=>element.dataset.sourceUrl||element.href;
-const history = assetPrefix ? {races:rawHistory()} : JSON.parse(fs.readFileSync(path.join(dir, 'history.json'), 'utf8'));
+const history = fs.existsSync(path.join(dataDir,'history.json'))?JSON.parse(fs.readFileSync(path.join(dataDir,'history.json'),'utf8')):{races:rawHistory()};
 function rawHistory(){const card=JSON.parse(html.match(/const races=(.*);\nconst body=/)[1]);return card.map(r=>({source_url:r.source,players:r.players.map(p=>({no:p.no,meeting_results:p.meetingResults}))}));}
 const snapshots = new Map(feed.results.filter(x=>x.ok).map(x=>[x.snapshot.race_key,x.snapshot]));
 const pause = () => new Promise(resolve=>setTimeout(resolve,25));
@@ -111,7 +113,7 @@ async function check(url) {
 }
 
 (async()=>{
-  await check('https://preview.example'+(assetPrefix||'/'));
+  await check(dir===path.join(project,'site')?'https://preview.example/':'https://preview.example'+(assetPrefix||'/'));
   const date = html.match(/KEIRIN · (\d{4})\.(\d{2})\.(\d{2})/).slice(1).join('');
   await check(`https://preview.example/line${date}.html/`);
   console.log(`PASS ${raw.length} real races; ${checked} odds cells and ${historyChecked} meeting results across both URLs; official video/live links and exact rider selection on every result link`);

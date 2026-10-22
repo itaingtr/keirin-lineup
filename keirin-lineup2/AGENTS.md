@@ -8,3 +8,5 @@
 - Never claim a provider permits collection or redistribution merely because a page is readable. Enjoy live extraction has not passed. Keep this a manual prototype until source and operating conditions are verified.
 
 - The latest user request restores the original official web pages: use same-tab links for results, video and live; no custom result table or video player. Update root and October 22 together and apply the same rollback to the prototype October 21 page. Preserve stored data, do not collect or append any new database records for this UI change, and do not modify the original sibling website.
+
+- For the newly requested October 23 card, update only index and line20261023.html with identical HTML. Respect the user's storage preference: collect and validate only display fields without adding database objects or raw-page backups. Keep October 21/22 HTML and their existing feeds unchanged. Give October 23 its own fixed base directory and odds/media files. Include prior-result URLs in the official-page allowlist.

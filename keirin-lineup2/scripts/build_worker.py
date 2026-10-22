@@ -21,7 +21,10 @@ def build():
         if path.endswith('/index.html') or path=='/index.html':
             match=re.search(r'const races=(.*);\nconst body=',asset['body'])
             if match:
-                refs.extend({'source_url':r['source'].replace('/racecard/','/raceresult/')} for r in json.loads(match[1]))
+                for race in json.loads(match[1]):
+                    refs.append({'source_url':race['source'].replace('/racecard/','/raceresult/')})
+                    refs.extend({'source_url':result['result_url']} for player in race['players']
+                                for result in player.get('meetingResults',[]))
         if path.endswith('/viewer.json'):
             refs.extend(json.loads(asset['body'])['results'])
     for item in refs:
