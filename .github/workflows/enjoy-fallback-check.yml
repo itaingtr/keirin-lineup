@@ -1,8 +1,8 @@
-name: Verify WINTICKET current-meeting results for keirin-lineup2
+name: Verify inline result and video data for keirin-lineup2
 on:
   push:
     branches: [keirin-lineup2-enjoy]
-    paths: [.github/workflows/enjoy-fallback-check.yml, keirin-lineup2/scripts/meeting_history.py, keirin-lineup2/scripts/collect_history.py, keirin-lineup2/tests/test_history.py]
+    paths: [.github/workflows/enjoy-fallback-check.yml, keirin-lineup2/scripts/result_cards.py]
   workflow_dispatch:
 permissions:
   contents: write
@@ -12,26 +12,27 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
-      - name: Test source identities and linked result verification
+      - name: Test source identity validation
         working-directory: keirin-lineup2
         run: python3 -m unittest discover -s tests -v
-      - name: Read existing private card and verify earlier meeting results
+      - name: Collect complete result tables and current official media URLs
         working-directory: keirin-lineup2
         env:
           SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
         run: |
           python3 - <<'PY'
-          import os,sys,json,re,gzip
+          import os,sys,json
           from pathlib import Path
-          from urllib.request import Request,urlopen
           from datetime import datetime,timezone
           sys.path.insert(0,'scripts')
           from archive_snapshot import Storage
-          from collect_history import collect
+          from collect_history import collect as history_collect
+          from collect_media import collect as media_collect
+          from source_http import fetch
           store=Storage(os.environ['SNAPSHOT_SUPABASE_URL'],os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
           target='2026-10-22'
           for item in reversed(store.list_all(target)):
@@ -39,40 +40,41 @@ jobs:
               if size<150000 or size>500000: continue
               card=store.request('GET','object/authenticated/keirin-source-snapshots/'+target+'/'+item['name'])
               if card.get('provider')=='winticket' and card.get('calendar_url') and card.get('expected_races')==26: break
-          else: raise ValueError('Existing validated private card missing')
-          archive,display=collect(card)
-          url='https://www.winticket.jp/assets/a53660/chunk.ba7d3223a3c683fa.min.js'
-          try:
-              with urlopen(Request(url,headers={'Accept-Encoding':'identity'}),timeout=30) as response:
-                  raw=response.read(3000000)
-                  if raw[:2]==b'\x1f\x8b':raw=gzip.decompress(raw)
-                  code=raw.decode()
-              snippets=[]
-              for match in list(re.finditer(r'currentCupResults|finalHalfRecord|displayType',code))[:18]:
-                  snippet=code[max(0,match.start()-250):match.end()+650]
-                  snippets.append(snippet);print('OFFICIAL RESULT DISPLAY',snippet)
-              archive['sources'].append({'url':url,'observed_at':datetime.now(timezone.utc).isoformat(),'snippets':snippets})
-          except Exception as error: print('Optional public rank display code inspection:',type(error).__name__)
-          Path('/tmp/lineup2-history.json').write_text(json.dumps(archive,ensure_ascii=False,indent=2))
-          Path('/tmp/lineup2-history-display.json').write_text(json.dumps(display,ensure_ascii=False,indent=2))
-          results=[x for r in display['races'] for p in r['players'] for x in p['meeting_results']]
-          print('VERIFIED HISTORY',len(display['races']),'races,',sum(len(r['players']) for r in display['races']),'riders,',len(results),'individual results,',len({x['result_url'] for x in results}),'linked official races,',sum(x['back'] for x in results),'B flags')
-          print('RANK DECORATIONS',sorted({x['display_type'] for x in results}))
+          else: raise ValueError('Validated private source card missing')
+          cache={}
+          def read(url,sources):
+              if url not in cache:
+                  saved=[]
+                  doc,observed=fetch(url,saved)
+                  cache[url]=(doc,observed,saved[-1])
+              doc,observed,raw=cache[url]
+              sources.append(raw)
+              return doc,observed
+          hist_archive,history=history_collect(card,read=read,pause=1)
+          media_archive,media=media_collect(card,read=read,pause=0)
+          display={'schema_version':1,'provider':'winticket','target_date':target,
+                   'checked_at':datetime.now(timezone.utc).isoformat(),
+                   'results':history['result_cards'],'media':media}
+          archive={**display,'snapshot_kind':'inline-viewer',
+                   'sources':hist_archive['sources']+media_archive['sources']}
+          Path('/tmp/lineup2-viewer-source.json').write_text(json.dumps(archive,ensure_ascii=False,indent=2))
+          Path('/tmp/lineup2-viewer.json').write_text(json.dumps(display,ensure_ascii=False,indent=2))
+          print('VERIFIED INLINE VIEWER',len(display['results']),'result tables,',sum(len(c['rows']) for c in display['results']),'result rows,',sum(bool(r['digest']) for r in media['races']),'published videos,',len(cache),'source pages')
           PY
-      - name: Append new history privately and verify readback
+      - name: Append sources privately and verify readback
         working-directory: keirin-lineup2
         env:
           SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
-        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-history.json --report /tmp/lineup2-history-usage.json
-      - name: Save only a new history display artifact
+        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-viewer-source.json --report /tmp/lineup2-viewer-usage.json
+      - name: Save a new display-only viewer artifact
         run: |
-          DEST="keirin-lineup2-history/run-${{ github.run_id }}-${{ github.run_attempt }}"
+          DEST="keirin-lineup2-viewer/run-${{ github.run_id }}-${{ github.run_attempt }}"
           test ! -e "$DEST"
           mkdir -p "$DEST"
-          cp /tmp/lineup2-history-display.json "$DEST/history.json"
+          cp /tmp/lineup2-viewer.json "$DEST/viewer.json"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- "$DEST"
-          git commit -m 'Append verified current-meeting results with official result links'
+          git commit -m 'Append verified inline result tables and current video metadata'
           git push origin HEAD:keirin-lineup2-enjoy
