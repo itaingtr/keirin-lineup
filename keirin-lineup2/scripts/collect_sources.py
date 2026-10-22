@@ -88,6 +88,19 @@ def visible_card(doc):
     return tables[0]
 
 
+def prediction_marks(data, numbers):
+    """Display the published WINTICKET AI order; never infer ranks from odds."""
+    predictions = [p for p in data.get('predictions', []) if p.get('isAi') is True]
+    if not predictions:
+        return {}
+    require(len(predictions) == 1, 'Ambiguous AI prediction')
+    order = predictions[0].get('order')
+    require(isinstance(order, list) and 1 <= len(order) <= 4
+            and all(type(n) is int and n in numbers for n in order)
+            and len(set(order)) == len(order), 'Invalid published AI prediction order')
+    return dict(zip(order, ('◎', '○', '▲', '△')))
+
+
 def parse_card(doc, url, fetched_at):
     ident = identity(url)
     require(ident['provider'] == 'winticket', 'WINTICKET parser cannot relabel another source')
@@ -114,6 +127,7 @@ def parse_card(doc, url, fetched_at):
     require(len(players) == len(entries) and len(records) == len(entries), 'Incomplete rider identities or statistics')
     visible = visible_card(doc)
     require(set(visible) == set(numbers), 'Visible rider numbers differ from source JSON')
+    marks = prediction_marks(data, numbers)
     output = []
     for entry in entries:
         player, record = players[entry['playerId']], records[entry['playerId']]
@@ -122,7 +136,7 @@ def parse_card(doc, url, fetched_at):
         for label, shown, value in zip(('S','B','逃','捲','差','マ'), visible[entry['number']][1:], stats):
             require(shown == value, f'Visible {label} statistic differs for car {entry["number"]}: shown={shown}, source={value}')
         output.append({'no':entry['number'], 'name':player['name'], 'score':record['racePoint'],
-                       'period':player['term'], 'mark':'', 'stats':stats})
+                       'period':player['term'], 'mark':marks.get(entry['number'], ''), 'stats':stats})
     lineup = lineup_text(data.get('linePrediction'), numbers)
     card = {'venue':VENUES[ident['code']][0], 'race':ident['race'], 'source':url,
             'race_type':race['class'] + race['raceType3'], 'grade_code':cup['grade'],

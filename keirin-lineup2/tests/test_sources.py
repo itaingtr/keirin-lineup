@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).parents[1] / 'scripts'))
-from collect_sources import parse_card, parse_odds, lineup_text, daily_races
+from collect_sources import parse_card, parse_odds, lineup_text, daily_races, prediction_marks
 from render_races import render, write_pages
 from source_http import Document, check_url
 
@@ -40,6 +40,14 @@ def doc(card, odds):
 
 
 class SourceTests(unittest.TestCase):
+    def test_ai_marks_follow_published_order_and_missing_predictions_stay_empty(self):
+        self.assertEqual(prediction_marks({}, [1,2,3]), {})
+        self.assertEqual(prediction_marks({'predictions':[{'isAi':True,'order':[3,1,2]}]}, [1,2,3]),
+                         {3:'◎',1:'○',2:'▲'})
+        for order in ([1,1], [9], ['1'], []):
+            with self.assertRaises(ValueError):
+                prediction_marks({'predictions':[{'isAi':True,'order':order}]}, [1,2,3])
+
     def test_source_json_is_checked_against_visible_riders(self):
         card, odds = fixture()
         parsed, quotes = parse_card(doc(card,odds), URL, OBSERVED)
