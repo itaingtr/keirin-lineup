@@ -1,0 +1,32 @@
+name: Verify official rank decorations
+on:
+  push:
+    branches: [keirin-lineup2-enjoy]
+    paths: [.github/workflows/history-display-check.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read official public enum definitions
+        run: |
+          python3 - <<'PY'
+          import re,gzip
+          from urllib.request import Request,urlopen
+          paths=['vendors.5ad4c44dba318336.min.js','bootstrap.28e6a9877aa5a8cf.min.js','chunk.7b8bcdeac50ea508.min.js','chunk.79330786c9f2cc59.min.js']
+          for path in paths:
+              url='https://www.winticket.jp/assets/a53660/'+path
+              try:
+                  with urlopen(Request(url,headers={'Accept-Encoding':'identity'}),timeout=25) as response:
+                      raw=response.read(3000000)
+                      if raw[:2]==b'\x1f\x8b':raw=gzip.decompress(raw)
+                      text=raw.decode()
+                  snippets=[]
+                  for m in re.finditer(r'\.(?:NORMAL|BLACK|WHITE)\s*=\s*\d',text):
+                      snippet=text[max(0,m.start()-120):m.end()+300]
+                      if ('BLACK' in snippet or 'WHITE' in snippet) and 'NORMAL' in snippet: snippets.append(snippet)
+                  for snippet in snippets[:8]: print('OFFICIAL RANK ENUM',path,snippet)
+              except Exception as e: print('Optional enum inspection:',path,type(e).__name__)
+          PY
