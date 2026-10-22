@@ -26,15 +26,6 @@ jobs:
           from pathlib import Path
           sys.path.insert(0,'scripts')
           from collect_sources import collect
-          import collect_sources as cs
-          original_parse=cs.parse_odds
-          def checked_odds(data,*args):
-              updated=data.get('oddsUpdatedAt')
-              if not updated:
-                  rows=data.get('exacta',[])
-                  print('UNRELEASED SOURCE METADATA',json.dumps({'source':args[1],'updated':updated,'fields':list(data),'rows':len(rows),'samples':rows[:3],'value_types':sorted(set(type(r.get('odds')).__name__ for r in rows)),'values':list(set(str(r.get('odds')) for r in rows))[:12]},ensure_ascii=False),flush=True)
-              return original_parse(data,*args)
-          cs.parse_odds=checked_odds
           from render_races import render,validate
           target='2026-10-23'
           card,odds=collect(target,pause=1)
@@ -75,3 +66,5 @@ jobs:
           git push origin HEAD:keirin-lineup2-enjoy
 
 # Validate complete unpublished placeholder matrices before rendering.
+
+# Official pre-opening 9999.9 placeholders have no update timestamp or popularity rank.

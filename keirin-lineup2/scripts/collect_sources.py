@@ -155,8 +155,12 @@ def parse_odds(data, race_id, source_url, numbers, fetched_at):
     if not data.get('exacta'):
         return {**snapshot, 'status':'unavailable'}
     updated = data.get('oddsUpdatedAt')
-    unpublished = (updated is None or type(updated) is int and updated == 0) and all(
-        type(item.get('odds')) in (int,float) and item['odds'] == 0 for item in data['exacta'])
+    zero_placeholders = all(type(item.get('odds')) in (int,float) and item['odds'] == 0
+                            for item in data['exacta'])
+    ceiling_placeholders = all(type(item.get('odds')) in (int,float) and item['odds'] == 9999.9
+                               and type(item.get('popularityOrder')) is int and item['popularityOrder'] == 0
+                               for item in data['exacta'])
+    unpublished = (updated is None or type(updated) is int and updated == 0) and (zero_placeholders or ceiling_placeholders)
     if not unpublished:
         require(type(updated) is int and updated > 0, 'Source odds update time is missing')
         observed = datetime.fromtimestamp(updated, timezone.utc)
@@ -175,7 +179,7 @@ def parse_odds(data, race_id, source_url, numbers, fetched_at):
     require(seen == expected, 'Incomplete exacta matrix')
     if unpublished:
         print('Official exacta not yet published:',source_url,'updated_at=',updated,
-              'validated_zero_placeholders=',len(output),flush=True)
+              'validated_placeholders=',len(output),flush=True)
         return {**snapshot,'status':'unavailable','unavailable_reason':'not_yet_published'}
     return {**snapshot, 'status':'snapshot', 'observed_at':observed.isoformat(), 'odds':output}
 

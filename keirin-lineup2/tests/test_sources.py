@@ -119,6 +119,19 @@ class SourceTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 parse_odds(bad,'test-race',URL,[1,2,3],OBSERVED)
 
+    def test_preopening_ceiling_placeholders_need_missing_time_and_zero_popularity(self):
+        _, odds=fixture()
+        for row in odds['exacta']:
+            row.update(odds=9999.9,popularityOrder=0)
+        self.assertEqual(parse_odds(odds,'test-race',URL,[1,2,3],OBSERVED)['odds'][0]['value'],9999.9)
+        odds['oddsUpdatedAt']=0
+        result=parse_odds(odds,'test-race',URL,[1,2,3],OBSERVED)
+        self.assertEqual(result['status'],'unavailable')
+        self.assertNotIn('odds',result)
+        odds['exacta'][0]['popularityOrder']=1
+        with self.assertRaises(ValueError):
+            parse_odds(odds,'test-race',URL,[1,2,3],OBSERVED)
+
     def test_wrong_date_rider_table_or_logged_in_page_is_rejected(self):
         for edit in (lambda c:c['schedule'].update(date='20261023'),
                      lambda c:c['records'][0].update(back=99),
