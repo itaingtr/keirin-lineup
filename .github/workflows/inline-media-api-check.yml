@@ -1,0 +1,52 @@
+name: Verify fresh inline media resolution
+on:
+  push:
+    branches: [keirin-lineup2-enjoy]
+    paths: [.github/workflows/inline-media-api-check.yml, keirin-lineup2/worker/runtime.js]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build a probe using the same media resolver and verified race allowlist
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          from datetime import date,timedelta
+          viewer=json.loads(Path('keirin-lineup2-viewer/run-39746040731-1/viewer.json').read_text())
+          allowed={}
+          for card in viewer['results']:
+              source=card['source_url'].replace('/raceresult/','/racecard/')
+              match=re.fullmatch(r'https://www.winticket.jp/keirin/([a-z]+)/racecard/(\d{8})(\d{2})/(\d)/(\d{1,2})',source)
+              slug,start,code,day,number=match.groups()
+              allowed[card['source_url'].replace('https://www.winticket.jp','')]={'source':source,'cup':start+code,'day':int(day),'number':int(number),'id':card['race_id']}
+          venues={code:{'code':code,'slug':v['slug']} for code,v in viewer['media']['venues'].items()}
+          prelude='const ASSETS={};\nconst ALLOWED_RACES='+json.dumps(allowed)+';\nconst VENUES='+json.dumps(venues)+';\n'
+          Path('/tmp/lineup2-resolver.mjs').write_text(prelude+Path('keirin-lineup2/worker/runtime.js').read_text())
+          PY
+      - name: Resolve the last Kumamoto race, a previous result, and live broadcasts without login
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import worker from '/tmp/lineup2-resolver.mjs';
+          const races=['/keirin/kumamoto/raceresult/2026102287/1/12','/keirin/odawara/raceresult/2026102036/2/7'];
+          for(const race of races){
+            const response=await worker.fetch(new Request('https://site.example/api/media?kind=digest&race='+encodeURIComponent(race)));
+            assert.equal(response.status,200,race);
+            const data=await response.json();
+            assert.equal(data.status,'available',race);
+            assert.match(data.src,/^https:\/\/video\.winticket\.jp\/keirin\/digest\/[A-Za-z0-9_-]+\.mp4$/);
+            console.log('FRESH VIDEO PASS',race,data.status);
+          }
+          for(const venue of ['36','48','87']){
+            const response=await worker.fetch(new Request('https://site.example/api/media?kind=live&venue='+venue));
+            assert.equal(response.status,200,venue);
+            const data=await response.json();
+            assert.ok(['available','offline'].includes(data.status));
+            console.log('FRESH LIVE PASS',venue,data.status);
+          }
+          JS
