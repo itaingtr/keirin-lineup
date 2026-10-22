@@ -1,0 +1,63 @@
+name: Check isolated Enjoy fallback
+on:
+  push:
+    branches: [keirin-lineup2-enjoy]
+    paths: [.github/workflows/enjoy-fallback-check.yml, keirin-lineup2/**]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+      - name: Inspect public source structure and preserve it privately
+        env:
+          SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
+          SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
+        run: |
+          python3 - <<'PY'
+          import sys, json, re, urllib.request, os
+          from datetime import datetime, timezone
+          sys.path.insert(0,'scripts')
+          from collect_exacta import Document, Node
+          from archive_snapshot import Storage, BUCKET, snapshot_name
+          urls = [
+            'https://www.yen-joy.net/kaisai/race/forecast/detail/202610/87/20261022/20261022/12',
+            'https://www.yen-joy.net/kaisai/race/forecast/202610/87/20261022/20261022',
+          ]
+          store = Storage(os.environ['SNAPSHOT_SUPABASE_URL'], os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
+          bucket = store.request('GET','bucket/'+BUCKET)
+          assert bucket.get('public') is False, 'Expected existing private bucket'
+          sources=[]
+          for url in urls:
+              req=urllib.request.Request(url,headers={'User-Agent':'KeirinLineup2/1.0 (+https://github.com/itaingtr/keirin-lineup)'})
+              with urllib.request.urlopen(req, timeout=45) as response:
+                  raw=response.read(6000001)
+                  if len(raw)>6000000: raise ValueError('Response too large')
+                  body=raw.decode('utf-8')
+              sources.append({'url':url,'observed_at':datetime.now(timezone.utc).isoformat(),'raw_html':body})
+              doc=Document(body).root
+              tables=list(doc.find_all('table'))
+              print(json.dumps({'source':url,'bytes':len(raw),'tables':len(tables)},ensure_ascii=False))
+              for table in tables:
+                  rows=list(table.find_all('tr'))
+                  summaries=[]
+                  for row in rows:
+                      cells=[n for n in row.children if isinstance(n,Node) and n.tag in ('th','td')]
+                      labels=[re.sub(r'\s+',' ',n.text()).strip()[:90] for n in cells if n.tag=='th']
+                      summaries.append({'cells':len(cells),'labels':labels,'attrs':row.attrs})
+                  print(json.dumps({'table':table.attrs,'rows':summaries[:55]},ensure_ascii=False))
+              print(json.dumps({'scripts':[n.attrs.get('src') for n in doc.find_all('script') if n.attrs.get('src')]},ensure_ascii=False))
+              for node in doc.find_all():
+                  attrs=json.dumps(node.attrs,ensure_ascii=False)
+                  if re.search('odds|formation|lineup|line-up|race-player|race-member|race_member|race-program|race-detail',attrs,re.I):
+                      print(json.dumps({'tag':node.tag,'attrs':node.attrs,'children':[{'tag':c.tag,'attrs':c.attrs} for c in node.children if isinstance(c,Node)][:12]},ensure_ascii=False))
+          data=json.dumps({'target_date':'2026-10-22','provider':'enjoy','purpose':'isolated source verification','sources':sources},ensure_ascii=False).encode()
+          name=snapshot_name('2026-10-22')
+          store.upload(name,data)
+          store.verify(name,data)
+          print('Private append and readback passed.')
+          print(json.dumps(store.usage(),ensure_ascii=False))
+          PY
