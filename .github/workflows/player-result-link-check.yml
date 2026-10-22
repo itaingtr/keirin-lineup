@@ -1,0 +1,57 @@
+name: Verify official result player highlighting
+on:
+  push:
+    branches: [keirin-lineup2-enjoy]
+    paths: [.github/workflows/player-result-link-check.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v6
+      - name: Compare public result links with the official player parameter
+        working-directory: keirin-lineup2
+        run: |
+          python3 - <<'PY'
+          import sys,re,json,gzip
+          from urllib.request import Request,urlopen
+          sys.path.insert(0,'scripts')
+          from source_http import fetch,state_payloads
+          base='https://www.winticket.jp/keirin/odawara/raceresult/2026102036/2/7'
+          for suffix in ('','?playerIds=014888','?playerIds%5B0%5D=014888'):
+              captured=[]
+              doc,observed=fetch(base+suffix,captured)
+              css='\n'.join(n.text() for n in doc.find_all('style'))
+              print('OFFICIAL RESULT URL',base+suffix)
+              for node in doc.find_all('a'):
+                  if '佐藤健太' not in node.text(): continue
+                  row=node
+                  while row.parent and row.tag!='tr': row=row.parent
+                  if row.tag!='tr': continue
+                  print('TARGET ROW',row.attrs,row.visible_text()[:180])
+                  nodes=[row]+list(row.find_all())
+                  classes={c for n in nodes for c in n.attrs.get('class','').split()}
+                  for cls in sorted(classes):
+                      for match in re.finditer(r'\.'+re.escape(cls)+r'(?![A-Za-z0-9_-])[^{}]*\{([^{}]*)\}',css):
+                          rule=match[0]
+                          if 'background' in rule: print('TARGET BACKGROUND',rule[:450])
+              for state in state_payloads(doc):
+                  if not isinstance(state,dict):continue
+                  def inspect(value,path=''):
+                      if isinstance(value,dict):
+                          for key,item in value.items():
+                              if any(w in key.lower() for w in ('highlight','selectedplayer','playerids')): print('PUBLIC HIGHLIGHT STATE',path+'/'+key,str(item)[:200])
+                              if key!='user':inspect(item,path+'/'+key)
+                  inspect(state.get('redux',{}))
+              if suffix=='?playerIds=014888':
+                  scripts=[n.attrs.get('src','') for n in doc.find_all('script') if n.attrs.get('src')]
+          url='https://www.winticket.jp/assets/a53660/chunk.ba7d3223a3c683fa.min.js'
+          with urlopen(Request(url,headers={'Accept-Encoding':'identity'}),timeout=30) as response:
+              raw=response.read(3000000)
+              if raw[:2]==b'\x1f\x8b':raw=gzip.decompress(raw)
+              code=raw.decode()
+          for match in list(re.finditer(r'playerIds|highlightEntryNumber',code))[:12]:
+              print('OFFICIAL PLAYER LINK CODE',code[max(0,match.start()-160):match.end()+300])
+          PY
