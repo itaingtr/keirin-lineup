@@ -1,76 +1,73 @@
-name: Validate independent keirin-lineup2
+name: Inspect official video links for keirin-lineup2
 on:
   push:
     branches: [keirin-lineup2-enjoy]
     paths: [.github/workflows/enjoy-fallback-check.yml, keirin-lineup2/**]
   workflow_dispatch:
-    inputs:
-      date:
-        description: Race date YYYY-MM-DD (blank = today in Japan)
-        required: false
 permissions:
-  contents: write
-concurrency:
-  group: keirin-lineup2-preview
-  cancel-in-progress: false
+  contents: read
 jobs:
-  verify:
+  inspect:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v6
-      - name: Test independent validation and renderer
+      - name: Read public official media metadata without login
         working-directory: keirin-lineup2
-        run: python3 -m unittest discover -s tests -v
-      - name: Select the requested race day
-        env:
-          REQUESTED_DATE: ${{ inputs.date }}
         run: |
           python3 - <<'PY'
-          import os
-          from datetime import datetime
-          from zoneinfo import ZoneInfo
-          target=os.environ.get('REQUESTED_DATE') or datetime.now(ZoneInfo('Asia/Tokyo')).date().isoformat()
-          datetime.strptime(target,'%Y-%m-%d')
-          with open(os.environ['GITHUB_ENV'],'a') as handle: handle.write('TARGET_DATE='+target+'\n')
+          import sys,re,json
+          from urllib.parse import urljoin
+          sys.path.insert(0,'scripts')
+          from source_http import fetch,state_payloads
+          sources=[]
+          urls=['https://www.winticket.jp/keirin/kumamoto/live',
+                'https://www.winticket.jp/keirin/kumamoto/raceresult/2026102287/1/1',
+                'https://www.winticket.jp/keirin/kumamoto/racecard/2026102287/1/12']
+          scripts=set()
+          for url in urls:
+              doc,observed=fetch(url,sources)
+              print('PUBLIC PAGE',url,observed)
+              for node in doc.find_all('script'):
+                  src=node.attrs.get('src','')
+                  if src and any(w in src.lower() for w in ('live','video','result','racecard','bootstrap','layouts-keirin')): scripts.add(urljoin(url,src))
+                  text=node.text()
+                  for match in re.finditer(r'window\.__CONFIG__\s*=\s*',text):
+                      config=json.JSONDecoder().raw_decode(text[match.end():])[0]
+                      print('PUBLIC VIDEO CONFIG',{k:v for k,v in config.items() if 'VIDEO' in k or 'LIVE' in k})
+              for state in state_payloads(doc):
+                  for q in state.get('tanStackQuery',{}).get('queries',[]):
+                      key=q.get('queryKey'); data=q.get('state',{}).get('data',{})
+                      print('QUERY',key)
+                      if not isinstance(data,dict): continue
+                      if 'race' in data:
+                          r=data['race']
+                          print('RACE VIDEO',{k:v for k,v in r.items() if 'video' in k.lower() or k in ('id','number','status')})
+                          print('PREDICTION MARKS',[(r.get('playerId'),r.get('predictionMark')) for r in data.get('records',[])])
+                          print('PREDICTION ORDER',[{k:v for k,v in p.items() if k in ('isAi','order','name')} for p in data.get('predictions',[])])
+                      if any(w in str(key).lower() for w in ('live','video','stream')):
+                          def media(data):
+                              if isinstance(data,dict): return {k:media(v) for k,v in data.items() if not any(w in k.lower() for w in ('token','secret','password','key','email'))}
+                              if isinstance(data,list): return [media(v) for v in data[:20]]
+                              return data
+                          print('PUBLIC VIDEO DATA',json.dumps(media(data),ensure_ascii=False)[:10000])
+              for node in doc.find_all():
+                  if node.tag in ('video','iframe','source'): print('MEDIA ELEMENT',node.tag,node.attrs)
+          for src in sorted(scripts)[:15]:
+              try:
+                  doc,_=fetch(src,sources)
+                  text=sources[-1]['raw_html']
+                  print('PUBLIC SCRIPT',src,'bytes',len(text))
+                  matches=list(re.finditer(r'VIDEO_BASE_URL|digestVideoProvider|digestVideo|liveStream|\.m3u8|\.mp4|predictionMark|iframe|embed',text))
+                  for match in matches[:24]:
+                      print('MEDIA CODE',text[max(0,match.start()-180):match.end()+240])
+              except Exception as error: print('PUBLIC SCRIPT FAILURE',src,type(error).__name__)
+          with open('/tmp/lineup2-media.json','w') as f:
+              json.dump({'target_date':'2026-10-22','provider':'winticket-media-inspection','sources':sources},f,ensure_ascii=False)
           PY
-      - name: Collect independently and verify all ordered exacta pairs
-        working-directory: keirin-lineup2
-        run: |
-          python3 scripts/collect_sources.py --date "$TARGET_DATE" --snapshot /tmp/lineup2-card.json --feed /tmp/lineup2-feed.json
-      - name: Append verified source data privately and read it back
+      - name: Append private source inspection and verify readback
         working-directory: keirin-lineup2
         env:
           SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
-        run: |
-          python3 scripts/archive_snapshot.py --date "$TARGET_DATE" --input /tmp/lineup2-card.json --report /tmp/lineup2-usage.json
-      - name: Generate a new isolated display artifact
-        run: |
-          python3 keirin-lineup2/scripts/render_races.py /tmp/lineup2-card.json --site-dir /tmp/lineup2-site
-          cp keirin-lineup2/site/*.js keirin-lineup2/site/*.css /tmp/lineup2-site/
-          cp keirin-lineup2/site/odds-config.json /tmp/lineup2-site/
-          cp /tmp/lineup2-feed.json /tmp/lineup2-site/odds.json
-          python3 - <<'PY'
-          import json,os
-          from pathlib import Path
-          card=json.loads(Path('/tmp/lineup2-card.json').read_text())
-          feed=json.loads(Path('/tmp/lineup2-feed.json').read_text())
-          usage=json.loads(Path('/tmp/lineup2-usage.json').read_text())
-          pairs=sum(len(r['snapshot'].get('odds',[])) for r in feed['results'])
-          print(f"PASS {len(card['races'])} S-class races, {sum(len(r['players']) for r in card['races'])} riders, {pairs} independent exacta pairs")
-          print(f"Private source storage: {usage['known_bytes']} bytes total, {usage['objects']} snapshots")
-          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as handle:
-              handle.write(f"Independent WINTICKET preview: {len(card['races'])} races, {pairs} exacta pairs. Original site and historical pages unchanged. Private source archive: {usage['known_bytes']} bytes total.\n")
-          PY
-      - name: Save only new display files on the experimental branch
-        run: |
-          DEST="keirin-lineup2-previews/run-${{ github.run_id }}-${{ github.run_attempt }}"
-          test ! -e "$DEST"
-          mkdir -p "$DEST"
-          cp -R /tmp/lineup2-site/. "$DEST/"
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- "$DEST"
-          git commit -m 'Save independently validated keirin-lineup2 preview'
-          git push origin HEAD:keirin-lineup2-enjoy
+        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-media.json --report /tmp/lineup2-media-usage.json
