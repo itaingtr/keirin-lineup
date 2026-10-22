@@ -155,9 +155,12 @@ def parse_odds(data, race_id, source_url, numbers, fetched_at):
     if not data.get('exacta'):
         return {**snapshot, 'status':'unavailable'}
     updated = data.get('oddsUpdatedAt')
-    require(type(updated) is int and updated > 0, 'Source odds update time is missing')
-    observed = datetime.fromtimestamp(updated, timezone.utc)
-    require(observed <= datetime.fromisoformat(fetched_at), 'Source odds time is in the future')
+    unpublished = (updated is None or type(updated) is int and updated == 0) and all(
+        type(item.get('odds')) in (int,float) and item['odds'] == 0 for item in data['exacta'])
+    if not unpublished:
+        require(type(updated) is int and updated > 0, 'Source odds update time is missing')
+        observed = datetime.fromtimestamp(updated, timezone.utc)
+        require(observed <= datetime.fromisoformat(fetched_at), 'Source odds time is in the future')
     expected = {(a,b) for a in numbers for b in numbers if a != b}
     output, seen = [], set()
     for item in data['exacta']:
@@ -167,9 +170,13 @@ def parse_odds(data, race_id, source_url, numbers, fetched_at):
         seen.add(pair)
         value = None if item['absent'] else item['odds']
         if value is not None:
-            require(type(value) in (float,int) and math.isfinite(value) and value > 0, 'Invalid source quote; never fill missing prices with zero')
+            require(type(value) in (float,int) and math.isfinite(value) and (value > 0 or unpublished and value == 0), 'Invalid source quote; never fill missing prices with zero')
         output.append({'first':pair[0], 'second':pair[1], 'value':value})
     require(seen == expected, 'Incomplete exacta matrix')
+    if unpublished:
+        print('Official exacta not yet published:',source_url,'updated_at=',updated,
+              'validated_zero_placeholders=',len(output),flush=True)
+        return {**snapshot,'status':'unavailable','unavailable_reason':'not_yet_published'}
     return {**snapshot, 'status':'snapshot', 'observed_at':observed.isoformat(), 'odds':output}
 
 

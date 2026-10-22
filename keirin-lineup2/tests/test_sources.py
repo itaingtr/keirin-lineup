@@ -102,6 +102,23 @@ class SourceTests(unittest.TestCase):
         odds['exacta']=[]
         self.assertEqual(parse_odds(odds,'test-race',URL,[1,2,3],OBSERVED)['status'],'unavailable')
 
+    def test_unpublished_zero_placeholders_are_not_displayed_as_quotes(self):
+        _, odds = fixture()
+        odds['oddsUpdatedAt'] = 0
+        for row in odds['exacta']:
+            row['odds'] = 0
+        result = parse_odds(odds,'test-race',URL,[1,2,3],OBSERVED)
+        self.assertEqual(result['status'],'unavailable')
+        self.assertEqual(result['unavailable_reason'],'not_yet_published')
+        self.assertNotIn('odds',result)
+        for edit in (lambda d:d['exacta'].pop(),
+                     lambda d:d['exacta'][0].update(raceId='wrong-race'),
+                     lambda d:d['exacta'][0].update(odds=12.3)):
+            bad=deepcopy(odds)
+            edit(bad)
+            with self.assertRaises(ValueError):
+                parse_odds(bad,'test-race',URL,[1,2,3],OBSERVED)
+
     def test_wrong_date_rider_table_or_logged_in_page_is_rejected(self):
         for edit in (lambda c:c['schedule'].update(date='20261023'),
                      lambda c:c['records'][0].update(back=99),

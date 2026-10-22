@@ -64,3 +64,5 @@ jobs:
           git add -- "$DEST"
           git commit -m 'Append October 23 fallback display only'
           git push origin HEAD:keirin-lineup2-enjoy
+
+# Validate complete unpublished placeholder matrices before rendering.
