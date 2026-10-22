@@ -59,8 +59,8 @@ jobs:
               for script in doc.find_all('script'):
                   if script.attrs.get('src'): continue
                   text=script.text().strip()
-                  print(json.dumps({'inline_script':script.attrs,'characters':len(text),'assignments':re.findall(r'(?:window\\.)?([A-Z_][A-Z_0-9]+)\\s*=',text)[:15]},ensure_ascii=False))
-                  for match in re.finditer(r'(?:window\\.)?([A-Z_][A-Z_0-9]+)\\s*=\\s*',text):
+                  print(json.dumps({'inline_script':script.attrs,'characters':len(text),'prefix_tokens':re.sub(r'\w{20,}', 'LONG_TOKEN',text[:100]),'assignments':re.findall(r'(?:window\.)?([A-Za-z_$][A-Za-z_$0-9.]*)\s*=',text)[:15]},ensure_ascii=False))
+                  for match in re.finditer(r'(?:window\.)?([A-Z_][A-Z_0-9]+)\s*=\s*',text):
                       try: payload=json.JSONDecoder().raw_decode(text[match.end():])[0]
                       except ValueError: continue
                       def shape(value,depth=0):
