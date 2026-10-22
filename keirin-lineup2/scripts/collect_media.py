@@ -53,11 +53,13 @@ def parse_extra(doc, url, observed_at, expected_players):
             'digest':digest, 'digest_status':'available' if digest else 'unpublished'}
 
 
-def parse_live(doc, code, cup_id, observed_at):
+def parse_live(doc, code, target_date, observed_at):
     slug = VENUES[code][1]
     data = query(doc, 'FETCH_BROADCAST_TIMETABLE', {'sport':0})
+    # Broadcast IDs use the calendar day, including on day 2+ of a meeting.
+    date_code = target_date.replace('-', '') + code
     programs = [(channel,p) for channel in data['channels'] if channel.get('venueId') == code
-                for p in channel.get('programs',[]) if p.get('id') == '1:venue'+code+':'+cup_id+':0'
+                for p in channel.get('programs',[]) if p.get('id') == '1:venue'+code+':'+date_code+':0'
                 and p.get('videoProvider') == 0]
     require(len(programs) <= 1, 'Ambiguous official venue broadcast')
     result = {'name':VENUES[code][0], 'slug':slug, 'observed_at':observed_at,
@@ -82,7 +84,7 @@ def collect(dataset, *, read=fetch, pause=1):
             live = 'https://www.winticket.jp/keirin/'+VENUES[code][1]+'/live'
             if pause: time.sleep(pause)
             doc, observed = read(live, sources)
-            venues[code] = parse_live(doc,code,ident['start']+code,observed)
+            venues[code] = parse_live(doc,code,dataset['target_date'],observed)
     display = {'schema_version':1, 'provider':'winticket', 'target_date':dataset['target_date'],
                'checked_at':datetime.now(timezone.utc).isoformat(), 'races':races, 'venues':venues}
     # Store only the relevant original public fields, with their real read times.
