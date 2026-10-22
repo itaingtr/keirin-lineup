@@ -1,56 +1,78 @@
-name: Inspect WINTICKET current-meeting results
+name: Verify WINTICKET current-meeting results for keirin-lineup2
 on:
   push:
     branches: [keirin-lineup2-enjoy]
-    paths: [.github/workflows/enjoy-fallback-check.yml]
+    paths: [.github/workflows/enjoy-fallback-check.yml, keirin-lineup2/scripts/meeting_history.py, keirin-lineup2/scripts/collect_history.py, keirin-lineup2/tests/test_history.py]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
+concurrency:
+  group: keirin-lineup2-preview
+  cancel-in-progress: false
 jobs:
-  inspect:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v6
-      - name: Inspect public current-meeting result fields
+      - name: Test source identities and linked result verification
         working-directory: keirin-lineup2
-        run: |
-          python3 - <<'PY'
-          import sys,json,re,gzip
-          from urllib.request import Request,urlopen
-          sys.path.insert(0,'scripts')
-          from source_http import fetch,state_payloads
-          sources=[]
-          for url in ('https://www.winticket.jp/keirin/odawara/racecard/2026102036/3/6','https://www.winticket.jp/keirin/yokkaichi/racecard/2026102148/2/6'):
-              doc,observed=fetch(url,sources)
-              print('PAGE',url,observed)
-              for state in state_payloads(doc):
-                  if not isinstance(state,dict): continue
-                  for q in state.get('tanStackQuery',{}).get('queries',[]):
-                      key=q.get('queryKey',[]);data=q.get('state',{}).get('data',{})
-                      print('PUBLIC QUERY',key,'FIELDS',list(data) if isinstance(data,dict) else type(data).__name__)
-                      if len(key)>1 and key[1]=='FETCH_KEIRIN_RACE':
-                          print('PUBLIC RECORD',json.dumps(data.get('records',[{}])[0],ensure_ascii=False)[:14000])
-                          for k,v in data.items():
-                              if any(w in k.lower() for w in ('recent','past','history','result')): print('PUBLIC RESULT FIELD',k,json.dumps(v,ensure_ascii=False)[:14000])
-              for node in doc.find_all('a'):
-                  if any(w in node.text() for w in ('直近','今場所')): print('RECENT LINK',node.attrs,node.text())
-          url='https://www.winticket.jp/assets/a53660/chunk.ba7d3223a3c683fa.min.js'
-          with urlopen(Request(url,headers={'Accept-Encoding':'identity'}),timeout=40) as response:
-              raw=response.read(3000000)
-              if raw[:2]==b'\x1f\x8b':raw=gzip.decompress(raw)
-              code=raw.decode()
-          snippets=[]
-          for m in list(re.finditer(r'今場所|RECENT|recentResults|recentRecords|recentResult|上がり|上り',code))[:35]:
-              snippet=code[max(0,m.start()-400):m.end()+700]
-              snippets.append(snippet);print('PUBLIC RECENT CODE',snippet)
-          sources.append({'url':url,'observed_at':sources[-1]['observed_at'],'snippets':snippets})
-          with open('/tmp/lineup2-history-probe.json','w') as f:
-              json.dump({'target_date':'2026-10-22','provider':'winticket-meeting-history-inspection','sources':sources},f,ensure_ascii=False)
-          PY
-      - name: Append private source inspection and verify it
+        run: python3 -m unittest discover -s tests -v
+      - name: Read existing private card and verify earlier meeting results
         working-directory: keirin-lineup2
         env:
           SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
-        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-history-probe.json --report /tmp/lineup2-history-probe-usage.json
+        run: |
+          python3 - <<'PY'
+          import os,sys,json,re,gzip
+          from pathlib import Path
+          from urllib.request import Request,urlopen
+          from datetime import datetime,timezone
+          sys.path.insert(0,'scripts')
+          from archive_snapshot import Storage
+          from collect_history import collect
+          store=Storage(os.environ['SNAPSHOT_SUPABASE_URL'],os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
+          target='2026-10-22'
+          for item in reversed(store.list_all(target)):
+              size=(item.get('metadata') or {}).get('size',0)
+              if size<150000 or size>500000: continue
+              card=store.request('GET','object/authenticated/keirin-source-snapshots/'+target+'/'+item['name'])
+              if card.get('provider')=='winticket' and card.get('calendar_url') and card.get('expected_races')==26: break
+          else: raise ValueError('Existing validated private card missing')
+          archive,display=collect(card)
+          url='https://www.winticket.jp/assets/a53660/chunk.ba7d3223a3c683fa.min.js'
+          try:
+              with urlopen(Request(url,headers={'Accept-Encoding':'identity'}),timeout=30) as response:
+                  raw=response.read(3000000)
+                  if raw[:2]==b'\x1f\x8b':raw=gzip.decompress(raw)
+                  code=raw.decode()
+              snippets=[]
+              for match in list(re.finditer(r'currentCupResults|finalHalfRecord|displayType',code))[:18]:
+                  snippet=code[max(0,match.start()-250):match.end()+650]
+                  snippets.append(snippet);print('OFFICIAL RESULT DISPLAY',snippet)
+              archive['sources'].append({'url':url,'observed_at':datetime.now(timezone.utc).isoformat(),'snippets':snippets})
+          except Exception as error: print('Optional public rank display code inspection:',type(error).__name__)
+          Path('/tmp/lineup2-history.json').write_text(json.dumps(archive,ensure_ascii=False,indent=2))
+          Path('/tmp/lineup2-history-display.json').write_text(json.dumps(display,ensure_ascii=False,indent=2))
+          results=[x for r in display['races'] for p in r['players'] for x in p['meeting_results']]
+          print('VERIFIED HISTORY',len(display['races']),'races,',sum(len(r['players']) for r in display['races']),'riders,',len(results),'individual results,',len({x['result_url'] for x in results}),'linked official races,',sum(x['back'] for x in results),'B flags')
+          print('RANK DECORATIONS',sorted({x['display_type'] for x in results}))
+          PY
+      - name: Append new history privately and verify readback
+        working-directory: keirin-lineup2
+        env:
+          SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
+          SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
+        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-history.json --report /tmp/lineup2-history-usage.json
+      - name: Save only a new history display artifact
+        run: |
+          DEST="keirin-lineup2-history/run-${{ github.run_id }}-${{ github.run_attempt }}"
+          test ! -e "$DEST"
+          mkdir -p "$DEST"
+          cp /tmp/lineup2-history-display.json "$DEST/history.json"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$DEST"
+          git commit -m 'Append verified current-meeting results with official result links'
+          git push origin HEAD:keirin-lineup2-enjoy
