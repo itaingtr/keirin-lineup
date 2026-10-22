@@ -1,4 +1,4 @@
-name: Inspect official video links for keirin-lineup2
+name: Resolve official public media and AI labels for keirin-lineup2
 on:
   push:
     branches: [keirin-lineup2-enjoy]
@@ -12,64 +12,72 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v6
-      - name: Read public official media metadata without login
-        working-directory: keirin-lineup2
-        run: |
-          python3 - <<'PY'
-          import sys,re,json
-          from urllib.parse import urljoin
-          sys.path.insert(0,'scripts')
-          from source_http import fetch,state_payloads
-          sources=[]
-          urls=['https://www.winticket.jp/keirin/kumamoto/live',
-                'https://www.winticket.jp/keirin/kumamoto/raceresult/2026102287/1/1',
-                'https://www.winticket.jp/keirin/kumamoto/racecard/2026102287/1/12']
-          scripts=set()
-          for url in urls:
-              doc,observed=fetch(url,sources)
-              print('PUBLIC PAGE',url,observed)
-              for node in doc.find_all('script'):
-                  src=node.attrs.get('src','')
-                  if src: print('ASSET',src)
-                  if src and any(w in src.lower() for w in ('live','video','result','racecard','bootstrap','layouts-keirin')): scripts.add(urljoin(url,src))
-                  text=node.text()
-                  for match in re.finditer(r'window\.__CONFIG__\s*=\s*',text):
-                      config=json.JSONDecoder().raw_decode(text[match.end():])[0]
-                      print('PUBLIC VIDEO CONFIG',{k:v for k,v in config.items() if 'VIDEO' in k or 'LIVE' in k})
-              for state in state_payloads(doc):
-                  if not isinstance(state,dict): continue
-                  for q in state.get('tanStackQuery',{}).get('queries',[]):
-                      key=q.get('queryKey'); data=q.get('state',{}).get('data',{})
-                      print('QUERY',key)
-                      if not isinstance(data,dict): continue
-                      if 'race' in data:
-                          r=data['race']
-                          print('RACE VIDEO',{k:v for k,v in r.items() if 'video' in k.lower() or k in ('id','number','status')})
-                          print('PREDICTION MARKS',[(r.get('playerId'),r.get('predictionMark')) for r in data.get('records',[])])
-                          print('PREDICTION ORDER',[{k:v for k,v in p.items() if k in ('isAi','order','name')} for p in data.get('predictions',[])])
-                      if any(w in str(key).lower() for w in ('live','video','stream')):
-                          def media(data):
-                              if isinstance(data,dict): return {k:media(v) for k,v in data.items() if not any(w in k.lower() for w in ('token','secret','password','key','email'))}
-                              if isinstance(data,list): return [media(v) for v in data[:20]]
-                              return data
-                          print('PUBLIC VIDEO DATA',json.dumps(media(data),ensure_ascii=False)[:10000])
-              for node in doc.find_all():
-                  if node.tag in ('video','iframe','source'): print('MEDIA ELEMENT',node.tag,node.attrs)
-          for src in sorted(scripts)[:15]:
-              try:
-                  doc,_=fetch(src,sources)
-                  text=sources[-1]['raw_html']
-                  print('PUBLIC SCRIPT',src,'bytes',len(text))
-                  matches=list(re.finditer(r'VIDEO_BASE_URL|digestVideoProvider|digestVideo|liveStream|\.m3u8|\.mp4|predictionMark|iframe|embed',text))
-                  for match in matches[:24]:
-                      print('MEDIA CODE',text[max(0,match.start()-180):match.end()+240])
-              except Exception as error: print('PUBLIC SCRIPT FAILURE',src,type(error).__name__)
-          with open('/tmp/lineup2-media.json','w') as f:
-              json.dump({'target_date':'2026-10-22','provider':'winticket-media-inspection','sources':sources},f,ensure_ascii=False)
-          PY
-      - name: Append private source inspection and verify readback
+      - name: Read previously saved public media sources and official scripts
         working-directory: keirin-lineup2
         env:
           SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
-        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-media.json --report /tmp/lineup2-media-usage.json
+        run: |
+          python3 - <<'PY'
+          import sys,re,json,os,gzip
+          from datetime import datetime,timezone
+          from urllib.parse import urljoin
+          from urllib.request import urlopen,Request
+          sys.path.insert(0,'scripts')
+          from source_http import Document,state_payloads
+          from archive_snapshot import Storage
+          store=Storage(os.environ['SNAPSHOT_SUPABASE_URL'],os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
+          for item in reversed(store.list_all('2026-10-22')):
+              saved=store.request('GET','object/authenticated/keirin-source-snapshots/2026-10-22/'+item['name'])
+              if saved.get('provider')=='winticket-media-inspection': break
+          else: raise ValueError('Saved public media inspection missing')
+          scripts=set(); sources=[]
+          def inspect(data,path=''):
+              if isinstance(data,dict):
+                  for k,v in data.items():
+                      p=path+'/'+k
+                      if any(w in k.lower() for w in ('video','stream','live')) and not any(w in k.lower() for w in ('token','secret','key')):
+                          print('OFFICIAL MEDIA FIELD',p,json.dumps(v,ensure_ascii=False)[:2000])
+                      elif k in ('sport','venueId','id','slug') and any(w in path.lower() for w in ('broadcast','venueinfo')): print('IDENTITY',p,str(v)[:100])
+                      if not any(w in k.lower() for w in ('token','secret','password')): inspect(v,p)
+              elif isinstance(data,list):
+                  for i,v in enumerate(data): inspect(v,path+'/'+str(i))
+          for source in saved['sources']:
+              doc=Document(source['raw_html']).root
+              for node in doc.find_all('script'):
+                  src=node.attrs.get('src','')
+                  if src: scripts.add(urljoin(source['url'],src))
+              if source['url'].endswith('/live'):
+                  for state in state_payloads(doc):
+                      if isinstance(state,dict):
+                          for q in state.get('tanStackQuery',{}).get('queries',[]):
+                              key=q.get('queryKey',[])
+                              if len(key)>1 and key[1] in ('FETCH_BROADCAST_TIMETABLE','FETCH_KEIRIN_VENUE_INFO','FETCH_KEIRIN_VENUE_LIST'):
+                                  print('QUERY KEYS',key,list(q.get('state',{}).get('data',{})))
+                                  inspect(q.get('state',{}).get('data',{}),str(key))
+          for src in sorted(scripts):
+              if '/assets/' not in src or not src.endswith('.js'): continue
+              try:
+                  with urlopen(Request(src,headers={'Accept-Encoding':'identity','User-Agent':'KeirinLineup2/1.0'}),timeout=25) as response:
+                      raw=response.read(3000001)
+                      if len(raw)>3000000: continue
+                      if raw[:2]==b'\x1f\x8b': raw=gzip.decompress(raw)
+                      if len(raw)>8000000: continue
+                      text=raw.decode('utf-8')
+                  matches=list(re.finditer(r'VIDEO_BASE_URL|digestVideoProvider|\.m3u8|\.mp4|predictionMark|pop.?[Uu]p|liveVideo|[Ee]mbed',text))
+                  snippets=[]
+                  for match in matches[:12]: snippets.append(text[max(0,match.start()-220):match.end()+380])
+                  if snippets:
+                      print('OFFICIAL MEDIA SCRIPT',src,'bytes',len(text))
+                      for snippet in snippets: print('OFFICIAL MEDIA CODE',snippet)
+                      sources.append({'url':src,'observed_at':datetime.now(timezone.utc).isoformat(),'snippets':snippets})
+              except Exception as e: print('SCRIPT FAILURE',src,type(e).__name__)
+          with open('/tmp/lineup2-media-code.json','w') as f:
+              json.dump({'target_date':'2026-10-22','provider':'winticket-media-code-inspection','sources':sources},f,ensure_ascii=False)
+          PY
+      - name: Append relevant media code privately and verify readback
+        working-directory: keirin-lineup2
+        env:
+          SNAPSHOT_SUPABASE_URL: https://ritinxywblgsccjvqoeh.supabase.co
+          SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
+        run: python3 scripts/archive_snapshot.py --date 2026-10-22 --input /tmp/lineup2-media-code.json --report /tmp/lineup2-media-code-usage.json
