@@ -1,0 +1,30 @@
+name: Check official browser page framing without storing data
+on:
+  push:
+    branches: [keirin-lineup2-enjoy]
+    paths: [.github/workflows/winticket-browser-check.yml]
+permissions:
+  contents: read
+jobs:
+  headers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read public HTTP framing headers only
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          from urllib.error import HTTPError
+          urls=[
+            'https://www.winticket.jp/keirin/odawara/raceresult/2026102036/1/7',
+            'https://www.winticket.jp/keirin/odawara/live'
+          ]
+          for url in urls:
+              try:
+                  with urlopen(Request(url,headers={'User-Agent':'KeirinLineup2/1.0'}),timeout=25) as r:
+                      print('PUBLIC WEB PAGE',r.status,r.url,flush=True)
+                      for k in ('x-frame-options','content-security-policy'):
+                          print(k+':',r.headers.get(k,'(not present)'),flush=True)
+              except HTTPError as e:
+                  print('PUBLIC WEB PAGE HTTP ERROR',e.code,flush=True)
+          PY
