@@ -24,9 +24,9 @@ jobs:
           from collect_exacta import Document, Node
           from archive_snapshot import Storage, BUCKET, snapshot_name
           urls = [
-            'https://www.yen-joy.net/',
-            'https://www.yen-joy.net/kaisai/race/forecast/detail/202610/87/20261022/20261022/12/',
-            'https://www.yen-joy.net/kaisai/race/forecast/202610/87/20261022/20261022',
+            'https://www.chariloto.com/keirin/athletes/2026-10-22/87/12',
+            'https://www.winticket.jp/keirin/kumamoto/racecard/2026102287/1/12',
+            'https://www.oddspark.com/keirin/RaceList.do?joCode=87&kaisaiBi=20261022&raceNo=12',
           ]
           opener=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
           store = Storage(os.environ['SNAPSHOT_SUPABASE_URL'], os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
@@ -61,8 +61,8 @@ jobs:
                   attrs=json.dumps(node.attrs,ensure_ascii=False)
                   if re.search('odds|formation|lineup|line-up|race-player|race-member|race_member|race-program|race-detail',attrs,re.I):
                       print(json.dumps({'tag':node.tag,'attrs':node.attrs,'children':[{'tag':c.tag,'attrs':c.attrs} for c in node.children if isinstance(c,Node)][:12]},ensure_ascii=False))
-          if not sources: raise SystemExit('No Enjoy source was readable; existing pages preserved')
-          data=json.dumps({'target_date':'2026-10-22','provider':'enjoy','purpose':'isolated source verification','sources':sources},ensure_ascii=False).encode()
+          if not sources: raise SystemExit('No alternate source was readable; existing pages preserved')
+          data=json.dumps({'target_date':'2026-10-22','provider':'alternate-source-probe','purpose':'isolated source verification','sources':sources},ensure_ascii=False).encode()
           name=snapshot_name('2026-10-22')
           store.upload(name,data)
           store.verify(name,data)
