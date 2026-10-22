@@ -18,25 +18,32 @@ jobs:
           SNAPSHOT_SUPABASE_SERVICE_KEY: ${{ secrets.SNAPSHOT_SUPABASE_SERVICE_KEY }}
         run: |
           python3 - <<'PY'
-          import sys, json, re, urllib.request, os
+          import sys, json, re, urllib.request, urllib.error, http.cookiejar, os, time
           from datetime import datetime, timezone
           sys.path.insert(0,'scripts')
           from collect_exacta import Document, Node
           from archive_snapshot import Storage, BUCKET, snapshot_name
           urls = [
-            'https://www.yen-joy.net/kaisai/race/forecast/detail/202610/87/20261022/20261022/12',
+            'https://www.yen-joy.net/',
+            'https://www.yen-joy.net/kaisai/race/forecast/detail/202610/87/20261022/20261022/12/',
             'https://www.yen-joy.net/kaisai/race/forecast/202610/87/20261022/20261022',
           ]
+          opener=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
           store = Storage(os.environ['SNAPSHOT_SUPABASE_URL'], os.environ['SNAPSHOT_SUPABASE_SERVICE_KEY'])
           bucket = store.request('GET','bucket/'+BUCKET)
           assert bucket.get('public') is False, 'Expected existing private bucket'
           sources=[]
           for url in urls:
               req=urllib.request.Request(url,headers={'User-Agent':'KeirinLineup2/1.0 (+https://github.com/itaingtr/keirin-lineup)'})
-              with urllib.request.urlopen(req, timeout=45) as response:
-                  raw=response.read(6000001)
-                  if len(raw)>6000000: raise ValueError('Response too large')
-                  body=raw.decode('utf-8')
+              try:
+                  with opener.open(req, timeout=45) as response:
+                      raw=response.read(6000001)
+                      if len(raw)>6000000: raise ValueError('Response too large')
+                      body=raw.decode('utf-8')
+              except urllib.error.HTTPError as error:
+                  print(json.dumps({'source':url,'http_status':error.code,'reason':error.reason}))
+                  time.sleep(2)
+                  continue
               sources.append({'url':url,'observed_at':datetime.now(timezone.utc).isoformat(),'raw_html':body})
               doc=Document(body).root
               tables=list(doc.find_all('table'))
@@ -54,6 +61,7 @@ jobs:
                   attrs=json.dumps(node.attrs,ensure_ascii=False)
                   if re.search('odds|formation|lineup|line-up|race-player|race-member|race_member|race-program|race-detail',attrs,re.I):
                       print(json.dumps({'tag':node.tag,'attrs':node.attrs,'children':[{'tag':c.tag,'attrs':c.attrs} for c in node.children if isinstance(c,Node)][:12]},ensure_ascii=False))
+          if not sources: raise SystemExit('No Enjoy source was readable; existing pages preserved')
           data=json.dumps({'target_date':'2026-10-22','provider':'enjoy','purpose':'isolated source verification','sources':sources},ensure_ascii=False).encode()
           name=snapshot_name('2026-10-22')
           store.upload(name,data)
