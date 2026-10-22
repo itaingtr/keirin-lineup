@@ -46,18 +46,11 @@ jobs:
                       break
               if payload is None: continue
               print(json.dumps({'source':source['url'],'observed_at':source['observed_at']},ensure_ascii=False))
-              print(json.dumps({'keirin_common':shape(payload['redux']['keirin']['races']['common'])},ensure_ascii=False))
-              print(json.dumps({'keirin_odds':shape(payload['redux']['keirin']['races']['odds'])},ensure_ascii=False))
               for q in payload.get('tanStackQuery',{}).get('queries',[]):
-                  print(json.dumps({'query_key':q['queryKey'],'data_shape':shape(q['state'].get('data'))},ensure_ascii=False))
-              for node in doc.find_all():
-                  if node.text().strip()=='並び予想':
-                      parent=node
-                      for i in range(2):
-                          if parent.parent: parent=parent.parent
-                      def tags(n,depth=0):
-                          if depth>3: return None
-                          return {'tag':n.tag,'attrs':n.attrs,'children':[tags(c,depth+1) for c in n.children if isinstance(c,Node)][:15]}
-                      print(json.dumps({'lineup_markup':tags(parent)},ensure_ascii=False))
-                      break
+                  data=q['state'].get('data')
+                  print(json.dumps({'query_key':q['queryKey'],'data_shape':shape(data)},ensure_ascii=False))
+                  if isinstance(data,dict):
+                      if data.get('race'): print(json.dumps({'race_metadata':data['race'],'line_prediction':data.get('linePrediction')},ensure_ascii=False))
+                      if data.get('cup'): print(json.dumps({'cup_metadata':data['cup']},ensure_ascii=False))
+                      if data.get('exacta'): print(json.dumps({'exacta_example':data['exacta'][:2],'oddsUpdatedAt':data.get('oddsUpdatedAt')},ensure_ascii=False))
           PY
