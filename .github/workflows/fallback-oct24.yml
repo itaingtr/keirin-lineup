@@ -1,0 +1,70 @@
+name: Prepare October 24 fallback display without database writes
+on:
+  push:
+    branches: [keirin-lineup2-enjoy]
+    paths: [.github/workflows/fallback-oct24.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: keirin-lineup2-preview
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate source parsers
+        working-directory: keirin-lineup2
+        run: python3 -m unittest discover -s tests -v
+      - name: Collect the requested day and render display files only
+        working-directory: keirin-lineup2
+        run: |
+          python3 -u - <<'PY'
+          import json,re,sys
+          from pathlib import Path
+          sys.path.insert(0,'scripts')
+          from collect_sources import collect
+          from render_races import render,validate
+          target='2026-10-24'
+          card,odds=collect(target,pause=1)
+          day,races,grades=validate(card)
+          page=render(card,site=Path('site'))
+          original='<base href="./"><script>if(/\\/line\\d{8}\\.html\\/(?:index\\.html)?$/.test(location.pathname))document.querySelector("base").href="../";</script>'
+          assert original in page,'Unexpected page base'
+          page=page.replace(original,'<base href="/line20261024.html/">')
+          for asset in ('comments.css','comments.js','odds-current.js','odds-comparison.js','predictions.js'):
+              page=page.replace('"./'+asset,'"/'+asset)
+          page=page.replace('value="./line','value="/line')
+          page=re.sub(r'<option value="/line20261025.html/"[^>]*>.*?</option>','',page)
+          media={'schema_version':1,'provider':'winticket','target_date':target,'checked_at':odds['checked_at'],
+                 'races':[{'source_url':r['source'],'players':[{'no':p['no'],'name':p['name'],'mark':p['mark']} for p in r['players']]} for r in races]}
+          output=Path('/tmp/lineup2-oct24/line20261024.html')
+          output.mkdir(parents=True,exist_ok=False)
+          (output/'index.html').write_text(page)
+          for name,data in [('odds.json',odds),('odds-config.json',{'endpoint':'./odds.json'}),('media.json',media)]:
+              (output/name).write_text(json.dumps(data,ensure_ascii=False,separators=(',',':'))+'\n')
+          summary={'target_date':target,'provider':'winticket','races':len(races),'riders':sum(len(r['players']) for r in races),
+                   'quotes':sum(len(x['snapshot'].get('odds',[])) for x in odds['results']),
+                   'venues':sorted(set(r['venue'] for r in races)),'checked_at':odds['checked_at'],
+                   'excluded_meetings':card['excluded_meetings'],'source_expected_races':card['source_expected_races'],
+                   'database_writes':0}
+          (output/'display-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
+          print('OCT24 DISPLAY VERIFIED',json.dumps(summary,ensure_ascii=False),flush=True)
+          PY
+      - name: Append new display artifact without changing main or stored data
+        run: |
+          DEST="keirin-lineup2-oct24/run-${{ github.run_id }}-${{ github.run_attempt }}"
+          test ! -e "$DEST"
+          mkdir -p "$DEST"
+          cp -R /tmp/lineup2-oct24/line20261024.html "$DEST/"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$DEST"
+          git commit -m 'Append October 24 fallback display only'
+          git push origin HEAD:keirin-lineup2-enjoy
+
+# Validate complete unpublished placeholder matrices before rendering.
+
+# Official pre-opening 9999.9 placeholders have no update timestamp or popularity rank.
