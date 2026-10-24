@@ -35,3 +35,4 @@ jobs:
           assert set(f['filename'] for f in changes['files'])=={'.github/workflows/lineup2-card-nightly.yml','.github/workflows/lineup2-odds-hourly.yml'}
           print('SCHEDULES READY',json.dumps({'default_branch':'main','nightly_jst':['21:00','23:30'],'odds_jst':'09:00-20:00','workflows':checked,'original_site_pages_unchanged':True}),flush=True)
           PY
+# Read-only readiness check after the published October 25 card.
