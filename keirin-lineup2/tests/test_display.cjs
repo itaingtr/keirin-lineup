@@ -11,6 +11,7 @@ const assetPrefix=fixedBase?'/'+fixedBase[1]:'';
 const dataDir=fixedBase?path.join(project,'site',fixedBase[1]):fs.existsSync(path.join(dir,'odds.json'))?dir:path.join(project,'site');
 const feed = JSON.parse(fs.readFileSync(path.join(dataDir, 'odds.json'), 'utf8'));
 const media = JSON.parse(fs.readFileSync(path.join(dataDir, 'media.json'), 'utf8'));
+const config=JSON.parse(fs.readFileSync(path.join(dataDir,'odds-config.json'),'utf8'));
 const sourceUrl=element=>element.dataset.sourceUrl||element.href;
 const history = fs.existsSync(path.join(dataDir,'history.json'))?JSON.parse(fs.readFileSync(path.join(dataDir,'history.json'),'utf8')):{races:rawHistory()};
 function rawHistory(){const card=JSON.parse(html.match(/const races=(.*);\nconst body=/)[1]);return card.map(r=>({source_url:r.source,players:r.players.map(p=>({no:p.no,meeting_results:p.meetingResults}))}));}
@@ -28,9 +29,8 @@ async function check(url) {
     window.fetch = async input => {
       const target = new URL(String(input),window.document.baseURI);
       fetched.push(target.href);
-      assert.equal(target.hostname,'preview.example');
-      assert.ok(['/odds-config.json','/odds.json','/media.json'].includes(target.pathname.replace(assetPrefix,'')), target.href);
-      return {ok:true,json:async()=>target.pathname.endsWith('odds-config.json') ? {endpoint:'./odds.json'} : target.pathname.endsWith('media.json') ? media : feed};
+      if(target.hostname==='raw.githubusercontent.com'){assert.equal(target.origin+target.pathname,new URL(config.endpoint).origin+new URL(config.endpoint).pathname);}else{assert.equal(target.hostname,'preview.example');assert.ok(['/odds-config.json','/odds.json','/media.json'].includes(target.pathname.replace(assetPrefix,'')),target.href);}
+      return {ok:true,json:async()=>target.pathname.endsWith('odds-config.json') ? config : target.pathname.endsWith('media.json') ? media : feed};
     };
     window.addEventListener('error',event=>errors.push(event.error || event.message));
   }});

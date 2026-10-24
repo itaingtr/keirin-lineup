@@ -1,0 +1,86 @@
+name: Update fallback exacta odds hourly
+on:
+  schedule:
+    # UTC 00:00-11:00 = 09:00-20:00 Asia/Tokyo, inclusive.
+    - cron: '0 0-11 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main, keirin-lineup2-enjoy]
+    paths:
+      - .github/workflows/lineup2-odds-hourly.yml
+      - keirin-lineup2/scripts/refresh_exacta.py
+      - keirin-lineup2/site/index.html
+permissions:
+  contents: write
+concurrency:
+  # Share the feed-branch writer lock with the original site's collector.
+  group: exacta-diagnostic
+  cancel-in-progress: false
+jobs:
+  display-check:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: keirin-lineup2-enjoy
+      - name: Verify the prepared current and historical pages
+        working-directory: keirin-lineup2
+        run: |
+          npm install --prefix /tmp/lineup2-qa --no-audit --no-fund jsdom@26.1.0
+          python3 scripts/build_site.py
+          NODE_PATH=/tmp/lineup2-qa/node_modules node tests/test_display.cjs
+          NODE_PATH=/tmp/lineup2-qa/node_modules node tests/test_display.cjs site/line20261023.html
+          NODE_PATH=/tmp/lineup2-qa/node_modules node tests/test_viewer.cjs
+          node tests/test_worker.cjs
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: keirin-lineup2-enjoy
+          fetch-depth: 1
+      - name: Validate independent source and failure recovery
+        working-directory: keirin-lineup2
+        run: python3 -m unittest discover -s tests -v
+      - name: Collect only the currently published fallback card
+        run: |
+          git fetch origin odds-diagnostics
+          python3 -u keirin-lineup2/scripts/refresh_exacta.py \
+            --page keirin-lineup2/site/index.html \
+            --previous-ref FETCH_HEAD \
+            --output /tmp/lineup2-exacta-update \
+            --run-key "run-${{ github.run_id }}-${{ github.run_attempt }}"
+      - name: Append run history and advance only the fallback display feed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B odds-diagnostics FETCH_HEAD
+          mkdir -p fallback
+          cp -R /tmp/lineup2-exacta-update/fallback/. fallback/
+          git add -- fallback/exacta
+          git commit -m 'Update independent fallback exacta display feed'
+          git push origin HEAD:odds-diagnostics
+      - name: Verify the public saved feed and browser CORS
+        run: |
+          python3 - <<'PY'
+          import json,time
+          from pathlib import Path
+          from urllib.request import Request,urlopen
+          report=json.loads(Path('/tmp/lineup2-exacta-update/report.json').read_text())
+          expected=json.loads(Path(report['local_feed']).read_text())
+          url=report['endpoint']+'?verify=${{ github.run_id }}-${{ github.run_attempt }}'
+          for attempt in range(5):
+              try:
+                  with urlopen(Request(url,headers={'Accept':'application/json','Cache-Control':'no-cache'}),timeout=20) as r:
+                      assert r.status==200
+                      assert r.headers.get('Access-Control-Allow-Origin')=='*','Browser CORS missing'
+                      assert json.load(r)==expected,'Saved feed differs from validated output'
+                  print('PUBLIC FEED READBACK PASS',json.dumps(report,ensure_ascii=False),flush=True)
+                  break
+              except Exception:
+                  if attempt==4:raise
+                  time.sleep(3)
+          PY
