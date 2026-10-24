@@ -1,0 +1,36 @@
+name: Verify fallback schedule readiness
+on:
+  push:
+    branches: [keirin-lineup2-enjoy]
+    paths: [.github/workflows/lineup2-schedule-check.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify active default-branch hourly workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64,json,os
+          from urllib.request import Request,urlopen
+          root='https://api.github.com/repos/itaingtr/keirin-lineup'
+          def get(path):
+              req=Request(root+path,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'lineup2-schedule-check'})
+              with urlopen(req,timeout=20) as r:return json.load(r)
+          repo=get('')
+          assert repo['default_branch']=='main'
+          workflow=get('/actions/workflows/lineup2-odds-hourly.yml')
+          assert workflow['state']=='active',workflow['state']
+          file=get('/contents/.github/workflows/lineup2-odds-hourly.yml?ref=main')
+          source=base64.b64decode(file['content']).decode()
+          assert "cron: '0 0-11 * * *'" in source
+          assert 'ref: keirin-lineup2-enjoy' in source
+          changes=get('/compare/d38fe13cc7b51c659b6ba38592a35d12f05c70d2...cf24bf47c518ed2684076294ba131823124cf669')
+          assert [f['filename'] for f in changes['files']]==['.github/workflows/lineup2-odds-hourly.yml']
+          print('SCHEDULE READY',json.dumps({'state':workflow['state'],'default_branch':repo['default_branch'],'cron_utc':'0 0-11 * * *','hours_jst':'09:00-20:00','original_site_pages_unchanged':True}),flush=True)
+          PY
