@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Verify active default-branch hourly workflow
+      - name: Verify both active default-branch schedules and preserved site
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -21,16 +21,17 @@ jobs:
           root='https://api.github.com/repos/itaingtr/keirin-lineup'
           def get(path):
               req=Request(root+path,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'lineup2-schedule-check'})
-              with urlopen(req,timeout=20) as r:return json.load(r)
-          repo=get('')
-          assert repo['default_branch']=='main'
-          workflow=get('/actions/workflows/lineup2-odds-hourly.yml')
-          assert workflow['state']=='active',workflow['state']
-          file=get('/contents/.github/workflows/lineup2-odds-hourly.yml?ref=main')
-          source=base64.b64decode(file['content']).decode()
-          assert "cron: '0 0-11 * * *'" in source
-          assert 'ref: keirin-lineup2-enjoy' in source
-          changes=get('/compare/d38fe13cc7b51c659b6ba38592a35d12f05c70d2...cf24bf47c518ed2684076294ba131823124cf669')
-          assert [f['filename'] for f in changes['files']]==['.github/workflows/lineup2-odds-hourly.yml']
-          print('SCHEDULE READY',json.dumps({'state':workflow['state'],'default_branch':repo['default_branch'],'cron_utc':'0 0-11 * * *','hours_jst':'09:00-20:00','original_site_pages_unchanged':True}),flush=True)
+              with urlopen(req,timeout=20) as response:return json.load(response)
+          assert get('')['default_branch']=='main'
+          checked=[]
+          for name,crons in [('lineup2-card-nightly.yml',['0 12 * * *','30 14 * * *']),('lineup2-odds-hourly.yml',['0 0-11 * * *'])]:
+              wf=get('/actions/workflows/'+name);assert wf['state']=='active'
+              file=get('/contents/.github/workflows/'+name+'?ref=main')
+              source=base64.b64decode(file['content']).decode()
+              assert 'ref: keirin-lineup2-enjoy' in source
+              for cron in crons:assert "cron: '"+cron+"'" in source
+              checked.append({'workflow':name,'state':wf['state'],'cron_utc':crons})
+          changes=get('/compare/cf24bf47c518ed2684076294ba131823124cf669...78c7fafc4edb7002c188fe0603bd0ce49ad5e897')
+          assert set(f['filename'] for f in changes['files'])=={'.github/workflows/lineup2-card-nightly.yml','.github/workflows/lineup2-odds-hourly.yml'}
+          print('SCHEDULES READY',json.dumps({'default_branch':'main','nightly_jst':['21:00','23:30'],'odds_jst':'09:00-20:00','workflows':checked,'original_site_pages_unchanged':True}),flush=True)
           PY

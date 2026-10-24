@@ -4,8 +4,6 @@ const CARD_FEED='https://raw.githubusercontent.com/itaingtr/keirin-lineup/odds-d
 const cardPointers=new Map(),cardVersions=new Map(),cardQuotes=new Map();
 const CARD_DATE=/^\d{4}-\d{2}-\d{2}$/;
 const CARD_FILES=new Set(['media.json','odds-config.json','odds.json']);
-const embeddedMatch=/const races=(.*);\nconst body=/.exec(ASSETS['/index.html'].body);
-const embeddedDate=embeddedMatch?JSON.parse(embeddedMatch[1])[0].source.match(/\/(\d{8})\d{2}\/([1-6])\//):null;
 
 async function readCardJson(path){
   const response=await fetch(CARD_FEED+path,{headers:{Accept:'application/json'},cache:'no-store',redirect:'error',signal:AbortSignal.timeout(8000)});
@@ -50,7 +48,7 @@ async function savedCard(day=null){
     if(day&&!/^\d{8}$/.test(day))throw new Error('Invalid date');
     const {value:p}=await readCardJson(day?'fallback/cards/'+day+'/latest.json':'fallback/cards/current.json');
     if(p.schema_version!==1||p.provider!=='winticket'||!CARD_DATE.test(p.target_date)||
-       !/^run-\d+-\d+$/.test(p.revision)||!/^\w{64}$/.test(p.sha256)||
+       !/^run-\d+-\d+$/.test(p.revision)||! /^[a-f0-9]{64}$/.test(p.sha256)||
        p.path!=='fallback/cards/'+p.target_date.replaceAll('-','')+'/runs/'+p.revision+'.json'||
        day&&p.target_date.replaceAll('-','')!==day)throw new Error('Invalid pointer');
     if(cached?.card&&p.target_date<cached.card.target_date)throw new Error('Refusing card regression');
@@ -75,7 +73,7 @@ async function scheduledAsset(path){
     return card&&card.target_date.replaceAll('-','')>=base?{body:card.html,type:'text/html; charset=utf-8'}:null;
   }
   const match=/^\/line(\d{8})\.html(?:\/(index\.html|media\.json|odds-config\.json|odds\.json)?)?$/.exec(path);
-  if(!match||ASSETS['/line'+match[1]+'.html/index.html'])return null;
+  if(!match||match[1]<'20261025'&&ASSETS['/line'+match[1]+'.html/index.html'])return null;
   const card=await savedCard(match[1]);if(!card)return null;
   const file=match[2]||'index.html';
   if(file==='index.html')return {body:card.html,type:'text/html; charset=utf-8'};

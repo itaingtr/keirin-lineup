@@ -6,7 +6,7 @@ const original=fs.readFileSync(path.join(root,'site/index.html'),'utf8');
 const race=JSON.parse(/const races=(.*);\nconst body=/.exec(original)[1])[0];
 race.race=1;race.source='https://www.winticket.jp/keirin/kumamoto/racecard/2026112587/1/1';
 race.players.forEach(p=>p.meetingResults=[]);
-const html=original.replace(/const races=.*;\nconst body=/,'const races='+JSON.stringify([race])+';\nconst body=').replaceAll('line20261024.html','line20261125.html');
+const html=original.replace(/const races=.*;\nconst body=/,'const races='+JSON.stringify([race])+';\nconst body=').replace(/<base href="\/line\d{8}\.html\//,'<base href="/line20261125.html/');
 const card={schema_version:1,provider:'winticket',target_date:'2026-11-25',html,
  assets:{'media.json':'{}','odds-config.json':'{"endpoint":"./odds.json"}','odds.json':'{"provider":"winticket","target_date":"2026-11-25","results":[]}'},
  summary:{races:1,riders:race.players.length}};

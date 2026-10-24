@@ -7,7 +7,7 @@ global.fetch=()=>{throw Error('Official-page navigation must not fetch or save s
 (async()=>{
  const worker=(await import('data:text/javascript;base64,'+Buffer.from(bundle).toString('base64'))).default;
  let checked=0;
- for(const route of ['/','/line20261022.html','/line20261022.html/','/line20261021.html','/line20261021.html/','/line20261023.html','/line20261023.html/','/line20261024.html','/line20261024.html/']){
+ for(const route of ['/','/line20261022.html','/line20261022.html/','/line20261021.html','/line20261021.html/','/line20261023.html','/line20261023.html/','/line20261024.html','/line20261024.html/',...(fs.existsSync(path.join(root,'site/line20261025.html/index.html'))?['/line20261025.html','/line20261025.html/']:[])]){
   const url='https://preview.example'+route;
   const response=await worker.fetch(new Request(url));assert.equal(response.status,200);
   const html=await response.text();
