@@ -1,0 +1,103 @@
+name: Prepare fallback next-day cards
+on:
+  schedule:
+    # 21:00 and 23:30 Asia/Tokyo on the preceding evening.
+    - cron: '0 12 * * *'
+    - cron: '30 14 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Optional YYYY-MM-DD; empty means tomorrow in Japan'
+        required: false
+        type: string
+  push:
+    branches: [main, keirin-lineup2-enjoy]
+    paths:
+      - .github/workflows/lineup2-card-nightly.yml
+      - keirin-lineup2/scripts/prepare_next_card.py
+      - keirin-lineup2/scripts/published_card.py
+      - keirin-lineup2/scripts/collect_sources.py
+      - keirin-lineup2/worker/cards.js
+permissions:
+  contents: write
+concurrency:
+  group: exacta-diagnostic
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: keirin-lineup2-enjoy
+          fetch-depth: 1
+      - name: Check schedules, no-odds collection, rendering and recovery
+        working-directory: keirin-lineup2
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 scripts/build_site.py
+          node tests/test_worker.cjs
+          node tests/test_cards.cjs
+      - name: Collect a complete card without collecting odds
+        env:
+          CARD_EVENT: ${{ github.event_name }}
+          CARD_SCHEDULE: ${{ github.event.schedule }}
+          CARD_DATE: ${{ inputs.date }}
+        run: |
+          git fetch origin odds-diagnostics
+          mode=manual
+          if [ "$CARD_EVENT" = schedule ]; then mode=schedule; fi
+          if [ "$CARD_EVENT" = push ]; then mode=push; fi
+          python3 -u keirin-lineup2/scripts/prepare_next_card.py \
+            --mode "$mode" --schedule "$CARD_SCHEDULE" --date "$CARD_DATE" \
+            --previous-ref FETCH_HEAD --run-key "run-${{ github.run_id }}-${{ github.run_attempt }}" \
+            --output /tmp/lineup2-card-update
+      - name: Validate the actual prepared card and browser controls
+        run: |
+          npm install --prefix /tmp/lineup2-qa --no-audit --no-fund jsdom@26.1.0
+          NODE_PATH=/tmp/lineup2-qa/node_modules node keirin-lineup2/tests/test_prepared_card.cjs /tmp/lineup2-card-update/report.json
+      - name: Append the card and atomically advance its display pointers
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B odds-diagnostics FETCH_HEAD
+          mkdir -p fallback
+          cp -R /tmp/lineup2-card-update/fallback/. fallback/
+          git add -- fallback/cards
+          git commit -m 'Append verified fallback race card without odds'
+          git push origin HEAD:odds-diagnostics
+      - name: Read back the public saved card, pointers and checksum
+        env:
+          REPORT: /tmp/lineup2-card-update/report.json
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,time
+          from pathlib import Path
+          from urllib.request import Request,urlopen
+          report=json.loads(Path(os.environ['REPORT']).read_text())
+          base='https://raw.githubusercontent.com/itaingtr/keirin-lineup/odds-diagnostics/'
+          def read(path):
+              url=base+path+'?verify=${{ github.run_id }}-${{ github.run_attempt }}'
+              with urlopen(Request(url,headers={'Accept':'application/json','Cache-Control':'no-cache'}),timeout=20) as response:
+                  assert response.status==200
+                  assert response.headers.get('Access-Control-Allow-Origin')=='*'
+                  return response.read()
+          for attempt in range(5):
+              try:
+                  saved=read(report['path'])
+                  assert saved==Path(report['local_payload']).read_bytes()
+                  assert hashlib.sha256(saved).hexdigest()==report['sha256']
+                  card=json.loads(saved)
+                  assert card['summary']['odds_collected'] is False
+                  assert card['summary']['database_writes']==0
+                  if report['published']:
+                      for path in ('fallback/cards/current.json','fallback/cards/'+report['target_date'].replace('-','')+'/latest.json'):
+                          pointer=json.loads(read(path))
+                          assert pointer['sha256']==report['sha256'] and pointer['revision']==report['revision']
+                  print('CARD PUBLICATION READBACK PASS',json.dumps(report,ensure_ascii=False),flush=True)
+                  break
+              except Exception:
+                  if attempt==4:raise
+                  time.sleep(3)
+          PY

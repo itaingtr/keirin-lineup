@@ -1,6 +1,7 @@
 """Update display-only WINTICKET quotes; retain earlier successful observations."""
 import argparse
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 import json
 import math
 from pathlib import Path
@@ -11,6 +12,12 @@ from urllib.parse import urlsplit
 from collect_sources import parse_odds, query, require
 from source_http import fetch
 from venues import identity
+from published_card import read_published
+
+
+def should_collect(target,now):
+    local=now.astimezone(ZoneInfo('Asia/Tokyo'))
+    return target==local.date().isoformat() and 9<=local.hour<=20
 
 
 def load_card(page):
@@ -87,7 +94,16 @@ def main():
     p.add_argument('--page',type=Path,required=True);p.add_argument('--previous-ref',required=True)
     p.add_argument('--output',type=Path,required=True);p.add_argument('--run-key',required=True)
     args=p.parse_args();require(re.fullmatch(r'run-\d+-\d+',args.run_key) is not None,'Invalid run key')
-    races,target=load_card(args.page);prefix='fallback/exacta/'+target.replace('-','')
+    saved=read_published(args.previous_ref)
+    races,target=(saved[1],saved[2]) if saved else load_card(args.page)
+    args.output.mkdir(parents=True,exist_ok=True)
+    if not should_collect(target,datetime.now(timezone.utc)):
+        (args.output/'report.json').write_text(json.dumps({'skipped':True,'target_date':target,'reason':'race_day_09_to_20_jst','database_writes':0}))
+        if os_path:=__import__('os').environ.get('GITHUB_OUTPUT'):
+            with open(os_path,'a') as handle:handle.write('publish=false\n')
+        print('EXACTA SKIPPED: collection starts at 09:00 JST on the race date',flush=True)
+        return
+    prefix='fallback/exacta/'+target.replace('-','')
     restored=subprocess.run(['git','show',args.previous_ref+':'+prefix+'/latest.json'],text=True,capture_output=True)
     previous=json.loads(restored.stdout) if restored.returncode==0 else {}
     require(not previous or previous.get('target_date')==target,'Previous feed has another date')
@@ -100,6 +116,8 @@ def main():
             'endpoint':'https://raw.githubusercontent.com/itaingtr/keirin-lineup/odds-diagnostics/'+prefix+'/latest.json',
             'local_feed':str(output/'latest.json')}
     (args.output/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+    if os_path:=__import__('os').environ.get('GITHUB_OUTPUT'):
+        with open(os_path,'a') as handle:handle.write('publish=true\n')
     print('EXACTA REFRESH',json.dumps(report,ensure_ascii=False),flush=True)
 
 

@@ -78,11 +78,17 @@ export default{async fetch(request){
     let target;
     try{target=new URL(url.searchParams.get('to'));}catch(_){return new Response('Invalid official page',{status:400});}
     const resultPath=target.pathname.replace('/racecard/','/raceresult/');
-    const live=Object.values(VENUES).some(v=>target.pathname==='/keirin/'+v.slug+'/live');
+    let live=Object.values(VENUES).some(v=>target.pathname==='/keirin/'+v.slug+'/live');
+    let known=!!ALLOWED_RACES[resultPath];
+    const cardDay=url.searchParams.get('card');
+    if(!known&&!live&&cardDay&&/^\d{8}$/.test(cardDay)){
+      const card=await savedCard(cardDay);
+      known=!!card?.paths.has(resultPath);live=!!card?.venues.has(target.pathname);
+    }
     const params=[...target.searchParams.keys()];
     const selected=target.searchParams.get('playerIds');
     if(target.origin!=='https://www.winticket.jp'||target.username||target.password||target.port||target.hash||
-       !(ALLOWED_RACES[resultPath]||live)||params.some(k=>k!=='playerIds')||params.length>1||
+       !(known||live)||params.some(k=>k!=='playerIds')||params.length>1||
        (selected!==null&&!/^[A-Za-z0-9_-]{1,80}$/.test(selected))||live&&params.length){
       return new Response('Unknown official page',{status:400});
     }
@@ -97,7 +103,8 @@ export default{async fetch(request){
     try{const data=await resolveMedia(url);if(mediaCache.size>=64)mediaCache.delete(mediaCache.keys().next().value);mediaCache.set(key,{at:Date.now(),data});return json(data);}
     catch(_){return json({error:'Official media information is temporarily unavailable'},502);}
   }
+  const scheduled=await scheduledAsset(url.pathname);
   let path=url.pathname;if(path.endsWith('/'))path+='index.html';
-  const asset=ASSETS[path]||ASSETS[path+'/index.html'];if(!asset)return new Response('Not found',{status:404});
+  const asset=scheduled||ASSETS[path]||ASSETS[path+'/index.html'];if(!asset)return new Response('Not found',{status:404});
   return new Response(request.method==='HEAD'?null:asset.body,{headers:{'content-type':asset.type,'cache-control':path.endsWith('.html')||path.endsWith('.json')?'no-store':'private, max-age=3600','x-content-type-options':'nosniff'}});
 }};

@@ -102,7 +102,7 @@ def prediction_marks(data, numbers):
     return dict(zip(order, ('◎', '○', '▲', '△')))
 
 
-def parse_card(doc, url, fetched_at):
+def parse_card(doc, url, fetched_at, *, include_odds=True):
     ident = identity(url)
     require(ident['provider'] == 'winticket', 'WINTICKET parser cannot relabel another source')
     index = (date.fromisoformat(f"{ident['date'][:4]}-{ident['date'][4:6]}-{ident['date'][6:]}") - date.fromisoformat(f"{ident['start'][:4]}-{ident['start'][4:6]}-{ident['start'][6:]}")).days + 1
@@ -144,7 +144,10 @@ def parse_card(doc, url, fetched_at):
             'race_type':race['class'] + race['raceType3'], 'grade_code':cup['grade'],
             'start_time':datetime.fromtimestamp(race['startAt'], JST).strftime('%H:%M'),
             'lineup':lineup, 'players':sorted(output, key=lambda p:p['no'])}
-    odds = parse_odds(query(doc, 'FETCH_KEIRIN_RACE_ODDS', params), race['id'], url, numbers, fetched_at)
+    odds = (parse_odds(query(doc, 'FETCH_KEIRIN_RACE_ODDS', params), race['id'], url, numbers, fetched_at)
+            if include_odds else {'race_key':urlsplit(url).path, 'source_url':url,
+                'provider':'winticket', 'bet_type':'exacta', 'rider_numbers':sorted(numbers),
+                'fetched_at':fetched_at, 'status':'unavailable', 'unavailable_reason':'race_day_09_jst'})
     return card, odds
 
 
@@ -207,7 +210,7 @@ def daily_races(doc, target_date):
     return output
 
 
-def collect(target_date, *, read=fetch, pause=1):
+def collect(target_date, *, read=fetch, pause=1, include_odds=True):
     sources = []
     calendar_url = 'https://www.winticket.jp/keirin/racecard/' + target_date.replace('-','')
     calendar, observed = read(calendar_url, sources)
@@ -220,7 +223,7 @@ def collect(target_date, *, read=fetch, pause=1):
             time.sleep(pause)
         doc, fetched_at = read(url, sources)
         try:
-            card, odds = parse_card(doc, url, fetched_at)
+            card, odds = parse_card(doc, url, fetched_at, include_odds=include_odds)
         except MissingLineup as error:
             excluded[meeting] = str(error)
             cards = [c for c in cards if identity(c['source'])['start'] + identity(c['source'])['code'] != meeting]

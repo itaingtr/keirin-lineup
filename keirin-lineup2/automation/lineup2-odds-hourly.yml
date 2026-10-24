@@ -46,6 +46,7 @@ jobs:
         working-directory: keirin-lineup2
         run: python3 -m unittest discover -s tests -v
       - name: Collect only the currently published fallback card
+        id: collect
         run: |
           git fetch origin odds-diagnostics
           python3 -u keirin-lineup2/scripts/refresh_exacta.py \
@@ -54,6 +55,7 @@ jobs:
             --output /tmp/lineup2-exacta-update \
             --run-key "run-${{ github.run_id }}-${{ github.run_attempt }}"
       - name: Append run history and advance only the fallback display feed
+        if: steps.collect.outputs.publish == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -64,6 +66,7 @@ jobs:
           git commit -m 'Update independent fallback exacta display feed'
           git push origin HEAD:odds-diagnostics
       - name: Verify the public saved feed and browser CORS
+        if: steps.collect.outputs.publish == 'true'
         run: |
           python3 - <<'PY'
           import json,time

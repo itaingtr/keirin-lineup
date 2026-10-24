@@ -7,6 +7,7 @@ let sequence=0,calls=[],mode='normal';
 const card=viewer.results[0],racePath=new URL(card.source_url).pathname;
 const state=data=>'<script>window.__PRELOADED_STATE__ = '+JSON.stringify({redux:{user:{loggedIn:mode!=='logged-in'?false:true}},tanStackQuery:{queries:[data]}})+';</script>';
 global.fetch=async(url,options)=>{
+ if(new URL(url).hostname==='raw.githubusercontent.com')return new Response('unavailable',{status:404});
  calls.push({url,options});assert.equal(new URL(url).hostname,'www.winticket.jp');assert.equal(options.redirect,'error');assert.equal(options.headers.Cookie,undefined);assert.equal(options.headers.Authorization,undefined);
  if(mode==='http-error')return new Response('unavailable',{status:503});
  if(String(url).endsWith('/live')){

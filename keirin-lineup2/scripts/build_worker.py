@@ -38,7 +38,7 @@ def build():
         allowed[key]={'source':source,'cup':start+code,'day':int(day),'number':int(number),'id':f'{int(number):02}{code}{day_date:%Y%m%d}'}
         venues[code]={'slug':slug,'code':code}
     prelude='const ASSETS='+json.dumps(assets,ensure_ascii=False,separators=(',',':'))+';\nconst ALLOWED_RACES='+json.dumps(allowed,separators=(',',':'))+';\nconst VENUES='+json.dumps(venues,separators=(',',':'))+';\n'
-    (ROOT/'worker/index.js').write_text(prelude+(ROOT/'worker/runtime.js').read_text())
+    (ROOT/'worker/index.js').write_text(prelude+(ROOT/'worker/cards.js').read_text()+'\n'+(ROOT/'worker/runtime.js').read_text())
     print(f'Embedded {len(assets)} assets and {len(allowed)} allowed race identities')
 
 
