@@ -6,7 +6,10 @@ const CARD_DATE=/^\d{4}-\d{2}-\d{2}$/;
 const CARD_FILES=new Set(['media.json','odds-config.json','odds.json']);
 
 async function readCardJson(path){
-  const response=await fetch(CARD_FEED+path,{headers:{Accept:'application/json'},cache:'no-store',redirect:'error',signal:AbortSignal.timeout(8000)});
+  // Request.cache is not available in every hosted Worker compatibility mode.
+  // Invalidate mutable indexes explicitly while keeping immutable run URLs stable.
+  const revision=path.endsWith('/latest.json')||path.endsWith('/current.json')?'?v='+Math.floor(Date.now()/60000):'';
+  const response=await fetch(CARD_FEED+path+revision,{headers:{Accept:'application/json','Cache-Control':'no-cache'},redirect:'error',signal:AbortSignal.timeout(8000)});
   if(!response.ok)throw new Error('Saved card unavailable');
   const reader=response.body.getReader();const chunks=[];let size=0;
   while(true){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>6000000){await reader.cancel();throw new Error('Card exceeds limit');}chunks.push(value);}
@@ -74,12 +77,22 @@ async function scheduledAsset(path){
   }
   const match=/^\/line(\d{8})\.html(?:\/(index\.html|media\.json|odds-config\.json|odds\.json)?)?$/.exec(path);
   if(!match||match[1]<'20261025'&&ASSETS['/line'+match[1]+'.html/index.html'])return null;
-  const card=await savedCard(match[1]);if(!card)return null;
+  let card=await savedCard(match[1]);
+  if(!card){
+    const embedded=ASSETS['/line'+match[1]+'.html/index.html'];
+    if(embedded)card={target_date:match[1].slice(0,4)+'-'+match[1].slice(4,6)+'-'+match[1].slice(6),
+      html:embedded.body,assets:Object.fromEntries([...CARD_FILES].map(name=>[name,ASSETS['/line'+match[1]+'.html/'+name]?.body]))};
+  }
+  if(!card)return null;
   const file=match[2]||'index.html';
   if(file==='index.html')return {body:card.html,type:'text/html; charset=utf-8'};
   let body=card.assets[file];
   const local=new Date(Date.now()+9*3600000).toISOString();
-  if(file==='odds.json'&&(local.slice(0,10)>card.target_date||local.slice(0,10)===card.target_date&&Number(local.slice(11,13))>=9)){
+  const oddsReady=local.slice(0,10)>card.target_date||local.slice(0,10)===card.target_date&&Number(local.slice(11,13))>=9;
+  // The browser can read the CORS-enabled saved feed directly even if the card
+  // pointer is temporarily unavailable. Existing pre-09:00 tabs keep odds.json.
+  if(file==='odds-config.json'&&oddsReady)body=JSON.stringify({endpoint:CARD_FEED+'fallback/exacta/'+match[1]+'/latest.json'});
+  if(file==='odds.json'&&oddsReady){
     try{
       const {value}=await readCardJson('fallback/exacta/'+match[1]+'/latest.json');
       if(value.provider!=='winticket'||value.target_date!==card.target_date||!Array.isArray(value.results))throw new Error('Wrong saved odds');
