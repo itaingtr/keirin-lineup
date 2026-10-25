@@ -1,15 +1,7 @@
+# Scheduled updates now run in itaingtr/keirin-lineup2; retain this legacy workflow for manual recovery.
 name: Update fallback exacta odds hourly
 on:
-  schedule:
-    # UTC 00:00-11:00 = 09:00-20:00 Asia/Tokyo, inclusive.
-    - cron: '0 0-11 * * *'
   workflow_dispatch:
-  push:
-    branches: [main, keirin-lineup2-enjoy]
-    paths:
-      - .github/workflows/lineup2-odds-hourly.yml
-      - keirin-lineup2/scripts/refresh_exacta.py
-      - keirin-lineup2/site/index.html
 permissions:
   contents: write
 concurrency:

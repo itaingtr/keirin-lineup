@@ -1,23 +1,12 @@
+# Scheduled updates now run in itaingtr/keirin-lineup2; retain this legacy workflow for manual recovery.
 name: Prepare fallback next-day cards
 on:
-  schedule:
-    # 21:00 and 23:30 Asia/Tokyo on the preceding evening.
-    - cron: '0 12 * * *'
-    - cron: '30 14 * * *'
   workflow_dispatch:
     inputs:
       date:
         description: 'Optional YYYY-MM-DD; empty means tomorrow in Japan'
         required: false
         type: string
-  push:
-    branches: [main, keirin-lineup2-enjoy]
-    paths:
-      - .github/workflows/lineup2-card-nightly.yml
-      - keirin-lineup2/scripts/prepare_next_card.py
-      - keirin-lineup2/scripts/published_card.py
-      - keirin-lineup2/scripts/collect_sources.py
-      - keirin-lineup2/worker/cards.js
 permissions:
   contents: write
 concurrency:
