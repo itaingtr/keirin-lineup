@@ -34,6 +34,8 @@ jobs:
           NODE_PATH=/tmp/lineup2-qa/node_modules node tests/test_display.cjs site/line20261023.html
           NODE_PATH=/tmp/lineup2-qa/node_modules node tests/test_viewer.cjs
           node tests/test_worker.cjs
+          node tests/test_cards.cjs
+          node tests/test_odds_delivery.cjs
   refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -54,6 +56,11 @@ jobs:
             --previous-ref FETCH_HEAD \
             --output /tmp/lineup2-exacta-update \
             --run-key "run-${{ github.run_id }}-${{ github.run_attempt }}"
+      - name: Verify the collected feed through the actual Site Worker
+        if: steps.collect.outputs.publish == 'true'
+        run: |
+          python3 keirin-lineup2/scripts/build_site.py
+          node keirin-lineup2/scripts/check_saved_feed.cjs /tmp/lineup2-exacta-update/report.json
       - name: Append run history and advance only the fallback display feed
         if: steps.collect.outputs.publish == 'true'
         run: |
