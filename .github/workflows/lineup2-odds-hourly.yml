@@ -34,6 +34,8 @@ jobs:
           NODE_PATH=/tmp/lineup2-qa/node_modules node tests/test_display.cjs site/line20261023.html
           NODE_PATH=/tmp/lineup2-qa/node_modules node tests/test_viewer.cjs
           node tests/test_worker.cjs
+          node tests/test_cards.cjs
+          node tests/test_odds_delivery.cjs
   refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -54,7 +56,13 @@ jobs:
             --previous-ref FETCH_HEAD \
             --output /tmp/lineup2-exacta-update \
             --run-key "run-${{ github.run_id }}-${{ github.run_attempt }}"
+      - name: Verify the collected feed through the actual Site Worker
+        if: steps.collect.outputs.publish == 'true'
+        run: |
+          python3 keirin-lineup2/scripts/build_site.py
+          node keirin-lineup2/scripts/check_saved_feed.cjs /tmp/lineup2-exacta-update/report.json
       - name: Append run history and advance only the fallback display feed
+        id: publish
         if: steps.collect.outputs.publish == 'true'
         run: |
           git config user.name 'github-actions[bot]'
@@ -65,23 +73,34 @@ jobs:
           git add -- fallback/exacta
           git commit -m 'Update independent fallback exacta display feed'
           git push origin HEAD:odds-diagnostics
+          published_commit=$(git rev-parse HEAD)
+          remote_commit=$(git ls-remote origin refs/heads/odds-diagnostics | cut -f1)
+          test "$published_commit" = "$remote_commit"
+          echo "commit=$published_commit" >> "$GITHUB_OUTPUT"
       - name: Verify the public saved feed and browser CORS
         if: steps.collect.outputs.publish == 'true'
+        env:
+          PUBLISHED_COMMIT: ${{ steps.publish.outputs.commit }}
         run: |
           python3 - <<'PY'
-          import json,time
+          import json,os,re,time
           from pathlib import Path
           from urllib.request import Request,urlopen
           report=json.loads(Path('/tmp/lineup2-exacta-update/report.json').read_text())
           expected=json.loads(Path(report['local_feed']).read_text())
-          url=report['endpoint']+'?verify=${{ github.run_id }}-${{ github.run_attempt }}'
+          commit=os.environ['PUBLISHED_COMMIT']
+          assert re.fullmatch(r'[a-f0-9]{40}',commit)
+          # Verify the exact public bytes of the confirmed branch head. Mutable
+          # raw branch URLs can briefly retain a previous CDN response.
+          url=report['endpoint'].replace('/odds-diagnostics/','/'+commit+'/')
           for attempt in range(5):
               try:
-                  with urlopen(Request(url,headers={'Accept':'application/json','Cache-Control':'no-cache'}),timeout=20) as r:
+                  check=url+'?verify=${{ github.run_id }}-${{ github.run_attempt }}-'+str(attempt)
+                  with urlopen(Request(check,headers={'Accept':'application/json','Cache-Control':'no-cache'}),timeout=20) as r:
                       assert r.status==200
                       assert r.headers.get('Access-Control-Allow-Origin')=='*','Browser CORS missing'
                       assert json.load(r)==expected,'Saved feed differs from validated output'
-                  print('PUBLIC FEED READBACK PASS',json.dumps(report,ensure_ascii=False),flush=True)
+                  print('PUBLIC FEED READBACK PASS',json.dumps({**report,'verified_commit':commit,'branch_head_verified':True},ensure_ascii=False),flush=True)
                   break
               except Exception:
                   if attempt==4:raise
