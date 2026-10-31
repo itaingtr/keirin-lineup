@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-31T04:27:28.861441+00:00",
+  "checked_at": "2026-10-31T05:25:04.208075+00:00",
   "results": [
     {
       "source_url": "https://my.keirin.kdreams.jp/keiokaku/racedetail/2720261017010001/",
@@ -46339,7 +46339,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:29.966792+00:00",
+        "observed_at": "2026-10-31T05:25:06.215388+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010001/?pageType=odds",
         "rider_numbers": [
           1,
@@ -46725,7 +46725,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:33.108197+00:00",
+        "observed_at": "2026-10-31T05:25:08.751808+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010002/?pageType=odds",
         "rider_numbers": [
           1,
@@ -47111,7 +47111,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:35.534379+00:00",
+        "observed_at": "2026-10-31T05:25:11.250941+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010003/?pageType=odds",
         "rider_numbers": [
           1,
@@ -47497,7 +47497,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:38.083644+00:00",
+        "observed_at": "2026-10-31T05:25:13.747671+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010004/?pageType=odds",
         "rider_numbers": [
           1,
@@ -47883,7 +47883,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:41.024505+00:00",
+        "observed_at": "2026-10-31T05:25:16.214327+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010005/?pageType=odds",
         "rider_numbers": [
           1,
@@ -48269,7 +48269,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:43.876625+00:00",
+        "observed_at": "2026-10-31T05:25:18.730264+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010006/?pageType=odds",
         "rider_numbers": [
           1,
@@ -48655,7 +48655,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:46.319767+00:00",
+        "observed_at": "2026-10-31T05:25:21.268358+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010007/?pageType=odds",
         "rider_numbers": [
           1,
@@ -48672,362 +48672,362 @@
           {
             "first": 2,
             "second": 1,
-            "value": 16.4
+            "value": 17.4
           },
           {
             "first": 3,
             "second": 1,
-            "value": 78.1
+            "value": 109.1
           },
           {
             "first": 4,
             "second": 1,
-            "value": 332.2
+            "value": 602.0
           },
           {
             "first": 5,
             "second": 1,
-            "value": 9.9
+            "value": 7.3
           },
           {
             "first": 6,
             "second": 1,
-            "value": 204.4
+            "value": 245.9
           },
           {
             "first": 7,
             "second": 1,
-            "value": 100.2
+            "value": 127.9
           },
           {
             "first": 8,
             "second": 1,
-            "value": 590.5
+            "value": 1518.2
           },
           {
             "first": 9,
             "second": 1,
-            "value": 31.2
+            "value": 34.2
           },
           {
             "first": 1,
             "second": 2,
-            "value": 23.9
+            "value": 25.2
           },
           {
             "first": 3,
             "second": 2,
-            "value": 51.6
+            "value": 73.9
           },
           {
             "first": 4,
             "second": 2,
-            "value": 212.6
+            "value": 311.7
           },
           {
             "first": 5,
             "second": 2,
-            "value": 22.8
+            "value": 20.8
           },
           {
             "first": 6,
             "second": 2,
-            "value": 279.7
+            "value": 326.3
           },
           {
             "first": 7,
             "second": 2,
-            "value": 93.2
+            "value": 235.9
           },
           {
             "first": 8,
             "second": 2,
-            "value": 885.8
+            "value": 1164.0
           },
           {
             "first": 9,
             "second": 2,
-            "value": 6.8
+            "value": 5.9
           },
           {
             "first": 1,
             "second": 3,
-            "value": 73.8
+            "value": 66.7
           },
           {
             "first": 2,
             "second": 3,
-            "value": 29.0
+            "value": 35.7
           },
           {
             "first": 4,
             "second": 3,
-            "value": 241.6
+            "value": 684.7
           },
           {
             "first": 5,
             "second": 3,
-            "value": 46.6
+            "value": 47.1
           },
           {
             "first": 6,
             "second": 3,
-            "value": 83.0
+            "value": 66.1
           },
           {
             "first": 7,
             "second": 3,
-            "value": 161.0
+            "value": 442.0
           },
           {
             "first": 8,
             "second": 3,
-            "value": 265.7
+            "value": 379.5
           },
           {
             "first": 9,
             "second": 3,
-            "value": 50.6
+            "value": 57.3
           },
           {
             "first": 1,
             "second": 4,
-            "value": 189.8
+            "value": 251.2
           },
           {
             "first": 2,
             "second": 4,
-            "value": 87.1
+            "value": 102.1
           },
           {
             "first": 3,
             "second": 4,
-            "value": 253.1
+            "value": 406.0
           },
           {
             "first": 5,
             "second": 4,
-            "value": 177.1
+            "value": 235.9
           },
           {
             "first": 6,
             "second": 4,
-            "value": 664.4
+            "value": 1455.0
           },
           {
             "first": 7,
             "second": 4,
-            "value": 177.1
+            "value": 634.9
           },
           {
             "first": 8,
             "second": 4,
-            "value": 885.8
+            "value": 2328.0
           },
           {
             "first": 9,
             "second": 4,
-            "value": 51.6
+            "value": 50.7
           },
           {
             "first": 1,
             "second": 5,
-            "value": 8.2
+            "value": 7.5
           },
           {
             "first": 2,
             "second": 5,
-            "value": 19.5
+            "value": 19.0
           },
           {
             "first": 3,
             "second": 5,
-            "value": 96.6
+            "value": 86.0
           },
           {
             "first": 4,
             "second": 5,
-            "value": 379.6
+            "value": 646.6
           },
           {
             "first": 6,
             "second": 5,
-            "value": 279.7
+            "value": 356.3
           },
           {
             "first": 7,
             "second": 5,
-            "value": 189.8
+            "value": 270.6
           },
           {
             "first": 8,
             "second": 5,
-            "value": 379.6
+            "value": 1204.1
           },
           {
             "first": 9,
             "second": 5,
-            "value": 30.9
+            "value": 31.5
           },
           {
             "first": 1,
             "second": 6,
-            "value": 241.6
+            "value": 203.0
           },
           {
             "first": 2,
             "second": 6,
-            "value": 143.6
+            "value": 178.1
           },
           {
             "first": 3,
             "second": 6,
-            "value": 65.6
+            "value": 42.7
           },
           {
             "first": 4,
             "second": 6,
-            "value": 664.4
+            "value": 1837.8
           },
           {
             "first": 5,
             "second": 6,
-            "value": 204.4
+            "value": 164.7
           },
           {
             "first": 7,
             "second": 6,
-            "value": 531.5
+            "value": 1027.0
           },
           {
             "first": 8,
             "second": 6,
-            "value": 1328.8
+            "value": 873.0
           },
           {
             "first": 9,
             "second": 6,
-            "value": 253.1
+            "value": 245.9
           },
           {
             "first": 1,
             "second": 7,
-            "value": 23.5
+            "value": 27.8
           },
           {
             "first": 2,
             "second": 7,
-            "value": 72.8
+            "value": 121.2
           },
           {
             "first": 3,
             "second": 7,
-            "value": 161.0
+            "value": 352.7
           },
           {
             "first": 4,
             "second": 7,
-            "value": 231.0
+            "value": 1091.2
           },
           {
             "first": 5,
             "second": 7,
-            "value": 73.8
+            "value": 93.3
           },
           {
             "first": 6,
             "second": 7,
-            "value": 531.5
+            "value": 1587.2
           },
           {
             "first": 8,
             "second": 7,
-            "value": 664.4
+            "value": 2328.0
           },
           {
             "first": 9,
             "second": 7,
-            "value": 71.8
+            "value": 158.7
           },
           {
             "first": 1,
             "second": 8,
-            "value": 442.9
+            "value": 485.0
           },
           {
             "first": 2,
             "second": 8,
-            "value": 221.4
+            "value": 298.4
           },
           {
             "first": 3,
             "second": 8,
-            "value": 110.7
+            "value": 103.3
           },
           {
             "first": 4,
             "second": 8,
-            "value": 590.5
+            "value": 1837.8
           },
           {
             "first": 5,
             "second": 8,
-            "value": 147.6
+            "value": 431.1
           },
           {
             "first": 6,
             "second": 8,
-            "value": 759.3
+            "value": 712.6
           },
           {
             "first": 7,
             "second": 8,
-            "value": 332.2
+            "value": 1247.1
           },
           {
             "first": 9,
             "second": 8,
-            "value": 221.4
+            "value": 513.5
           },
           {
             "first": 1,
             "second": 9,
-            "value": 27.2
+            "value": 31.1
           },
           {
             "first": 2,
             "second": 9,
-            "value": 6.1
+            "value": 5.0
           },
           {
             "first": 3,
             "second": 9,
-            "value": 78.1
+            "value": 69.5
           },
           {
             "first": 4,
             "second": 9,
-            "value": 156.3
+            "value": 251.2
           },
           {
             "first": 5,
             "second": 9,
-            "value": 27.3
+            "value": 28.0
           },
           {
             "first": 6,
             "second": 9,
-            "value": 279.7
+            "value": 349.2
           },
           {
             "first": 7,
             "second": 9,
-            "value": 183.2
+            "value": 367.5
           },
           {
             "first": 8,
             "second": 9,
-            "value": 265.7
+            "value": 997.7
           }
         ],
         "source_title": "防府競輪 レース詳細 | 周防国府杯争奪戦 7R Ｓ級一予選 | 2026年10月31日【楽天Kドリームス】"
@@ -49041,7 +49041,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:49.359933+00:00",
+        "observed_at": "2026-10-31T05:25:23.774980+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010008/?pageType=odds",
         "rider_numbers": [
           1,
@@ -49058,362 +49058,362 @@
           {
             "first": 2,
             "second": 1,
-            "value": 22.6
+            "value": 22.5
           },
           {
             "first": 3,
             "second": 1,
-            "value": 102.5
+            "value": 142.7
           },
           {
             "first": 4,
             "second": 1,
-            "value": 267.4
+            "value": 400.2
           },
           {
             "first": 5,
             "second": 1,
-            "value": 7.3
+            "value": 6.4
           },
           {
             "first": 6,
             "second": 1,
-            "value": 307.5
+            "value": 690.6
           },
           {
             "first": 7,
             "second": 1,
-            "value": 104.2
+            "value": 144.1
           },
           {
             "first": 8,
             "second": 1,
-            "value": 323.7
+            "value": 738.3
           },
           {
             "first": 9,
             "second": 1,
-            "value": 89.1
+            "value": 118.9
           },
           {
             "first": 1,
             "second": 2,
-            "value": 31.5
+            "value": 47.7
           },
           {
             "first": 3,
             "second": 2,
-            "value": 53.9
+            "value": 68.6
           },
           {
             "first": 4,
             "second": 2,
-            "value": 279.5
+            "value": 436.9
           },
           {
             "first": 5,
             "second": 2,
-            "value": 12.8
+            "value": 10.5
           },
           {
             "first": 6,
             "second": 2,
-            "value": 236.5
+            "value": 339.8
           },
           {
             "first": 7,
             "second": 2,
-            "value": 19.1
+            "value": 15.1
           },
           {
             "first": 8,
             "second": 2,
-            "value": 473.1
+            "value": 509.7
           },
           {
             "first": 9,
             "second": 2,
-            "value": 58.5
+            "value": 43.3
           },
           {
             "first": 1,
             "second": 3,
-            "value": 102.5
+            "value": 126.3
           },
           {
             "first": 2,
             "second": 3,
-            "value": 25.0
+            "value": 25.8
           },
           {
             "first": 4,
             "second": 3,
-            "value": 323.7
+            "value": 1070.5
           },
           {
             "first": 5,
             "second": 3,
-            "value": 42.4
+            "value": 47.8
           },
           {
             "first": 6,
             "second": 3,
-            "value": 267.4
+            "value": 823.5
           },
           {
             "first": 7,
             "second": 3,
-            "value": 128.1
+            "value": 192.8
           },
           {
             "first": 8,
             "second": 3,
-            "value": 292.8
+            "value": 481.1
           },
           {
             "first": 9,
             "second": 3,
-            "value": 26.5
+            "value": 19.5
           },
           {
             "first": 1,
             "second": 4,
-            "value": 125.5
+            "value": 182.2
           },
           {
             "first": 2,
             "second": 4,
-            "value": 79.8
+            "value": 102.6
           },
           {
             "first": 3,
             "second": 4,
-            "value": 267.4
+            "value": 492.2
           },
           {
             "first": 5,
             "second": 4,
-            "value": 19.6
+            "value": 20.2
           },
           {
             "first": 6,
             "second": 4,
-            "value": 1025.1
+            "value": 1297.6
           },
           {
             "first": 7,
             "second": 4,
-            "value": 246.0
+            "value": 509.7
           },
           {
             "first": 8,
             "second": 4,
-            "value": 1230.1
+            "value": 2253.8
           },
           {
             "first": 9,
             "second": 4,
-            "value": 410.0
+            "value": 603.1
           },
           {
             "first": 1,
             "second": 5,
-            "value": 14.2
+            "value": 15.9
           },
           {
             "first": 2,
             "second": 5,
-            "value": 10.1
+            "value": 6.9
           },
           {
             "first": 3,
             "second": 5,
-            "value": 75.0
+            "value": 92.6
           },
           {
             "first": 4,
             "second": 5,
-            "value": 109.8
+            "value": 127.0
           },
           {
             "first": 6,
             "second": 5,
-            "value": 341.7
+            "value": 620.6
           },
           {
             "first": 7,
             "second": 5,
-            "value": 34.9
+            "value": 68.8
           },
           {
             "first": 8,
             "second": 5,
-            "value": 279.5
+            "value": 455.5
           },
           {
             "first": 9,
             "second": 5,
-            "value": 96.1
+            "value": 45.4
           },
           {
             "first": 1,
             "second": 6,
-            "value": 175.7
+            "value": 375.6
           },
           {
             "first": 2,
             "second": 6,
-            "value": 106.0
+            "value": 136.3
           },
           {
             "first": 3,
             "second": 6,
-            "value": 256.2
+            "value": 556.1
           },
           {
             "first": 4,
             "second": 6,
-            "value": 1537.6
+            "value": 1259.4
           },
           {
             "first": 5,
             "second": 6,
-            "value": 146.4
+            "value": 209.9
           },
           {
             "first": 7,
             "second": 6,
-            "value": 361.8
+            "value": 436.9
           },
           {
             "first": 8,
             "second": 6,
-            "value": 93.1
+            "value": 226.5
           },
           {
             "first": 9,
             "second": 6,
-            "value": 323.7
+            "value": 450.7
           },
           {
             "first": 1,
             "second": 7,
-            "value": 64.7
+            "value": 114.4
           },
           {
             "first": 2,
             "second": 7,
-            "value": 5.9
+            "value": 4.8
           },
           {
             "first": 3,
             "second": 7,
-            "value": 89.1
+            "value": 183.0
           },
           {
             "first": 4,
             "second": 7,
-            "value": 323.7
+            "value": 1070.5
           },
           {
             "first": 5,
             "second": 7,
-            "value": 23.1
+            "value": 37.8
           },
           {
             "first": 6,
             "second": 7,
-            "value": 768.8
+            "value": 702.0
           },
           {
             "first": 8,
             "second": 7,
-            "value": 683.4
+            "value": 1259.4
           },
           {
             "first": 9,
             "second": 7,
-            "value": 83.1
+            "value": 164.7
           },
           {
             "first": 1,
             "second": 8,
-            "value": 192.2
+            "value": 400.2
           },
           {
             "first": 2,
             "second": 8,
-            "value": 130.8
+            "value": 135.9
           },
           {
             "first": 3,
             "second": 8,
-            "value": 161.8
+            "value": 329.4
           },
           {
             "first": 4,
             "second": 8,
-            "value": 768.8
+            "value": 1647.0
           },
           {
             "first": 5,
             "second": 8,
-            "value": 94.6
+            "value": 169.2
           },
           {
             "first": 6,
             "second": 8,
-            "value": 133.7
+            "value": 243.3
           },
           {
             "first": 7,
             "second": 8,
-            "value": 384.4
+            "value": 611.7
           },
           {
             "first": 9,
             "second": 8,
-            "value": 323.7
+            "value": 339.8
           },
           {
             "first": 1,
             "second": 9,
-            "value": 77.8
+            "value": 130.1
           },
           {
             "first": 2,
             "second": 9,
-            "value": 32.0
+            "value": 33.2
           },
           {
             "first": 3,
             "second": 9,
-            "value": 27.3
+            "value": 35.4
           },
           {
             "first": 4,
             "second": 9,
-            "value": 439.3
+            "value": 793.0
           },
           {
             "first": 5,
             "second": 9,
-            "value": 49.6
+            "value": 32.4
           },
           {
             "first": 6,
             "second": 9,
-            "value": 341.7
+            "value": 639.1
           },
           {
             "first": 7,
             "second": 9,
-            "value": 205.0
+            "value": 262.7
           },
           {
             "first": 8,
             "second": 9,
-            "value": 439.3
+            "value": 441.4
           }
         ],
         "source_title": "防府競輪 レース詳細 | 周防国府杯争奪戦 8R Ｓ級一予選 | 2026年10月31日【楽天Kドリームス】"
@@ -49427,7 +49427,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:51.807878+00:00",
+        "observed_at": "2026-10-31T05:25:26.284121+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010009/?pageType=odds",
         "rider_numbers": [
           1,
@@ -49444,362 +49444,362 @@
           {
             "first": 2,
             "second": 1,
-            "value": 11.4
+            "value": 13.5
           },
           {
             "first": 3,
             "second": 1,
-            "value": 40.1
+            "value": 42.8
           },
           {
             "first": 4,
             "second": 1,
-            "value": 116.4
+            "value": 130.6
           },
           {
             "first": 5,
             "second": 1,
-            "value": 28.7
+            "value": 26.9
           },
           {
             "first": 6,
             "second": 1,
-            "value": 332.6
+            "value": 405.6
           },
           {
             "first": 7,
             "second": 1,
-            "value": 58.9
+            "value": 61.1
           },
           {
             "first": 8,
             "second": 1,
-            "value": 291.0
+            "value": 321.1
           },
           {
             "first": 9,
             "second": 1,
-            "value": 33.9
+            "value": 33.0
           },
           {
             "first": 1,
             "second": 2,
-            "value": 7.2
+            "value": 6.1
           },
           {
             "first": 3,
             "second": 2,
-            "value": 54.7
+            "value": 72.0
           },
           {
             "first": 4,
             "second": 2,
-            "value": 221.7
+            "value": 197.6
           },
           {
             "first": 5,
             "second": 2,
-            "value": 68.4
+            "value": 79.4
           },
           {
             "first": 6,
             "second": 2,
-            "value": 465.6
+            "value": 592.8
           },
           {
             "first": 7,
             "second": 2,
-            "value": 22.0
+            "value": 24.4
           },
           {
             "first": 8,
             "second": 2,
-            "value": 517.4
+            "value": 405.6
           },
           {
             "first": 9,
             "second": 2,
-            "value": 110.8
+            "value": 107.0
           },
           {
             "first": 1,
             "second": 3,
-            "value": 24.1
+            "value": 18.8
           },
           {
             "first": 2,
             "second": 3,
-            "value": 38.8
+            "value": 47.2
           },
           {
             "first": 4,
             "second": 3,
-            "value": 71.6
+            "value": 81.9
           },
           {
             "first": 5,
             "second": 3,
-            "value": 75.1
+            "value": 101.4
           },
           {
             "first": 6,
             "second": 3,
-            "value": 245.0
+            "value": 321.1
           },
           {
             "first": 7,
             "second": 3,
-            "value": 125.8
+            "value": 163.9
           },
           {
             "first": 8,
             "second": 3,
-            "value": 358.2
+            "value": 453.3
           },
           {
             "first": 9,
             "second": 3,
-            "value": 119.4
+            "value": 142.7
           },
           {
             "first": 1,
             "second": 4,
-            "value": 45.2
+            "value": 29.6
           },
           {
             "first": 2,
             "second": 4,
-            "value": 72.7
+            "value": 84.6
           },
           {
             "first": 3,
             "second": 4,
-            "value": 47.5
+            "value": 52.0
           },
           {
             "first": 5,
             "second": 4,
-            "value": 186.2
+            "value": 179.2
           },
           {
             "first": 6,
             "second": 4,
-            "value": 358.2
+            "value": 367.0
           },
           {
             "first": 7,
             "second": 4,
-            "value": 141.1
+            "value": 183.5
           },
           {
             "first": 8,
             "second": 4,
-            "value": 776.1
+            "value": 770.7
           },
           {
             "first": 9,
             "second": 4,
-            "value": 358.2
+            "value": 321.1
           },
           {
             "first": 1,
             "second": 5,
-            "value": 6.3
+            "value": 5.9
           },
           {
             "first": 2,
             "second": 5,
-            "value": 44.3
+            "value": 50.7
           },
           {
             "first": 3,
             "second": 5,
-            "value": 83.1
+            "value": 102.7
           },
           {
             "first": 4,
             "second": 5,
-            "value": 358.2
+            "value": 308.2
           },
           {
             "first": 6,
             "second": 5,
-            "value": 776.1
+            "value": 856.3
           },
           {
             "first": 7,
             "second": 5,
-            "value": 145.5
+            "value": 187.9
           },
           {
             "first": 8,
             "second": 5,
-            "value": 310.4
+            "value": 453.3
           },
           {
             "first": 9,
             "second": 5,
-            "value": 108.2
+            "value": 113.3
           },
           {
             "first": 1,
             "second": 6,
-            "value": 133.0
+            "value": 142.7
           },
           {
             "first": 2,
             "second": 6,
-            "value": 332.6
+            "value": 296.4
           },
           {
             "first": 3,
             "second": 6,
-            "value": 258.7
+            "value": 285.4
           },
           {
             "first": 4,
             "second": 6,
-            "value": 358.2
+            "value": 275.2
           },
           {
             "first": 5,
             "second": 6,
-            "value": 465.6
+            "value": 700.6
           },
           {
             "first": 7,
             "second": 6,
-            "value": 310.4
+            "value": 453.3
           },
           {
             "first": 8,
             "second": 6,
-            "value": 2328.3
+            "value": 1541.4
           },
           {
             "first": 9,
             "second": 6,
-            "value": 517.4
+            "value": 642.2
           },
           {
             "first": 1,
             "second": 7,
-            "value": 21.2
+            "value": 17.9
           },
           {
             "first": 2,
             "second": 7,
-            "value": 13.6
+            "value": 14.5
           },
           {
             "first": 3,
             "second": 7,
-            "value": 113.5
+            "value": 140.1
           },
           {
             "first": 4,
             "second": 7,
-            "value": 202.4
+            "value": 220.2
           },
           {
             "first": 5,
             "second": 7,
-            "value": 141.1
+            "value": 183.5
           },
           {
             "first": 6,
             "second": 7,
-            "value": 1552.2
+            "value": 1101.0
           },
           {
             "first": 8,
             "second": 7,
-            "value": 423.3
+            "value": 405.6
           },
           {
             "first": 9,
             "second": 7,
-            "value": 75.1
+            "value": 105.5
           },
           {
             "first": 1,
             "second": 8,
-            "value": 108.2
+            "value": 107.0
           },
           {
             "first": 2,
             "second": 8,
-            "value": 172.4
+            "value": 160.5
           },
           {
             "first": 3,
             "second": 8,
-            "value": 221.7
+            "value": 275.2
           },
           {
             "first": 4,
             "second": 8,
-            "value": 582.0
+            "value": 642.2
           },
           {
             "first": 5,
             "second": 8,
-            "value": 155.2
+            "value": 240.8
           },
           {
             "first": 6,
             "second": 8,
-            "value": 2328.3
+            "value": 963.3
           },
           {
             "first": 7,
             "second": 8,
-            "value": 136.9
+            "value": 137.6
           },
           {
             "first": 9,
             "second": 8,
-            "value": 245.0
+            "value": 367.0
           },
           {
             "first": 1,
             "second": 9,
-            "value": 4.6
+            "value": 4.5
           },
           {
             "first": 2,
             "second": 9,
-            "value": 72.7
+            "value": 67.6
           },
           {
             "first": 3,
             "second": 9,
-            "value": 129.3
+            "value": 142.7
           },
           {
             "first": 4,
             "second": 9,
-            "value": 388.0
+            "value": 453.3
           },
           {
             "first": 5,
             "second": 9,
-            "value": 97.0
+            "value": 98.8
           },
           {
             "first": 6,
             "second": 9,
-            "value": 1164.1
+            "value": 770.7
           },
           {
             "first": 7,
             "second": 9,
-            "value": 172.4
+            "value": 240.8
           },
           {
             "first": 8,
             "second": 9,
-            "value": 358.2
+            "value": 513.8
           }
         ],
         "source_title": "防府競輪 レース詳細 | 周防国府杯争奪戦 9R Ｓ級一予選 | 2026年10月31日【楽天Kドリームス】"
@@ -49813,7 +49813,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:54.701264+00:00",
+        "observed_at": "2026-10-31T05:25:28.780946+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010010/?pageType=odds",
         "rider_numbers": [
           1,
@@ -49830,362 +49830,362 @@
           {
             "first": 2,
             "second": 1,
-            "value": 108.9
+            "value": 124.5
           },
           {
             "first": 3,
             "second": 1,
-            "value": 25.4
+            "value": 26.6
           },
           {
             "first": 4,
             "second": 1,
-            "value": 366.9
+            "value": 438.8
           },
           {
             "first": 5,
             "second": 1,
-            "value": 53.2
+            "value": 49.2
           },
           {
             "first": 6,
             "second": 1,
-            "value": 290.4
+            "value": 263.3
           },
           {
             "first": 7,
             "second": 1,
-            "value": 193.6
+            "value": 230.4
           },
           {
             "first": 8,
             "second": 1,
-            "value": 316.8
+            "value": 341.3
           },
           {
             "first": 9,
             "second": 1,
-            "value": 3.6
+            "value": 3.4
           },
           {
             "first": 1,
             "second": 2,
-            "value": 83.9
+            "value": 87.7
           },
           {
             "first": 3,
             "second": 2,
-            "value": 37.2
+            "value": 41.7
           },
           {
             "first": 4,
             "second": 2,
-            "value": 387.2
+            "value": 384.0
           },
           {
             "first": 5,
             "second": 2,
-            "value": 19.9
+            "value": 20.0
           },
           {
             "first": 6,
             "second": 2,
-            "value": 580.9
+            "value": 512.0
           },
           {
             "first": 7,
             "second": 2,
-            "value": 258.1
+            "value": 249.1
           },
           {
             "first": 8,
             "second": 2,
-            "value": 464.7
+            "value": 485.0
           },
           {
             "first": 9,
             "second": 2,
-            "value": 32.1
+            "value": 34.1
           },
           {
             "first": 1,
             "second": 3,
-            "value": 37.4
+            "value": 36.7
           },
           {
             "first": 2,
             "second": 3,
-            "value": 99.5
+            "value": 99.1
           },
           {
             "first": 4,
             "second": 3,
+            "value": 115.2
+          },
+          {
+            "first": 5,
+            "second": 3,
+            "value": 41.1
+          },
+          {
+            "first": 6,
+            "second": 3,
+            "value": 263.3
+          },
+          {
+            "first": 7,
+            "second": 3,
+            "value": 105.9
+          },
+          {
+            "first": 8,
+            "second": 3,
+            "value": 200.3
+          },
+          {
+            "first": 9,
+            "second": 3,
+            "value": 15.0
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "value": 200.3
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "value": 384.0
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "value": 33.6
+          },
+          {
+            "first": 5,
+            "second": 4,
+            "value": 173.9
+          },
+          {
+            "first": 6,
+            "second": 4,
+            "value": 1024.0
+          },
+          {
+            "first": 7,
+            "second": 4,
+            "value": 307.2
+          },
+          {
+            "first": 8,
+            "second": 4,
+            "value": 768.0
+          },
+          {
+            "first": 9,
+            "second": 4,
             "value": 118.1
           },
           {
-            "first": 5,
-            "second": 3,
-            "value": 40.7
-          },
-          {
-            "first": 6,
-            "second": 3,
-            "value": 248.9
-          },
-          {
-            "first": 7,
-            "second": 3,
-            "value": 110.6
-          },
-          {
-            "first": 8,
-            "second": 3,
-            "value": 183.4
-          },
-          {
-            "first": 9,
-            "second": 3,
-            "value": 15.3
-          },
-          {
-            "first": 1,
-            "second": 4,
-            "value": 165.9
-          },
-          {
-            "first": 2,
-            "second": 4,
-            "value": 316.8
-          },
-          {
-            "first": 3,
-            "second": 4,
-            "value": 30.3
-          },
-          {
-            "first": 5,
-            "second": 4,
-            "value": 142.2
-          },
-          {
-            "first": 6,
-            "second": 4,
-            "value": 995.8
-          },
-          {
-            "first": 7,
-            "second": 4,
-            "value": 278.8
-          },
-          {
-            "first": 8,
-            "second": 4,
-            "value": 995.8
-          },
-          {
-            "first": 9,
-            "second": 4,
-            "value": 116.1
-          },
-          {
             "first": 1,
             "second": 5,
-            "value": 54.8
+            "value": 46.5
           },
           {
             "first": 2,
             "second": 5,
-            "value": 34.5
+            "value": 34.7
           },
           {
             "first": 3,
             "second": 5,
-            "value": 22.2
+            "value": 24.5
           },
           {
             "first": 4,
             "second": 5,
-            "value": 536.2
+            "value": 512.0
           },
           {
             "first": 6,
             "second": 5,
-            "value": 774.5
+            "value": 614.4
           },
           {
             "first": 7,
             "second": 5,
-            "value": 387.2
+            "value": 418.9
           },
           {
             "first": 8,
             "second": 5,
-            "value": 268.1
+            "value": 263.3
           },
           {
             "first": 9,
             "second": 5,
-            "value": 26.9
+            "value": 27.1
           },
           {
             "first": 1,
             "second": 6,
-            "value": 303.0
+            "value": 219.4
           },
           {
             "first": 2,
             "second": 6,
-            "value": 316.8
+            "value": 307.2
           },
           {
             "first": 3,
             "second": 6,
-            "value": 71.8
+            "value": 78.1
           },
           {
             "first": 4,
             "second": 6,
-            "value": 774.5
+            "value": 837.8
           },
           {
             "first": 5,
             "second": 6,
-            "value": 258.1
+            "value": 236.3
           },
           {
             "first": 7,
             "second": 6,
-            "value": 536.2
+            "value": 658.3
           },
           {
             "first": 8,
             "second": 6,
-            "value": 134.0
+            "value": 124.5
           },
           {
             "first": 9,
             "second": 6,
-            "value": 158.4
+            "value": 128.0
           },
           {
             "first": 1,
             "second": 7,
-            "value": 101.0
+            "value": 111.0
           },
           {
             "first": 2,
             "second": 7,
-            "value": 258.1
+            "value": 271.0
           },
           {
             "first": 3,
             "second": 7,
-            "value": 13.9
-          },
-          {
-            "first": 4,
-            "second": 7,
-            "value": 268.1
-          },
-          {
-            "first": 5,
-            "second": 7,
-            "value": 118.1
-          },
-          {
-            "first": 6,
-            "second": 7,
-            "value": 774.5
-          },
-          {
-            "first": 8,
-            "second": 7,
-            "value": 774.5
-          },
-          {
-            "first": 9,
-            "second": 7,
-            "value": 76.6
-          },
-          {
-            "first": 1,
-            "second": 8,
-            "value": 224.8
-          },
-          {
-            "first": 2,
-            "second": 8,
-            "value": 464.7
-          },
-          {
-            "first": 3,
-            "second": 8,
-            "value": 60.6
-          },
-          {
-            "first": 4,
-            "second": 8,
-            "value": 871.4
-          },
-          {
-            "first": 5,
-            "second": 8,
-            "value": 104.0
-          },
-          {
-            "first": 6,
-            "second": 8,
-            "value": 151.5
-          },
-          {
-            "first": 7,
-            "second": 8,
-            "value": 435.7
-          },
-          {
-            "first": 9,
-            "second": 8,
-            "value": 75.7
-          },
-          {
-            "first": 1,
-            "second": 9,
-            "value": 7.9
-          },
-          {
-            "first": 2,
-            "second": 9,
-            "value": 34.0
-          },
-          {
-            "first": 3,
-            "second": 9,
             "value": 14.7
           },
           {
             "first": 4,
+            "second": 7,
+            "value": 329.1
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 141.7
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 921.6
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 576.0
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 80.1
+          },
+          {
+            "first": 1,
+            "second": 8,
+            "value": 180.7
+          },
+          {
+            "first": 2,
+            "second": 8,
+            "value": 512.0
+          },
+          {
+            "first": 3,
+            "second": 8,
+            "value": 70.3
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "value": 576.0
+          },
+          {
+            "first": 5,
+            "second": 8,
+            "value": 111.0
+          },
+          {
+            "first": 6,
+            "second": 8,
+            "value": 137.5
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "value": 438.8
+          },
+          {
+            "first": 9,
+            "second": 8,
+            "value": 75.5
+          },
+          {
+            "first": 1,
             "second": 9,
-            "value": 303.0
+            "value": 7.0
+          },
+          {
+            "first": 2,
+            "second": 9,
+            "value": 38.7
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "value": 15.3
+          },
+          {
+            "first": 4,
+            "second": 9,
+            "value": 288.0
           },
           {
             "first": 5,
             "second": 9,
-            "value": 28.4
+            "value": 29.7
           },
           {
             "first": 6,
             "second": 9,
-            "value": 387.2
+            "value": 329.1
           },
           {
             "first": 7,
             "second": 9,
-            "value": 232.3
+            "value": 242.5
           },
           {
             "first": 8,
             "second": 9,
-            "value": 80.1
+            "value": 94.0
           }
         ],
         "source_title": "防府競輪 レース詳細 | 周防国府杯争奪戦 10R Ｓ級一予選 | 2026年10月31日【楽天Kドリームス】"
@@ -50199,7 +50199,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:27:57.132774+00:00",
+        "observed_at": "2026-10-31T05:25:31.483937+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010011/?pageType=odds",
         "rider_numbers": [
           1,
@@ -50216,362 +50216,362 @@
           {
             "first": 2,
             "second": 1,
-            "value": 63.1
+            "value": 60.0
           },
           {
             "first": 3,
             "second": 1,
-            "value": 115.2
+            "value": 120.7
           },
           {
             "first": 4,
             "second": 1,
-            "value": 207.4
+            "value": 205.3
           },
           {
             "first": 5,
             "second": 1,
-            "value": 129.6
+            "value": 153.2
           },
           {
             "first": 6,
             "second": 1,
-            "value": 382.1
+            "value": 513.3
           },
           {
             "first": 7,
             "second": 1,
-            "value": 4.6
+            "value": 4.4
           },
           {
             "first": 8,
             "second": 1,
-            "value": 518.6
+            "value": 684.5
           },
           {
             "first": 9,
             "second": 1,
-            "value": 27.8
+            "value": 31.7
           },
           {
             "first": 1,
             "second": 2,
-            "value": 17.4
+            "value": 17.6
           },
           {
             "first": 3,
             "second": 2,
-            "value": 259.3
+            "value": 331.2
           },
           {
             "first": 4,
             "second": 2,
-            "value": 302.5
+            "value": 342.2
           },
           {
             "first": 5,
             "second": 2,
-            "value": 279.2
+            "value": 301.9
           },
           {
             "first": 6,
             "second": 2,
-            "value": 518.6
+            "value": 684.5
           },
           {
             "first": 7,
             "second": 2,
-            "value": 76.4
+            "value": 78.3
           },
           {
             "first": 8,
             "second": 2,
-            "value": 907.6
+            "value": 1026.7
           },
           {
             "first": 9,
             "second": 2,
-            "value": 27.4
+            "value": 29.1
           },
           {
             "first": 1,
             "second": 3,
-            "value": 38.2
+            "value": 41.7
           },
           {
             "first": 2,
             "second": 3,
-            "value": 191.0
+            "value": 238.7
           },
           {
             "first": 4,
             "second": 3,
-            "value": 382.1
+            "value": 427.8
           },
           {
             "first": 5,
             "second": 3,
-            "value": 89.6
+            "value": 105.8
           },
           {
             "first": 6,
             "second": 3,
-            "value": 453.8
+            "value": 641.7
           },
           {
             "first": 7,
             "second": 3,
-            "value": 127.3
+            "value": 146.6
           },
           {
             "first": 8,
             "second": 3,
-            "value": 484.1
+            "value": 684.5
           },
           {
             "first": 9,
             "second": 3,
-            "value": 106.7
+            "value": 135.0
           },
           {
             "first": 1,
             "second": 4,
-            "value": 30.1
+            "value": 30.3
           },
           {
             "first": 2,
             "second": 4,
-            "value": 177.1
+            "value": 228.1
           },
           {
             "first": 3,
             "second": 4,
-            "value": 427.1
+            "value": 427.8
           },
           {
             "first": 5,
             "second": 4,
-            "value": 403.4
+            "value": 466.7
           },
           {
             "first": 6,
             "second": 4,
-            "value": 1815.3
+            "value": 2566.8
           },
           {
             "first": 7,
             "second": 4,
-            "value": 50.4
+            "value": 50.0
           },
           {
             "first": 8,
             "second": 4,
-            "value": 1210.2
+            "value": 1466.7
           },
           {
             "first": 9,
             "second": 4,
-            "value": 207.4
+            "value": 256.6
           },
           {
             "first": 1,
             "second": 5,
-            "value": 33.7
+            "value": 36.4
           },
           {
             "first": 2,
             "second": 5,
-            "value": 220.0
+            "value": 238.7
           },
           {
             "first": 3,
             "second": 5,
-            "value": 119.0
+            "value": 126.7
           },
           {
             "first": 4,
             "second": 5,
-            "value": 806.8
+            "value": 933.4
           },
           {
             "first": 6,
             "second": 5,
-            "value": 1815.3
+            "value": 2053.5
           },
           {
             "first": 7,
             "second": 5,
-            "value": 157.8
+            "value": 186.6
           },
           {
             "first": 8,
             "second": 5,
-            "value": 345.7
+            "value": 427.8
           },
           {
             "first": 9,
             "second": 5,
-            "value": 177.1
+            "value": 168.3
           },
           {
             "first": 1,
             "second": 6,
-            "value": 168.8
+            "value": 177.0
           },
           {
             "first": 2,
             "second": 6,
-            "value": 234.2
+            "value": 256.6
           },
           {
             "first": 3,
             "second": 6,
-            "value": 403.4
+            "value": 466.7
           },
           {
             "first": 4,
             "second": 6,
-            "value": 907.6
+            "value": 1283.4
           },
           {
             "first": 5,
             "second": 6,
-            "value": 1037.3
+            "value": 1283.4
           },
           {
             "first": 7,
             "second": 6,
-            "value": 315.7
+            "value": 380.2
           },
           {
             "first": 8,
             "second": 6,
-            "value": 1452.3
+            "value": 1466.7
           },
           {
             "first": 9,
             "second": 6,
-            "value": 427.1
+            "value": 540.3
           },
           {
             "first": 1,
             "second": 7,
-            "value": 2.0
+            "value": 1.9
           },
           {
             "first": 2,
             "second": 7,
-            "value": 108.3
+            "value": 105.8
           },
           {
             "first": 3,
             "second": 7,
-            "value": 226.9
+            "value": 277.5
           },
           {
             "first": 4,
             "second": 7,
-            "value": 154.5
+            "value": 148.8
           },
           {
             "first": 5,
             "second": 7,
-            "value": 259.3
+            "value": 311.1
           },
           {
             "first": 6,
             "second": 7,
-            "value": 726.1
+            "value": 789.8
           },
           {
             "first": 8,
             "second": 7,
-            "value": 726.1
+            "value": 789.8
           },
           {
             "first": 9,
             "second": 7,
-            "value": 49.3
+            "value": 53.1
           },
           {
             "first": 1,
             "second": 8,
-            "value": 181.5
+            "value": 180.1
           },
           {
             "first": 2,
             "second": 8,
-            "value": 558.5
+            "value": 641.7
           },
           {
             "first": 3,
             "second": 8,
-            "value": 382.1
+            "value": 446.4
           },
           {
             "first": 4,
             "second": 8,
-            "value": 1037.3
+            "value": 1283.4
           },
           {
             "first": 5,
             "second": 8,
-            "value": 165.0
+            "value": 205.3
           },
           {
             "first": 6,
             "second": 8,
-            "value": 1815.3
+            "value": 1283.4
           },
           {
             "first": 7,
             "second": 8,
-            "value": 363.0
+            "value": 394.9
           },
           {
             "first": 9,
             "second": 8,
-            "value": 259.3
+            "value": 366.6
           },
           {
             "first": 1,
             "second": 9,
-            "value": 11.1
+            "value": 11.9
           },
           {
             "first": 2,
             "second": 9,
-            "value": 33.3
+            "value": 36.5
           },
           {
             "first": 3,
             "second": 9,
-            "value": 142.3
+            "value": 186.6
           },
           {
             "first": 4,
             "second": 9,
-            "value": 345.7
+            "value": 446.4
           },
           {
             "first": 5,
             "second": 9,
-            "value": 279.2
+            "value": 311.1
           },
           {
             "first": 6,
             "second": 9,
-            "value": 806.8
+            "value": 933.4
           },
           {
             "first": 7,
             "second": 9,
-            "value": 56.7
+            "value": 57.3
           },
           {
             "first": 8,
             "second": 9,
-            "value": 660.1
+            "value": 933.4
           }
         ],
         "source_title": "防府競輪 レース詳細 | 周防国府杯争奪戦 11R Ｓ級一予選 | 2026年10月31日【楽天Kドリームス】"
@@ -50585,7 +50585,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:00.257160+00:00",
+        "observed_at": "2026-10-31T05:25:33.979769+00:00",
         "source_url": "https://keirin.kdreams.jp/hofu/racedetail/6320261031010012/?pageType=odds",
         "rider_numbers": [
           1,
@@ -50602,362 +50602,362 @@
           {
             "first": 2,
             "second": 1,
-            "value": 28.6
+            "value": 27.5
           },
           {
             "first": 3,
             "second": 1,
-            "value": 165.0
+            "value": 168.9
           },
           {
             "first": 4,
             "second": 1,
-            "value": 41.9
+            "value": 42.1
           },
           {
             "first": 5,
             "second": 1,
-            "value": 66.3
+            "value": 61.3
           },
           {
             "first": 6,
             "second": 1,
-            "value": 316.1
+            "value": 322.5
           },
           {
             "first": 7,
             "second": 1,
-            "value": 72.8
+            "value": 73.9
           },
           {
             "first": 8,
             "second": 1,
-            "value": 22.1
+            "value": 21.6
           },
           {
             "first": 9,
             "second": 1,
-            "value": 36.0
+            "value": 35.0
           },
           {
             "first": 1,
             "second": 2,
-            "value": 33.5
+            "value": 34.2
           },
           {
             "first": 3,
             "second": 2,
-            "value": 186.8
+            "value": 206.4
           },
           {
             "first": 4,
             "second": 2,
-            "value": 195.4
+            "value": 214.4
           },
           {
             "first": 5,
             "second": 2,
-            "value": 77.5
+            "value": 80.6
           },
           {
             "first": 6,
             "second": 2,
-            "value": 306.3
+            "value": 317.2
           },
           {
             "first": 7,
             "second": 2,
-            "value": 50.7
+            "value": 56.3
           },
           {
             "first": 8,
             "second": 2,
-            "value": 8.4
+            "value": 8.5
           },
           {
             "first": 9,
             "second": 2,
-            "value": 46.0
+            "value": 43.0
           },
           {
             "first": 1,
             "second": 3,
-            "value": 84.1
+            "value": 93.3
           },
           {
             "first": 2,
             "second": 3,
-            "value": 110.8
+            "value": 115.1
           },
           {
             "first": 4,
             "second": 3,
-            "value": 319.5
+            "value": 333.5
           },
           {
             "first": 5,
             "second": 3,
-            "value": 153.1
+            "value": 173.4
           },
           {
             "first": 6,
             "second": 3,
-            "value": 396.2
+            "value": 415.1
           },
           {
             "first": 7,
             "second": 3,
-            "value": 137.5
+            "value": 136.4
           },
           {
             "first": 8,
             "second": 3,
-            "value": 113.8
+            "value": 121.1
           },
           {
             "first": 9,
             "second": 3,
-            "value": 56.1
+            "value": 60.7
           },
           {
             "first": 1,
             "second": 4,
-            "value": 19.2
+            "value": 18.9
           },
           {
             "first": 2,
             "second": 4,
-            "value": 90.0
+            "value": 94.0
           },
           {
             "first": 3,
             "second": 4,
-            "value": 479.2
+            "value": 487.8
           },
           {
             "first": 5,
             "second": 4,
-            "value": 99.3
+            "value": 108.4
           },
           {
             "first": 6,
             "second": 4,
-            "value": 619.0
+            "value": 565.5
           },
           {
             "first": 7,
             "second": 4,
-            "value": 179.0
+            "value": 197.1
           },
           {
             "first": 8,
             "second": 4,
-            "value": 103.5
+            "value": 111.1
           },
           {
             "first": 9,
             "second": 4,
-            "value": 100.7
+            "value": 96.3
           },
           {
             "first": 1,
             "second": 5,
-            "value": 51.2
-          },
-          {
-            "first": 2,
-            "second": 5,
-            "value": 48.3
-          },
-          {
-            "first": 3,
-            "second": 5,
-            "value": 265.3
-          },
-          {
-            "first": 4,
-            "second": 5,
-            "value": 176.8
-          },
-          {
-            "first": 6,
-            "second": 5,
-            "value": 67.5
-          },
-          {
-            "first": 7,
-            "second": 5,
-            "value": 101.7
-          },
-          {
-            "first": 8,
-            "second": 5,
-            "value": 37.7
-          },
-          {
-            "first": 9,
-            "second": 5,
-            "value": 51.9
-          },
-          {
-            "first": 1,
-            "second": 6,
-            "value": 128.0
-          },
-          {
-            "first": 2,
-            "second": 6,
-            "value": 140.8
-          },
-          {
-            "first": 3,
-            "second": 6,
-            "value": 632.2
-          },
-          {
-            "first": 4,
-            "second": 6,
-            "value": 503.6
-          },
-          {
-            "first": 5,
-            "second": 6,
-            "value": 37.0
-          },
-          {
-            "first": 7,
-            "second": 6,
-            "value": 190.4
-          },
-          {
-            "first": 8,
-            "second": 6,
-            "value": 142.1
-          },
-          {
-            "first": 9,
-            "second": 6,
-            "value": 122.7
-          },
-          {
-            "first": 1,
-            "second": 7,
-            "value": 50.3
-          },
-          {
-            "first": 2,
-            "second": 7,
-            "value": 29.9
-          },
-          {
-            "first": 3,
-            "second": 7,
-            "value": 306.3
-          },
-          {
-            "first": 4,
-            "second": 7,
-            "value": 265.3
-          },
-          {
-            "first": 5,
-            "second": 7,
-            "value": 91.4
-          },
-          {
-            "first": 6,
-            "second": 7,
-            "value": 316.1
-          },
-          {
-            "first": 8,
-            "second": 7,
-            "value": 7.7
-          },
-          {
-            "first": 9,
-            "second": 7,
             "value": 45.8
           },
           {
+            "first": 2,
+            "second": 5,
+            "value": 49.3
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "value": 278.7
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "value": 202.2
+          },
+          {
+            "first": 6,
+            "second": 5,
+            "value": 67.7
+          },
+          {
+            "first": 7,
+            "second": 5,
+            "value": 94.2
+          },
+          {
+            "first": 8,
+            "second": 5,
+            "value": 39.0
+          },
+          {
+            "first": 9,
+            "second": 5,
+            "value": 52.0
+          },
+          {
+            "first": 1,
+            "second": 6,
+            "value": 107.5
+          },
+          {
+            "first": 2,
+            "second": 6,
+            "value": 145.0
+          },
+          {
+            "first": 3,
+            "second": 6,
+            "value": 650.4
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "value": 549.6
+          },
+          {
+            "first": 5,
+            "second": 6,
+            "value": 38.1
+          },
+          {
+            "first": 7,
+            "second": 6,
+            "value": 209.8
+          },
+          {
+            "first": 8,
+            "second": 6,
+            "value": 151.8
+          },
+          {
+            "first": 9,
+            "second": 6,
+            "value": 120.4
+          },
+          {
+            "first": 1,
+            "second": 7,
+            "value": 52.5
+          },
+          {
+            "first": 2,
+            "second": 7,
+            "value": 33.2
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "value": 325.2
+          },
+          {
+            "first": 4,
+            "second": 7,
+            "value": 284.8
+          },
+          {
+            "first": 5,
+            "second": 7,
+            "value": 88.0
+          },
+          {
+            "first": 6,
+            "second": 7,
+            "value": 371.6
+          },
+          {
+            "first": 8,
+            "second": 7,
+            "value": 7.0
+          },
+          {
+            "first": 9,
+            "second": 7,
+            "value": 50.5
+          },
+          {
             "first": 1,
             "second": 8,
-            "value": 26.6
+            "value": 25.5
           },
           {
             "first": 2,
             "second": 8,
-            "value": 12.7
+            "value": 12.9
           },
           {
             "first": 3,
             "second": 8,
-            "value": 294.2
+            "value": 314.7
           },
           {
             "first": 4,
             "second": 8,
-            "value": 288.4
+            "value": 295.6
           },
           {
             "first": 5,
             "second": 8,
-            "value": 67.5
+            "value": 65.3
           },
           {
             "first": 6,
             "second": 8,
-            "value": 376.1
+            "value": 378.8
           },
           {
             "first": 7,
             "second": 8,
-            "value": 17.3
+            "value": 16.6
           },
           {
             "first": 9,
             "second": 8,
-            "value": 27.7
+            "value": 26.2
           },
           {
             "first": 1,
             "second": 9,
-            "value": 37.6
+            "value": 38.9
           },
           {
             "first": 2,
             "second": 9,
-            "value": 35.2
+            "value": 37.1
           },
           {
             "first": 3,
             "second": 9,
-            "value": 182.3
+            "value": 183.2
           },
           {
             "first": 4,
             "second": 9,
-            "value": 270.1
+            "value": 276.7
           },
           {
             "first": 5,
             "second": 9,
-            "value": 55.2
+            "value": 59.2
           },
           {
             "first": 6,
             "second": 9,
-            "value": 288.4
+            "value": 276.7
           },
           {
             "first": 7,
             "second": 9,
-            "value": 71.4
+            "value": 79.1
           },
           {
             "first": 8,
             "second": 9,
-            "value": 29.4
+            "value": 30.9
           }
         ],
         "source_title": "防府競輪 レース詳細 | 周防国府杯争奪戦 12R Ｓ級初特選 | 2026年10月31日【楽天Kドリームス】"
@@ -50971,7 +50971,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:02.660755+00:00",
+        "observed_at": "2026-10-31T05:25:36.420646+00:00",
         "source_url": "https://keirin.kdreams.jp/aomori/racedetail/1220261029030005/?pageType=odds",
         "rider_numbers": [
           1,
@@ -50985,77 +50985,77 @@
           {
             "first": 2,
             "second": 1,
-            "value": 44.0
+            "value": 47.1
           },
           {
             "first": 3,
             "second": 1,
-            "value": 19.2
+            "value": 18.8
           },
           {
             "first": 4,
             "second": 1,
-            "value": 7.7
+            "value": 8.7
           },
           {
             "first": 5,
             "second": 1,
-            "value": 19.2
+            "value": 16.4
           },
           {
             "first": 6,
             "second": 1,
-            "value": 308.2
+            "value": 94.3
           },
           {
             "first": 1,
             "second": 2,
-            "value": 61.6
+            "value": 53.8
           },
           {
             "first": 3,
             "second": 2,
-            "value": 28.0
+            "value": 29.0
           },
           {
             "first": 4,
             "second": 2,
-            "value": 154.1
+            "value": 94.3
           },
           {
             "first": 5,
             "second": 2,
-            "value": 11.0
+            "value": 9.9
           },
           {
             "first": 6,
             "second": 2,
-            "value": 44.0
+            "value": 41.9
           },
           {
             "first": 1,
             "second": 3,
-            "value": 14.6
+            "value": 14.5
           },
           {
             "first": 2,
             "second": 3,
-            "value": 20.5
+            "value": 20.9
           },
           {
             "first": 4,
             "second": 3,
-            "value": 20.5
+            "value": 25.1
           },
           {
             "first": 5,
             "second": 3,
-            "value": 10.6
+            "value": 11.4
           },
           {
             "first": 6,
             "second": 3,
-            "value": 30.8
+            "value": 37.7
           },
           {
             "first": 1,
@@ -51065,72 +51065,72 @@
           {
             "first": 2,
             "second": 4,
-            "value": 102.7
+            "value": 94.3
           },
           {
             "first": 3,
             "second": 4,
-            "value": 34.2
+            "value": 37.7
           },
           {
             "first": 5,
             "second": 4,
-            "value": 23.7
+            "value": 26.9
           },
           {
             "first": 6,
             "second": 4,
-            "value": 51.3
+            "value": 31.4
           },
           {
             "first": 1,
             "second": 5,
-            "value": 18.1
+            "value": 16.4
           },
           {
             "first": 2,
             "second": 5,
-            "value": 34.2
+            "value": 31.4
           },
           {
             "first": 3,
             "second": 5,
-            "value": 19.2
+            "value": 23.5
           },
           {
             "first": 4,
             "second": 5,
-            "value": 22.0
+            "value": 19.8
           },
           {
             "first": 6,
             "second": 5,
-            "value": 9.6
+            "value": 10.1
           },
           {
             "first": 1,
             "second": 6,
-            "value": 102.7
+            "value": 62.8
           },
           {
             "first": 2,
             "second": 6,
-            "value": 61.6
+            "value": 62.8
           },
           {
             "first": 3,
             "second": 6,
-            "value": 34.2
+            "value": 41.9
           },
           {
             "first": 4,
             "second": 6,
-            "value": 34.2
+            "value": 37.7
           },
           {
             "first": 5,
             "second": 6,
-            "value": 15.4
+            "value": 14.5
           }
         ],
         "source_title": "青森競輪 レース詳細 | ＪｏｍｏｎＧＰ日刊スポ杯ＯＰ杯 5R Ｓ級一般 | 2026年10月31日【楽天Kドリームス】"
@@ -51144,7 +51144,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:07.903478+00:00",
+        "observed_at": "2026-10-31T05:25:41.646653+00:00",
         "source_url": "https://keirin.kdreams.jp/aomori/racedetail/1220261029030007/?pageType=odds",
         "rider_numbers": [
           1,
@@ -51159,112 +51159,112 @@
           {
             "first": 2,
             "second": 1,
-            "value": 27.8
+            "value": 30.0
           },
           {
             "first": 3,
             "second": 1,
-            "value": 90.3
+            "value": 75.1
           },
           {
             "first": 4,
             "second": 1,
-            "value": 72.3
+            "value": 90.1
           },
           {
             "first": 5,
             "second": 1,
-            "value": 12.4
+            "value": 15.0
           },
           {
             "first": 6,
             "second": 1,
-            "value": 9999.9
+            "value": 450.7
           },
           {
             "first": 7,
             "second": 1,
-            "value": 14.4
+            "value": 14.0
           },
           {
             "first": 1,
             "second": 2,
-            "value": 9999.9
+            "value": 450.7
           },
           {
             "first": 3,
             "second": 2,
-            "value": 72.3
+            "value": 90.1
           },
           {
             "first": 4,
             "second": 2,
-            "value": 51.6
+            "value": 56.3
           },
           {
             "first": 5,
             "second": 2,
-            "value": 40.1
+            "value": 30.0
           },
           {
             "first": 6,
             "second": 2,
-            "value": 361.5
+            "value": 450.7
           },
           {
             "first": 7,
             "second": 2,
-            "value": 7.2
+            "value": 8.0
           },
           {
             "first": 1,
             "second": 3,
-            "value": 60.2
+            "value": 56.3
           },
           {
             "first": 2,
             "second": 3,
-            "value": 36.1
+            "value": 30.0
           },
           {
             "first": 4,
             "second": 3,
-            "value": 361.5
+            "value": 450.7
           },
           {
             "first": 5,
             "second": 3,
-            "value": 17.2
+            "value": 16.6
           },
           {
             "first": 6,
             "second": 3,
-            "value": 180.7
+            "value": 150.2
           },
           {
             "first": 7,
             "second": 3,
-            "value": 13.9
+            "value": 14.5
           },
           {
             "first": 1,
             "second": 4,
-            "value": 120.5
+            "value": 112.6
           },
           {
             "first": 2,
             "second": 4,
-            "value": 21.2
+            "value": 21.4
           },
           {
             "first": 3,
             "second": 4,
-            "value": 120.5
+            "value": 112.6
           },
           {
             "first": 5,
             "second": 4,
-            "value": 90.3
+            "value": 112.6
           },
           {
             "first": 6,
@@ -51274,27 +51274,27 @@
           {
             "first": 7,
             "second": 4,
-            "value": 15.7
+            "value": 16.0
           },
           {
             "first": 1,
             "second": 5,
-            "value": 16.4
+            "value": 18.7
           },
           {
             "first": 2,
             "second": 5,
-            "value": 22.5
+            "value": 18.0
           },
           {
             "first": 3,
             "second": 5,
-            "value": 40.1
+            "value": 34.6
           },
           {
             "first": 4,
             "second": 5,
-            "value": 60.2
+            "value": 64.3
           },
           {
             "first": 6,
@@ -51304,12 +51304,12 @@
           {
             "first": 7,
             "second": 5,
-            "value": 9.0
+            "value": 9.3
           },
           {
             "first": 1,
             "second": 6,
-            "value": 361.5
+            "value": 225.3
           },
           {
             "first": 2,
@@ -51319,47 +51319,47 @@
           {
             "first": 3,
             "second": 6,
-            "value": 51.6
+            "value": 56.3
           },
           {
             "first": 4,
             "second": 6,
-            "value": 361.5
+            "value": 450.7
           },
           {
             "first": 5,
             "second": 6,
-            "value": 361.5
+            "value": 450.7
           },
           {
             "first": 7,
             "second": 6,
-            "value": 45.1
+            "value": 40.9
           },
           {
             "first": 1,
             "second": 7,
-            "value": 22.5
+            "value": 19.5
           },
           {
             "first": 2,
             "second": 7,
-            "value": 13.9
+            "value": 10.0
           },
           {
             "first": 3,
             "second": 7,
-            "value": 9.2
+            "value": 11.2
           },
           {
             "first": 4,
             "second": 7,
-            "value": 36.1
+            "value": 40.9
           },
           {
             "first": 5,
             "second": 7,
-            "value": 22.5
+            "value": 21.4
           },
           {
             "first": 6,
@@ -51378,7 +51378,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:10.415690+00:00",
+        "observed_at": "2026-10-31T05:25:44.125324+00:00",
         "source_url": "https://keirin.kdreams.jp/aomori/racedetail/1220261029030008/?pageType=odds",
         "rider_numbers": [
           1,
@@ -51393,27 +51393,27 @@
           {
             "first": 2,
             "second": 1,
-            "value": 72.5
+            "value": 39.0
           },
           {
             "first": 3,
             "second": 1,
-            "value": 15.2
+            "value": 11.4
           },
           {
             "first": 4,
             "second": 1,
-            "value": 32.2
+            "value": 43.3
           },
           {
             "first": 5,
             "second": 1,
-            "value": 14.5
+            "value": 14.4
           },
           {
             "first": 6,
             "second": 1,
-            "value": 58.0
+            "value": 78.0
           },
           {
             "first": 7,
@@ -51423,47 +51423,47 @@
           {
             "first": 1,
             "second": 2,
-            "value": 96.7
+            "value": 97.5
           },
           {
             "first": 3,
             "second": 2,
-            "value": 41.4
+            "value": 35.4
           },
           {
             "first": 4,
             "second": 2,
-            "value": 72.5
+            "value": 78.0
           },
           {
             "first": 5,
             "second": 2,
-            "value": 10.0
+            "value": 11.8
           },
           {
             "first": 6,
             "second": 2,
-            "value": 48.3
+            "value": 32.5
           },
           {
             "first": 7,
             "second": 2,
-            "value": 96.7
+            "value": 97.5
           },
           {
             "first": 1,
             "second": 3,
-            "value": 36.2
+            "value": 27.8
           },
           {
             "first": 2,
             "second": 3,
-            "value": 26.3
+            "value": 24.3
           },
           {
             "first": 4,
             "second": 3,
-            "value": 58.0
+            "value": 35.4
           },
           {
             "first": 5,
@@ -51473,132 +51473,132 @@
           {
             "first": 6,
             "second": 3,
-            "value": 145.1
+            "value": 97.5
           },
           {
             "first": 7,
             "second": 3,
-            "value": 9999.9
+            "value": 195.0
           },
           {
             "first": 1,
             "second": 4,
-            "value": 48.3
+            "value": 65.0
           },
           {
             "first": 2,
             "second": 4,
-            "value": 58.0
+            "value": 78.0
           },
           {
             "first": 3,
             "second": 4,
-            "value": 145.1
+            "value": 55.7
           },
           {
             "first": 5,
             "second": 4,
-            "value": 29.0
+            "value": 27.8
           },
           {
             "first": 6,
             "second": 4,
-            "value": 36.2
+            "value": 48.7
           },
           {
             "first": 7,
             "second": 4,
-            "value": 96.7
+            "value": 65.0
           },
           {
             "first": 1,
             "second": 5,
-            "value": 29.0
+            "value": 35.4
           },
           {
             "first": 2,
             "second": 5,
-            "value": 72.5
+            "value": 97.5
           },
           {
             "first": 3,
             "second": 5,
-            "value": 3.8
+            "value": 4.4
           },
           {
             "first": 4,
             "second": 5,
-            "value": 36.2
+            "value": 32.5
           },
           {
             "first": 6,
             "second": 5,
-            "value": 96.7
+            "value": 130.0
           },
           {
             "first": 7,
             "second": 5,
-            "value": 290.2
+            "value": 195.0
           },
           {
             "first": 1,
             "second": 6,
-            "value": 58.0
+            "value": 78.0
           },
           {
             "first": 2,
             "second": 6,
-            "value": 20.7
+            "value": 17.7
           },
           {
             "first": 3,
             "second": 6,
-            "value": 58.0
+            "value": 55.7
           },
           {
             "first": 4,
             "second": 6,
-            "value": 48.3
+            "value": 43.3
           },
           {
             "first": 5,
             "second": 6,
-            "value": 48.3
+            "value": 65.0
           },
           {
             "first": 7,
             "second": 6,
-            "value": 72.5
+            "value": 97.5
           },
           {
             "first": 1,
             "second": 7,
-            "value": 96.7
+            "value": 97.5
           },
           {
             "first": 2,
             "second": 7,
-            "value": 96.7
+            "value": 130.0
           },
           {
             "first": 3,
             "second": 7,
-            "value": 290.2
+            "value": 130.0
           },
           {
             "first": 4,
             "second": 7,
-            "value": 58.0
+            "value": 78.0
           },
           {
             "first": 5,
             "second": 7,
-            "value": 72.5
+            "value": 97.5
           },
           {
             "first": 6,
             "second": 7,
-            "value": 72.5
+            "value": 97.5
           }
         ],
         "source_title": "青森競輪 レース詳細 | ＪｏｍｏｎＧＰ日刊スポ杯ＯＰ杯 8R Ｓ級特選 | 2026年10月31日【楽天Kドリームス】"
@@ -51612,7 +51612,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:13.083067+00:00",
+        "observed_at": "2026-10-31T05:25:46.571306+00:00",
         "source_url": "https://keirin.kdreams.jp/aomori/racedetail/1220261029030009/?pageType=odds",
         "rider_numbers": [
           1,
@@ -51627,52 +51627,52 @@
           {
             "first": 2,
             "second": 1,
-            "value": 30.3
+            "value": 36.9
           },
           {
             "first": 3,
             "second": 1,
-            "value": 106.1
+            "value": 86.2
           },
           {
             "first": 4,
             "second": 1,
-            "value": 30.3
+            "value": 25.8
           },
           {
             "first": 5,
             "second": 1,
-            "value": 9.2
+            "value": 9.4
           },
           {
             "first": 6,
             "second": 1,
-            "value": 106.1
+            "value": 129.3
           },
           {
             "first": 7,
             "second": 1,
-            "value": 28.3
+            "value": 25.8
           },
           {
             "first": 1,
             "second": 2,
-            "value": 26.5
+            "value": 23.5
           },
           {
             "first": 3,
             "second": 2,
-            "value": 424.5
+            "value": 517.5
           },
           {
             "first": 4,
             "second": 2,
-            "value": 70.7
+            "value": 64.6
           },
           {
             "first": 5,
             "second": 2,
-            "value": 17.6
+            "value": 20.7
           },
           {
             "first": 6,
@@ -51682,87 +51682,87 @@
           {
             "first": 7,
             "second": 2,
-            "value": 18.4
+            "value": 16.1
           },
           {
             "first": 1,
             "second": 3,
-            "value": 70.7
+            "value": 86.2
           },
           {
             "first": 2,
             "second": 3,
-            "value": 141.5
+            "value": 103.5
           },
           {
             "first": 4,
             "second": 3,
-            "value": 141.5
+            "value": 73.9
           },
           {
             "first": 5,
             "second": 3,
-            "value": 32.6
+            "value": 39.8
           },
           {
             "first": 6,
             "second": 3,
-            "value": 424.5
+            "value": 517.5
           },
           {
             "first": 7,
             "second": 3,
-            "value": 141.5
+            "value": 129.3
           },
           {
             "first": 1,
             "second": 4,
-            "value": 17.6
+            "value": 15.6
           },
           {
             "first": 2,
             "second": 4,
-            "value": 84.9
+            "value": 86.2
           },
           {
             "first": 3,
             "second": 4,
-            "value": 141.5
+            "value": 73.9
           },
           {
             "first": 5,
             "second": 4,
-            "value": 24.9
+            "value": 27.2
           },
           {
             "first": 6,
             "second": 4,
-            "value": 424.5
+            "value": 517.5
           },
           {
             "first": 7,
             "second": 4,
-            "value": 9.8
+            "value": 9.7
           },
           {
             "first": 1,
             "second": 5,
-            "value": 5.1
+            "value": 5.3
           },
           {
             "first": 2,
             "second": 5,
-            "value": 70.7
+            "value": 64.6
           },
           {
             "first": 3,
             "second": 5,
-            "value": 424.5
+            "value": 517.5
           },
           {
             "first": 4,
             "second": 5,
-            "value": 53.0
+            "value": 51.7
           },
           {
             "first": 6,
@@ -51772,62 +51772,62 @@
           {
             "first": 7,
             "second": 5,
-            "value": 30.3
+            "value": 32.3
           },
           {
             "first": 1,
             "second": 6,
-            "value": 9.0
+            "value": 9.7
           },
           {
             "first": 2,
             "second": 6,
-            "value": 424.5
+            "value": 86.2
           },
           {
             "first": 3,
             "second": 6,
-            "value": 212.2
+            "value": 258.7
           },
           {
             "first": 4,
             "second": 6,
-            "value": 424.5
+            "value": 517.5
           },
           {
             "first": 5,
             "second": 6,
-            "value": 141.5
+            "value": 172.5
           },
           {
             "first": 7,
             "second": 6,
-            "value": 212.2
+            "value": 172.5
           },
           {
             "first": 1,
             "second": 7,
-            "value": 11.4
+            "value": 10.7
           },
           {
             "first": 2,
             "second": 7,
-            "value": 30.3
+            "value": 34.5
           },
           {
             "first": 3,
             "second": 7,
-            "value": 9999.9
+            "value": 517.5
           },
           {
             "first": 4,
             "second": 7,
-            "value": 11.1
+            "value": 12.3
           },
           {
             "first": 5,
             "second": 7,
-            "value": 20.2
+            "value": 22.5
           },
           {
             "first": 6,
@@ -51846,7 +51846,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:15.776847+00:00",
+        "observed_at": "2026-10-31T05:25:48.998513+00:00",
         "source_url": "https://keirin.kdreams.jp/aomori/racedetail/1220261029030010/?pageType=odds",
         "rider_numbers": [
           1,
@@ -51861,212 +51861,212 @@
           {
             "first": 2,
             "second": 1,
-            "value": 42.2
+            "value": 49.3
           },
           {
             "first": 3,
             "second": 1,
-            "value": 66.3
+            "value": 58.2
           },
           {
             "first": 4,
             "second": 1,
-            "value": 154.7
+            "value": 128.2
           },
           {
             "first": 5,
             "second": 1,
-            "value": 35.7
+            "value": 37.7
           },
           {
             "first": 6,
             "second": 1,
-            "value": 464.2
+            "value": 320.6
           },
           {
             "first": 7,
             "second": 1,
-            "value": 20.1
+            "value": 17.8
           },
           {
             "first": 1,
             "second": 2,
-            "value": 46.4
+            "value": 42.7
           },
           {
             "first": 3,
             "second": 2,
-            "value": 27.3
+            "value": 33.7
           },
           {
             "first": 4,
             "second": 2,
-            "value": 154.7
+            "value": 80.1
           },
           {
             "first": 5,
             "second": 2,
-            "value": 46.4
+            "value": 53.4
           },
           {
             "first": 6,
             "second": 2,
-            "value": 35.7
+            "value": 30.5
           },
           {
             "first": 7,
             "second": 2,
-            "value": 21.1
+            "value": 21.3
           },
           {
             "first": 1,
             "second": 3,
-            "value": 46.4
+            "value": 42.7
           },
           {
             "first": 2,
             "second": 3,
-            "value": 51.5
+            "value": 58.2
           },
           {
             "first": 4,
             "second": 3,
-            "value": 154.7
+            "value": 160.3
           },
           {
             "first": 5,
             "second": 3,
-            "value": 29.0
+            "value": 40.0
           },
           {
             "first": 6,
             "second": 3,
-            "value": 464.2
+            "value": 320.6
           },
           {
             "first": 7,
             "second": 3,
-            "value": 3.8
+            "value": 4.2
           },
           {
             "first": 1,
             "second": 4,
-            "value": 51.5
+            "value": 58.2
           },
           {
             "first": 2,
             "second": 4,
-            "value": 116.0
+            "value": 80.1
           },
           {
             "first": 3,
             "second": 4,
-            "value": 29.0
+            "value": 33.7
           },
           {
             "first": 5,
             "second": 4,
-            "value": 77.3
+            "value": 106.8
           },
           {
             "first": 6,
             "second": 4,
-            "value": 464.2
+            "value": 320.6
           },
           {
             "first": 7,
             "second": 4,
-            "value": 5.4
+            "value": 5.2
           },
           {
             "first": 1,
             "second": 5,
-            "value": 16.5
+            "value": 16.0
           },
           {
             "first": 2,
             "second": 5,
-            "value": 66.3
+            "value": 71.2
           },
           {
             "first": 3,
             "second": 5,
-            "value": 92.8
+            "value": 91.6
           },
           {
             "first": 4,
             "second": 5,
-            "value": 116.0
+            "value": 91.6
           },
           {
             "first": 6,
             "second": 5,
-            "value": 154.7
+            "value": 160.3
           },
           {
             "first": 7,
             "second": 5,
-            "value": 25.7
+            "value": 24.6
           },
           {
             "first": 1,
             "second": 6,
-            "value": 154.7
+            "value": 128.2
           },
           {
             "first": 2,
             "second": 6,
-            "value": 27.3
+            "value": 18.8
           },
           {
             "first": 3,
             "second": 6,
-            "value": 154.7
+            "value": 213.7
           },
           {
             "first": 4,
             "second": 6,
-            "value": 232.1
+            "value": 213.7
           },
           {
             "first": 5,
             "second": 6,
-            "value": 116.0
+            "value": 160.3
           },
           {
             "first": 7,
             "second": 6,
-            "value": 29.0
+            "value": 33.7
           },
           {
             "first": 1,
             "second": 7,
-            "value": 38.6
+            "value": 33.7
           },
           {
             "first": 2,
             "second": 7,
-            "value": 18.5
+            "value": 17.8
           },
           {
             "first": 3,
             "second": 7,
-            "value": 14.9
+            "value": 13.0
           },
           {
             "first": 4,
             "second": 7,
-            "value": 35.7
+            "value": 35.6
           },
           {
             "first": 5,
             "second": 7,
-            "value": 46.4
+            "value": 58.2
           },
           {
             "first": 6,
             "second": 7,
-            "value": 116.0
+            "value": 128.2
           }
         ],
         "source_title": "青森競輪 レース詳細 | ＪｏｍｏｎＧＰ日刊スポ杯ＯＰ杯 10R Ｓ級特選 | 2026年10月31日【楽天Kドリームス】"
@@ -52080,7 +52080,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:18.359734+00:00",
+        "observed_at": "2026-10-31T05:25:51.632672+00:00",
         "source_url": "https://keirin.kdreams.jp/aomori/racedetail/1220261029030012/?pageType=odds",
         "rider_numbers": [
           1,
@@ -52095,182 +52095,182 @@
           {
             "first": 2,
             "second": 1,
-            "value": 50.0
+            "value": 42.7
           },
           {
             "first": 3,
             "second": 1,
-            "value": 55.3
+            "value": 51.3
           },
           {
             "first": 4,
             "second": 1,
-            "value": 96.1
+            "value": 102.7
           },
           {
             "first": 5,
             "second": 1,
-            "value": 10.8
+            "value": 9.3
           },
           {
             "first": 6,
             "second": 1,
-            "value": 304.3
+            "value": 359.7
           },
           {
             "first": 7,
             "second": 1,
-            "value": 16.6
+            "value": 17.2
           },
           {
             "first": 1,
             "second": 2,
-            "value": 28.5
+            "value": 25.6
           },
           {
             "first": 3,
             "second": 2,
-            "value": 70.2
+            "value": 75.7
           },
           {
             "first": 4,
             "second": 2,
-            "value": 89.0
+            "value": 98.1
           },
           {
             "first": 5,
             "second": 2,
-            "value": 31.4
+            "value": 32.4
           },
           {
             "first": 6,
             "second": 2,
-            "value": 57.0
+            "value": 58.3
           },
           {
             "first": 7,
             "second": 2,
-            "value": 31.7
+            "value": 31.2
           },
           {
             "first": 1,
             "second": 3,
-            "value": 55.3
+            "value": 47.9
           },
           {
             "first": 2,
             "second": 3,
-            "value": 91.3
+            "value": 89.9
           },
           {
             "first": 4,
             "second": 3,
-            "value": 71.6
+            "value": 79.9
           },
           {
             "first": 5,
             "second": 3,
-            "value": 35.4
+            "value": 38.5
           },
           {
             "first": 6,
             "second": 3,
-            "value": 260.8
+            "value": 287.8
           },
           {
             "first": 7,
             "second": 3,
-            "value": 16.9
+            "value": 16.8
           },
           {
             "first": 1,
             "second": 4,
-            "value": 23.7
+            "value": 24.3
           },
           {
             "first": 2,
             "second": 4,
-            "value": 84.9
+            "value": 81.4
           },
           {
             "first": 3,
             "second": 4,
-            "value": 61.9
+            "value": 68.5
           },
           {
             "first": 5,
             "second": 4,
-            "value": 52.9
+            "value": 52.6
           },
           {
             "first": 6,
             "second": 4,
-            "value": 260.8
+            "value": 253.9
           },
           {
             "first": 7,
             "second": 4,
-            "value": 4.5
+            "value": 4.9
           },
           {
             "first": 1,
             "second": 5,
-            "value": 8.4
+            "value": 8.0
           },
           {
             "first": 2,
             "second": 5,
-            "value": 49.3
+            "value": 42.7
           },
           {
             "first": 3,
             "second": 5,
-            "value": 54.5
+            "value": 56.0
           },
           {
             "first": 4,
             "second": 5,
-            "value": 66.4
+            "value": 75.7
           },
           {
             "first": 6,
             "second": 5,
-            "value": 125.9
+            "value": 143.9
           },
           {
             "first": 7,
             "second": 5,
-            "value": 26.6
+            "value": 28.2
           },
           {
             "first": 1,
             "second": 6,
-            "value": 74.5
+            "value": 81.4
           },
           {
             "first": 2,
             "second": 6,
-            "value": 35.1
+            "value": 35.9
           },
           {
             "first": 3,
             "second": 6,
-            "value": 140.4
+            "value": 154.1
           },
           {
             "first": 4,
             "second": 6,
-            "value": 173.9
+            "value": 179.8
           },
           {
             "first": 5,
             "second": 6,
-            "value": 84.9
+            "value": 93.8
           },
           {
             "first": 7,
             "second": 6,
-            "value": 65.2
+            "value": 68.5
           },
           {
             "first": 1,
@@ -52280,27 +52280,27 @@
           {
             "first": 2,
             "second": 7,
-            "value": 50.7
+            "value": 40.7
           },
           {
             "first": 3,
             "second": 7,
-            "value": 25.5
+            "value": 25.6
           },
           {
             "first": 4,
             "second": 7,
-            "value": 12.6
+            "value": 12.8
           },
           {
             "first": 5,
             "second": 7,
-            "value": 38.4
+            "value": 40.3
           },
           {
             "first": 6,
             "second": 7,
-            "value": 135.2
+            "value": 143.9
           }
         ],
         "source_title": "青森競輪 レース詳細 | ＪｏｍｏｎＧＰ日刊スポ杯ＯＰ杯 12R Ｓ級決勝 | 2026年10月31日【楽天Kドリームス】"
@@ -52314,7 +52314,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:20.819383+00:00",
+        "observed_at": "2026-10-31T05:25:54.098899+00:00",
         "source_url": "https://keirin.kdreams.jp/yahiko/racedetail/2120261030020006/?pageType=odds",
         "rider_numbers": [
           1,
@@ -52548,7 +52548,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:23.437851+00:00",
+        "observed_at": "2026-10-31T05:25:56.713438+00:00",
         "source_url": "https://keirin.kdreams.jp/yahiko/racedetail/2120261030020007/?pageType=odds",
         "rider_numbers": [
           1,
@@ -52563,212 +52563,212 @@
           {
             "first": 2,
             "second": 1,
-            "value": 83.3
+            "value": 54.0
           },
           {
             "first": 3,
             "second": 1,
-            "value": 23.9
+            "value": 20.6
           },
           {
             "first": 4,
             "second": 1,
-            "value": 87.5
+            "value": 90.7
           },
           {
             "first": 5,
             "second": 1,
-            "value": 42.6
+            "value": 55.8
           },
           {
             "first": 6,
             "second": 1,
-            "value": 250.0
+            "value": 401.3
           },
           {
             "first": 7,
             "second": 1,
-            "value": 140.0
+            "value": 270.3
           },
           {
             "first": 1,
             "second": 2,
-            "value": 134.6
+            "value": 80.2
           },
           {
             "first": 3,
             "second": 2,
-            "value": 33.9
+            "value": 30.1
           },
           {
             "first": 4,
             "second": 2,
-            "value": 39.7
+            "value": 41.6
           },
           {
             "first": 5,
             "second": 2,
-            "value": 2.6
+            "value": 2.7
           },
           {
             "first": 6,
             "second": 2,
-            "value": 205.8
+            "value": 191.9
           },
           {
             "first": 7,
             "second": 2,
-            "value": 54.6
+            "value": 56.8
           },
           {
             "first": 1,
             "second": 3,
-            "value": 54.6
+            "value": 44.4
           },
           {
             "first": 2,
             "second": 3,
-            "value": 33.6
+            "value": 31.7
           },
           {
             "first": 4,
             "second": 3,
-            "value": 16.0
+            "value": 19.8
           },
           {
             "first": 5,
             "second": 3,
-            "value": 19.3
+            "value": 16.4
           },
           {
             "first": 6,
             "second": 3,
-            "value": 233.3
+            "value": 427.2
           },
           {
             "first": 7,
             "second": 3,
-            "value": 140.0
+            "value": 270.3
           },
           {
             "first": 1,
             "second": 4,
-            "value": 125.0
+            "value": 132.4
           },
           {
             "first": 2,
             "second": 4,
-            "value": 43.7
+            "value": 43.0
           },
           {
             "first": 3,
             "second": 4,
-            "value": 13.1
+            "value": 13.4
           },
           {
             "first": 5,
             "second": 4,
-            "value": 19.4
+            "value": 22.8
           },
           {
             "first": 6,
             "second": 4,
-            "value": 318.2
+            "value": 529.8
           },
           {
             "first": 7,
             "second": 4,
-            "value": 250.0
+            "value": 339.6
           },
           {
             "first": 1,
             "second": 5,
-            "value": 87.5
+            "value": 90.1
           },
           {
             "first": 2,
             "second": 5,
-            "value": 5.2
+            "value": 4.5
           },
           {
             "first": 3,
             "second": 5,
-            "value": 24.3
+            "value": 25.7
           },
           {
             "first": 4,
             "second": 5,
-            "value": 30.9
+            "value": 34.5
           },
           {
             "first": 6,
             "second": 5,
-            "value": 194.4
+            "value": 200.6
           },
           {
             "first": 7,
             "second": 5,
-            "value": 97.2
+            "value": 88.8
           },
           {
             "first": 1,
             "second": 6,
-            "value": 120.6
+            "value": 186.5
           },
           {
             "first": 2,
             "second": 6,
-            "value": 140.0
+            "value": 116.1
           },
           {
             "first": 3,
             "second": 6,
-            "value": 76.0
+            "value": 131.1
           },
           {
             "first": 4,
             "second": 6,
-            "value": 129.6
+            "value": 240.8
           },
           {
             "first": 5,
             "second": 6,
-            "value": 83.3
+            "value": 117.2
           },
           {
             "first": 7,
             "second": 6,
-            "value": 875.0
+            "value": 735.8
           },
           {
             "first": 1,
             "second": 7,
-            "value": 205.8
+            "value": 264.9
           },
           {
             "first": 2,
             "second": 7,
-            "value": 26.3
+            "value": 18.2
           },
           {
             "first": 3,
             "second": 7,
-            "value": 102.9
+            "value": 150.5
           },
           {
             "first": 4,
             "second": 7,
-            "value": 145.8
+            "value": 189.2
           },
           {
             "first": 5,
             "second": 7,
-            "value": 29.6
+            "value": 33.1
           },
           {
             "first": 6,
             "second": 7,
-            "value": 437.5
+            "value": 735.8
           }
         ],
         "source_title": "弥彦競輪 レース詳細 | 弥彦王冠記念・報知新聞賞 7R Ｓ級一般 | 2026年10月31日【楽天Kドリームス】"
@@ -52782,7 +52782,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:26.064915+00:00",
+        "observed_at": "2026-10-31T05:25:59.145520+00:00",
         "source_url": "https://keirin.kdreams.jp/yahiko/racedetail/2120261030020008/?pageType=odds",
         "rider_numbers": [
           1,
@@ -52797,122 +52797,122 @@
           {
             "first": 2,
             "second": 1,
-            "value": 42.4
+            "value": 54.0
           },
           {
             "first": 3,
             "second": 1,
-            "value": 164.4
+            "value": 190.4
           },
           {
             "first": 4,
             "second": 1,
-            "value": 38.6
+            "value": 37.0
           },
           {
             "first": 5,
             "second": 1,
-            "value": 9.0
+            "value": 6.9
           },
           {
             "first": 6,
             "second": 1,
-            "value": 48.7
+            "value": 48.6
           },
           {
             "first": 7,
             "second": 1,
-            "value": 18.5
+            "value": 22.6
           },
           {
             "first": 1,
             "second": 2,
-            "value": 30.5
+            "value": 24.5
           },
           {
             "first": 3,
             "second": 2,
-            "value": 82.2
+            "value": 74.3
           },
           {
             "first": 4,
             "second": 2,
-            "value": 54.8
+            "value": 59.6
           },
           {
             "first": 5,
             "second": 2,
-            "value": 35.5
+            "value": 46.8
           },
           {
             "first": 6,
             "second": 2,
-            "value": 82.2
+            "value": 185.3
           },
           {
             "first": 7,
             "second": 2,
-            "value": 16.6
+            "value": 15.2
           },
           {
             "first": 1,
             "second": 3,
-            "value": 43.8
+            "value": 43.7
           },
           {
             "first": 2,
             "second": 3,
-            "value": 50.5
+            "value": 39.6
           },
           {
             "first": 4,
             "second": 3,
-            "value": 69.2
+            "value": 106.1
           },
           {
             "first": 5,
             "second": 3,
-            "value": 62.6
+            "value": 137.6
           },
           {
             "first": 6,
             "second": 3,
-            "value": 101.1
+            "value": 262.2
           },
           {
             "first": 7,
             "second": 3,
-            "value": 42.4
+            "value": 73.1
           },
           {
             "first": 1,
             "second": 4,
-            "value": 20.5
+            "value": 25.9
           },
           {
             "first": 2,
             "second": 4,
-            "value": 48.7
+            "value": 87.4
           },
           {
             "first": 3,
             "second": 4,
-            "value": 131.5
+            "value": 193.0
           },
           {
             "first": 5,
             "second": 4,
-            "value": 82.2
+            "value": 75.9
           },
           {
             "first": 6,
             "second": 4,
-            "value": 164.4
+            "value": 159.7
           },
           {
             "first": 7,
             "second": 4,
-            "value": 48.7
+            "value": 86.8
           },
           {
             "first": 1,
@@ -52922,87 +52922,87 @@
           {
             "first": 2,
             "second": 5,
-            "value": 36.5
+            "value": 78.0
           },
           {
             "first": 3,
             "second": 5,
-            "value": 73.0
+            "value": 257.4
           },
           {
             "first": 4,
             "second": 5,
-            "value": 119.5
+            "value": 91.4
           },
           {
             "first": 6,
             "second": 5,
-            "value": 219.2
+            "value": 100.7
           },
           {
             "first": 7,
             "second": 5,
-            "value": 32.0
+            "value": 33.5
           },
           {
             "first": 1,
             "second": 6,
-            "value": 14.2
+            "value": 5.8
           },
           {
             "first": 2,
             "second": 6,
-            "value": 69.2
+            "value": 143.3
           },
           {
             "first": 3,
             "second": 6,
-            "value": 109.6
+            "value": 248.2
           },
           {
             "first": 4,
             "second": 6,
-            "value": 119.5
+            "value": 113.0
           },
           {
             "first": 5,
             "second": 6,
-            "value": 69.2
+            "value": 67.4
           },
           {
             "first": 7,
             "second": 6,
-            "value": 52.6
+            "value": 102.9
           },
           {
             "first": 1,
             "second": 7,
-            "value": 14.4
+            "value": 15.4
           },
           {
             "first": 2,
             "second": 7,
-            "value": 19.9
+            "value": 24.5
           },
           {
             "first": 3,
             "second": 7,
-            "value": 82.2
+            "value": 154.4
           },
           {
             "first": 4,
             "second": 7,
-            "value": 77.3
+            "value": 97.8
           },
           {
             "first": 5,
             "second": 7,
-            "value": 25.7
+            "value": 26.3
           },
           {
             "first": 6,
             "second": 7,
-            "value": 131.5
+            "value": 159.7
           }
         ],
         "source_title": "弥彦競輪 レース詳細 | 弥彦王冠記念・報知新聞賞 8R Ｓ級選抜 | 2026年10月31日【楽天Kドリームス】"
@@ -53016,7 +53016,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:28.618474+00:00",
+        "observed_at": "2026-10-31T05:26:01.589481+00:00",
         "source_url": "https://keirin.kdreams.jp/yahiko/racedetail/2120261030020009/?pageType=odds",
         "rider_numbers": [
           1,
@@ -53031,212 +53031,212 @@
           {
             "first": 2,
             "second": 1,
-            "value": 3.9
+            "value": 2.9
           },
           {
             "first": 3,
             "second": 1,
-            "value": 102.3
+            "value": 147.1
           },
           {
             "first": 4,
             "second": 1,
-            "value": 111.6
+            "value": 52.5
           },
           {
             "first": 5,
             "second": 1,
-            "value": 111.6
+            "value": 120.1
           },
           {
             "first": 6,
             "second": 1,
-            "value": 245.7
+            "value": 217.9
           },
           {
             "first": 7,
             "second": 1,
-            "value": 122.8
+            "value": 136.8
           },
           {
             "first": 1,
             "second": 2,
-            "value": 17.0
+            "value": 21.6
           },
           {
             "first": 3,
             "second": 2,
-            "value": 45.5
+            "value": 58.2
           },
           {
             "first": 4,
             "second": 2,
-            "value": 16.3
+            "value": 18.8
           },
           {
             "first": 5,
             "second": 2,
-            "value": 35.1
+            "value": 53.5
           },
           {
             "first": 6,
             "second": 2,
-            "value": 68.2
+            "value": 85.2
           },
           {
             "first": 7,
             "second": 2,
-            "value": 42.3
+            "value": 66.8
           },
           {
             "first": 1,
             "second": 3,
-            "value": 111.6
+            "value": 159.0
           },
           {
             "first": 2,
             "second": 3,
-            "value": 12.7
+            "value": 16.7
           },
           {
             "first": 4,
             "second": 3,
-            "value": 72.2
+            "value": 108.9
           },
           {
             "first": 5,
             "second": 3,
-            "value": 102.3
+            "value": 136.8
           },
           {
             "first": 6,
             "second": 3,
-            "value": 34.1
+            "value": 72.6
           },
           {
             "first": 7,
             "second": 3,
-            "value": 94.5
+            "value": 147.1
           },
           {
             "first": 1,
             "second": 4,
-            "value": 64.6
+            "value": 67.6
           },
           {
             "first": 2,
             "second": 4,
-            "value": 3.5
+            "value": 2.7
           },
           {
             "first": 3,
             "second": 4,
-            "value": 122.8
+            "value": 163.4
           },
           {
             "first": 5,
             "second": 4,
-            "value": 136.5
+            "value": 101.4
           },
           {
             "first": 6,
             "second": 4,
-            "value": 122.8
+            "value": 150.9
           },
           {
             "first": 7,
             "second": 4,
-            "value": 102.3
+            "value": 143.5
           },
           {
             "first": 1,
             "second": 5,
-            "value": 153.5
+            "value": 120.1
           },
           {
             "first": 2,
             "second": 5,
-            "value": 12.4
+            "value": 12.1
           },
           {
             "first": 3,
             "second": 5,
-            "value": 81.9
+            "value": 159.0
           },
           {
             "first": 4,
             "second": 5,
-            "value": 87.7
+            "value": 91.9
           },
           {
             "first": 6,
             "second": 5,
-            "value": 307.1
+            "value": 280.2
           },
           {
             "first": 7,
             "second": 5,
-            "value": 81.9
+            "value": 111.0
           },
           {
             "first": 1,
             "second": 6,
-            "value": 175.5
+            "value": 309.7
           },
           {
             "first": 2,
             "second": 6,
-            "value": 21.9
+            "value": 28.1
           },
           {
             "first": 3,
             "second": 6,
-            "value": 40.9
+            "value": 70.9
           },
           {
             "first": 4,
             "second": 6,
-            "value": 102.3
+            "value": 117.7
           },
           {
             "first": 5,
             "second": 6,
-            "value": 245.7
+            "value": 163.4
           },
           {
             "first": 7,
             "second": 6,
-            "value": 204.7
+            "value": 255.8
           },
           {
             "first": 1,
             "second": 7,
-            "value": 94.5
+            "value": 154.8
           },
           {
             "first": 2,
             "second": 7,
-            "value": 14.1
+            "value": 19.8
           },
           {
             "first": 3,
             "second": 7,
-            "value": 94.5
+            "value": 154.8
           },
           {
             "first": 4,
             "second": 7,
-            "value": 68.2
+            "value": 113.1
           },
           {
             "first": 5,
             "second": 7,
-            "value": 61.4
+            "value": 86.5
           },
           {
             "first": 6,
             "second": 7,
-            "value": 111.6
+            "value": 367.8
           }
         ],
         "source_title": "弥彦競輪 レース詳細 | 弥彦王冠記念・報知新聞賞 9R Ｓ級選抜 | 2026年10月31日【楽天Kドリームス】"
@@ -53250,7 +53250,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:31.367953+00:00",
+        "observed_at": "2026-10-31T05:26:04.081898+00:00",
         "source_url": "https://keirin.kdreams.jp/yahiko/racedetail/2120261030020010/?pageType=odds",
         "rider_numbers": [
           1,
@@ -53265,212 +53265,212 @@
           {
             "first": 2,
             "second": 1,
-            "value": 90.1
+            "value": 68.9
           },
           {
             "first": 3,
             "second": 1,
-            "value": 94.4
+            "value": 109.2
           },
           {
             "first": 4,
             "second": 1,
-            "value": 991.5
+            "value": 633.9
           },
           {
             "first": 5,
             "second": 1,
-            "value": 36.7
+            "value": 36.0
           },
           {
             "first": 6,
             "second": 1,
-            "value": 29.5
+            "value": 28.5
           },
           {
             "first": 7,
             "second": 1,
-            "value": 9.6
+            "value": 11.2
           },
           {
             "first": 1,
             "second": 2,
-            "value": 79.3
+            "value": 77.3
           },
           {
             "first": 3,
             "second": 2,
-            "value": 152.5
+            "value": 121.9
           },
           {
             "first": 4,
             "second": 2,
-            "value": 152.5
+            "value": 211.3
           },
           {
             "first": 5,
             "second": 2,
-            "value": 43.1
+            "value": 39.1
           },
           {
             "first": 6,
             "second": 2,
-            "value": 132.2
+            "value": 102.2
           },
           {
             "first": 7,
             "second": 2,
-            "value": 4.6
+            "value": 4.5
           },
           {
             "first": 1,
             "second": 3,
-            "value": 86.2
+            "value": 113.1
           },
           {
             "first": 2,
             "second": 3,
-            "value": 76.2
+            "value": 32.0
           },
           {
             "first": 4,
             "second": 3,
-            "value": 110.1
+            "value": 166.8
           },
           {
             "first": 5,
             "second": 3,
-            "value": 13.8
+            "value": 15.6
           },
           {
             "first": 6,
             "second": 3,
-            "value": 82.6
+            "value": 85.6
           },
           {
             "first": 7,
             "second": 3,
-            "value": 18.1
+            "value": 17.7
           },
           {
             "first": 1,
             "second": 4,
-            "value": 283.2
+            "value": 243.8
           },
           {
             "first": 2,
             "second": 4,
-            "value": 34.7
+            "value": 25.9
           },
           {
             "first": 3,
             "second": 4,
-            "value": 116.6
+            "value": 126.7
           },
           {
             "first": 5,
             "second": 4,
-            "value": 99.1
+            "value": 113.1
           },
           {
             "first": 6,
             "second": 4,
-            "value": 283.2
+            "value": 211.3
           },
           {
             "first": 7,
             "second": 4,
-            "value": 37.4
+            "value": 36.4
           },
           {
             "first": 1,
             "second": 5,
-            "value": 53.5
+            "value": 59.8
           },
           {
             "first": 2,
             "second": 5,
-            "value": 49.5
+            "value": 26.8
           },
           {
             "first": 3,
             "second": 5,
-            "value": 18.1
+            "value": 21.4
           },
           {
             "first": 4,
             "second": 5,
-            "value": 123.9
+            "value": 176.0
           },
           {
             "first": 6,
             "second": 5,
-            "value": 79.3
+            "value": 77.3
           },
           {
             "first": 7,
             "second": 5,
-            "value": 9.4
+            "value": 9.2
           },
           {
             "first": 1,
             "second": 6,
-            "value": 28.7
+            "value": 31.0
           },
           {
             "first": 2,
             "second": 6,
-            "value": 99.1
+            "value": 85.6
           },
           {
             "first": 3,
             "second": 6,
-            "value": 94.4
+            "value": 99.0
           },
           {
             "first": 4,
             "second": 6,
-            "value": 495.7
+            "value": 792.3
           },
           {
             "first": 5,
             "second": 6,
-            "value": 61.9
+            "value": 68.9
           },
           {
             "first": 7,
             "second": 6,
-            "value": 19.4
+            "value": 23.4
           },
           {
             "first": 1,
             "second": 7,
-            "value": 39.6
+            "value": 46.6
           },
           {
             "first": 2,
             "second": 7,
-            "value": 6.2
+            "value": 7.6
           },
           {
             "first": 3,
             "second": 7,
-            "value": 41.3
+            "value": 26.1
           },
           {
             "first": 4,
             "second": 7,
-            "value": 116.6
+            "value": 137.8
           },
           {
             "first": 5,
             "second": 7,
-            "value": 27.9
+            "value": 20.3
           },
           {
             "first": 6,
             "second": 7,
-            "value": 49.5
+            "value": 51.1
           }
         ],
         "source_title": "弥彦競輪 レース詳細 | 弥彦王冠記念・報知新聞賞 10R Ｓ級準決勝 | 2026年10月31日【楽天Kドリームス】"
@@ -53484,7 +53484,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:34.267187+00:00",
+        "observed_at": "2026-10-31T05:26:06.578637+00:00",
         "source_url": "https://keirin.kdreams.jp/yahiko/racedetail/2120261030020011/?pageType=odds",
         "rider_numbers": [
           1,
@@ -53499,212 +53499,212 @@
           {
             "first": 2,
             "second": 1,
-            "value": 21.9
+            "value": 22.1
           },
           {
             "first": 3,
             "second": 1,
-            "value": 50.0
+            "value": 43.1
           },
           {
             "first": 4,
             "second": 1,
-            "value": 450.7
+            "value": 407.6
           },
           {
             "first": 5,
             "second": 1,
-            "value": 108.1
+            "value": 118.3
           },
           {
             "first": 6,
             "second": 1,
-            "value": 676.1
+            "value": 733.8
           },
           {
             "first": 7,
             "second": 1,
-            "value": 108.1
+            "value": 131.0
           },
           {
             "first": 1,
             "second": 2,
-            "value": 84.5
+            "value": 91.7
           },
           {
             "first": 3,
             "second": 2,
-            "value": 36.0
+            "value": 33.9
           },
           {
             "first": 4,
             "second": 2,
-            "value": 150.2
+            "value": 152.8
           },
           {
             "first": 5,
             "second": 2,
-            "value": 4.3
+            "value": 4.5
           },
           {
             "first": 6,
             "second": 2,
-            "value": 300.5
+            "value": 333.5
           },
           {
             "first": 7,
             "second": 2,
-            "value": 44.3
+            "value": 44.2
           },
           {
             "first": 1,
             "second": 3,
-            "value": 73.0
+            "value": 76.4
           },
           {
             "first": 2,
             "second": 3,
-            "value": 10.7
+            "value": 9.8
           },
           {
             "first": 4,
             "second": 3,
-            "value": 208.0
+            "value": 203.8
           },
           {
             "first": 5,
             "second": 3,
-            "value": 56.3
+            "value": 59.1
           },
           {
             "first": 6,
             "second": 3,
-            "value": 338.0
+            "value": 407.6
           },
           {
             "first": 7,
             "second": 3,
-            "value": 38.6
+            "value": 37.4
           },
           {
             "first": 1,
             "second": 4,
-            "value": 300.5
+            "value": 333.5
           },
           {
             "first": 2,
             "second": 4,
-            "value": 30.3
+            "value": 33.9
           },
           {
             "first": 3,
             "second": 4,
-            "value": 108.1
+            "value": 122.3
           },
           {
             "first": 5,
             "second": 4,
-            "value": 169.0
+            "value": 183.4
           },
           {
             "first": 6,
             "second": 4,
-            "value": 386.3
+            "value": 458.6
           },
           {
             "first": 7,
             "second": 4,
-            "value": 270.4
+            "value": 282.2
           },
           {
             "first": 1,
             "second": 5,
-            "value": 225.3
+            "value": 215.8
           },
           {
             "first": 2,
             "second": 5,
-            "value": 1.9
+            "value": 1.8
           },
           {
             "first": 3,
             "second": 5,
-            "value": 41.6
+            "value": 47.0
           },
           {
             "first": 4,
             "second": 5,
-            "value": 245.8
+            "value": 215.8
           },
           {
             "first": 6,
             "second": 5,
-            "value": 300.5
+            "value": 333.5
           },
           {
             "first": 7,
             "second": 5,
-            "value": 150.2
+            "value": 131.0
           },
           {
             "first": 1,
             "second": 6,
-            "value": 450.7
+            "value": 611.5
           },
           {
             "first": 2,
             "second": 6,
-            "value": 36.0
+            "value": 42.1
           },
           {
             "first": 3,
             "second": 6,
-            "value": 87.2
+            "value": 104.8
           },
           {
             "first": 4,
             "second": 6,
-            "value": 300.5
+            "value": 333.5
           },
           {
             "first": 5,
             "second": 6,
-            "value": 87.2
+            "value": 79.7
           },
           {
             "first": 7,
             "second": 6,
-            "value": 540.9
+            "value": 524.1
           },
           {
             "first": 1,
             "second": 7,
-            "value": 180.3
+            "value": 203.8
           },
           {
             "first": 2,
             "second": 7,
-            "value": 18.5
+            "value": 18.0
           },
           {
             "first": 3,
             "second": 7,
-            "value": 27.3
+            "value": 27.1
           },
           {
             "first": 4,
             "second": 7,
-            "value": 193.1
+            "value": 203.8
           },
           {
             "first": 5,
             "second": 7,
-            "value": 150.2
+            "value": 122.3
           },
           {
             "first": 6,
             "second": 7,
-            "value": 901.5
+            "value": 917.2
           }
         ],
         "source_title": "弥彦競輪 レース詳細 | 弥彦王冠記念・報知新聞賞 11R Ｓ級準決勝 | 2026年10月31日【楽天Kドリームス】"
@@ -53718,7 +53718,7 @@
         "bet_type": "exacta",
         "status": "snapshot",
         "parser_version": 2,
-        "observed_at": "2026-10-31T04:28:36.822033+00:00",
+        "observed_at": "2026-10-31T05:26:09.002716+00:00",
         "source_url": "https://keirin.kdreams.jp/yahiko/racedetail/2120261030020012/?pageType=odds",
         "rider_numbers": [
           1,
@@ -53733,212 +53733,212 @@
           {
             "first": 2,
             "second": 1,
-            "value": 30.4
+            "value": 41.3
           },
           {
             "first": 3,
             "second": 1,
-            "value": 59.1
+            "value": 76.1
           },
           {
             "first": 4,
             "second": 1,
-            "value": 78.0
+            "value": 85.7
           },
           {
             "first": 5,
             "second": 1,
-            "value": 6.0
+            "value": 7.2
           },
           {
             "first": 6,
             "second": 1,
-            "value": 216.8
+            "value": 285.6
           },
           {
             "first": 7,
             "second": 1,
-            "value": 14.3
+            "value": 18.3
           },
           {
             "first": 1,
             "second": 2,
-            "value": 14.6
+            "value": 7.1
           },
           {
             "first": 3,
             "second": 2,
-            "value": 81.3
+            "value": 122.4
           },
           {
             "first": 4,
             "second": 2,
-            "value": 139.3
+            "value": 155.8
           },
           {
             "first": 5,
             "second": 2,
-            "value": 35.4
+            "value": 47.6
           },
           {
             "first": 6,
             "second": 2,
-            "value": 243.9
+            "value": 342.8
           },
           {
             "first": 7,
             "second": 2,
-            "value": 11.2
+            "value": 14.7
           },
           {
             "first": 1,
             "second": 3,
-            "value": 31.9
+            "value": 42.8
           },
           {
             "first": 2,
             "second": 3,
-            "value": 67.2
+            "value": 95.2
           },
           {
             "first": 4,
             "second": 3,
-            "value": 75.0
+            "value": 85.7
           },
           {
             "first": 5,
             "second": 3,
-            "value": 65.0
+            "value": 87.9
           },
           {
             "first": 6,
             "second": 3,
-            "value": 216.8
+            "value": 342.8
           },
           {
             "first": 7,
             "second": 3,
-            "value": 50.0
+            "value": 60.1
           },
           {
             "first": 1,
             "second": 4,
-            "value": 33.6
+            "value": 42.3
           },
           {
             "first": 2,
             "second": 4,
-            "value": 81.3
+            "value": 107.1
           },
           {
             "first": 3,
             "second": 4,
-            "value": 69.6
+            "value": 79.7
           },
           {
             "first": 5,
             "second": 4,
-            "value": 59.1
+            "value": 83.6
           },
           {
             "first": 6,
             "second": 4,
-            "value": 325.2
+            "value": 489.7
           },
           {
             "first": 7,
             "second": 4,
-            "value": 47.5
+            "value": 65.9
           },
           {
             "first": 1,
             "second": 5,
-            "value": 3.8
+            "value": 3.1
           },
           {
             "first": 2,
             "second": 5,
-            "value": 47.5
+            "value": 69.9
           },
           {
             "first": 3,
             "second": 5,
-            "value": 81.3
+            "value": 118.2
           },
           {
             "first": 4,
             "second": 5,
-            "value": 108.4
+            "value": 137.1
           },
           {
             "first": 6,
             "second": 5,
-            "value": 150.1
+            "value": 214.2
           },
           {
             "first": 7,
             "second": 5,
-            "value": 22.9
+            "value": 29.5
           },
           {
             "first": 1,
             "second": 6,
-            "value": 47.5
+            "value": 74.5
           },
           {
             "first": 2,
             "second": 6,
-            "value": 162.6
+            "value": 228.5
           },
           {
             "first": 3,
             "second": 6,
-            "value": 162.6
+            "value": 201.6
           },
           {
             "first": 4,
             "second": 6,
-            "value": 390.3
+            "value": 428.5
           },
           {
             "first": 5,
             "second": 6,
-            "value": 88.7
+            "value": 103.8
           },
           {
             "first": 7,
             "second": 6,
-            "value": 97.5
+            "value": 149.0
           },
           {
             "first": 1,
             "second": 7,
-            "value": 9.2
+            "value": 5.4
           },
           {
             "first": 2,
             "second": 7,
-            "value": 16.8
+            "value": 21.6
           },
           {
             "first": 3,
             "second": 7,
-            "value": 81.3
+            "value": 118.2
           },
           {
             "first": 4,
             "second": 7,
-            "value": 108.4
+            "value": 155.8
           },
           {
             "first": 5,
             "second": 7,
-            "value": 35.4
+            "value": 43.9
           },
           {
             "first": 6,
             "second": 7,
-            "value": 390.3
+            "value": 685.6
           }
         ],
         "source_title": "弥彦競輪 レース詳細 | 弥彦王冠記念・報知新聞賞 12R Ｓ級準決勝 | 2026年10月31日【楽天Kドリームス】"
