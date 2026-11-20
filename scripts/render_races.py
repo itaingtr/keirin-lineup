@@ -11,6 +11,11 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = re.compile(r'https://(?:my\.)?keirin\.kdreams\.jp/[a-z]+/racedetail/(\d{2})(\d{8})(\d{2})(\d{4})/')
+S_CLASS_SPECIAL_NAMES = frozenset({'ダイヤモンドレース'})
+
+
+def is_s_class_type(value):
+    return value.startswith(('S級', 'Ｓ級')) or value in S_CLASS_SPECIAL_NAMES
 
 
 def require(condition, message):
@@ -72,7 +77,7 @@ def validate(dataset):
         grades[meeting] = str(grade)
         venue = text(r['venue'], 'venue')
         race_type = text(r['race_type'], 'race type')
-        require(race_type.startswith(('S級', 'Ｓ級')), 'Only S-class races are supported')
+        require(is_s_class_type(race_type), 'Only S-class races are supported')
         start_time = r['start_time']
         require(isinstance(start_time, str) and (start_time == '' or re.fullmatch(r'(?:[01]\d|2[0-3]):[0-5]\d', start_time)), 'Invalid start time')
         require(isinstance(r['players'], list) and 1 <= len(r['players']) <= 9, 'Invalid rider count')

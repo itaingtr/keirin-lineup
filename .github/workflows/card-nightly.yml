@@ -10,6 +10,11 @@ on:
       date:
         description: Race date YYYY-MM-DD (blank = tomorrow in Japan)
         required: false
+      historical_only:
+        description: Restore only the requested historical page, preserving the current card
+        type: boolean
+        required: false
+        default: false
   push:
     branches: [main]
     paths: [.github/workflows/card-nightly.yml]
@@ -30,6 +35,7 @@ jobs:
     timeout-minutes: 20
     outputs:
       publish: ${{ steps.publish.outputs.publish }}
+      target_date: ${{ steps.publish.outputs.target_date }}
     steps:
       - uses: actions/checkout@v6
       - name: Validate collectors and archive behavior
@@ -57,6 +63,7 @@ jobs:
       - name: Select requested race date
         env:
           REQUESTED_DATE: ${{ inputs.date }}
+          HISTORICAL_ONLY: ${{ inputs.historical_only || false }}
         run: |
           python3 - <<'PYTHON'
           import os
@@ -65,6 +72,8 @@ jobs:
           from datetime import datetime, timedelta, timezone
           from zoneinfo import ZoneInfo
           now = datetime.now(timezone.utc)
+          if os.environ['HISTORICAL_ONLY'] == 'true' and not os.environ.get('REQUESTED_DATE'):
+              raise SystemExit('Historical restore requires an explicit requested date')
           # UTC calendar + 1 also handles a 23:30 run delayed past midnight JST.
           base = now.date() if os.environ['GITHUB_EVENT_NAME'] == 'schedule' else now.astimezone(ZoneInfo('Asia/Tokyo')).date()
           target = os.environ.get('REQUESTED_DATE') or (base + timedelta(days=1)).isoformat()
@@ -98,25 +107,35 @@ jobs:
               handle.write(f"Private storage: {daily.get('known_bytes', 0):,} bytes for this race day; {usage['known_bytes']:,} bytes total, {usage['objects']} snapshots. Unknown-size objects: {usage['unknown_size_objects']}. No automatic deletion.\n")
           print(f"::notice title=Private source backup verified::{snapshot['target_date']}: {len(snapshot['races'])} S-class races saved and read back. Daily storage: {daily.get('known_bytes', 0)} bytes; total: {usage['known_bytes']} bytes in {usage['objects']} snapshots. No automatic deletion.")
           PYTHON
-      - name: Generate and publish only index and the requested day
+      - name: Generate the requested day and preserve the current card on historical restores
         id: publish
         if: github.event_name != 'push'
+        env:
+          HISTORICAL_ONLY: ${{ inputs.historical_only || false }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git fetch origin main
           git checkout -B auto-card FETCH_HEAD
           python3 - <<'PYTHON'
-          import json, sys
+          import json, os, sys
           from pathlib import Path
           sys.path.insert(0, 'scripts')
           from export_races import export
-          from render_races import write_pages
+          from render_races import render, write_pages
           snapshot = json.loads(Path('/tmp/card-snapshot.json').read_text())
           current = export(Path('site/index.html').read_text())
-          if current['target_date'] > snapshot['target_date']:
-              raise SystemExit('A newer card is already published; refusing to replace it with an older date')
-          write_pages(snapshot, Path('site'))
+          if os.environ['HISTORICAL_ONLY'] == 'true':
+              if snapshot['target_date'] >= current['target_date']:
+                  raise SystemExit('Historical restore requires a date earlier than the current card')
+              output = render(snapshot, Path('site'))
+              path = Path('site') / ('line' + snapshot['target_date'].replace('-', '') + '.html') / 'index.html'
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_text(output)
+          else:
+              if current['target_date'] > snapshot['target_date']:
+                  raise SystemExit('A newer card is already published; refusing to replace it with an older date')
+              write_pages(snapshot, Path('site'))
           PYTHON
           DATE_PATH="line$(date -d "$TARGET_DATE" +%Y%m%d).html/index.html"
           git add -- site/index.html "site/$DATE_PATH"
@@ -125,15 +144,19 @@ jobs:
             git push origin HEAD:main
           fi
           echo 'publish=true' >> "$GITHUB_OUTPUT"
+          echo "target_date=$TARGET_DATE" >> "$GITHUB_OUTPUT"
       - name: Summarize the published card
         if: github.event_name != 'push'
+        env:
+          HISTORICAL_ONLY: ${{ inputs.historical_only || false }}
         run: |
           python3 - <<'PYTHON'
           import json, os
           from pathlib import Path
           snapshot = json.loads(Path('/tmp/card-snapshot.json').read_text())
+          mode = 'Restored historical page; current card preserved' if os.environ['HISTORICAL_ONLY'] == 'true' else 'Published current card'
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as handle:
-              handle.write(f"Published {snapshot['target_date']}: {len(snapshot['races'])} S-class races. Entire meetings with unpublished lineups were omitted: {len(snapshot['excluded_meetings'])}. Historical pages were preserved.\n")
+              handle.write(f"{mode}: {snapshot['target_date']}, {len(snapshot['races'])} S-class races. Entire meetings with unpublished lineups were omitted: {len(snapshot['excluded_meetings'])}. Other historical pages were preserved.\n")
           PYTHON
 
   # GITHUB_TOKEN commits do not start the separate push-based Pages workflow.
@@ -157,16 +180,20 @@ jobs:
           path: ./site
       - uses: actions/deploy-pages@v4
         id: deployment
-      - name: Verify both public pages after deployment
+      - name: Verify current and requested public pages after deployment
+        env:
+          REQUESTED_DATE: ${{ needs.collect.outputs.target_date }}
         run: |
           python3 - <<'PYTHON'
-          import sys, time, urllib.request
+          import os, sys, time, urllib.request
           from pathlib import Path
           sys.path.insert(0, 'scripts')
           from export_races import export
-          expected = Path('site/index.html').read_bytes()
-          target = export(expected.decode())['target_date'].replace('-','')
-          for suffix in ['', 'line'+target+'.html/']:
+          current = Path('site/index.html').read_bytes()
+          target = export(current.decode())['target_date'].replace('-','')
+          requested = os.environ['REQUESTED_DATE'].replace('-', '')
+          for suffix in dict.fromkeys(['', 'line'+target+'.html/', 'line'+requested+'.html/']):
+              expected = (Path('site') / suffix / 'index.html').read_bytes()
               for attempt in range(6):
                   with urllib.request.urlopen('https://itaingtr.github.io/keirin-lineup/'+suffix+'?check='+str(time.time_ns()),timeout=30) as response:
                       actual = response.read()
@@ -175,5 +202,5 @@ jobs:
                   if attempt == 5:
                       raise SystemExit('Published card differs from the validated generated page')
                   time.sleep(10)
-          print('PASS published index and dated page match the validated card')
+          print('PASS published current and requested pages match the validated cards')
           PYTHON

@@ -10,7 +10,7 @@ import unicodedata
 import urllib.parse
 import urllib.request
 from collect_exacta import Document, Node
-from render_races import SOURCE, parse_lineup as validate_lineup, validate, write_pages
+from render_races import SOURCE, S_CLASS_SPECIAL_NAMES, is_s_class_type, parse_lineup as validate_lineup, validate, write_pages
 
 
 def clean(value):
@@ -117,9 +117,9 @@ def parse_card(doc, url, meeting):
     if canonicals and any(urllib.parse.urlsplit(value).path != urllib.parse.urlsplit(url).path for value in canonicals):
         raise ValueError('Card canonical does not match requested race')
     title = next((clean(node.text()) for node in doc.find_all('title')), '')
-    kind = re.search(r'\b(\d+)R\s+([ＳS]級[^|]+?)\s*\|', title)
-    if not kind:
-        if re.search(r'\d+R\s+[ＡAＬL]級', title):
+    kind = re.search(r'\b(\d+)R\s+([^|]+?)\s*\|', title)
+    if not kind or not is_s_class_type(kind[2]):
+        if kind and re.match(r'[ＡAＬL]級', kind[2]):
             return None
         raise ValueError('Unrecognized race class in source title')
     tables = [node for node in doc.find_all('table') if 'racecard_table' in classes(node) and 'none' not in classes(node)]
@@ -146,6 +146,8 @@ def parse_card(doc, url, meeting):
             raise ValueError('Unrecognized rider name / prefecture / period')
         if len(values)<index+11:
             raise ValueError('Incomplete statistics for rider')
+        if kind[2] in S_CLASS_SPECIAL_NAMES and compact(values[index+1].text()) not in ('SS', 'S1', 'S2'):
+            raise ValueError('Special S-class race contains a non-S-class rider')
         score=compact(values[index+4].text())
         if not re.fullmatch(r'\d+(?:\.\d+)?',score):
             raise ValueError('Missing competition score')

@@ -58,6 +58,19 @@ class CardTests(unittest.TestCase):
     def test_a_class_is_excluded_without_inventing_s_class(self):
         self.assertIsNone(collector.parse_card(Document(fixture().replace('Ｓ級一般','Ａ級一般')).root,URL,MEETING))
 
+    def test_diamond_race_keeps_source_name_and_requires_s_class_riders(self):
+        source=fixture().replace('Ｓ級一般','ダイヤモンドレース')
+        result=collector.parse_card(Document(source).root,URL,MEETING)
+        self.assertEqual(result['race_type'],'ダイヤモンドレース')
+        with TemporaryDirectory() as directory:
+            dataset={'schema_version':1,'target_date':'2026-10-18','expected_races':1,'races':[result]}
+            collector.write_pages(dataset,Path(directory))
+            self.assertIn('ダイヤモンドレース',(Path(directory)/'index.html').read_text())
+        for invalid in [source.replace('<td>S2</td>','<td>A1</td>'),
+                        source.replace('ダイヤモンドレース','未知のレース')]:
+            with self.assertRaises(ValueError):
+                collector.parse_card(Document(invalid).root,URL,MEETING)
+
     def test_calendar_grades_urls_and_actual_race_date(self):
         source='<div class="raceinfo_table"><table><tr><td>高知競輪</td><td><span class="icon_grade gr2"></span></td><td></td><td><a href="'+URL+'">6R</a><a href="'+URL+'">6R</a></td></tr></table></div>'
         meetings=collector.schedule(Document(source).root,'https://keirin.kdreams.jp/',date(2026,10,18))
